@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="main">
     <BannerContain></BannerContain>
     <AuthContain></AuthContain>
   </div>
@@ -15,3 +15,9 @@ export default {
   }
 };
 </script>
+
+<style>
+  #main {
+    height: inherit;
+  }
+</style>
