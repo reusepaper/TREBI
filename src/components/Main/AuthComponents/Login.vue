@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Log In</h1>
     <div id="firebaseui-auth-container"></div>
     <!-- <LoadingPage id='loader'></LoadingPage> -->
   </div>
@@ -58,6 +57,12 @@ export default {
           // 로그인이 성공하면,
           signInSuccessWithAuthResult: (authResult, redirectUrl) => {
             // 로그인 정보를 각각의 data에 저장한다.
+            auth.onAuthStateChanged(user => {
+              this.$store.commit("setUser", user);
+              this.$store.commit("setLogin", true);
+              // this.$store.commit("setProfileImage", user.photoURL);
+            });
+            console.log(this.$store.state.user)
             console.log("ok");
             return false;
           }
@@ -69,14 +74,10 @@ export default {
   },
   mounted: function() {
     // 현재 로그인한 회원의 정보를 알 수 있는 함수이다. 존재하면 딕셔너리가, 아니면 null값이 나온다.
-    auth.onAuthStateChanged((user) =>{
-        if (user) {
-            console.log("login")
-            console.log(user)
-        }
-        //현재 유저가 존재하지 않으면 로그인창을 보여준다.
-        this.initUI()
-    })
+    
+    if (this.$store.state.user == null) {
+      this.initUI();
+    }
   }
 }
 </script>

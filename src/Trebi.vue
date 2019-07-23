@@ -21,7 +21,7 @@ import Footer from "./views/Footer";
 import Sidebar from "./views/Sidebar";
 
 export default {
-  name: "app",
+  name: "Trebi",
   components: {
     Main,
     Team,
