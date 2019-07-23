@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    hello world!!
+    this is contact us!
   </div>
 </template>
 
