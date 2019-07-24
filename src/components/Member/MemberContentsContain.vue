@@ -1,10 +1,11 @@
 <template>
   <div class="memberContents">
-    
+    <div class="tail"></div>
   </div>
 </template>
 
 <script>
+
 export default {
 
 }
@@ -17,5 +18,15 @@ export default {
   }
     .memberContents:hover{
     box-shadow: 5px 5px 0 grey;
+  }
+  .memberContents .tail{
+    width: 0px;height: 0px;
+    border-top:50px solid none;
+    border-bottom:50px solid white;
+    border-right: 50px solid transparent;
+    border-left: 50px solid  transparent;
+    position: relative;
+    bottom: 24px;
+    left: 65px;
   }
 </style>
