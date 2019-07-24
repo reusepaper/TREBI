@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <MemberTitle></MemberTitle>
-    <MemberListContain></MemberListContain>
-    <MemberContentsContain></MemberContentsContain>
+  <div id="member">
+    <MemberTitle class='member-title'></MemberTitle>
+    <div class="contents">
+      <MemberListContain class='member-list-contain'></MemberListContain>
+      <MemberContentsContain class='member-contents-contain'></MemberContentsContain>
+    </div>
   </div>
 </template>
 <script>
@@ -18,3 +20,27 @@ export default {
   }
 };
 </script>
+<style scoped>
+  .member-title{
+    float: left;
+    width:10%;
+    border-left-color:black;
+    height: 100vh;
+  }
+  .contents{
+    float:right;
+    width:90%;
+    height: 100vh;
+  }
+  .member-list-contain{
+    height:20%;
+    background-color: blue;
+    margin:20px;
+    margin-top:7%;
+  }
+  .member-contents-contain{
+    background-color: green;
+    margin:20px;
+    height:40%;
+  }
+</style>

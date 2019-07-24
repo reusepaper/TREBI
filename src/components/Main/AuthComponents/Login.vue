@@ -29,7 +29,7 @@ export default {
         // 현재 사용하는 옵션은 이메일 로그인만 사용한다.
         signInFlow: "popup",
         signInoptions: [
-          firebase.auth.EmailAuthProvider.PROVIDER_ID,
+          // firebase.auth.EmailAuthProvider.PROVIDER_ID,
           {
             // Google provider must be enabled in Firebase Console to support one-tap
             // sign-up.
