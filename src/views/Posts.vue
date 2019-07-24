@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <PostsTitleContain></PostsTitleContain>
-    <WriterListsContain></WriterListsContain>
-    <PostsViewContain></PostsViewContain>
+  <div class="posts-container">
+    <PostsTitleContain class="posts-title"></PostsTitleContain>
+    <div class="contents">
+      <WriterListsContain class="posts-list-contain"></WriterListsContain>
+      <PostsViewContain class="posts-contents-contain"></PostsViewContain>
+    </div>
   </div>
 </template>
 <script>
@@ -18,3 +20,13 @@ export default {
   }
 };
 </script>
+<style scoped>
+.posts-title {
+}
+.contents {
+}
+.posts-list-contain {
+}
+.posts-contents-contain {
+}
+</style>
