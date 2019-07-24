@@ -2,7 +2,7 @@
 
 ## Project setup
 
-f
+ffd
 
 ```
 yarn install
