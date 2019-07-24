@@ -1,6 +1,6 @@
 <template>
-  <div class="app">
-    this is BannerContain Main section
+  <div id="main-title">
+    <h1>TREBI</h1>
   </div>
 </template>
 
@@ -10,9 +10,9 @@ export default {
 }
 </script>
 
-<style scoped>
-  .app{
-    height: 96vh;
-    border:3px #f99 solid;
+<style>
+  #main-title {
+    height: 60%;
+    background: #F7F7F7;
   }
 </style>
