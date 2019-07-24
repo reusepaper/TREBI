@@ -26,6 +26,5 @@ export default {
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 1fr 1fr;
-  background-color: black;
 }
 </style>

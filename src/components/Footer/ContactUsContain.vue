@@ -14,7 +14,6 @@ export default {};
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  background-color: red;
   padding: 50px;
   display: grid;
   grid-template-rows: 2fr 8fr;
@@ -22,11 +21,14 @@ export default {};
   justify-content: center;
 }
 .contactTitle {
-  font-size: 30px;
+  align-self: center;
+  justify-self: center;
+  font-size: 50px;
   font-weight: 600;
-  background-color: yellow;
+  /* background-color: yellow; */
 }
 .contactUs {
-  background-color: azure;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
 }
 </style>
