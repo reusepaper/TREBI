@@ -1,17 +1,17 @@
 <template>
   <div>
     <PostWriteTitleContain></PostWriteTitleContain>
-    <WriteContain></WriteContain>
+    <WriterContain></WriterContain>
   </div>
 </template>
 <script>
 import PostWriteTitleContain from "../components/PostWrite/PostWriteTitleContain";
-import WriteContain from "../components/PostWrite/WriteContain";
+import WriterContain from "../components/PostWrite/WriteContain";
 
 export default {
   components: {
     PostWriteTitleContain,
-    WriteContain
+    WriterContain
   }
 };
 </script>

@@ -61,7 +61,7 @@ export default {
       options: {
         licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
         anchors: ['page1', 'page2', 'page3', 'page4', 'page5', 'page6', 'page7', 'page8'],
-        sectionsColor: ['#517A53', '#B0D6B3', '#B0D6B3', '#B0D6B3', '#ff8181fc', '#F7F7F7', '#517A53', '#FFFFFF']
+        sectionsColor: ['#517A53', '#B0D6B3', '#B0D6B3', '#B0D6B3', '#B0D6B3', '#F7F7F7', '#517A53', '#FFFFFF']
       }
     }
   }
