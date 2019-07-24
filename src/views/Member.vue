@@ -24,19 +24,23 @@ export default {
   .member-title{
     float: left;
     width:10%;
-    background-color: bisque;
+    border-left-color:black;
     height: 100vh;
   }
   .contents{
     float:right;
     width:90%;
-    background-color: yellow;
     height: 100vh;
   }
   .member-list-contain{
-    background-color: aquamarine;
+    height:20%;
+    background-color: blue;
+    margin:20px;
+    margin-top:7%;
   }
-  .member-list-contain{
-    height:50%;
+  .member-contents-contain{
+    background-color: green;
+    margin:20px;
+    height:40%;
   }
 </style>
