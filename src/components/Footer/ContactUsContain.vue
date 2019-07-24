@@ -1,15 +1,15 @@
 <template>
-  <div id="app">
-    this is contact us!
-  </div>
+  <div class="contactContainer">this is contact us!</div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style scoped>
-
+.contactContainer {
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}
 </style>
