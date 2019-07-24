@@ -22,8 +22,10 @@ export default {
 </script>
 <style scoped>
 .posts-container {
+  width: 100%;
+  height: 100vh;
   display: grid;
-  grid-template-columns: 2fr 8fr;
+  grid-template-columns: 150px 8fr;
 }
 .posts-title {
   writing-mode: vertical-rl;
@@ -33,6 +35,7 @@ export default {
 .contents {
   display: grid;
   grid-template-rows: 3fr 7fr;
+  padding: 20px;
 }
 .posts-list-contain {
 }

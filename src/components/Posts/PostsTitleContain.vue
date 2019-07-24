@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="title-container">
     <p>Posts</p>
   </div>
 </template>
@@ -8,5 +8,11 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
+.title-container {
+  font-size: 130px;
+  font-weight: 900;
+  justify-self: center;
+  align-self: center;
+}
 </style>
