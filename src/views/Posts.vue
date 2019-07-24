@@ -21,9 +21,18 @@ export default {
 };
 </script>
 <style scoped>
+.posts-container {
+  display: grid;
+  grid-template-columns: 2fr 8fr;
+}
 .posts-title {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
 }
 .contents {
+  display: grid;
+  grid-template-rows: 3fr 7fr;
 }
 .posts-list-contain {
 }
