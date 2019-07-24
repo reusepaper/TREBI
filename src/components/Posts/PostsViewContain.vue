@@ -3,7 +3,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    posts: [
+      { id: 1, title: "첫글입니당" },
+      { id: 2, title: "두번째글입니당" },
+      { id: 3, title: "네번째글입니당" },
+      { id: 4, title: "다섯번째글입니당" },
+      { id: 5, title: "여섯째글입니당" },
+      { id: 6, title: "일곱번째글입니당" }
+    ];
+  }
+};
 </script>
 
 <style>
