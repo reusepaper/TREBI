@@ -2,8 +2,6 @@
 
 ## Project setup
 
-ffd
-
 ```
 yarn install
 ```
