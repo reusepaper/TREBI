@@ -1,5 +1,5 @@
 <template>
-  <div class="weatherContainer">footerfooter</div>
+  <div class="weatherContainer">this is weather Container</div>
 </template>
 
 <script>
