@@ -1,6 +1,6 @@
 <template>
   <div>
-    this is member contentscontain section!!!
+    this is member contentscontain section
   </div>
 </template>
 

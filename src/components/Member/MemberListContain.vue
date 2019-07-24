@@ -1,6 +1,6 @@
 <template>
   <div>
-    this is memberlist contain section!!
+    this is memberlist contain section
   </div>
 </template>
 
