@@ -34,13 +34,15 @@ export default {
   }
   .member-list-contain{
     height:20%;
-    background-color: blue;
     margin:20px;
     margin-top:7%;
   }
   .member-contents-contain{
-    background-color: green;
-    margin:20px;
-    height:40%;
+    background-color: white;
+    margin: 20px;
+    height: 46%;
+    border-radius: 1%;
+    margin-top: 8%;
   }
+  
 </style>
