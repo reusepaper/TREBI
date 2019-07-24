@@ -75,7 +75,7 @@ export default {
           "#B0D6B3",
           "#B0D6B3",
           "#B0D6B3",
-          "#B0D6B3",
+          "#ff8181fc",
           "#F7F7F7",
           "#517A53",
           "#FFFFFF"
