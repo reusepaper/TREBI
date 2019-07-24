@@ -11,7 +11,6 @@
     "core-js": "^2.6.5",
     "firebase": "^6.3.1",
     "firebaseui": "^4.1.0",
-    "markdown-it-vue": "^1.0.9",
     "vue": "^2.6.10",
     "vue-fullpage": "^2.0.1",
     "vue-fullpage.js": "^0.1.4",
