@@ -1,12 +1,15 @@
 <template>
   <div id="main-title">
-    <h1>TREBI</h1>
+    <BannerHeader></BannerHeader>
   </div>
 </template>
 
 <script>
+import BannerHeader from './BannerComponents/BannerHeader'
 export default {
-
+  components: {
+    BannerHeader
+  }
 }
 </script>
 
@@ -14,5 +17,6 @@ export default {
   #main-title {
     height: 60%;
     background: #F7F7F7;
+    overflow: hidden;
   }
 </style>
