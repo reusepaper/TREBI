@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="footerContainer">
     <ChatbotContain></ChatbotContain>
     <ContactUsContain></ContactUsContain>
-    <WeatherContain></WeatherContain>
+    <!-- <WeatherContain></WeatherContain> -->
   </div>
 </template>
 <script>
@@ -18,3 +18,13 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.footerContainer {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr;
+}
+</style>
