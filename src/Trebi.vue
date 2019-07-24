@@ -72,7 +72,7 @@ export default {
         ],
         sectionsColor: [
           "#517A53",
-          "#B0D6B3",
+          "#FFFFFF",
           "#B0D6B3",
           "#B0D6B3",
           "#ff8181fc",
