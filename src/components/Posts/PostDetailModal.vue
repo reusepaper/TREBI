@@ -65,12 +65,12 @@ export default {};
 .modal-body {
   margin: 20px 0;
 }
-<<<<<<< head .post-column {
+.post-column {
   display: grid;
   grid-template-rows: 1fr 3fr 3fr 2fr 1fr;
   grid-auto-rows: 978px;
 }
-=======>>>>>>>[#5] merge .closeBtn {
+.closeBtn {
   position: absolute;
   right: -30px;
   top: -30px;
