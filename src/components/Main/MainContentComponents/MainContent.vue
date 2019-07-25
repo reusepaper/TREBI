@@ -10,7 +10,6 @@ export default {};
 
 <style>
 #MainContent-content {
-  background: #f7f7f7;
   height: 60%;
 }
 </style>

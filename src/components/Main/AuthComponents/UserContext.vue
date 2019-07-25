@@ -6,9 +6,11 @@
     </div>
     <div id="userContent-content">
       <h1>{{this.$store.state.user === null ? "guest" : this.$store.state.user.displayName}}님 환영합니다.</h1>
-      <Logout></Logout>
-      <profileButton></profileButton>
-      <adminButton v-if="this.$store.state.user"></adminButton>
+      <div class="authButtons">
+        <Logout></Logout>
+        <profileButton></profileButton>
+        <adminButton v-if="this.$store.state.user"></adminButton>
+      </div>
     </div>
   </div>
 </template>
@@ -35,7 +37,7 @@ export default {
 <style>
 #userContext-container {
   margin-top: 15px;
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
   display: grid;
   grid-template-columns: 2fr 3fr;
 }
@@ -45,5 +47,11 @@ export default {
 }
 #userContent-content {
   padding-right: 10px;
+}
+.authButtons {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
 }
 </style>
