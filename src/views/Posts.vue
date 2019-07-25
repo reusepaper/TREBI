@@ -1,6 +1,6 @@
 <template>
   <div class="posts">
-    <PostsTitleContain class="posts-title"></PostsTitleContain>
+    <PostsTitleContain class="post-title"></PostsTitleContain>
     <div class="contents">
       <WriterListsContain class="posts-list-contain"></WriterListsContain>
       <PostsViewContain class="posts-contents-contain"></PostsViewContain>
@@ -26,6 +26,10 @@ export default {
   height: 100vh;
   display: grid;
   grid-template-columns: 150px 8fr;
+}
+.post-title {
+  float: left;
+  height: 100vh;
 }
 .contents {
   float: left;

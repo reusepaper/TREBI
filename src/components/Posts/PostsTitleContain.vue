@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <p class="title-container">Posts</p>
+  <div style="background-color:white;">
+    <p class="title-vertical">POST</p>
   </div>
 </template>
 
