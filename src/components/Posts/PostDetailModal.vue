@@ -8,21 +8,11 @@
           </div>
 
           <div class="post-column">
-            <div>
-              <slot name="post-header">1</slot>
-            </div>
-            <div>
-              <slot name="post-content">2</slot>
-            </div>
-            <div>
-              <slot name="post-commentList">3</slot>
-            </div>
-            <div>
-              <slot name="post-meta">4</slot>
-            </div>
-            <div>
-              <slot name="post-Input">5</slot>
-            </div>
+            <slot name="post-header">heaer</slot>
+            <slot name="post-content">content</slot>
+            <slot name="post-commentList">commentList</slot>
+            <slot name="post-meta">meta</slot>
+            <slot name="post-Input">input</slot>
           </div>
 
           <button class="closeBtn" @click="$emit('close')">X</button>
@@ -75,12 +65,12 @@ export default {};
 .modal-body {
   margin: 20px 0;
 }
-.post-column {
+<<<<<<< head .post-column {
   display: grid;
   grid-template-rows: 1fr 3fr 3fr 2fr 1fr;
   grid-auto-rows: 978px;
 }
-.closeBtn {
+=======>>>>>>>[#5] merge .closeBtn {
   position: absolute;
   right: -30px;
   top: -30px;
