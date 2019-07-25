@@ -1,8 +1,8 @@
 <template>
   <div class="Wrapper">
-    <span v-on:click="pre" v-bind:class="{hidden : selected == 1}">
+    <div v-on:click="pre" v-bind:class="{hidden : selected == 1}">
       <i class="fas fa-chevron-circle-left fa-2x left"></i>
-    </span>
+    </div>
     <div
       class="imageContainer"
       v-bind:style="{'transform': 'translate(-' + (selected-1)*imgWidth + 'px, 0px)'}"
@@ -11,9 +11,9 @@
         <div class="image" v-bind:style="{ 'background-image': 'url(' + i + ')' }"></div>
       </div>
     </div>
-    <span v-on:click="next" v-bind:class="{hidden : selected == length}">
+    <div v-on:click="next" v-bind:class="{hidden : selected == length}">
       <i class="fas fa-chevron-circle-right fa-2x right"></i>
-    </span>
+    </div>
   </div>
 </template>
 
@@ -57,9 +57,15 @@ export default {
   overflow: hidden;
 }
 .imageContainer {
+  height: 100%;
   display: flex;
   transition: 0.6s;
 }
+
+.post-column {
+  height: 578px;
+}
+
 .image {
   height: 578px;
   width: 578px;
@@ -86,6 +92,6 @@ svg {
   color: rgba(0, 0, 0, 0.2);
 }
 .hidden {
-  display: hidden;
+  display: none;
 }
 </style>
