@@ -86,6 +86,7 @@ export default {
 .post-list .post-title {
   cursor: pointer;
   transition: 0.1s linear;
+  font-weight: lighter;
 }
 .post-list .post-title:hover {
   color: rgba(0, 0, 0, 0.3);
