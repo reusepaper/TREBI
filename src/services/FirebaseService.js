@@ -1,6 +1,21 @@
 import "firebase/firestore";
 import "firebase/auth";
+import * as firebaseui from 'firebaseui'
+import * as firebase from "firebase/app"
+const config = {
+  apiKey: "AIzaSyCBToAXiNSn5EIUwm0AbYF3jtRJkzGQRs8",
+  authDomain: "webmobile-sub2-510fa.firebaseapp.com",
+  databaseURL: "https://webmobile-sub2-510fa.firebaseio.com",
+  projectId: "webmobile-sub2-510fa",
+  storageBucket: "",
+  messagingSenderId: "69251272917",
+  appId: "1:69251272917:web:e3d748f5c506995f"
+};
+firebase.initializeApp(config);
+// const auth = firebase.auth();
+// const ui = new firebaseui.auth.AuthUI(auth);
 
+const firestore = firebase.firestore();
 const POSTS = "Posts";
 const USERS = "Users";
 const TODO = "ToDo";

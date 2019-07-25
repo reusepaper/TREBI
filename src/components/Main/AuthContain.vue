@@ -20,8 +20,8 @@ export default {
     UserContext
   },
   mounted: function(){
-    console.log(this.$store.state.user)
-    console.log(this.$store.state.is_login);
+    // console.log(this.$store.state.user)
+    // console.log(this.$store.state.is_login);
   }
 }
 </script>

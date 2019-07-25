@@ -6,22 +6,19 @@
 </template>
 
 <script>
+import FirebaseService from '@/services/FirebaseService'
 import * as firebaseui from 'firebaseui'
 import * as firebase from "firebase/app"
-const config = {
-  apiKey: "AIzaSyCBToAXiNSn5EIUwm0AbYF3jtRJkzGQRs8",
-  authDomain: "webmobile-sub2-510fa.firebaseapp.com",
-  databaseURL: "https://webmobile-sub2-510fa.firebaseio.com",
-  projectId: "webmobile-sub2-510fa",
-  storageBucket: "",
-  messagingSenderId: "69251272917",
-  appId: "1:69251272917:web:e3d748f5c506995f"
-};
-firebase.initializeApp(config);
+
 const auth = firebase.auth();
 const ui = new firebaseui.auth.AuthUI(auth);
 
 export default {
+  data() {
+    return {
+      allUsers: [],
+    }
+  },
   methods: {
     initUI: function() {
       // template에 존재하는 div에 ui.start 명령어를 사용하면 firebaseui가 알아서 그려준다.
@@ -56,26 +53,53 @@ export default {
         callbacks: {
           // 로그인이 성공하면,
           signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-            // 로그인 정보를 각각의 data에 저장한다.
-            auth.onAuthStateChanged(user => {
-              this.$store.commit("setUser", user);
-              this.$store.commit("setLogin", true);
-              // this.$store.commit("setProfileImage", user.photoURL);
-            });
-            console.log(this.$store.state.user)
-            console.log("ok");
+            this.updateCurrentUser();
+
             return false;
           }
         }
       });
-      
-    }
+    },
+    async getUsers() {
+      this.allUsers = await FirebaseService.getUsers();
+    },
+    // 현재 유저 veux에 저장 및 firebase 비교.
+    async updateCurrentUser(){
+      // 로그인 정보를 각각의 data에 저장한다.
+      await auth.onAuthStateChanged(user => {
+        this.$store.commit("setUser", user);
+        this.$store.commit("setLogin", true);
+        // this.$store.commit("setProfileImage", user.photoURL);
+        if(this.checkIsSignup(user) == false){
+          // console.log("true");
+          FirebaseService.createUser(
+            user.uid, 
+            user.displayName, 
+            user.email.toString(), 
+            "visitor", 
+            new Date()
+          );
+        };
+      });
+      // await console.log(this.$store.state.user);
+    },
+    checkIsSignup: function(currentUser){
+      // console.log(this.allUsers);
+      if (currentUser == null) return true;
+      for(let i=0; i<this.allUsers.length; i++){
+        if(this.allUsers[i].uid == currentUser.uid){
+          return true;
+        }
+      }
+      return false;
+    },
     
   },
   mounted: function() {
     // 현재 로그인한 회원의 정보를 알 수 있는 함수이다. 존재하면 딕셔너리가, 아니면 null값이 나온다.
     
     if (this.$store.state.user == null) {
+      this.getUsers();
       this.initUI();
     }
   }
