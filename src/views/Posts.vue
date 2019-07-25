@@ -1,5 +1,5 @@
 <template>
-  <div class="posts-container">
+  <div class="posts">
     <PostsTitleContain class="posts-title"></PostsTitleContain>
     <div class="contents">
       <WriterListsContain class="posts-list-contain"></WriterListsContain>
@@ -21,7 +21,7 @@ export default {
 };
 </script>
 <style scoped>
-.posts-container {
+.posts {
   width: 100%;
   height: 100vh;
   display: grid;
@@ -33,12 +33,20 @@ export default {
   transform: rotate(180deg);
 }
 .contents {
-  display: grid;
-  grid-template-rows: 3fr 7fr;
-  padding: 20px;
+  float: left;
+  width: 80%;
+  height: 100vh;
 }
 .posts-list-contain {
+  height: 20%;
+  margin: 20px;
+  margin-top: 7%;
 }
 .posts-contents-contain {
+  background-color: white;
+  margin: 20px;
+  height: 46%;
+  border-radius: 1%;
+  margin-top: 8%;
 }
 </style>

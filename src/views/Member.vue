@@ -21,6 +21,12 @@ export default {
 };
 </script>
 <style scoped>
+.member{
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 150px 8fr;
+}
 .member-title {
   float: left;
   width: 10%;
@@ -28,8 +34,8 @@ export default {
   height: 100vh;
 }
 .contents {
-  float: right;
-  width: 90%;
+  float: left;
+  width: 80%;
   height: 100vh;
 }
 .member-list-contain {
