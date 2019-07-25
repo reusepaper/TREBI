@@ -10,11 +10,16 @@ export default {};
 
 <style>
 #Header {
+  /* font-family: 'Bungee Outline', cursive; */
+  /* font-family: 'Fascinate', cursive; */
+  font-family: 'PT Serif', serif;
   margin-left: 3%;
   padding: 0px;
-  color: rgb(30, 56, 31);
+  /* color: rgb(30, 56, 31); */
+  color: rgb(32, 154, 74);
   /* font-size: 250px; */
-  font-size: 16em;
+  font-weight: bold;
+  font-size: 14em;
   position: fixed;
   left: 12.5%;
   top: 0.7%;
