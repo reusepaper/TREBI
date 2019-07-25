@@ -6,7 +6,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  colorChange: function() {
+    color: white;
+  }
+};
 </script>
 
 <style scoped>
@@ -20,13 +24,20 @@ export default {};
   grid-auto-columns: 80%;
   justify-content: center;
 }
+
 .contactTitle {
   align-self: center;
   justify-self: center;
   font-size: 50px;
   font-weight: 600;
+  color: #919191;
   /* background-color: yellow; */
 }
+
+.contactTitle:hover {
+  color: white;
+}
+
 .contactUs {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;

@@ -1,20 +1,19 @@
 <template>
   <div class="memberList">
-    <img src="../../../src/assets/goubook1.png"/>
-    <img src="../../../src/assets/hesee.jpg"/>
-    <img src="../../../src/assets/pikachu.jpg"/>
-    <img src="../../../src/assets/togepi.jpg"/>
-    <img src="../../../src/assets/jammanbo.jpg"/>
+    <img src="../../../src/assets/goubook1.png" />
+    <img src="../../../src/assets/hesee.jpg" />
+    <img src="../../../src/assets/pikachu.jpg" />
+    <img src="../../../src/assets/togepi.jpg" />
+    <img src="../../../src/assets/jammanbo.jpg" />
   </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
+<<<<<<< HEAD
   .memberList {
     display: grid;
     grid-auto-flow: column;
@@ -29,4 +28,20 @@ export default {
   img:hover{
     box-shadow: 5px 5px 0 grey;
   }
+=======
+.memberList {
+  display: grid;
+  grid-auto-flow: column;
+}
+.memberList > img {
+  justify-self: center;
+  align-self: center;
+  height: 200px;
+  border-radius: 50%;
+  box-shadow: 10px 10px 10px grey;
+}
+img:hover {
+  box-shadow: 5px 5px 0 grey;
+}
+>>>>>>> [$5] S1P2213002-38 base Color Change
 </style>

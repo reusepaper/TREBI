@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background-color:white;">
     <p class="text-vertical">MEMBER</p>
   </div>
 </template>

@@ -25,7 +25,12 @@ export default {};
   align-self: center;
   font-size: 50px;
   font-weight: 600;
+  color: #919191;
   /* background-color: yellow; */
+}
+
+.chatbotTitle:hover {
+  color: white;
 }
 .chatbot {
   background-color: rgba(255, 255, 255, 0.9);

@@ -4,7 +4,9 @@
       <Main></Main>
     </div>
     <div class="section">
-      <Team></Team>
+      <div class="teampageContain">
+        <Team></Team>
+      </div>
     </div>
     <div class="section">
       <Member></Member>
@@ -16,7 +18,9 @@
       <PostWrite></PostWrite>
     </div>
     <div class="section">
-      <GitGraph></GitGraph>
+      <div class="GraphPageContain">
+        <GitGraph></GitGraph>
+      </div>
     </div>
     <div class="section">
       <Footer></Footer>
@@ -72,12 +76,12 @@ export default {
         ],
         sectionsColor: [
           "#517A53",
-          "#FFFFFF",
-          "#B0D6B3",
-          "#B0D6B3",
-          "#ff8181fc",
+          "#ffff82",
+          "#e4f1e6",
+          "#ffffdf",
+          "#F8FDF6",
           "#F7F7F7",
-          "#517A53",
+          "#232323",
           "#FFFFFF"
         ]
       }
@@ -85,3 +89,18 @@ export default {
   }
 };
 </script>
+<style>
+.teampageContain {
+  height: 94%;
+  width: 97%;
+  background-color: white;
+  transform: translate(1.5%, 3%);
+}
+
+.GraphPageContain {
+  height: 94%;
+  width: 97%;
+  background-color: #aed34e;
+  transform: translate(1.5%, 3%);
+}
+</style>
