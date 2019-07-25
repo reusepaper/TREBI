@@ -1,5 +1,5 @@
 <template>
-  <button>관리자 페이지</button>
+  <button class="authButton">관리자 페이지</button>
 </template>
 
 <script>

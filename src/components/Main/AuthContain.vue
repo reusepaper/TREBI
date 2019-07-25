@@ -29,7 +29,13 @@ export default {
 </script>
 
 <style>
-
+.authButton {
+  background-color: white;
+  border: 1px #8ee468 solid;
+  color: #1d9436;
+  padding: 3px;
+  border-radius: 5px;
+}
 
 #authcontainer-out {
   text-align: center;
