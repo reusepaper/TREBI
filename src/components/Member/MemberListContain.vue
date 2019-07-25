@@ -25,6 +25,7 @@ export default {};
   width: 150px;
   border-radius: 50%;
   box-shadow: 10px 10px 10px grey;
+  transition: 0.1s linear;
 }
 img:hover {
   box-shadow: 5px 5px 0 grey;
