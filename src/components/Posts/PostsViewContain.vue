@@ -1,5 +1,7 @@
 <template>
-  <div class="postsContents"></div>
+  <div class="postsContents">
+    <div class="tail"></div>
+  </div>
 </template>
 
 <script>
@@ -24,7 +26,17 @@ export default {
   background-color: white;
   border-radius: 1%;
 }
-.memberContents:hover {
+.postsContents:hover {
   box-shadow: 5px 5px 0 grey;
+}
+.postsContents .tail{
+  width: 0px;height: 0px;
+  border-top:50px solid none;
+  border-bottom:50px solid white;
+  border-right: 50px solid transparent;
+  border-left: 50px solid  transparent;
+  position: relative;
+  bottom: 24px;
+  left: 65px;
 }
 </style>
