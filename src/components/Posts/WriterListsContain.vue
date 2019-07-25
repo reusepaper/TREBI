@@ -12,7 +12,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 .memberList {
   display: grid;
   grid-auto-flow: column;
