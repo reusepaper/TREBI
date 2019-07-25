@@ -5,14 +5,12 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
-  #MainContent-content {
-    background: #F7F7F7;
-    height: 80%;
-  }
+#MainContent-content {
+  background: #f7f7f7;
+  height: 60%;
+}
 </style>

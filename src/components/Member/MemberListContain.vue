@@ -13,20 +13,20 @@ export default {};
 </script>
 
 <style>
-  .memberList {
-    display: grid;
-    grid-auto-flow: column;
-  }
-  .memberList > img{
-    justify-self: center;
-    align-self: center;
-    background-size: 100px;
-    height:150px;
-    width:150px;
-    border-radius: 50%;
-    box-shadow: 10px 10px 10px grey;
-  }
-  img:hover{
-    box-shadow: 5px 5px 0 grey;
-  }
+.memberList {
+  display: grid;
+  grid-auto-flow: column;
+}
+.memberList > img {
+  justify-self: center;
+  align-self: center;
+  background-size: 100px;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  box-shadow: 10px 10px 10px grey;
+}
+img:hover {
+  box-shadow: 5px 5px 0 grey;
+}
 </style>

@@ -80,7 +80,7 @@ export default {
           "#e4f1e6",
           "#ffffdf",
           "#F8FDF6",
-          "#F7F7F7",
+          "#FFFFFF",
           "#232323",
           "#FFFFFF"
         ]
