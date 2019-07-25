@@ -17,7 +17,7 @@ export default {
 <style>
 #main-title {
   height: 64%;
-  background: #f7f7f7;
+  background: #edffa4;
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;

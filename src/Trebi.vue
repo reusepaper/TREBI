@@ -75,14 +75,14 @@ export default {
           "page8"
         ],
         sectionsColor: [
-          "#517A53",
-          "#ffff82",
-          "#e4f1e6",
-          "#ffffdf",
-          "#F8FDF6",
-          "#FFFFFF",
-          "#232323",
-          "#FFFFFF"
+          "#F7F7F7",
+          "#edffa4",
+          "#edffa4",
+          "#edffa4",
+          "#edffa4",
+          "#edffa4",
+          "#edffa4",
+          "#f7f7f7"
         ]
       }
     };
@@ -91,16 +91,14 @@ export default {
 </script>
 <style>
 .teampageContain {
-  height: 94%;
-  width: 97%;
-  background-color: white;
-  transform: translate(1.5%, 3%);
+  height: 70%;
+  background-color: #f7f7f7;
+  transform: translate(0, 20%);
 }
 
 .GraphPageContain {
-  height: 94%;
-  width: 97%;
-  background-color: #aed34e;
-  transform: translate(1.5%, 3%);
+  height: 70%;
+  background-color: #f7f7f7;
+  transform: translate(0, 20%);
 }
 </style>
