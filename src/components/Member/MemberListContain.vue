@@ -13,7 +13,6 @@ export default {};
 </script>
 
 <style>
-<<<<<<< HEAD
   .memberList {
     display: grid;
     grid-auto-flow: column;
@@ -21,27 +20,13 @@ export default {};
   .memberList > img{
     justify-self: center;
     align-self: center;
+    background-size: 100px;
     height:150px;
+    width:150px;
     border-radius: 50%;
     box-shadow: 10px 10px 10px grey;
   }
   img:hover{
     box-shadow: 5px 5px 0 grey;
   }
-=======
-.memberList {
-  display: grid;
-  grid-auto-flow: column;
-}
-.memberList > img {
-  justify-self: center;
-  align-self: center;
-  height: 200px;
-  border-radius: 50%;
-  box-shadow: 10px 10px 10px grey;
-}
-img:hover {
-  box-shadow: 5px 5px 0 grey;
-}
->>>>>>> [$5] S1P2213002-38 base Color Change
 </style>

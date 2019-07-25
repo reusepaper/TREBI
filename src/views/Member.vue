@@ -30,12 +30,11 @@ export default {
 .member-title {
   float: left;
   width: 10%;
-  border-left-color: black;
   height: 100vh;
 }
 .contents {
   float: left;
-  width: 80%;
+  width: 72%;
   height: 100vh;
 }
 .member-list-contain {
