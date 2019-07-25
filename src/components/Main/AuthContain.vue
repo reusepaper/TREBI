@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <h1>Log In</h1>
-    <UserContext v-if="this.$store.state.is_login"></UserContext>
-    <Login v-else></Login>
+  <div id="authcontainer-out">
+    <div id="authcontainer-in" >
+      <h1 v-if="this.$store.state.is_login == false">Log In</h1>
+      <UserContext v-if="this.$store.state.is_login"></UserContext>
+      <Login v-else></Login>
+    </div>
   </div>
 </template>
 
@@ -20,7 +22,7 @@ export default {
     UserContext
   },
   mounted: function(){
-    // console.log(this.$store.state.user)
+    console.log(this.$store.state.user)
     // console.log(this.$store.state.is_login);
   }
 }
@@ -28,4 +30,11 @@ export default {
 
 <style>
 
+
+#authcontainer-out {
+  text-align: center;
+}
+#authcontainer-in {
+  display:inline-block;
+}
 </style>
