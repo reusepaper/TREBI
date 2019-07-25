@@ -22,7 +22,9 @@ export default {
   .memberList > img{
     justify-self: center;
     align-self: center;
+    background-size: 100px;
     height:150px;
+    width:150px;
     border-radius: 50%;
     box-shadow: 10px 10px 10px grey;
   }

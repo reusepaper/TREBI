@@ -1,6 +1,6 @@
 <template>
-  <div class="title-container">
-    <p>Posts</p>
+  <div>
+    <p class="title-container">Posts</p>
   </div>
 </template>
 
@@ -10,9 +10,18 @@ export default {};
 
 <style scoped>
 .title-container {
-  font-size: 130px;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  -ms-transform: rotate(270deg); /* IE 9 */
+  -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
+  transform: rotate(270deg);
+  position: relative;
+  top: 43%;
+  left: -49px;
+  font-size: 150px;
   font-weight: 900;
-  justify-self: center;
-  align-self: center;
+  color: rgb(6, 37, 6);
+  
 }
 </style>

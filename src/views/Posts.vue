@@ -28,9 +28,9 @@ export default {
   grid-template-columns: 150px 8fr;
 }
 .posts-title {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  transform: rotate(180deg);
+  float: left;
+  width: 10%;
+  height: 100vh;
 }
 .contents {
   float: left;
