@@ -1,6 +1,6 @@
 <template>
   <div id="MainContent-content">
-    <h3>유초록씨 유튜브</h3>
+    <p>유초록씨 유튜브</p>
   </div>
 </template>
 

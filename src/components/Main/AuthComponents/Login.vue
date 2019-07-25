@@ -106,5 +106,9 @@ export default {
 }
 </script>
 <style>
-
+#firebaseui-auth-container {
+  background-color: #f7f7f7;
+  width: 312px;
+  padding: 5px 0px;
+}
 </style>
