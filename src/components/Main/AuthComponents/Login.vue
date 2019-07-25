@@ -53,14 +53,8 @@ export default {
         callbacks: {
           // 로그인이 성공하면,
           signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-            // 로그인 정보를 각각의 data에 저장한다.
-            auth.onAuthStateChanged(user => {
-              this.$store.commit("setUser", user);
-              this.$store.commit("setLogin", true);
-              // this.$store.commit("setProfileImage", user.photoURL);
-            });
-            console.log(this.$store.state.user)
-            console.log("ok");
+            this.updateCurrentUser();
+
             return false;
           }
         }
@@ -68,11 +62,37 @@ export default {
     },
     async getUsers() {
       this.allUsers = await FirebaseService.getUsers();
-      await console.log(this.allUsers);
     },
-    checkIsSignup: function(){
-      
-    }
+    // 현재 유저 veux에 저장 및 firebase 비교.
+    async updateCurrentUser(){
+      // 로그인 정보를 각각의 data에 저장한다.
+      await auth.onAuthStateChanged(user => {
+        this.$store.commit("setUser", user);
+        this.$store.commit("setLogin", true);
+        // this.$store.commit("setProfileImage", user.photoURL);
+        if(this.checkIsSignup(user) == false){
+          // console.log("true");
+          FirebaseService.createUser(
+            user.uid, 
+            user.displayName, 
+            user.email.toString(), 
+            "visitor", 
+            new Date()
+          );
+        };
+      });
+      // await console.log(this.$store.state.user);
+    },
+    checkIsSignup: function(currentUser){
+      // console.log(this.allUsers);
+      if (currentUser == null) return true;
+      for(let i=0; i<this.allUsers.length; i++){
+        if(this.allUsers[i].uid == currentUser.uid){
+          return true;
+        }
+      }
+      return false;
+    },
     
   },
   mounted: function() {
