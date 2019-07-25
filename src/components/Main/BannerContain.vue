@@ -1,15 +1,17 @@
 <template>
   <div id="main-title">
     <BannerHeader></BannerHeader>
-    <img width="530vw" src="../../assets/main_img.png" />
+    <BannerImg></BannerImg>
   </div>
 </template>
 
 <script>
 import BannerHeader from "./BannerComponents/BannerHeader";
+import BannerImg from "./BannerComponents/BannerImg";
 export default {
   components: {
-    BannerHeader
+    BannerHeader,
+    BannerImg
   }
 };
 </script>
@@ -19,9 +21,5 @@ export default {
   height: 64%;
   background: #edffa4;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-flow: column;
-  grid-gap: 50px;
 }
 </style>

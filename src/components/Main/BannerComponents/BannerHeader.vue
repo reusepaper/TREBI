@@ -1,5 +1,7 @@
 <template>
-  <h1 id="Header">TREBI</h1>
+  <div>
+    <h1 id="Header">TREBI</h1>
+  </div>
 </template>
 
 <script>
@@ -13,8 +15,8 @@ export default {};
   color: rgb(30, 56, 31);
   /* font-size: 250px; */
   font-size: 16em;
-  position: relative;
-  top: 40%;
-  z-index: 3;
+  position: fixed;
+  left: 12.5%;
+  top: 0.7%;
 }
 </style>
