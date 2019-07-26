@@ -17,6 +17,8 @@ export default {
   data() {
     return {
       allUsers: [],
+      loginUser: null,
+      userLevel: null,
     }
   },
   methods: {
@@ -67,11 +69,12 @@ export default {
     async updateCurrentUser(){
       // 로그인 정보를 각각의 data에 저장한다.
       await auth.onAuthStateChanged(user => {
-        this.$store.commit("setUser", user);
-        this.$store.commit("setLogin", true);
+        this.loginUser = user;
+        console.log(this.loginUser);
         // this.$store.commit("setProfileImage", user.photoURL);
         if(this.checkIsSignup(user) == false){
           // console.log("true");
+          // this.userLevel = 'visitor';
           FirebaseService.createUser(
             user.uid, 
             user.displayName, 
@@ -79,15 +82,33 @@ export default {
             "visitor", 
             new Date()
           );
-        };
+          // this.loginUser['level'] = 'visitor';
+        }
+        // else{
+        //   // this.loginUser['level'] = this.userLevel;
+        //   this.loginUser['level'] = this.userLevel
+        // }
+        
       });
-      // await console.log(this.$store.state.user);
+      await this.$store.commit("setUser", this.loginUser);
+      await this.$store.commit("setLogin", true);
+      await this.$store.commit("setUserLevel", this.userLevel);
+      // await function(){
+      //   this.loginUser = this.$store.state.user;
+      // }
+      // await function(){
+      //   this.loginUser['level']=this.userLevel;
+      // }
+      // await console.log(this.loginUser);
+      // await this.$store.commit("setUser", this.loginUser);
+      await console.log(this.$store.state.user);
     },
     checkIsSignup: function(currentUser){
       // console.log(this.allUsers);
       if (currentUser == null) return true;
       for(let i=0; i<this.allUsers.length; i++){
         if(this.allUsers[i].uid == currentUser.uid){
+          this.userLevel = this.allUsers[i].level;
           return true;
         }
       }
@@ -107,7 +128,7 @@ export default {
 </script>
 <style>
 #firebaseui-auth-container {
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
   width: 312px;
   padding: 5px 0px;
 }
