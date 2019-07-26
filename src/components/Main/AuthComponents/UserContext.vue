@@ -9,7 +9,7 @@
       <div class="authButtons">
         <Logout></Logout>
         <profileButton></profileButton>
-        <adminButton v-if="this.$store.state.user"></adminButton>
+        <adminButton v-if="this.$store.state.userLevel=='Maintainer'"></adminButton>
       </div>
     </div>
   </div>
