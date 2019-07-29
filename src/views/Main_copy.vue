@@ -1,6 +1,5 @@
 <template>
-  <div class="app">
-    <Navbar></Navbar>
+  <div class="main">
     <ul>
         <li>T</li>
         <li>R</li>
@@ -26,15 +25,16 @@ export default {
 </script>
 
 <style scoped>
-    .app{
+    .main{
         background: #524F5a;
         margin:0;
         padding: 0;
-        height:100vh;
+        /* height:100vh; */
     }
-    .app ul{
+    .main ul{
         padding:5px 25px 5px 25px;
-        margin:0;
+        margin:auto;
+        vertical-align: middle;
         border: 10px solid #fff;
         display: inline-block;
         position: sticky;
@@ -42,7 +42,7 @@ export default {
         left:50%;
         transform: translateY(-50%) translateX(-50%);
     }
-    .app ul li{
+    .main ul li{
         list-style: none;
         color: #fff;
         float: left;
