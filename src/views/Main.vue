@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import ScrollDown from "../components/Main_copy/Scroll_down_indicator";
+import ScrollDown from "../components/Navigation/Scroll_down_indicator";
 // import Navbar from "../components/Navigation/Navbar";
 
 export default {
