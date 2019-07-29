@@ -21,12 +21,12 @@
       <Footer></Footer>
     </div>
     <!-- <Main></Main>
-    <Team></Team>
-    <Member></Member>
-    <Posts></Posts>
-    <PostWrite></PostWrite>
-    <GitGraph></GitGraph>
-    <Footer></Footer>
+      <Team></Team>
+      <Member></Member>
+      <Posts></Posts>
+      <PostWrite></PostWrite>
+      <GitGraph></GitGraph>
+      <Footer></Footer>
     <Sidebar></Sidebar>-->
   </full-page>
 </template>
@@ -36,7 +36,7 @@ import Team from "./views/Team";
 import Member from "./views/Member";
 import GitGraph from "./views/GitGraph";
 import Footer from "./views/Footer";
-import Sidebar from "./views/Header";
+import Header from "./views/Header";
 
 export default {
   name: "Trebi",
@@ -47,6 +47,16 @@ export default {
     GitGraph,
     Footer,
     Header
+  },
+  data() {
+    return {
+      options: {
+        licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
+        anchors: ["page1", "page2", "page3", "page4", "page5"]
+      }
+    };
   }
 };
-<style></style>;
+</script>
+<style>
+</style>
