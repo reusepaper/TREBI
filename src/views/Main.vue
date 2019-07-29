@@ -49,8 +49,8 @@ export default {
         float: left;
         /* display: inline-block;
         text-align: center; */
-        font-size: 10rem;
-        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10vw;
+        font-family: Ubuntu, Arial, Helvetica, sans-serif;
         transition: 2s;
     }
     ul:hover li{

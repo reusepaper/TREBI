@@ -23,14 +23,14 @@ export default {
     position:fixed;
     /* top:0; */
     width:100%;
-    height:80px;
+    height:10vh;
     padding: 0 100px;
     box-sizing:border-box;
     display:flex;
     justify-content: space-between;
     align-items: center;
     transition:0.5s;
-    z-index: 1; 
+    z-index: 1;
   }
   .navbar ul {
     margin:0;
@@ -46,6 +46,7 @@ export default {
     font-size: 1.1em;
     text-decoration: none;
     font-weight: bold;
+    font-family: Ubuntu;
     /* transition: 3s; */
   }
   .navbar ul li:hoveR{
@@ -54,6 +55,7 @@ export default {
   }
 
   a.brand {
+    font-family: Ubuntu;
     font-size:1.8em;
     color:#fff;
     font-weight: bold;
@@ -63,7 +65,7 @@ export default {
       -1px 1px 1px #222222, 
       1px -1px 1px #222222, 
       -1px -1px 1px #222222,
-      1px  1px 5px #555555;
+      1px  1px 1px #555555;
   }
 
   a.brand, a.nav-menu {
@@ -72,6 +74,6 @@ export default {
       -1px 1px 1px #222222, 
       1px -1px 1px #222222, 
       -1px -1px 1px #222222,
-      1px  1px 5px #555555;
+      1px  1px 1px #555555;
   }
 </style>
