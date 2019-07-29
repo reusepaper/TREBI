@@ -1,6 +1,9 @@
 <template>
   <div class="postsContents">
-    <div class="tail"></div>
+    <div
+      class="tail"
+      v-bind:style="{'transform':'translate(' + (this.$store.state.postTarget-1)*212 + 'px, 0px)'}"
+    ></div>
     <ul class="post-list">
       <li v-for="post in posts">
         <span @click="showModal = true" v-bind:id="post.id" class="post-title">{{post.title}}</span>
@@ -55,6 +58,7 @@ export default {
   box-shadow: 10px 10px 5px grey;
   background-color: white;
   border-radius: 1%;
+  transition: 0.1s linear;
 }
 .postsContents:hover {
   box-shadow: 5px 5px 0 grey;
@@ -90,5 +94,8 @@ export default {
 }
 .post-list .post-title:hover {
   color: rgba(0, 0, 0, 0.3);
+}
+.tail {
+  transition: 0.3s ease-in-out;
 }
 </style>

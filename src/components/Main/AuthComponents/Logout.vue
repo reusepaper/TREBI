@@ -19,7 +19,7 @@ export default {
       await auth.signOut();
       await this.$store.commit("setUser", null);
       await this.$store.commit("setLogin", false);
-      
+      await this.$store.commit("setUserLevel", null);
     }
   }
 }
