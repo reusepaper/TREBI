@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 50px;">
     <img class="sidebarLogo" src="../../../assets/admin.png" />
     <span class="sidebarTitle">Trebi Admin</span>
   </div>
@@ -20,5 +20,6 @@ export default {};
   display: inline-block;
   font-size: 25px;
   color: #ffffff;
+  padding-left: 20px;
 }
 </style>
