@@ -1,9 +1,17 @@
 <template>
-  <p>메인</p>
+  <div>
+    <p>메인</p>
+    <mainTable></mainTable>
+  </div>
 </template>
 
 <script>
-export default {};
+import mainTable from './MainComponents/AdminMainTable'
+export default {
+  components: {
+    mainTable,
+  }
+};
 </script>
 
 <style>
