@@ -1,7 +1,7 @@
 import "firebase/firestore";
 import "firebase/auth";
-import * as firebaseui from 'firebaseui'
 import * as firebase from "firebase/app"
+
 const config = {
   apiKey: "AIzaSyCBToAXiNSn5EIUwm0AbYF3jtRJkzGQRs8",
   authDomain: "webmobile-sub2-510fa.firebaseapp.com",
@@ -75,6 +75,21 @@ export default {
         return docSnapshots.docs.map(doc => {
           let data = doc.data();
           return data;
+        });
+      });
+  },
+  getUserfield(){
+    return firestore
+      .collection(USERS)
+      // .orderBy("uid")
+      .limit(1)
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          let userFields = Object.getOwnPropertyNames(data);
+          // console.log(data);
+          return userFields;
         });
       });
   },
