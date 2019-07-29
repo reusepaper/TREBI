@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 id="Header">TREBI</h1>
+    <h1 id="Header"></h1>
   </div>
 </template>
 
@@ -23,5 +23,14 @@ export default {};
   position: fixed;
   left: 12.5%;
   top: 0.7%;
+  background: #55ffaa;
+  background: -webkit-linear-gradient(left, #ffc955, #00ff66d4);
+  background:    -moz-linear-gradient(right, #ffc955, #00ff66d4);
+  background:      -o-linear-gradient(right,  #ffc955, #00ff66d4);
+  background:         linear-gradient(to right,  #ffc955, #00ff66d4);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  font-weight: bold;
 }
 </style>
