@@ -1,18 +1,18 @@
 <template>
   <div class="adminPageGrid">
-    <AdminSideBarContain></AdminSideBarContain>
+    <AdminSideBar></AdminSideBar>
     <AdminMainContain></AdminMainContain>
   </div>
 </template>
 
 <script>
 import AdminMainContain from "../components/Admin/AdminMainContain";
-import AdminSideBarContain from "../components/Admin/AdminSideBarContain";
+import AdminSideBar from "../components/Admin/AdminSideBar";
 
 export default {
   components: {
     AdminMainContain,
-    AdminSideBarContain
+    AdminSideBar
   }
 };
 </script>

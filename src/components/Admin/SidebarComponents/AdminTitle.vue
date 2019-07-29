@@ -1,7 +1,7 @@
 <template>
-  <div style="height: 50px;">
+  <div style="height: 78px;">
     <img class="sidebarLogo" src="../../../assets/admin.png" />
-    <span class="sidebarTitle">Trebi Admin</span>
+    <span class="sidebarTitle">TREBI Admin</span>
   </div>
 </template>
 
