@@ -1,5 +1,5 @@
 <template>
-  <full-page ref="fullpage" :options="options" id="fullpage">
+  <!-- <full-page ref="fullpage" :options="options" id="fullpage">
     <Header></Header>
     <div class="section">
       <Main_copy></Main_copy>
@@ -22,16 +22,16 @@
     </div>
     <div class="section">
       <Footer></Footer>
-    </div>
-    <!-- <Main></Main>
-      <Team></Team>
-      <Member></Member>
-      <Posts></Posts>
-      <PostWrite></PostWrite>
-      <GitGraph></GitGraph>
-      <Footer></Footer>
-    <Sidebar></Sidebar>-->
-  </full-page>
+    </div> -->
+  <!-- </full-page> -->
+  <div>
+    <!-- <Main_copy class="page"></Main_copy> -->
+    <Main class="page"></Main>
+    <Team class="page"></Team>
+    <Member class="page"></Member>
+    <GitGraph class="page"></GitGraph>
+    <Footer class="page"></Footer>
+  </div>
 </template>
 <script>
 import Main from "./views/Main";
@@ -40,7 +40,7 @@ import Team from "./views/Team";
 import Member from "./views/Member";
 import GitGraph from "./views/GitGraph";
 import Footer from "./views/Footer";
-import Header from "./views/Header";
+import $ from 'jquery';
 
 export default {
   name: "Trebi",
@@ -50,18 +50,66 @@ export default {
     Team,
     Member,
     GitGraph,
-    Footer,
-    Header
+    Footer
   },
   data() {
     return {
-      options: {
-        licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-        anchors: ["page1", "page2", "page3", "page4", "page5"]
-      }
+      // options: {
+      //   licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
+      //   anchors: ["page1", "page2", "page3", "page4", "page5"]
+      // }
     };
+  },
+  mounted: function(){
+    $(".page").each(function(){
+      $(this).on("mousewheel DOMMouseScroll", function(event){
+        event.preventDefault();
+        var delta = 0;
+        var moveTop = $(window).scrollTop();
+        var pageMax = $(".page").length-1;
+        var winEvent = "";
+        if(!winEvent) {
+          winEvent = window.event;
+        }
+        if(winEvent.wheelDelta){
+          delta = winEvent.wheelDelta/120;
+          if(window.opera) {
+            delta = -delta;
+          }
+        } else if(winEvent.detail) {
+          delta = -winEvent.detail/3;
+        }
+
+        if(delta < 0){
+          if($(this).index() < pageMax) {
+            if($(this).next() != undefined) {
+              moveTop = $(this).next().offset().top;
+            }
+          }
+        } else {
+          if($(this).index() > 0) {
+            if($(this).prev() != undefined) {
+              moveTop = $(this).prev().offset().top;
+            }
+            
+          }
+        }
+
+        $("html, body").stop().animate({
+          scrollTop: moveTop + "px"
+        },{
+          duration:800, complete: function(){
+          }
+        });
+      });
+    });
   }
 };
 </script>
 <style>
+div .page{
+  width:100%;
+  height:100vh;
+  position:relative;
+}
 </style>

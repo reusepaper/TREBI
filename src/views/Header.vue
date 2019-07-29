@@ -1,8 +1,17 @@
-<template></template>
+<template>
+  <div>
+    <Navbar class="nav"></Navbar>
+  </div>
+</template>
 
 <script>
-export default {};
+import Navbar from "../components/Header/HeaderContain.vue"
+export default {
+  name: "Header",
+  components: {
+    Navbar
+  }
+};
 </script>
-
 <style>
 </style>
