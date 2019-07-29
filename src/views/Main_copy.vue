@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <Navbar></Navbar>
     <ul>
         <li>T</li>
         <li>R</li>
@@ -14,10 +15,12 @@
 
 <script>
 import ScrollDown from "../components/Main_copy/Scroll_down_indicator";
+import Navbar from "../components/Main_copy/Navbar";
 
 export default {
   components:{
-    ScrollDown
+    ScrollDown,
+    Navbar
   }
 }
 </script>
