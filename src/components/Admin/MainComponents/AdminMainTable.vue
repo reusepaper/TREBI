@@ -10,8 +10,19 @@
       </thead>
       <tbody>
         <tr v-for="oneUser in allUsers">
-          <td v-for="field in oneUser" v-if="typeof(field) === 'object'">
+          <!-- {{oneUser}} -->
+          <td v-for="field, key in oneUser" v-if="typeof(field) === 'object'">
             {{formatDate(field.toDate())}}
+          </td>
+          <td v-else-if="key === 'level'">
+            {{field}}<br>
+            <select id="level_select">
+              <option value="" disabled selected>수정</option>
+              <option value="visitor">visitor</option>
+              <option value="member">member</option>
+              <option value="maintainer">maintainer</option>
+            </select>
+            <button id="select_button" @click="changeLevel(oneUser)">변경</button>
           </td>
           <td v-else>
             {{field}}
@@ -49,11 +60,18 @@ export default {
         "11월", "12월"
       ];
 
-      var day = date.getDate();
-      var monthIndex = date.getMonth();
-      var year = date.getFullYear();
+      let day = date.getDate();
+      let monthIndex = date.getMonth();
+      let year = date.getFullYear();
 
       return year + '년 ' + monthNames[monthIndex] + ' ' + day + '일';
+    },
+    changeLevel: function(changeUser){
+      let change_level = document.getElementById("level_select");
+      console.log(changeUser);
+      // alert('선택된 옵션 text 값=' + target.options[target.selectedIndex].text);     // 옵션 text 값
+      // alert('선택된 옵션 value 값=' + target.options[target.selectedIndex].value);     // 옵션 value 값
+
     }
   },
   mounted: function(){
@@ -73,7 +91,7 @@ table {
 
 /* Zebra striping */
 tr:nth-of-type(odd) { 
-	background: #eee; 
+	background: #ebebeb; 
 	}
 
 th { 
@@ -140,5 +158,8 @@ only screen and (max-width: 760px),
 		font-weight: bold;
 	}
 
+}
+#level_select {
+  width: 60%;
 }
 </style>
