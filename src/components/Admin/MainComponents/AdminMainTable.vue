@@ -3,27 +3,19 @@
     <table>
       <thead>
         <tr>
-          <th>uid</th>
-          <th>nickname</th>
-          <th>email</th>
-          <th>level</th>
-          <th>created at</th>
+          <th v-for="field in userFields">
+            {{field}}
+          </th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1232123</td>
-          <td>아아아</td>
-          <td>aaa@aaa.com</td>
-          <td>visitor</td>
-          <td>19.07.29</td>
-        </tr>
-        <tr>
-          <td>1232123</td>
-          <td>아아아</td>
-          <td>aaa@aaa.com</td>
-          <td>visitor</td>
-          <td>19.07.29</td>
+        <tr v-for="oneUser in allUsers">
+          <td v-for="field in oneUser" v-if="typeof(field) === 'object'">
+            {{formatDate(field.toDate())}}
+          </td>
+          <td v-else>
+            {{field}}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -31,16 +23,52 @@
 </template>
 
 <script>
+import firebaseService from '@/services/FirebaseService'
 export default {
+  data() {
+    return{
+      userFields: null,
+      allUsers: [],
+
+    }
+  },
+  methods: {
+    async getUserFields(){
+      this.userFields = await firebaseService.getUserfield();
+      // await console.log(this.userFields[0]);
+      this.userFields = await this.userFields[0]
+    },
+    async getUsers(){
+      this.allUsers = await firebaseService.getUsers();
+    },
+    formatDate(date) {
+      var monthNames = [
+        "1월", "2월", "3월",
+        "4월", "5월", "6월", "7월",
+        "8월", "9월", "10월",
+        "11월", "12월"
+      ];
+
+      var day = date.getDate();
+      var monthIndex = date.getMonth();
+      var year = date.getFullYear();
+
+      return year + '년 ' + monthNames[monthIndex] + ' ' + day + '일';
+    }
+  },
+  mounted: function(){
+    this.getUserFields();
+    this.getUsers();
+  },
 
 }
 </script>
 
 <style scoped>
 table { 
-	width: 750px; 
+	width: 800px; 
 	border-collapse: collapse; 
-	margin:50px auto;
+	margin:50px 0px;
 	}
 
 /* Zebra striping */
@@ -58,7 +86,7 @@ td, th {
 	padding: 10px; 
 	border: 1px solid #ccc; 
 	text-align: left; 
-	font-size: 18px;
+	font-size: 16px;
 	}
 
 /* 
