@@ -1,13 +1,25 @@
 <template>
-  <h1>안녕!!!!!!!!!!!!1</h1>
+  <div class="adminPageGrid">
+    <AdminSideBarContain></AdminSideBarContain>
+    <AdminMainContain></AdminMainContain>
+  </div>
 </template>
 
 <script>
-export default {
+import AdminMainContain from "../components/Admin/AdminMainContain";
+import AdminSideBarContain from "../components/Admin/AdminSideBarContain";
 
-}
+export default {
+  components: {
+    AdminMainContain,
+    AdminSideBarContain
+  }
+};
 </script>
 
 <style>
-
+.adminPageGrid {
+  display: grid;
+  grid-template-columns: 2fr 8fr;
+}
 </style>
