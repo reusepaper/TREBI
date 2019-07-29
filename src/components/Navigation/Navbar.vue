@@ -38,6 +38,12 @@ export default {
   }
   .navbar ul li{
     list-style: none;
+    text-shadow: 
+      1px  1px     #222, 
+      -1px  1px     #222, 
+      1px -1px     #222, 
+      -1px -1px     #222
+      1px  1px 5px #555;
   }
   .navbar ul li a{
     color: #fff;
@@ -46,6 +52,7 @@ export default {
     text-decoration: none;
     font-weight: bold;
     transition: 3s;
+    
   }
   .navbar ul li:hoveR{
     /* border: 0.5px solid #fff; */
@@ -57,5 +64,11 @@ export default {
     color:#fff;
     font-weight: bold;
     text-decoration: none;
+    text-shadow: 
+      1px  1px     #222, 
+      -1px  1px     #222, 
+      1px -1px     #222, 
+      -1px -1px     #222
+      1px  1px 5px #555;
   }
 </style>

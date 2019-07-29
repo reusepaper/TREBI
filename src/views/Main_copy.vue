@@ -1,69 +1,45 @@
 <template>
-  <div class="main">
-    <ul>
-        <li>T</li>
-        <li>R</li>
-        <li>E</li>
-        <li>B</li>
-        <li>I</li>
-        <div style="clear: both;"></div>
-    </ul>
-    <ScrollDown></ScrollDown>
+  <div id="main">
+    <BannerContain></BannerContain>
+    <div class="contentContainer">
+      <MainContentContain></MainContentContain>
+      <AuthContain></AuthContain>
+    </div>
+    <div class="bottomColor"></div>
   </div>
 </template>
-
 <script>
-import ScrollDown from "../components/Main_copy/Scroll_down_indicator";
-import Navbar from "../components/Main_copy/Navbar";
+import BannerContain from "../components/Main/BannerContain";
+import MainContentContain from "../components/Main/MainContentContain";
+import AuthContain from "../components/Main/AuthContain";
 
 export default {
-  components:{
-    ScrollDown,
-    Navbar
+  components: {
+    BannerContain,
+    MainContentContain,
+    AuthContain
   }
-}
+};
 </script>
 
-<style scoped>
-    .main{
-        background: #524F5a;
-        margin:0;
-        padding: 0;
-        /* height:100vh; */
-    }
-    .main ul{
-        padding:5px 25px 5px 25px;
-        margin:auto;
-        vertical-align: middle;
-        border: 10px solid #fff;
-        display: inline-block;
-        position: sticky;
-        top:50%;
-        left:50%;
-        transform: translateY(-50%) translateX(-50%);
-    }
-    .main ul li{
-        list-style: none;
-        color: #fff;
-        float: left;
-        font-size: 10rem;
-        font-family: Arial, Helvetica, sans-serif;
-        transition: 2s;
-    }
-    ul:hover li{
-        transform: rotateY(360deg);
-    }
-    ul:hover li:nth-child(2){
-        transition-delay: .3s;
-    }
-    ul:hover li:nth-child(3){
-        transition-delay: .6s;
-    }
-    ul:hover li:nth-child(4){
-        transition-delay: .9s;
-    }
-    ul:hover li:nth-child(5){
-        transition-delay: 1.2s;
-    }
+<style>
+#main {
+  height: inherit;
+}
+.contentContainer {
+  height: 30%;
+  width: 100%;
+  padding: 0px 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: column;
+  grid-gap: 10px;
+}
+.bottomColor {
+  margin-top: 20px;
+  background-color: #edffa4;
+  width: 100%;
+  height: 10%;
+}
 </style>
 

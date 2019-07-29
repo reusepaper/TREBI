@@ -25,12 +25,12 @@
     </div> -->
   <!-- </full-page> -->
   <div>
-    <Main_copy class="page"></Main_copy>
-    <!-- <Main class="page"></Main> -->
+    <!-- <Main_copy class="page"></Main_copy> -->
+    <Main class="page"></Main>
     <Team class="page"></Team>
-    <!-- <Member class="page"></Member>
+    <Member class="page"></Member>
     <GitGraph class="page"></GitGraph>
-    <Footer class="page"></Footer> -->
+    <Footer class="page"></Footer>
   </div>
 </template>
 <script>
@@ -82,14 +82,12 @@ export default {
 
         if(delta < 0){
           if($(this).index() < pageMax) {
-            console.log("↓");
             if($(this).next() != undefined) {
               moveTop = $(this).next().offset().top;
             }
           }
         } else {
           if($(this).index() > 0) {
-            console.log("↑");
             if($(this).prev() != undefined) {
               moveTop = $(this).prev().offset().top;
             }
@@ -110,7 +108,7 @@ export default {
 </script>
 <style>
 div .page{
-  width:100vw;
+  width:100%;
   height:100vh;
   position:relative;
 }
