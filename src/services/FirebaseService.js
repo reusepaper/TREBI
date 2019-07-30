@@ -114,8 +114,19 @@ export default {
       });
     });
   },
+  updateUserLevel(loginUid, updateLevel){
+    const changeUser = firestore.collection(USERS)
+                      .where("uid", "==", loginUid);
+    console.log(changeUser);
+    changeUser.update({
+      "level" : updateLevel
+    });
+    return true
+  },
   createUser(uid, nickname, eamil, level, createdAt) {
-    return firestore.collection(USERS).add({
+    return firestore.collection(USERS)
+    .doc(uid)
+    .set({
       uid,
       nickname,
       eamil,
