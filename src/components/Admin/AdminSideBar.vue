@@ -1,8 +1,8 @@
 <template>
   <div class="sideBar">
-    <div style="margin-top: 20px; height: 100%;">
+    <div style="height: 100%;">
       <!-- Admin Sidebar Title -->
-      <AdminTitle style="margin-left: 20px"></AdminTitle>
+      <AdminTitle style="margin-left: 20px; padding-top: 20px;"></AdminTitle>
 
       <!-- Accordion 형식으로 구현한 메뉴 List -->
       <div class="accordion vertical">
@@ -10,20 +10,28 @@
           <li>
             <input type="checkbox" id="checkbox-1" name="checkbox-accordion" />
             <label for="checkbox-1" style="padding-left: 20px;">Authentication</label>
-            <div class="content"></div>
+            <div class="content" style="padding: 0px">
+              <div class="menuDetailBtn">All User List</div>
+              <div class="menuDetailBtn">Admin User List</div>
+              <div class="menuDetailBtn">User Add</div>
+            </div>
           </li>
           <li>
             <input type="checkbox" id="checkbox-2" name="checkbox-accordion" />
             <label for="checkbox-2" style="padding-left: 20px;">Post</label>
-            <div class="content"></div>
+            <div class="content" style="padding: 0px;">
+              <div class="menuDetailBtn">Post List</div>
+              <div class="menuDetailBtn">Portfolio List</div>
+            </div>
           </li>
           <li class="AnalyticsBtnLi">
-            <input
-              onClick="window.open('https://analytics.google.com/analytics/web/?utm_source=marketingplatform.google.com&utm_medium=et&utm_campaign=marketingplatform.google.com%2Fabout%2Fanalytics%2F#/report-home/a143603759w204989459p198246038')"
+            <button
               class="AnalyticsBtn"
-              type="button"
-              value="Analytics"
-            />
+              onclick="window.open('https://analytics.google.com/analytics/web/?utm_source=marketingplatform.google.com&utm_medium=et&utm_campaign=marketingplatform.google.com%2Fabout%2Fanalytics%2F#/report-home/a143603759w204989459p198246038')"
+            >
+              <img src="../../assets/googleAnalytics.png" width="30px;" class="AnalyticsImg" />
+              <span>Google Analytics</span>
+            </button>
           </li>
         </ul>
       </div>
@@ -47,6 +55,8 @@ export default {
   height: 60px;
   border-top: 1px solid #404854;
   border-bottom: 1px solid #404854;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .AnalyticsBtn {
@@ -63,6 +73,21 @@ export default {
   height: 100%;
   border: none;
   outline: none;
+}
+.AnalyticsImg {
+  background-color: none;
+  margin-right: 10px;
+}
+
+/* detail menu */
+.menuDetailBtn {
+  padding-left: 20px;
+  color: white;
+  height: 32px;
+}
+
+.menuDetailBtn:hover {
+  background-color: #324558;
 }
 
 .AnalyticsBtn:hover {
@@ -149,6 +174,6 @@ export default {
 }
 .vertical [type="radio"]:checked ~ label ~ .content,
 .vertical [type="checkbox"]:checked ~ label ~ .content {
-  height: 300px;
+  height: 150px;
 }
 </style>
