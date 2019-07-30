@@ -7,6 +7,8 @@
 <script>
 import TeamTitleContain from "../components/Team/TeamTitleContain";
 import TeamContentsContain from "../components/Team/TeamContentsContain";
+import $ from 'jquery';
+
 export default {
   components: {
     TeamTitleContain,

@@ -1,52 +1,67 @@
 <template>
-  <div id="member">
-    <MemberTitle class="member-title"></MemberTitle>
-    <div class="contents">
-      <MemberListContain class="member-list-contain"></MemberListContain>
-      <MemberContentsContain class="member-contents-contain"></MemberContentsContain>
-    </div>
+  <div class="member">
+    <MemberTitle class="fadeInRight"></MemberTitle>
+    <MemberListContain></MemberListContain>
+    <!-- <MemberContentsContain></MemberContentsContain> -->
   </div>
 </template>
 <script>
 import MemberTitle from "../components/Member/MemberTitle";
 import MemberListContain from "../components/Member/MemberListContain";
 import MemberContentsContain from "../components/Member/MemberContentsContain";
+import $ from 'jquery';
 
 export default {
   components: {
     MemberTitle,
     MemberListContain,
     MemberContentsContain
+  },
+  mounted: function(){
+    $(window).scroll(function(){
+      $('.fadeInRight').each(function(i){
+        var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+        var bottom_of_window = $(window).scrollTop() + $(window).height();
+        if(bottom_of_window > bottom_of_element) {
+          $(this).animate({
+            'opacity':'1',
+            'margin-right':'0px'
+          }, 1000);
+        }
+      });
+    });
   }
+  // ,
+  // data() {
+  //   return {
+  //     members: [
+  //       { 'member_image_src' : require('../assets/goubook1.png'), 'member_contents' : '꼬부기1'},
+  //       { 'member_image_src' : require('../assets/hesee.jpg'), 'member_contents' : '이상해씨1'},
+  //       { 'member_image_src' : require('../assets/pikachu.jpg'), 'member_contents' : '피카츄1'},
+  //       { 'member_image_src' : require('../assets/togepi.jpg'), 'member_contents' : '토게피1'},
+  //       { 'member_image_src' : require('../assets/jammanbo.jpg'), 'member_contents' : '잠만보1'},
+  //       { 'member_image_src' : require('../assets/goubook1.png'), 'member_contents' : '꼬부기2'},
+  //       { 'member_image_src' : require('../assets/hesee.jpg'), 'member_contents' : '이상해씨2'},
+  //       { 'member_image_src' : require('../assets/pikachu.jpg'), 'member_contents' : '피카츄2'},
+  //       { 'member_image_src' : require('../assets/togepi.jpg'), 'member_contents' : '토게피2'},
+  //       { 'member_image_src' : require('../assets/jammanbo.jpg'), 'member_contents' : '잠만보2'},
+  //       { 'member_image_src' : require('../assets/goubook1.png'), 'member_contents' : '꼬부기3'},
+  //       { 'member_image_src' : require('../assets/hesee.jpg'), 'member_contents' : '이상해씨3'},
+  //       { 'member_image_src' : require('../assets/pikachu.jpg'), 'member_contents' : '피카츄3'},
+  //       { 'member_image_src' : require('../assets/togepi.jpg'), 'member_contents' : '토게피3'},
+  //       { 'member_image_src' : require('../assets/jammanbo.jpg'), 'member_contents' : '잠만보3'}
+  //     ]
+  //   }
+  // }
 };
 </script>
 <style scoped>
-.member{
-  width: 100%;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 150px 8fr;
-}
-.member-title {
-  float: left;
-  width: 10%;
-  height: 100vh;
-}
-.contents {
-  float: left;
-  width: 72%;
-  height: 100vh;
-}
-.member-list-contain {
-  height: 20%;
-  margin: 20px;
-  margin-top: 7%;
-}
-.member-contents-contain {
-  background-color: white;
-  margin: 20px;
-  height: 46%;
-  border-radius: 1%;
-  margin-top: 8%;
-}
+  .member {
+    background: #EDEDEE;
+  }
+
+  .fadeInRight {
+    opacity: 0;
+    margin-right: -400px;
+  }
 </style>

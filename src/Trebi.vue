@@ -25,6 +25,7 @@
     </div> -->
   <!-- </full-page> -->
   <div>
+    <Header class="page-header"></Header>
     <!-- <Main_copy class="page"></Main_copy> -->
     <Main class="page"></Main>
     <Team class="page"></Team>
@@ -34,8 +35,9 @@
   </div>
 </template>
 <script>
+import Header from "./views/Header.vue"
 import Main from "./views/Main";
-import Main_copy from "./views/Main_copy";
+// import Main_copy from "./views/Main_copy";
 import Team from "./views/Team";
 import Member from "./views/Member";
 import GitGraph from "./views/GitGraph";
@@ -46,11 +48,12 @@ export default {
   name: "Trebi",
   components: {
     Main,
-    Main_copy,
+    // Main_copy,
     Team,
     Member,
     GitGraph,
-    Footer
+    Footer,
+    Header
   },
   data() {
     return {
@@ -110,6 +113,11 @@ export default {
 div .page{
   width:100%;
   height:100vh;
+  position:relative;
+}
+
+div .page-header{
+  width:100%;
   position:relative;
 }
 </style>
