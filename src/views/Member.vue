@@ -27,6 +27,21 @@ export default {
   display: grid;
   grid-template-columns: 150px 1fr;
   grid-gap: 20px;
+  background-color: #ededee;
+}
+.contents {
+  margin: 50px 0px;
+  margin-right: 50px;
+  display: grid;
+  grid-template-rows: 100px 1fr;
+  grid-gap: 30px;
+}
+.member-title {
+  margin-top: 50px;
+  background-color: #ededee !important;
+  overflow: hidden;
+}
+.member-contents-contain {
 }
 /* .member-title {
 }
