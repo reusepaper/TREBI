@@ -24,9 +24,9 @@ export default {
       const commitGraph = document.querySelector("#commitGraph");
       Body.innerHTML = result;
       const GraphHTML = Body.getElementsByClassName(
-        "border border-gray-dark py-2 graph-before-activity-overview"
+        "js-calendar-graph mx-3 d-flex flex-column flex-items-end flex-xl-items-center overflow-hidden pt-1 is-graph-loading graph-canvas calendar-graph height-full text-center"
       )[0].innerHTML;
-      // Body.innerHTML = CommitGraph;
+      Body.innerHTML = "";
       commitGraph.innerHTML = GraphHTML;
     }
   }
@@ -35,11 +35,11 @@ export default {
 
 <style>
 .hidden {
-  display: none;
+  /* display: none; */
 }
 #githubBody {
-  height: 0px;
-  width: 0px;
+  /* height: 0px;
+  width: 0px; */
 }
 .GraphContain {
 }
