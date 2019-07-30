@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="GraphContain">
     <div id="githubBody" class="hidden"></div>
     <div id="commitGraph"></div>
   </div>
@@ -36,5 +36,11 @@ export default {
 <style>
 .hidden {
   display: none;
+}
+#githubBody {
+  height: 0px;
+  width: 0px;
+}
+.GraphContain {
 }
 </style>

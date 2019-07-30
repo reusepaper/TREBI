@@ -6,7 +6,7 @@
     <img src="../../../src/assets/togepi.jpg" />
     <img src="../../../src/assets/jammanbo.jpg" />
   </div>
-</template>
+</template> 
 
 <script>
 export default {};
