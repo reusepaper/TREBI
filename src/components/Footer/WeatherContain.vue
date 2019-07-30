@@ -1,5 +1,7 @@
 <template>
-  <div class="weatherContainer">this is weather Container</div>
+  <div class="weatherContainer">
+    <div class="weatherConditionContainer">weather icon</div>
+  </div>
 </template>
 
 <script>
@@ -8,8 +10,8 @@ export default {};
 
 <style>
 .weatherContainer {
-  width: 100%;
-  height: 100%;
-  background-color: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
