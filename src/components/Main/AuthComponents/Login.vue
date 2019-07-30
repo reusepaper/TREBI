@@ -16,9 +16,9 @@ const ui = new firebaseui.auth.AuthUI(auth);
 export default {
   data() {
     return {
-      allUsers: [],
       loginUser: null,
       userLevel: null,
+      firebaseUser: null,
     }
   },
   methods: {
@@ -62,46 +62,31 @@ export default {
         }
       });
     },
-    async getUsers() {
-      this.allUsers = await FirebaseService.getUsers();
-    },
     // 현재 유저 veux에 저장 및 firebase 비교.
     async updateCurrentUser(){
       // 로그인 정보를 각각의 data에 저장한다.
       await auth.onAuthStateChanged(user => {
         this.loginUser = user;
-        console.log(this.loginUser);
         // this.$store.commit("setProfileImage", user.photoURL);
-        if(this.checkIsSignup(user) == false){
-          // console.log("true");
-          // this.userLevel = 'visitor';
-          FirebaseService.createUser(
-            user.uid, 
-            user.displayName, 
-            user.email.toString(), 
-            "visitor", 
-            new Date()
-          );
-          // this.loginUser['level'] = 'visitor';
-        }
-        // else{
-        //   // this.loginUser['level'] = this.userLevel;
-        //   this.loginUser['level'] = this.userLevel
-        // }
-        
       });
+      this.firebaseUser = await FirebaseService.getisSignup(this.loginUser.uid);
+      // await console.log(this.firebaseUser)
+      if (this.firebaseUser.length == 0){
+        await FirebaseService.createUser(
+          user.uid, 
+          user.displayName, 
+          user.email.toString(), 
+          "visitor", 
+          new Date()
+        );
+        this.userLevel = 'visitor';
+      } else {
+        this.userLevel = this.firebaseUser[0].level;
+      }
       await this.$store.commit("setUser", this.loginUser);
       await this.$store.commit("setLogin", true);
       await this.$store.commit("setUserLevel", this.userLevel);
-      // await function(){
-      //   this.loginUser = this.$store.state.user;
-      // }
-      // await function(){
-      //   this.loginUser['level']=this.userLevel;
-      // }
-      // await console.log(this.loginUser);
-      // await this.$store.commit("setUser", this.loginUser);
-      await console.log(this.$store.state.user);
+      // await console.log(this.$store.state.userLevel);
     },
     checkIsSignup: function(currentUser){
       // console.log(this.allUsers);
@@ -120,7 +105,6 @@ export default {
     // 현재 로그인한 회원의 정보를 알 수 있는 함수이다. 존재하면 딕셔너리가, 아니면 null값이 나온다.
     
     if (this.$store.state.user == null) {
-      this.getUsers();
       this.initUI();
     }
   }
