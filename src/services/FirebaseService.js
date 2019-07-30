@@ -93,6 +93,18 @@ export default {
         });
       });
   },
+  getisSignup(loginUid){
+    return firestore
+    .collection(USERS)
+    .where("uid", "==", loginUid)
+    .get()
+    .then(docSnapshots => {
+      return docSnapshots.docs.map(doc => {
+        let data = doc.data();
+        return data;
+      });
+    });
+  },
   getUsers() {
     const usersList = firestore.collection(USERS);
     return usersList.get().then(docSnapshots => {
