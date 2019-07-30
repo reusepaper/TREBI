@@ -21,11 +21,6 @@ import profileButton from './modify_profile'
 import adminButton from './adminButton'
 
 export default {
-  data() {
-    return{
-      photoURL
-    }
-  },
   components:{
     Logout,
     profileButton,
