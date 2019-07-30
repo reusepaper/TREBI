@@ -43,5 +43,6 @@ export default {};
   font-size: 130px;
   font-weight: 900;
   color: #524f5a;
+  background-color: #ededee;
 }
 </style>
