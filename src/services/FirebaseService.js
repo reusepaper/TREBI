@@ -115,9 +115,10 @@ export default {
     });
   },
   updateUserLevel(loginUid, updateLevel){
+    console.log(loginUid, updateLevel)
     const changeUser = firestore.collection(USERS)
-                      .where("uid", "==", loginUid);
-    console.log(changeUser);
+                      .doc(loginUid);
+    // console.log(changeUser);
     changeUser.update({
       "level" : updateLevel
     });

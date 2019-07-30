@@ -72,13 +72,14 @@ export default {
 
       return year + "년 " + monthNames[monthIndex] + " " + day + "일";
     },
-    changeLevel: function(changeUser) {
+    async changeLevel(changeUser) {
       let change_user = document.getElementById(changeUser.uid);
       // console.log(changeUser);
       let change_level = change_user.options[change_user.selectedIndex].value;
       console.log(change_level);
-      firebaseService.updateUserLevel(changeUser, change_level);
-      
+      let isUpdate = await firebaseService.updateUserLevel(changeUser.uid, change_level);
+      await alert("변경되었습니다.");
+      this.getUsers();
     },
   },
   mounted: function() {
