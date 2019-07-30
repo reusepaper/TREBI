@@ -73,9 +73,9 @@ export default {
       // await console.log(this.firebaseUser)
       if (this.firebaseUser.length == 0){
         await FirebaseService.createUser(
-          user.uid, 
-          user.displayName, 
-          user.email.toString(), 
+          this.loginUser.uid, 
+          this.loginUser.displayName, 
+          this.loginUser.email.toString(), 
           "visitor", 
           new Date()
         );
