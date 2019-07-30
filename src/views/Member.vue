@@ -21,16 +21,14 @@ export default {
 };
 </script>
 <style scoped>
-.member{
+#member {
   width: 100%;
   height: 100vh;
   display: grid;
-  grid-template-columns: 150px 8fr;
+  grid-template-columns: 150px 1fr;
+  grid-gap: 20px;
 }
-.member-title {
-  float: left;
-  width: 10%;
-  height: 100vh;
+/* .member-title {
 }
 .contents {
   float: left;
@@ -48,5 +46,5 @@ export default {
   height: 46%;
   border-radius: 1%;
   margin-top: 8%;
-}
+} */
 </style>
