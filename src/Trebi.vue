@@ -110,6 +110,10 @@ export default {
 };
 </script>
 <style>
+div {
+  width: 100%;
+}
+
 div .page{
   width:100%;
   height:100vh;
@@ -117,7 +121,7 @@ div .page{
 }
 
 div .page-header{
-  width:100%;
-  position:relative;
+  width: 100%;
+  position: relative;
 }
 </style>

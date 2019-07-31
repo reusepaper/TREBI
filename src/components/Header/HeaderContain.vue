@@ -20,16 +20,16 @@ export default {
 
 <style scoped>
   .navbar{
-    position:fixed;
+    position: fixed;
     /* top:0; */
-    width:100%;
-    height:10vh;
+    width: 100%;
+    height: 10vh;
     padding: 0 100px;
-    box-sizing:border-box;
-    display:flex;
+    box-sizing: border-box;
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    transition:0.5s;
+    transition: 0.5s;
     z-index: 1;
   }
   .navbar ul {
@@ -49,10 +49,10 @@ export default {
     font-family: Ubuntu;
     /* transition: 3s; */
   }
-  .navbar ul li:hoveR{
-    /* border: 0.5px solid #fff; */
+  /* .navbar ul li:hover{
+    border: 0.5px solid #fff;
     transform: rotateY(360deg);
-  }
+  } */
 
   a.brand {
     font-family: Ubuntu;
