@@ -5,16 +5,18 @@
         <i class="fas fa-chevron-circle-left fa-2x left"></i>
       </div>
       <!-- v-bind:style="{'transform': 'translate(-' + (selected-1)*100 + 'vw, 0)'}" -->
-      <div class="member-contents-wrapper">
-        <div class="member-contents">
-          <img :src="members[Math.abs(currentNumber)%members.length].member_image_src" class="cliped">
-          {{ members[Math.abs(currentNumber)%members.length].member_contents }}
-          <!-- <input type="image" v-for="(member, index) in members"
-            :key="index"
-            :src="member.member_image_src"
-            class="cliped"> -->
+      <transition name="fade" mode="out-in">
+        <div class="member-contents-wrapper" v-for="number in [currentNumber]" :key="number">
+          <div class="member-contents">
+            <img :src="members[Math.abs(currentNumber)%members.length].member_image_src" class="cliped">
+            {{ members[Math.abs(currentNumber)%members.length].member_contents }}
+            <!-- <input type="image" v-for="(member, index) in members"
+              :key="index"
+              :src="member.member_image_src"
+              class="cliped"> -->
+          </div>
         </div>
-      </div>
+      </transition>
       <div v-on:click="next">
         <i class="fas fa-chevron-circle-right fa-2x right"></i>
       </div>
@@ -77,6 +79,7 @@ export default {
     height: 70vh;
     width: 80vw;
     font-family: 'Noto Sans KR', sans-serif;
+    overflow: hidden;
   }
 
   .member-contents-wrapper{    
@@ -104,5 +107,12 @@ export default {
   }
   .hidden {
     display: none;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 </style>
