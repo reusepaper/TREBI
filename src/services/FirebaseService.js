@@ -124,6 +124,12 @@ export default {
     });
     return true
   },
+  deleteUser(deleteUserUid){
+    const deleteUser = firestore.collection(USERS)
+                      .doc(deleteUserUid);
+    deleteUser.delete();
+    return true;
+  },
   createUser(uid, nickname, eamil, level, createdAt) {
     return firestore.collection(USERS)
     .doc(uid)
