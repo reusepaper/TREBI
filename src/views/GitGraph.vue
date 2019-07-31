@@ -2,6 +2,7 @@
   <div class="gitGraphPageContainer">
     <GitGraphTitle></GitGraphTitle>
     <GraphContain v-bind:githubId="githubId"></GraphContain>
+    <!-- <div class></div> -->
   </div>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div class="GraphContain">
-    <apexchart class="chart" type="line" height="350" :options="chartOptions" :series="series" />
+    <apexchart type="line" height="350" :options="chartOptions" :series="series" />
   </div>
 </template>
 
@@ -18,6 +18,7 @@ export default {
       xDays.unshift(date[0]);
       today.setDate(today.getDate() - 1);
     }
+
     this.chartOptions.xaxis.categories = xDays;
   },
 
@@ -25,7 +26,6 @@ export default {
     this.githubId.forEach((id, index) => {
       this.getGithub(id, index);
     });
-    // this.getGithub("13akstjq", 0);
   },
   props: ["githubId"],
   data() {
@@ -74,7 +74,7 @@ export default {
           curve: "smooth"
         },
         title: {
-          text: "최근 커밋 수 ",
+          text: "Average High & Low Temperature",
           align: "left"
         },
         grid: {
@@ -97,8 +97,8 @@ export default {
           title: {
             text: "Commit"
           },
-          min: 0,
-          max: 50
+          min: 1,
+          max: 40
         },
         legend: {
           position: "top",
@@ -129,8 +129,8 @@ export default {
           .replace(/"/gi, "")
           .replace(/ /gi, "");
         result = result.substring(0, dateIndex);
-        commitCount.unshift(count);
       }
+      commitCount.unshift(count);
       console.log(commitCount);
       this.series[index].data = commitCount;
     }
@@ -139,7 +139,4 @@ export default {
 </script>
 
 <style>
-.GraphContain {
-  width: 80%;
-}
 </style>
