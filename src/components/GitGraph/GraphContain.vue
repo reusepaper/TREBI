@@ -1,6 +1,8 @@
 <template>
   <div class="GraphContain">
-    <apexchart class="chart" type="line" height="350" :options="chartOptions" :series="series" />
+    <div class="view-chart">
+      <apexchart class="chart" type="line" height="350" :options="chartOptions" :series="series" />
+    </div>
   </div>
 </template>
 
@@ -140,6 +142,10 @@ export default {
 
 <style>
 .GraphContain {
-  width: 80%;
+  margin-top: 3vh;
+}
+.view-chart {
+  margin: auto;
+  width: 80vw;
 }
 </style>

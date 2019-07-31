@@ -27,6 +27,7 @@ export default {
   height: 100%;
   display: grid;
   grid-template-rows: 2fr 8fr;
+  background: #EDEDEE;
 }
 </style>
 
