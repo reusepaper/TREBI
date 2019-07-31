@@ -12,13 +12,11 @@ export default {
   },
   created() {
     let xDays = [];
-    const today = new Date();
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) {
       const date = today.toISOString().split("T");
       xDays.unshift(date[0]);
       today.setDate(today.getDate() - 1);
     }
-
     this.chartOptions.xaxis.categories = xDays;
   },
 
@@ -26,6 +24,7 @@ export default {
     this.githubId.forEach((id, index) => {
       this.getGithub(id, index);
     });
+    // this.getGithub("13akstjq", 0);
   },
   props: ["githubId"],
   data() {
@@ -74,7 +73,7 @@ export default {
           curve: "smooth"
         },
         title: {
-          text: "Average High & Low Temperature",
+          text: "최근 커밋 수 ",
           align: "left"
         },
         grid: {
@@ -97,8 +96,8 @@ export default {
           title: {
             text: "Commit"
           },
-          min: 1,
-          max: 40
+          min: 0,
+          max: 50
         },
         legend: {
           position: "top",
@@ -122,15 +121,15 @@ export default {
 
       const commitCount = [];
 
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 20; i++) {
         const dateIndex = result.lastIndexOf("data-count");
         const count = result
           .substring(dateIndex + 11, dateIndex + 15)
           .replace(/"/gi, "")
           .replace(/ /gi, "");
         result = result.substring(0, dateIndex);
+        commitCount.unshift(count);
       }
-      commitCount.unshift(count);
       console.log(commitCount);
       this.series[index].data = commitCount;
     }
