@@ -67,6 +67,7 @@ export default {
     $(".page").each(function() {
       $(this).on("mousewheel DOMMouseScroll", function(event) {
         event.preventDefault();
+
         var delta = 0;
         var moveTop = $(window).scrollTop();
         var pageMax = $(".page").length - 1;
@@ -82,9 +83,8 @@ export default {
         } else if (winEvent.detail) {
           delta = -winEvent.detail / 3;
         }
-
         if (delta < 0) {
-          if ($(this).index() < pageMax) {
+          if ($(this).index() <= pageMax) {
             if ($(this).next() != undefined) {
               moveTop = $(this)
                 .next()
@@ -120,6 +120,7 @@ export default {
 <style scoped>
 div {
   width: 100%;
+  overflow: hidden;
 }
 
 div .page {

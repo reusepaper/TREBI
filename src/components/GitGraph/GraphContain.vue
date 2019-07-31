@@ -1,6 +1,6 @@
 <template>
   <div class="GraphContain">
-    <apexchart type="line" height="350" :options="chartOptions" :series="series" />
+    <apexchart class="chart" type="line" height="350" :options="chartOptions" :series="series" />
   </div>
 </template>
 
@@ -12,7 +12,8 @@ export default {
   },
   created() {
     let xDays = [];
-    for (let i = 0; i < 20; i++) {
+    const today = new Date();
+    for (let i = 0; i < 10; i++) {
       const date = today.toISOString().split("T");
       xDays.unshift(date[0]);
       today.setDate(today.getDate() - 1);
@@ -121,7 +122,7 @@ export default {
 
       const commitCount = [];
 
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 10; i++) {
         const dateIndex = result.lastIndexOf("data-count");
         const count = result
           .substring(dateIndex + 11, dateIndex + 15)
@@ -138,4 +139,7 @@ export default {
 </script>
 
 <style>
+.GraphContain {
+  width: 80%;
+}
 </style>
