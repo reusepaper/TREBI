@@ -14,13 +14,17 @@
             v-if="typeof(field) === 'object'"
           >{{formatDate(field.toDate())}}</td>
           <td v-else-if="key === 'level'">
-            {{field}}
-            <br />
+            <p class="level_field" v-if="field === 'visitor'">방문자</p>
+            <p class="level_field" v-else-if="field === 'member'">팀원</p>
+            <p class="level_field" v-else-if="field === 'maintainer'">관리자</p>
+            
+            <!-- {{field}} -->
+            <!-- <br /> -->
             <select v-bind:id="oneUser.uid" class="level_select">
               <!-- <option value disabled selected>수정</option> -->
-              <option value="visitor">visitor</option>
-              <option value="member">member</option>
-              <option value="maintainer">maintainer</option>
+              <option value="visitor">방문자</option>
+              <option value="member">팀원</option>
+              <option value="maintainer">관리자</option>
             </select>
             <button id="select_button" @click="changeLevel(oneUser)">변경</button>
           </td>
@@ -79,7 +83,7 @@ export default {
       console.log(change_level);
       let isUpdate = await firebaseService.updateUserLevel(changeUser.uid, change_level);
       await alert("변경되었습니다.");
-      this.getUsers();
+      await this.getUsers();
     },
   },
   mounted: function() {
@@ -171,6 +175,10 @@ and also iPads specifically.
     font-weight: bold;
   }
 }
+.level_field{
+  font-weight: 400;
+}
+
 .level_select {
   width: 60%;
 }

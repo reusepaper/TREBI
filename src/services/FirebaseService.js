@@ -114,13 +114,13 @@ export default {
       });
     });
   },
-  updateUserLevel(loginUid, updateLevel){
-    console.log(loginUid, updateLevel)
+  updateUserLevel(loginUserUid, updateUserLevel){
+    // console.log(loginUserUid, updateUserLevel)
     const changeUser = firestore.collection(USERS)
-                      .doc(loginUid);
+                      .doc(loginUserUid);
     // console.log(changeUser);
     changeUser.update({
-      "level" : updateLevel
+      "level" : updateUserLevel
     });
     return true
   },
