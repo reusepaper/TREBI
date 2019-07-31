@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import mainTable from './MainComponents/AdminMainTable'
+import mainTable from "./MainComponents/AdminMainTable";
 export default {
   components: {
-    mainTable,
+    mainTable
   }
 };
 </script>
