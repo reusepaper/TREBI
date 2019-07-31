@@ -1,15 +1,15 @@
 <template>
   <div id="userContext-container">
     <div>
-      <img v-if="this.$store.state.user.photoURL" id="profile_img" :src='this.$store.state.user.photoURL'/>
-      <imb v-else id="profile_img" src='https://scontent-nrt1-1.cdninstagram.com/vp/14e487ffcb73b4d07dd6cf3dd7688afb/5DA39AF1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-nrt1-1.cdninstagram.com'/>
+      <img v-if="this.$store.state.user" id="profile_img" :src='this.$store.state.user.photoURL'/>
+      <img v-else id="profile_img" src='https://scontent-nrt1-1.cdninstagram.com/vp/14e487ffcb73b4d07dd6cf3dd7688afb/5DA39AF1/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-nrt1-1.cdninstagram.com'/>
     </div>
     <div id="userContent-content">
       <h1>{{this.$store.state.user === null ? "guest" : this.$store.state.user.displayName}}님 환영합니다.</h1>
       <div class="authButtons">
         <Logout></Logout>
         <profileButton></profileButton>
-        <adminButton v-if="this.$store.state.userLevel=='Maintainer'"></adminButton>
+        <adminButton v-if="this.$store.state.userLevel=='maintainer'"></adminButton>
       </div>
     </div>
   </div>
@@ -21,11 +21,6 @@ import profileButton from './modify_profile'
 import adminButton from './adminButton'
 
 export default {
-  data() {
-    return{
-      photoURL
-    }
-  },
   components:{
     Logout,
     profileButton,

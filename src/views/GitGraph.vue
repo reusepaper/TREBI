@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="gitGraphPageContainer">
     <GitGraphTitle></GitGraphTitle>
-    <GraphContain></GraphContain>
+    <div>
+      <!-- <GraphContain v-bind:githubId="githubId[0]"></GraphContain> -->
+    </div>
   </div>
 </template>
 <script>
@@ -12,6 +14,21 @@ export default {
   components: {
     GitGraphTitle,
     GraphContain
+  },
+  data() {
+    return {
+      githubId: ["13akstjq", "sweetrain096"]
+    };
   }
 };
 </script>
+
+<style>
+.gitGraphPageContainer {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 2fr 8fr;
+}
+</style>
+

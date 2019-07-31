@@ -16,8 +16,8 @@
           <td v-else-if="key === 'level'">
             {{field}}
             <br />
-            <select id="level_select">
-              <option value disabled selected>수정</option>
+            <select v-bind:id="oneUser.uid" class="level_select">
+              <!-- <option value disabled selected>수정</option> -->
               <option value="visitor">visitor</option>
               <option value="member">member</option>
               <option value="maintainer">maintainer</option>
@@ -36,6 +36,7 @@ import firebaseService from "@/services/FirebaseService";
 export default {
   data() {
     return {
+      selectLevel: '',
       userFields: null,
       allUsers: []
     };
@@ -71,12 +72,15 @@ export default {
 
       return year + "년 " + monthNames[monthIndex] + " " + day + "일";
     },
-    changeLevel: function(changeUser) {
-      let change_level = document.getElementById("level_select");
-      console.log(changeUser);
-      // alert('선택된 옵션 text 값=' + target.options[target.selectedIndex].text);     // 옵션 text 값
-      // alert('선택된 옵션 value 값=' + target.options[target.selectedIndex].value);     // 옵션 value 값
-    }
+    async changeLevel(changeUser) {
+      let change_user = document.getElementById(changeUser.uid);
+      // console.log(changeUser);
+      let change_level = change_user.options[change_user.selectedIndex].value;
+      console.log(change_level);
+      let isUpdate = await firebaseService.updateUserLevel(changeUser.uid, change_level);
+      await alert("변경되었습니다.");
+      this.getUsers();
+    },
   },
   mounted: function() {
     this.getUserFields();
@@ -167,7 +171,7 @@ and also iPads specifically.
     font-weight: bold;
   }
 }
-#level_select {
+.level_select {
   width: 60%;
 }
 </style>

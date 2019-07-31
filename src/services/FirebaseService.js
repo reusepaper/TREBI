@@ -93,6 +93,18 @@ export default {
         });
       });
   },
+  getisSignup(loginUid){
+    return firestore
+    .collection(USERS)
+    .where("uid", "==", loginUid)
+    .get()
+    .then(docSnapshots => {
+      return docSnapshots.docs.map(doc => {
+        let data = doc.data();
+        return data;
+      });
+    });
+  },
   getUsers() {
     const usersList = firestore.collection(USERS);
     return usersList.get().then(docSnapshots => {
@@ -102,8 +114,20 @@ export default {
       });
     });
   },
+  updateUserLevel(loginUid, updateLevel){
+    console.log(loginUid, updateLevel)
+    const changeUser = firestore.collection(USERS)
+                      .doc(loginUid);
+    // console.log(changeUser);
+    changeUser.update({
+      "level" : updateLevel
+    });
+    return true
+  },
   createUser(uid, nickname, eamil, level, createdAt) {
-    return firestore.collection(USERS).add({
+    return firestore.collection(USERS)
+    .doc(uid)
+    .set({
       uid,
       nickname,
       eamil,

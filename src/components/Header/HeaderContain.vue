@@ -1,20 +1,46 @@
 <template>
   <div class="navbar">
     <a href="#" class="brand">TREBI</a>
-    <ul>
+    <div href="#" class="hambar icon" @click="toggleItems()">
+      <i class="fa fa-bars"></i>
+    </div>
+    <ul id='hello'>
       <li><a href="#" class="nav-menu">Team</a></li>
       <li><a href="#" class="nav-menu">Member</a></li>
       <li><a href="#" class="nav-menu">Post</a></li>
       <li><a href="#" class="nav-menu">GitGraph</a></li>
       <li><a href="#" class="nav-menu">Contact</a></li>
       <li><a href="#" class="nav-menu">Login</a></li>
-    </ul> 
+    </ul>
   </div>
 </template>
 
 <script type="text/javascript">
 export default {
-  name: "HeaderContain"
+  name: "HeaderContain",
+  data:function(){
+    liShow:true
+  },
+  methods:{
+    showItems:function(){
+      if(this.liShow==true){
+          var w = window.innerWidth;
+          if(w>900){ var x = document.getElementById("hello");
+          x.style.display="flex";}else{
+            x.style.display="none";
+          }
+      }
+    },
+    toggleItems:function(){
+      var x = document.getElementById("hello");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+      showItems();
+    }
+  }
 }
 </script>
 
@@ -40,19 +66,22 @@ export default {
   .navbar ul li{
     list-style: none;
   }
-  .navbar ul li a{
+  .navbar ul li a, .navbar a{
     color: #fff;
     padding: 0 20px;
     font-size: 1.1em;
     text-decoration: none;
     font-weight: bold;
     font-family: Ubuntu;
-    /* transition: 3s; */
+    transition: 1s ease;
   }
   /* .navbar ul li:hover{
     border: 0.5px solid #fff;
     transform: rotateY(360deg);
   } */
+  .navbar ul li:hover a{
+    color:salmon;
+  }
 
   a.brand {
     font-family: Ubuntu;
@@ -75,5 +104,25 @@ export default {
       1px -1px 1px #222222, 
       -1px -1px 1px #222222,
       1px  1px 1px #555555;
+  }
+  .navbar .hambar{
+    display: none;
+  }
+  @media screen and (max-width: 900px) {
+    .navbar{
+      display: block;
+      text-align: center;
+      margin: 10px auto;
+    }
+    .navbar ul{
+      display:none;
+    }
+    .navbar .hambar{
+      display: inline-flex;
+      color: #fff;
+    }
+    #hello{
+      font-size: 30px;
+    }
   }
 </style>

@@ -1,12 +1,18 @@
 <template>
   <div class="contactContainer">
-    <div class="contactTitle">Contact Us</div>
-    <div class="contactUs">contactform 들어갈 곳</div>
+    <div class="contactTitle" data-aos="fade-up">Contact Us</div>
+    <div class="contactUs">
+      <ContactMemberListContain></ContactMemberListContain>
+    </div>
   </div>
 </template>
 
 <script>
+import ContactMemberListContain from "./ContactMemberListContain";
 export default {
+  components: {
+    ContactMemberListContain
+  },
   colorChange: function() {
     color: white;
   }
@@ -36,10 +42,5 @@ export default {
 
 .contactTitle:hover {
   color: white;
-}
-
-.contactUs {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
 }
 </style>
