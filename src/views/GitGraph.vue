@@ -1,9 +1,8 @@
 <template>
   <div class="gitGraphPageContainer">
     <GitGraphTitle></GitGraphTitle>
-    <div>
-      <!-- <GraphContain v-bind:githubId="githubId[0]"></GraphContain> -->
-    </div>
+    <GraphContain v-bind:githubId="githubId"></GraphContain>
+    <!-- <div class></div> -->
   </div>
 </template>
 <script>
@@ -17,7 +16,7 @@ export default {
   },
   data() {
     return {
-      githubId: ["13akstjq", "sweetrain096"]
+      githubId: ["13akstjq", "leeiopd", "sweetrain096", "yeonjilim", "dkyou7"]
     };
   }
 };
