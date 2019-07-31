@@ -65,6 +65,8 @@ export default {
     // 현재 유저 veux에 저장 및 firebase 비교.
     async updateCurrentUser(){
       // 로그인 정보를 각각의 data에 저장한다.
+      
+      await this.$store.commit("setModalStyle", "none");
       await auth.onAuthStateChanged(user => {
         this.loginUser = user;
         // this.$store.commit("setProfileImage", user.photoURL);
@@ -83,8 +85,8 @@ export default {
       } else {
         this.userLevel = this.firebaseUser[0].level;
       }
-      await this.$store.commit("setUser", this.loginUser);
       await this.$store.commit("setLogin", true);
+      await this.$store.commit("setUser", this.loginUser);
       await this.$store.commit("setUserLevel", this.userLevel);
       // await console.log(this.$store.state.userLevel);
     },
