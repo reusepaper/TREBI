@@ -2,7 +2,6 @@
   <div class="gitGraphPageContainer">
     <GitGraphTitle></GitGraphTitle>
     <GraphContain v-bind:githubId="githubId"></GraphContain>
-    <!-- <div class></div> -->
   </div>
 </template>
 <script>
@@ -28,6 +27,7 @@ export default {
   height: 100%;
   display: grid;
   grid-template-rows: 2fr 8fr;
+  background: #EDEDEE;
 }
 </style>
 
