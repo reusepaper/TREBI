@@ -9,7 +9,10 @@ export default new Vuex.Store({
     user: null,
     is_login: false,
     userLevel: null,
-    postTarget: 1
+    postTarget: 1,
+    modal_style: {
+      display: 'none'
+    }
   },
   mutations: {
     setUser(state, currentUser) {
@@ -24,6 +27,9 @@ export default new Vuex.Store({
     setPostTarget(state, newTarget) {
       state.postTarget = newTarget;
       console.log(state.postTarget);
+    },
+    setModalStyle(state, currentState){
+      state.modal_style.display = currentState;
     }
   },
   actions: {},

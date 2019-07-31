@@ -5,6 +5,7 @@
 
 <script>
 import * as firebase from "firebase/app"
+import authcontain from "../AuthContain"
 
 const auth = firebase.auth();
 
@@ -16,10 +17,10 @@ export default {
       // window.location.reload();
     },
     async logoutCurrentUser(){
-      await auth.signOut();
-      await this.$store.commit("setUser", null);
+      auth.signOut();
+      this.$store.commit("setUser", null);
+      this.$store.commit("setUserLevel", null);
       await this.$store.commit("setLogin", false);
-      await this.$store.commit("setUserLevel", null);
     }
   }
 }
