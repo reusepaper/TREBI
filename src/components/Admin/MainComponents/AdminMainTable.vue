@@ -4,6 +4,7 @@
       <thead>
         <tr>
           <th v-for="field in userFields">{{field}}</th>
+          <th>삭제</th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +30,7 @@
             <button id="select_button" @click="changeLevel(oneUser)">변경</button>
           </td>
           <td v-else>{{field}}</td>
+          <td><button @click="delete_event(oneUser)">삭제</button></td>
         </tr>
       </tbody>
     </table>
@@ -85,6 +87,14 @@ export default {
       await alert("변경되었습니다.");
       await this.getUsers();
     },
+    delete_event(deleteUser){
+      if(confirm("정말 삭제하시겠습니까?") == true) this.deleteUser(deleteUser);
+      else console.log("아니에요!")
+    },
+    async deleteUser(deleteUser){
+      await firebaseService.deleteUser(deleteUser.uid);
+      await this.getUsers();
+    }
   },
   mounted: function() {
     this.getUserFields();
@@ -95,7 +105,7 @@ export default {
 
 <style scoped>
 table {
-  width: 800px;
+  width: 900px;
   border-collapse: collapse;
   margin: 50px 0px;
 }
