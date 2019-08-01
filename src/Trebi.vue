@@ -27,15 +27,7 @@
   <div>
     <Header class="page-header"></Header>
     <!-- <Main_copy class="page"></Main_copy> -->
-    <div v-show="this.$store.getters.getNavbarState === false">
-      <Main class="page"></Main>
-      <Team class="page"></Team>
-      <Member class="page"></Member>
-      <GitGraph class="page"></GitGraph>
-      <Footer class="page"></Footer>
-    </div>
-
-    <div id="displaysize">
+    <div v-show="(((this.$store.getters.getNavbarState === true) && (window.width <= 991))) === false">
       <Main class="page"></Main>
       <Team class="page"></Team>
       <Member class="page"></Member>
@@ -67,7 +59,14 @@ export default {
   },
   data() {
     return {
+      window: {
+        width: 0
+      }
     };
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize();
   },
   mounted: function() {
     $(".page").each(function() {
@@ -120,6 +119,17 @@ export default {
           );
       });
     });
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize)
+  },
+  methods: {
+    handleResize() {
+      this.window.width = window.innerWidth;
+    }
+  },
+  watch: {
+
   }
 };
 </script>
@@ -138,15 +148,5 @@ export default {
   div .page-header {
     width: 100%;
     position: relative;
-  }
-
-  #displaysize {
-    display: none;
-  }
-
-  @media screen and (min-width: 992px) {
-    #displaysize {
-      display: inline-block;
-    }
   }
 </style>
