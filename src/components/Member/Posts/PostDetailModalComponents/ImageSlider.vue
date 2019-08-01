@@ -5,13 +5,14 @@
     </div>
     <div
       class="imageContainer"
-      v-bind:style="{'transform': 'translate(-' + (selected-1)*imgWidth + 'px, 0px)'}"
+      v-bind:style="{'transform': 'translate(-' + (selected)*imgWidth + 'vw, 0px)'}"
     >
-      <div v-for="i in images">
-        <div class="image" v-bind:style="{ 'background-image': 'url(' + i + ')' }"></div>
+      <div class="memberInfo" v-for="i in members">
+        <!-- <div class="image" v-bind:style="{ 'background-image': 'url(' + i + ')' }"></div> -->
+        {{i}}
       </div>
     </div>
-    <div v-on:click="next" v-bind:class="{hidden : selected == length}">
+    <div v-on:click="next" v-bind:class="{hidden : selected == length-2}">
       <i class="fas fa-chevron-circle-right fa-2x right"></i>
     </div>
   </div>
@@ -19,12 +20,12 @@
 
 <script>
 export default {
-  props: ["images"],
+  props: ["members"],
   data() {
     return {
-      length: this.images.length,
+      length: this.members.length,
       selected: 1,
-      imgWidth: 578
+      imgWidth: 88.3
     };
   },
   mounted() {},
@@ -51,13 +52,14 @@ export default {
 
 <style>
 .Wrapper {
-  position: relative;
-  width: 578px;
-  height: 578px;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin-top: 50px;
+  /* overflow: hidden; */
 }
 .imageContainer {
   height: 100%;
+  width: 100%;
   display: flex;
   transition: 0.6s;
 }
@@ -66,11 +68,17 @@ export default {
   height: 578px;
 }
 
-.image {
-  height: 578px;
-  width: 578px;
-  background-size: cover;
-  background-position: center center;
+.memberInfo {
+  height: 80%;
+  width: 82vw;
+  /* background-color: yellowgreen; */
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  margin: 0 3vw;
+}
+.memberInfo:first-child {
+  /* margin-left: calc(6vw+41px); */
+  margin-left: 9vw;
 }
 
 .left {
