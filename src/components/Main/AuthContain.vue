@@ -6,11 +6,11 @@
       <div v-else>
         <button id="myBtn" @click="button_click">로그인</button>
         <!-- The Modal -->
-        <div id="myModal" class="modal" style="display:none" v-bind:style="this.$store.state.modal_style">
+        <div id="myModal" class="modal" style="display:none" v-bind:style="this.$store.state.modal_style" @click.stop="close_modal">
           <!-- Modal content -->
           <div class="modal-content">
             <span class="close" @click="close_modal">&times;</span>
-            <Login></Login>
+            <div @click.stop="button_click"><Login></Login></div>
           </div>
         </div>
       </div>
@@ -41,15 +41,12 @@ export default {
     Login,
     UserContext
   },
-  // created: function(){
-  //   window.addEventListener('click', this.close_modal_outside())
-  // },
   methods: {
-    button_click(){
+    button_click(e){
       // this.modal_style.display = "block";
       this.$store.commit("setModalStyle", "block");
     },
-    close_modal(){
+    close_modal(e){
       // this.modal_style.display = "none";
       this.$store.commit("setModalStyle", "none");
     },
@@ -96,7 +93,7 @@ export default {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 320px;
 }
 
 /* The Close Button */
@@ -105,6 +102,9 @@ export default {
   float: right;
   font-size: 28px;
   font-weight: bold;
+  position: relative;
+  top: -25px;
+  right: -13px;
 }
 
 .close:hover,
