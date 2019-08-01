@@ -13,7 +13,8 @@ export default new Vuex.Store({
     modal_style: {
       display: "none"
     },
-    adminPage: null
+    adminPage: null,
+    navbarstate: false
   },
   mutations: {
     setUser(state, currentUser) {
@@ -35,6 +36,14 @@ export default new Vuex.Store({
     setAdminPAge(state, CurrnetAdminPage) {
       state.adminPage = CurrnetAdminPage;
       console.log(state.adminPage);
+    },
+    setNavbarState(state, currentNavbar){
+      state.navbarstate = currentNavbar;
+    }
+  },
+  getters: {
+    getNavbarState: function(state){
+      return state.navbarstate; 
     }
   },
   actions: {},

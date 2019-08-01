@@ -36,6 +36,7 @@ export default {
   justify-self: center;
   font-size: 50px;
   font-weight: 600;
+  font-family: Ubuntu;
   color: #919191;
   /* background-color: yellow; */
 }

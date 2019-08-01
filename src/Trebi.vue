@@ -27,11 +27,21 @@
   <div>
     <Header class="page-header"></Header>
     <!-- <Main_copy class="page"></Main_copy> -->
-    <Main class="page"></Main>
-    <Team class="page"></Team>
-    <Member class="page"></Member>
-    <GitGraph class="page"></GitGraph>
-    <Footer class="page"></Footer>
+    <div v-show="this.$store.getters.getNavbarState === false">
+      <Main class="page"></Main>
+      <Team class="page"></Team>
+      <Member class="page"></Member>
+      <GitGraph class="page"></GitGraph>
+      <Footer class="page"></Footer>
+    </div>
+
+    <div id="displaysize">
+      <Main class="page"></Main>
+      <Team class="page"></Team>
+      <Member class="page"></Member>
+      <GitGraph class="page"></GitGraph>
+      <Footer class="page"></Footer>
+    </div>
   </div>
 </template>
 <script>
@@ -57,10 +67,6 @@ export default {
   },
   data() {
     return {
-      // options: {
-      //   licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
-      //   anchors: ["page1", "page2", "page3", "page4", "page5"]
-      // }
     };
   },
   mounted: function() {
@@ -118,19 +124,29 @@ export default {
 };
 </script>
 <style scoped>
-div {
-  width: 100%;
-  overflow: hidden;
-}
+  div {
+    width: 100%;
+    overflow: hidden;
+  }
 
-div .page {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-}
+  div .page {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+  }
 
-div .page-header {
-  width: 100%;
-  position: relative;
-}
+  div .page-header {
+    width: 100%;
+    position: relative;
+  }
+
+  #displaysize {
+    display: none;
+  }
+
+  @media screen and (min-width: 992px) {
+    #displaysize {
+      display: inline-block;
+    }
+  }
 </style>
