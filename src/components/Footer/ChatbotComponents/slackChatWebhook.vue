@@ -1,77 +1,62 @@
 <template>
 <div>
-  <div>챗봇 들어갈 위치</div>
-  <div id="chat_container">
-    <div id="chat_head">
-      <span id="chat_head_text">trebi에게 질문하기</span>
-      <span id="close">&times;</span>
+  <transition name="fade">
+    <div v-if="!show" id=chat_mini @click="show = !show" >
+      <i id="chat_mini_icon" class="fas fa-comment-dots"></i>
     </div>
-    <div id="chat_body">
-      <div>
-        <ul>
-          <li 
-            v-for="(slackMessage, index) in this.$store.state.messages"
-            v-bind:key="slackMessage.item">
-            <div v-if="slackMessage.isMe" >
-              <div class="message-data align-right">
-                <span class="message-data-time" >{{slackMessage.time}}</span> &nbsp; &nbsp;
-                <span class="message-data-name" >{{slackMessage.username}}</span>
+  </transition>
+  <transition name="slide-up">
+    <div id="chat_container" v-if="show">
+      <div id="chat_head">
+        <span id="chat_head_text">trebi에게 질문하기</span>
+        <span id="close" @click="show = !show">&times;</span>
+      </div>
+      <div id="chat_body">
+        <div>
+          <ul>
+            <li 
+              v-for="(slackMessage, index) in this.$store.state.messages"
+              v-bind:key="slackMessage.item">
+              <div v-if="slackMessage.isMe" >
+                <div class="message-data align-right">
+                  <span class="message-data-time" >{{slackMessage.time}}</span> &nbsp; &nbsp;
+                  <span class="message-data-name" >{{slackMessage.username}}</span>
+                </div>
+                <div class="message other-message float-right">
+                  {{slackMessage.message}}
+                </div>
               </div>
-              <div class="message other-message float-right">
-                {{slackMessage.message}}
+              <div v-else>
+                <div class="message-data align-left">
+                  <span class="message-data-name"> Vincent</span>
+                  <span class="message-data-time">10:12 AM, Today</span>
+                </div>
+                <div class="message my-message">
+                  Are we meeting today? Project has been already finished and I have results to show you.
+                </div>
               </div>
-            </div>
-            <div v-else>
-              <div class="message-data align-left">
-                <span class="message-data-name"> Vincent</span>
-                <span class="message-data-time">10:12 AM, Today</span>
-              </div>
-              <div class="message my-message">
-                Are we meeting today? Project has been already finished and I have results to show you.
-              </div>
-            </div>
-          </li>
-          
+            </li>
+            
 
-          <!-- <li>
-            <div class="message-data align-left">
-              <span class="message-data-name"> Vincent</span>
-              <span class="message-data-time">10:12 AM, Today</span>
-            </div>
-            <div class="message my-message">
-              Are we meeting today? Project has been already finished and I have results to show you.
-            </div>
-          </li>
-
-          <li class="clearfix">
-            <div class="message-data align-right">
-              <span class="message-data-time" >10:14 AM, Today</span> &nbsp; &nbsp;
-              <span class="message-data-name" >Olia</span> 
-              
-            </div>
-            <div class="message other-message float-right">
-              Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
-            </div>
-          </li> -->
-
-        </ul>
+          </ul>
+        </div>
+      </div>
+      <div id="chat_send">
+        <div id="chat_send_text">
+          <span>
+            <i class="fas fa-paperclip"></i>
+          </span>
+          <span>
+            <i class="far fa-smile"></i>
+          </span>
+          <input type="text" v-model="message" placeholder="질문을 입력해주세요." v-on:keyup.enter="sendMessage">
+          <span>
+            <i class="fas fa-paper-plane"></i>
+          </span>
+        </div>
       </div>
     </div>
-    <div id="chat_send">
-      <div id="chat_send_text">
-        <span>
-          <i class="fas fa-paperclip"></i>
-        </span>
-        <span>
-          <i class="far fa-smile"></i>
-        </span>
-        <input type="text" v-model="message" placeholder="질문을 입력해주세요." v-on:keyup.enter="sendMessage">
-        <span>
-          <i class="fas fa-paper-plane"></i>
-        </span>
-      </div>
-    </div>
-  </div>
+  </transition>
 </div>
 </template>
 
@@ -100,6 +85,7 @@ export default {
     return {
       messages: [],
       message:'',
+      show: false,
     }
   },
   methods:{
@@ -122,7 +108,8 @@ export default {
       this.$store.commit("upMessages", newMessage);
       console.log(this.$store.state.messages);
       this.message = ""
-    }
+    },
+    
   }
 }
 </script>
@@ -131,6 +118,44 @@ export default {
 div{
   font-family: 'Nanum Gothic', sans-serif !important;
 }
+
+#chat_mini{
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background-color: #94c2ed;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+#chat_mini:hover{
+  cursor: pointer;
+}
+#chat_mini_icon{
+  font-size: 40px;
+  color: #fff;
+  position: relative;
+  top: 11px;
+  left: 11px;
+}
+
+.fade-enter-active, .fade-leave-active {
+  opacity: 0;
+}
+.fade-enter, .fade-leave-to {
+  transition: opacity .2s;
+}
+.slide-up-enter-active {
+  transition: all .2s ease;
+}
+.slide-up-leave-active {
+  transition: all cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-up-enter, .slide-fade-leave-to {
+  transform: translateY(100vh);
+  opacity: 0 .2s;
+}
+
 div#chat_send_text>span{
   color:rgb(199, 199, 199);
   font-size: 20px;
@@ -160,6 +185,9 @@ div#chat_send_text>span:hover{
   width: 320px;
   border-radius: 10px;
   box-shadow: 0 6px 60px 0 rgba(81,99,120,0.3);
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
   /* border: 1px black solid; */
 }
 #chat_head {
