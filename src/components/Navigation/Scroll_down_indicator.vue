@@ -21,6 +21,15 @@ export default {
     height:40px;
     transform: translateY(-80px) translateX(-50%) rotate(45deg);
   }
+  .scroll-down:hover span:nth-child(1){
+    border-color: orange;
+  }
+    .scroll-down:hover span:nth-child(2){
+    border-color: orange;
+  }
+    .scroll-down:hover span:nth-child(3){
+    border-color: orange;
+  }
   .scroll-down span {
     position:absolute;
     top:0;
@@ -31,6 +40,7 @@ export default {
     border-bottom: 2px solid #fff;
     border-right: 2px solid #fff;
     animation: animate 1.5s linear infinite;
+    transition: .5s ease;
     opacity: 0;
   }
   .scroll-down span:nth-child(1){
