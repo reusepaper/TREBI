@@ -17,6 +17,7 @@
     "firebaseui": "^4.1.0",
     "jquery": "^3.4.1",
     "markdown-it-vue": "^1.0.9",
+    "slack-node": "^0.1.8",
     "vue": "^2.6.10",
     "vue-apexcharts": "^1.4.0",
     "vue-fullpage": "^2.0.1",
