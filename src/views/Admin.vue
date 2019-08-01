@@ -1,7 +1,7 @@
 <template>
   <div class="adminPageGrid">
     <AdminSideBar></AdminSideBar>
-    <AdminMainContain></AdminMainContain>
+    <AdminMainContain style="background: #ECEFF1"></AdminMainContain>
   </div>
 </template>
 
@@ -21,5 +21,6 @@ export default {
 .adminPageGrid {
   display: grid;
   grid-template-columns: 2fr 8fr;
+  user-select: none;
 }
 </style>

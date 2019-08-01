@@ -11,8 +11,9 @@ export default new Vuex.Store({
     userLevel: null,
     postTarget: 1,
     modal_style: {
-      display: 'none'
-    }
+      display: "none"
+    },
+    adminPage: null
   },
   mutations: {
     setUser(state, currentUser) {
@@ -21,15 +22,19 @@ export default new Vuex.Store({
     setLogin(state, currentState) {
       state.is_login = currentState;
     },
-    setUserLevel(state, currentLevel){
+    setUserLevel(state, currentLevel) {
       state.userLevel = currentLevel;
     },
     setPostTarget(state, newTarget) {
       state.postTarget = newTarget;
       console.log(state.postTarget);
     },
-    setModalStyle(state, currentState){
+    setModalStyle(state, currentState) {
       state.modal_style.display = currentState;
+    },
+    setAdminPAge(state, CurrnetAdminPage) {
+      state.adminPage = CurrnetAdminPage;
+      console.log(state.adminPage);
     }
   },
   actions: {},

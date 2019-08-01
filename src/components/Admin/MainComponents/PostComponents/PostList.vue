@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div style="margin-top: 20px; padding-right: 40px; text-align: right;">
+      <span>total Post: {{postsNums}}</span>
+    </div>
     <table class="adminPostTable">
       <thead>
         <tr>
@@ -7,17 +10,17 @@
           <th scope="cols">Category</th>
           <th scope="cols">Title</th>
           <th scope="cols">Writer</th>
-          <th scope="cols">none</th>
+          <th scope="cols">Delete</th>
         </tr>
       </thead>
       <tbody v-for="(post, i) in Allposts">
-        <tr>
-          <th scope="row">{{i+1}}</th>
+        <tr style="border-bottom: solid 1px #ccc">
+          <th scope="row">{{postsNums - i}}</th>
           <td style="text-align: center;">{{post.category}}</td>
           <td>{{post.title}}</td>
           <td style="text-align: center;">{{post.postWriter}}</td>
           <td style="text-align: center;">
-            <img src="../../../../assets/delete.png" />
+            <img style="height: 25px; cursor:pointer;" src="../../../../assets/delete.png" />
           </td>
         </tr>
       </tbody>
@@ -31,7 +34,8 @@ import FirebaseService from "@/services/FirebaseService";
 export default {
   data() {
     return {
-      Allposts: null
+      Allposts: null,
+      postsNums: 0
     };
   },
   mounted() {
@@ -40,6 +44,7 @@ export default {
   methods: {
     async getPosts() {
       this.Allposts = await FirebaseService.getPosts();
+      this.postsNums = this.Allposts.length;
     }
   }
 };
@@ -52,7 +57,8 @@ export default {
   line-height: 1.5;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-  margin: 20px 10px;
+  margin: 10px;
+  margin-top: 5px;
 }
 .adminPostTable thead th {
   width: 150px;

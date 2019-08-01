@@ -2,26 +2,55 @@
   <div class="sideBar">
     <div style="height: 100%;">
       <!-- Admin Sidebar Title -->
-      <AdminTitle style="margin-left: 20px; padding-top: 20px;"></AdminTitle>
-
+      <AdminTitle style="padding-top: 20px;"></AdminTitle>
       <!-- Accordion 형식으로 구현한 메뉴 List -->
       <div class="accordion vertical">
         <ul>
           <li>
             <input type="checkbox" id="checkbox-1" name="checkbox-accordion" />
-            <label for="checkbox-1" style="padding-left: 20px;">Authentication</label>
+            <label for="checkbox-1" style="padding-left: 20px;">
+              <div style="display: table;">
+                <img
+                  src="../../assets/user.png"
+                  style="color:white; display: table-cell; vertical-align: middle; width:30px; display:inline; margin-right: 10px;"
+                />
+                <span
+                  style="display: table-cell; vertical-align: middle; display:inline;"
+                >Authentications</span>
+              </div>
+            </label>
             <div class="content" style="padding: 0px">
-              <div class="menuDetailBtn">All User List</div>
-              <div class="menuDetailBtn">Admin User List</div>
-              <div class="menuDetailBtn">User Add</div>
+              <div style="display: table; width:100%;">
+                <button v-on:click="viewAllUser" class="menuDetailBtn">
+                  <span>All User List</span>
+                </button>
+              </div>
+              <div style="display: table; width:100%;">
+                <button v-on:click="viewAdmin" class="menuDetailBtn">Admin User List</button>
+              </div>
+              <div style="display: table; width:100%;">
+                <button class="menuDetailBtn">User Add</button>
+              </div>
             </div>
           </li>
           <li>
             <input type="checkbox" id="checkbox-2" name="checkbox-accordion" />
-            <label for="checkbox-2" style="padding-left: 20px;">Post</label>
+            <label for="checkbox-2" style="padding-left: 20px;">
+              <div style="display: table;">
+                <img
+                  src="../../assets/note.png"
+                  style="color:white; display: table-cell; vertical-align: middle; width:30px; display:inline; margin-right: 10px;"
+                />
+                <span style="display: table-cell; vertical-align: middle; display:inline;">Post</span>
+              </div>
+            </label>
             <div class="content" style="padding: 0px;">
-              <div class="menuDetailBtn">Post List</div>
-              <div class="menuDetailBtn">Portfolio List</div>
+              <div style="display: table; width:100%;">
+                <button v-on:click="viewPostList" class="menuDetailBtn">Post List</button>
+              </div>
+              <div style="display: table; width:100%;">
+                <button v-on:click="viewPortfolioList" class="menuDetailBtn">Portfolio List</button>
+              </div>
             </div>
           </li>
           <li class="AnalyticsBtnLi">
@@ -29,8 +58,10 @@
               class="AnalyticsBtn"
               onclick="window.open('https://analytics.google.com/analytics/web/?utm_source=marketingplatform.google.com&utm_medium=et&utm_campaign=marketingplatform.google.com%2Fabout%2Fanalytics%2F#/report-home/a143603759w204989459p198246038')"
             >
-              <img src="../../assets/googleAnalytics.png" width="30px;" class="AnalyticsImg" />
-              <span>Google Analytics</span>
+              <div style="display: table;">
+                <img src="../../assets/googleAnalytics.png" width="30px;" class="AnalyticsImg" />
+                <span style="display: table-cell; vertical-align: middle">Google Analytics</span>
+              </div>
             </button>
           </li>
         </ul>
@@ -45,6 +76,26 @@ import AdminTitle from "./SidebarComponents/AdminTitle";
 export default {
   components: {
     AdminTitle
+  },
+  methods: {
+    viewMain: function() {
+      this.$store.state.adminPage = "Main";
+    },
+    viewAdmin: function() {
+      this.$store.state.adminPage = "Admin";
+    },
+    viewAllUser: function() {
+      this.$store.state.adminPage = "AllUser";
+    },
+    viewPostList: function() {
+      this.$store.state.adminPage = "PostList";
+    },
+    viewPortfolioList: function() {
+      this.$store.state.adminPage = "PortfolioList";
+    }
+  },
+  created() {
+    this.viewMain();
   }
 };
 </script>
@@ -84,10 +135,19 @@ export default {
   padding-left: 20px;
   color: white;
   height: 32px;
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  text-decoration: none;
+  text-align: left;
+  border: 0;
+  outline: 0;
+  background: #19212b;
 }
 
 .menuDetailBtn:hover {
   background-color: #324558;
+  cursor: pointer;
 }
 
 .AnalyticsBtn:hover {
@@ -96,7 +156,7 @@ export default {
 
 /* 전체 Sidebar */
 .sideBar {
-  height: 100vw;
+  height: 100vh;
   background-color: #262f3d;
 }
 
