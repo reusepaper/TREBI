@@ -1,36 +1,44 @@
 <template>
   <div>
+    <div style="margin-top: 20px; padding-right: 40px; text-align: right;">
+      <span>total User: {{usersNum}}</span>
+    </div>
     <table>
       <thead>
         <tr>
-          <th v-for="field in userFields">{{field}}</th>
-          <th>삭제</th>
+          <th>Created At</th>
+          <th>User Id</th>
+          <th>Level</th>
+          <th>Name</th>
+          <th>uid</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="oneUser in allUsers">
+        <tr v-for="oneUser in allUsers" style="border-bottom: solid 1px #ccc;">
           <!-- {{oneUser}} -->
           <td
             v-for="field, key in oneUser"
             v-if="typeof(field) === 'object'"
           >{{formatDate(field.toDate())}}</td>
           <td v-else-if="key === 'level'">
-            <p class="level_field" v-if="field === 'visitor'">방문자</p>
-            <p class="level_field" v-else-if="field === 'member'">팀원</p>
-            <p class="level_field" v-else-if="field === 'maintainer'">관리자</p>
-            
-            <!-- {{field}} -->
-            <!-- <br /> -->
             <select v-bind:id="oneUser.uid" class="level_select">
               <!-- <option value disabled selected>수정</option> -->
-              <option value="visitor">방문자</option>
-              <option value="member">팀원</option>
-              <option value="maintainer">관리자</option>
+              <option value="visitor" selected="filed === 'visitor'? true : false">방문자</option>
+              <option value="member" selected="filed === 'member'? true : false">팀원</option>
+              <option value="maintainer" selected="filed === 'maintainer'? true : false">관리자</option>
             </select>
             <button id="select_button" @click="changeLevel(oneUser)">변경</button>
           </td>
           <td v-else>{{field}}</td>
-          <td><button @click="delete_event(oneUser)">삭제</button></td>
+          <td>
+            <button
+              @click="delete_event(oneUser)"
+              style="border: 0; outline: 0;background: none; cursor:pointer;"
+            >
+              <img src="../../../../assets/userDelete.png" />
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -42,9 +50,10 @@ import firebaseService from "@/services/FirebaseService";
 export default {
   data() {
     return {
-      selectLevel: '',
+      selectLevel: "",
       userFields: null,
-      allUsers: []
+      allUsers: [],
+      usersNum: 0
     };
   },
   methods: {
@@ -55,6 +64,7 @@ export default {
     },
     async getUsers() {
       this.allUsers = await firebaseService.getUsers();
+      this.usersNum = this.allUsers.length;
     },
     formatDate(date) {
       var monthNames = [
@@ -83,15 +93,19 @@ export default {
       // console.log(changeUser);
       let change_level = change_user.options[change_user.selectedIndex].value;
       console.log(change_level);
-      let isUpdate = await firebaseService.updateUserLevel(changeUser.uid, change_level);
+      let isUpdate = await firebaseService.updateUserLevel(
+        changeUser.uid,
+        change_level
+      );
       await alert("변경되었습니다.");
       await this.getUsers();
     },
-    delete_event(deleteUser){
-      if(confirm("정말 삭제하시겠습니까?") == true) this.deleteUser(deleteUser);
-      else console.log("아니에요!")
+    delete_event(deleteUser) {
+      if (confirm("정말 삭제하시겠습니까?") == true)
+        this.deleteUser(deleteUser);
+      else console.log("아니에요!");
     },
-    async deleteUser(deleteUser){
+    async deleteUser(deleteUser) {
       await firebaseService.deleteUser(deleteUser.uid);
       await this.getUsers();
     }
@@ -105,28 +119,35 @@ export default {
 
 <style scoped>
 table {
-  width: 900px;
-  border-collapse: collapse;
   margin: 50px 0px;
-}
-
-/* Zebra striping */
-tr:nth-of-type(odd) {
-  background: #ebebeb;
-}
-
-th {
-  background: #4f4e57;
-  color: white;
-  font-weight: bold;
-}
-
-td,
-th {
-  padding: 10px;
-  border: 1px solid #ccc;
+  border-collapse: collapse;
   text-align: left;
-  font-size: 16px;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin: 10px;
+  margin-top: 5px;
+}
+
+table thead th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  color: #fff;
+  background: #e7708d;
+  margin: 20px 10px;
+  text-align: center;
+}
+
+table tbody tr:hover {
+  background: #ffddff;
+}
+table td {
+  width: 350px;
+  padding: 10px;
+  vertical-align: top;
+  text-align: center;
 }
 
 /* 
@@ -185,7 +206,7 @@ and also iPads specifically.
     font-weight: bold;
   }
 }
-.level_field{
+.level_field {
   font-weight: 400;
 }
 
