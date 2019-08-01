@@ -1,12 +1,17 @@
 <template>
   <div class="chatbotContainer">
     <div class="chatbotTitle">chatbot</div>
-    <div class="chatbot">챗봇 내용 들어갈 곳</div>
+    <slackChat></slackChat>
   </div>
 </template>
 
 <script>
-export default {};
+import slackChat from './ChatbotComponents/slackChatWebhook'
+export default {
+  components: {
+    slackChat
+  }
+};
 </script>
 
 <style>

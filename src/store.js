@@ -14,7 +14,8 @@ export default new Vuex.Store({
       display: "none"
     },
     adminPage: null,
-    navbarstate: false
+    navbarstate: false,
+    messages: []
   },
   mutations: {
     setUser(state, currentUser) {
@@ -39,12 +40,22 @@ export default new Vuex.Store({
     },
     setNavbarState(state, currentNavbar){
       state.navbarstate = currentNavbar;
+    },
+    getMessages(){
+
+    },
+    setMessages(state) {
+      state.messages = [];
+    },
+    upMessages(state, newMessage){
+      state.messages.push(newMessage);
     }
   },
   getters: {
     getNavbarState: function(state){
       return state.navbarstate; 
-    }
+    },
+    
   },
   actions: {},
   plugins: [createPersistedState()]
