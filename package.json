@@ -1,0 +1,65 @@
+{
+  "name": "webmobile-sub3",
+  "version": "0.1.0",
+  "private": true,
+  "description": "develop",
+  "author": "",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "main": "babel.config.js",
+  "dependencies": {
+    "apexcharts": "^3.8.3",
+    "core-js": "^2.6.5",
+    "firebase": "^6.3.1",
+    "firebaseui": "^4.1.0",
+    "jquery": "^3.4.1",
+    "markdown-it-vue": "^1.0.9",
+    "vue": "^2.6.10",
+    "vue-apexcharts": "^1.4.0",
+    "vue-fullpage": "^2.0.1",
+    "vue-fullpage.js": "^0.1.4",
+    "vue-router": "^3.0.7",
+    "vuex": "^3.1.1",
+    "vuex-persistedstate": "^2.5.4"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.9.0",
+    "@vue/cli-plugin-eslint": "^3.9.0",
+    "@vue/cli-service": "^3.9.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://lab.ssafy.com/leeiopd/webmobile-final.git"
+  }
+}
