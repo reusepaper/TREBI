@@ -2,36 +2,48 @@
   <div class="team-contents-contain">
     <div class="team-contents">
       <div class="box">
-        <ul>
-          <li>
-            <div class="item">
-              <span>1th July 2019</span>
-              <h3>첫 만남</h3>
-              <p>팀 이름 정하기, 역할 분담 및 목표 설정</p>
-            </div>
-          </li>
-          <li>
-            <div class="item">
-              <span>1st July 2019 ~ 7st 7th 2019</span>
-              <h3>[1주 프로젝트] 반응형 웹 페이지 제작</h3>
-              <p>자신을 소개하는 포토폴리오 사이트 제작</p>
-            </div>
-          </li>
-          <li>
-            <div class="item">
-              <span>9st July 2019 ~ 18st 7th 2019</span>
-              <h3>[2주 프로젝트] 외부 API 연동을 통한 기능 추가</h3>
-              <p>Git Graph, Firebase, Vuetify 등 다양한 API를 이용하여 프로젝트 진행</p>
-            </div>
-          </li>
-          <li>
-            <div class="item">
-              <span>22st July 2019 ~ 16st Aug 2019</span>
-              <h3>[4주 프로젝트] SW 개발 비서 구현</h3>
-              <p>SW 개발 비서 구현</p>
-            </div>
-          </li>
-        </ul>
+        <div class="box-row">
+          <div class="box-cell box1">
+            <h2>
+              History
+              <span>History</span>
+              <span>History</span>
+              <span>우리가 걸어온 길</span>
+            </h2>
+          </div>
+          <div class="box-cell box2">
+            <ul>
+              <li>
+                <div class="item">
+                  <span>1th July 2019</span>
+                  <h3>첫 만남</h3>
+                  <p>팀 이름 정하기, 역할 분담 및 목표 설정</p>
+                </div>
+              </li>
+              <li>
+                <div class="item">
+                  <span>1st July 2019 ~ 7st 7th 2019</span>
+                  <h3>[1주 프로젝트] 반응형 웹 페이지 제작</h3>
+                  <p>자신을 소개하는 포토폴리오 사이트 제작</p>
+                </div>
+              </li>
+              <li>
+                <div class="item">
+                  <span>9st July 2019 ~ 18st 7th 2019</span>
+                  <h3>[2주 프로젝트] 외부 API 연동을 통한 기능 추가</h3>
+                  <p>Git Graph, Firebase, Vuetify 등 다양한 API를 이용하여 프로젝트 진행</p>
+                </div>
+              </li>
+              <li>
+                <div class="item">
+                  <span>22st July 2019 ~ 16st Aug 2019</span>
+                  <h3>[4주 프로젝트] SW 개발 비서 구현</h3>
+                  <p>SW 개발 비서 구현</p>
+                </div>
+              </li>
+            </ul>
+          </div>  
+        </div> 
       </div>
     </div>
   </div>
@@ -46,6 +58,8 @@ export default {
 <style>
   .team-contents-contain {
     margin-top: 3vh;
+    display:table;
+    margin: 10px auto;
   }
   .team-contents {
     border: 2px solid #AAAAAA;
@@ -59,10 +73,18 @@ export default {
   }
   .box{
     position:relative;
-    margin: 20px auto;
-    width:800px;
+    margin: 10px auto;
+    width:100%;
     height:300px;
     box-sizing:border-box;
+    display:table;
+  }
+  .box .box-row{
+    display: table-row;
+  }
+  .box .box-row .box-cell{
+    display: table-cell;
+    width:50%;
   }
   .box ul{
     margin:0;
@@ -101,7 +123,7 @@ export default {
     opacity: 0;
   }
   .box ul li .item:hover::after{
-    animation : animate 2s linear infinite;
+    animation : animate 1s linear infinite;
   }
   @keyframes animate {
     0%{
@@ -128,5 +150,65 @@ export default {
   .box ul li .item:hover h3{
     font-style:italic;
     font-weight: bold;
+  }
+  .box1 {
+    margin:0;
+    padding:0;
+    min-height: 100vh;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  .box1 h2{
+    position: absolute;
+    top:40%;
+    left:10%;
+    transform: trasnlate(-50%,-50%);
+    font-size: 6em;
+    text-transform: uppercase;
+    color: transparent;
+  }
+  @media screen and (max-width: 1054px) {
+    .box1 h2{
+      top:38%;
+      left:0%;
+    }
+  }
+  h2 span:nth-child(1){
+    position:absolute;
+    top:0;
+    left: 0;
+    color:#000;
+    transition: .5s;
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+    overflow: hidden;
+  }
+  h2:hover span:nth-child(1){
+    transform: translateY(-40px);
+  }
+  h2 span:nth-child(2){
+    position:absolute;
+    top:0;
+    left: 0;
+    color:#000;
+    transition: .5s;
+    overflow: hidden;
+    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+  }
+  h2:hover span:nth-child(2){
+    transform: translateY(40px);
+  }
+  h2 span:nth-child(3){
+    position: absolute;
+    top:50%;
+    left: 0;
+    transform: translateY(-50%) scaleY(0);
+    color: #000;
+    font-size: .5em;
+    letter-spacing: .15em;
+    padding-left: 4px;
+    transition: .5s ease;
+    background:orange;
+  }
+  h2:hover span:nth-child(3){
+    transform: translateY(-50%) scaleY(1);
   }
 </style>
