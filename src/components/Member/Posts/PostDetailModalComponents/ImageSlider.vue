@@ -12,7 +12,7 @@
         {{i}}
       </div>
     </div>
-    <div v-on:click="next" v-bind:class="{hidden : selected == length}">
+    <div v-on:click="next" v-bind:class="{hidden : selected == length-2}">
       <i class="fas fa-chevron-circle-right fa-2x right"></i>
     </div>
   </div>
