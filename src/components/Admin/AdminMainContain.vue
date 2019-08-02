@@ -1,7 +1,7 @@
 <template>
   <div>
     <AdminMain v-show="this.$store.state.adminPage==='Main'"></AdminMain>
-    <div class="adminMainPageGrid">
+    <div class="adminMainPageGrid" v-show="this.$store.state.adminPage!=='Main'">
       <div
         style=" margin-left: 40px; border-bottom: 3px solid #262F3D; box-shadow: 5px 3px 4px #6a88a6;"
       >
