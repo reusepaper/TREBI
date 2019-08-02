@@ -23,8 +23,8 @@ export default {
 
 <style>
 .gitGraphPageContainer {
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   display: grid;
   grid-template-rows: 2fr 8fr;
   background: #EDEDEE;
