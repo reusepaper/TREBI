@@ -26,10 +26,10 @@
                   <h3>[1주 프로젝트] 반응형 웹 페이지 제작</h3>
                   <p>자신을 소개하는 포토폴리오 사이트 제작</p>
                   <div class="modal-call">
-                    <a v-on:click="show1()">상세보기</a>
+                    <a @click="$modal.show('hello-world')">상세보기</a>
                   </div>
                   <modal name="hello-world">
-                    <c1 v-on:nameeee="hide()"></c1>
+                    <c1></c1>
                   </modal>
                 </div>
               </li>
@@ -39,7 +39,7 @@
                   <h3>[2주 프로젝트] 외부 API 연동을 통한 기능 추가</h3>
                   <p>Git Graph, Firebase, Vuetify 등 다양한 API를 이용하여 프로젝트 진행</p>
                   <div class="modal-call">
-                    <a v-on:click="show2()">상세보기</a>
+                    <a @click="$modal.show('hello-world2')">상세보기</a>
                   </div>
                 </div>
               </li>
@@ -49,7 +49,7 @@
                   <h3>[4주 프로젝트] SW 개발 비서 구현</h3>
                   <p>SW 개발 비서 구현</p>
                   <div class="modal-call">
-                    <a v-on:click="show3()">상세보기</a>
+                    <a @click="$modal.show('hello-world3')">상세보기</a>
                   </div>
                 </div>
               </li>
@@ -74,31 +74,14 @@ import c3 from './ChildComponents/Child3';
 export default {
   components:{
     c1,c2,c3
-  },
-  methods:{
-    show1 () {
-      this.$modal.show('hello-world');
-    },
-    show2 () {
-      this.$modal.show('hello-world2');
-    },
-    show3 () {
-      this.$modal.show('hello-world3');
-    },
-    hide () {
-      this.$modal.hide('hello-world');
-    },
-        hide2 () {
-      this.$modal.hide('hello-world2');
-    },
-        hide3 () {
-      this.$modal.hide('hello-world3');
-    }
   }
 }
 </script>
 
 <style >
+.v--modal-overlay {
+  background:orange;
+}
   .team-contents-contain {
     margin-top: 3vh;
     display:table;
