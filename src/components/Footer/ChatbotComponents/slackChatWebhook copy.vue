@@ -15,11 +15,11 @@
         <div>
           <ul>
             <li 
-              v-for="(slackMessage, index) in messages"
+              v-for="(slackMessage, index) in this.$store.state.messages"
               v-bind:key="slackMessage.item">
               <div v-if="slackMessage.isMe" >
                 <div class="message-data align-right">
-                  <!-- <span class="message-data-time" >{{slackMessage.time}}</span> &nbsp; &nbsp; -->
+                  <span class="message-data-time" >{{slackMessage.time}}</span> &nbsp; &nbsp;
                   <span class="message-data-name" >{{slackMessage.username}}</span>
                 </div>
                 <div class="message other-message float-right">
@@ -28,11 +28,11 @@
               </div>
               <div v-else>
                 <div class="message-data align-left">
-                  <span class="message-data-name"> {{slackMessage.username}}</span>
+                  <span class="message-data-name"> Vincent</span>
                   <span class="message-data-time">10:12 AM, Today</span>
                 </div>
                 <div class="message my-message">
-                  {{slackMessage.message}}
+                  Are we meeting today? Project has been already finished and I have results to show you.
                 </div>
               </div>
             </li>
@@ -62,27 +62,21 @@
 
 <script>
 
+const Slack = require('slack-node');
 
-const { WebClient } = require('@slack/web-api');
-const token = "xoxp-670239397110-670254160774-712885402592-dad841589ccf2d2ee7d575ae57fc8328";
+const webhookUri = "https://hooks.slack.com/services/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";
 
-// Initialize
-const web = new WebClient(token);
-
-// Given some known conversation ID (representing a public channel, private channel, DM or group DM)
-const conversationId = '#test_chat';
- (async () => {
- 
-  // Post a message to the channel, and await the result.
-  // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
-  const result = await web.conversations.history({
-    channel: 'CLYG23CHW'
-  });
- 
-  // The result contains an identifier for the message, `ts`.
-  console.log(`Successfully send message ${result} in conversation ${conversationId}`);
-})();
-
+const slack = new Slack();
+slack.setWebhook(webhookUri);
+// const send = async(message) => {
+//   slack.webhook({
+//     channel: "#firebase", // 전송될 슬랙 채널
+//     username: "webhookbot", //슬랙에 표시될 이름
+//     text: message
+//   }, function(err, response) {
+//     console.log(response);
+//   });
+// }
 
 
 
@@ -92,75 +86,30 @@ export default {
       messages: [],
       message:'',
       show: false,
-      message_thread_ts: '',
     }
-  },
-  mounted() {
-    this.readMessages();
   },
   methods:{
-    async sendMessage(){
+    sendMessage(){
+      slack.webhook({
+        channel: "#test_chat",
+        username: this.$store.state.user.displayName,
+        text: this.message
+      }, function(err, response) {
+        console.log(response);
+      });
       let now = new Date();
-      await this.postMessage();
-      await this.readMessageOne();
-      await console.log(this.message_thread_ts);
-
-      // let newMessage = await {
-      //   username: this.$store.state.user.displayName,
-      //   time: now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate() + '. ' + now.getHours() + ':' + now.getMinutes(),
-      //   message: this.message,
-      //   isMe: true,
-      //   thread_ts: this.message_thread_ts
-      // }
-
-      let newMessage = await this.message_thread_ts;
-      // this.$store.commit("setMessages");
-      await this.$store.commit("upMessages", newMessage);
-      await console.log(this.$store.state.messages);
-      this.message = "";
-    },
-    async postMessage(){
-      const result = await web.chat.postMessage({
-          channel: "#test_chat",
-          username: this.$store.state.user.displayName,
-          text: this.message
-        });
-    },
-    async readMessageOne(){
-      const result = await web.conversations.history({
-          channel: "CLYG23CHW",
-          limit: 1
-        });
-      // console.log(result.messages[0].ts);
-      this.message_thread_ts = await result.messages[0].ts
-    },
-    async readMessages(){
-      for (let ts of this.$store.state.messages){
-        let result = await web.channels.replies({
-          channel: "CLYG23CHW",
-          thread_ts: ts
-        })
-        let myMessages = {
-          username: result.messages[0].username,
-          isMe: true,
-          message: result.messages[0].text
-        }
-        await this.messages.push(myMessages);
-        
-        if (result.messages[0].hasOwnProperty('replies')){
-          for(let replies=1; replies<=result.messages[0].reply_count; replies++){
-            await console.log(result.messages[replies]);
-            let trebiMessages = {
-              username: "trebi",
-              isMe: false,
-              message: result.messages[replies].text
-            }
-            await this.messages.push(trebiMessages);
-          }
-        }
+      let newMessage = {
+        username: this.$store.state.user.displayName,
+        time: now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate() + '. ' + now.getHours() + ':' + now.getMinutes(),
+        message: this.message,
+        isMe: true
       }
-      await console.log(this.messages);
-    }
+      // this.$store.commit("setMessages");
+      this.$store.commit("upMessages", newMessage);
+      console.log(this.$store.state.messages);
+      this.message = ""
+    },
+    
   }
 }
 </script>
@@ -287,7 +236,6 @@ li{
 .message-data-time {
   color: #a8aab1;
   padding-left: 6px;
-  visibility: hidden;
 }
 .message {
   color: white;
