@@ -3,7 +3,9 @@ import Router from 'vue-router'
 import Trebi from './Trebi.vue'
 import Admin from './views/Admin.vue'
 import Auth from './views/Login.vue'
-
+import VModal from 'vue-js-modal'
+ 
+Vue.use(VModal)
 Vue.use(Router)
 
 export default new Router({

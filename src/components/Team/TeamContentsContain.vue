@@ -25,6 +25,12 @@
                   <span>1st July 2019 ~ 7st 7th 2019</span>
                   <h3>[1주 프로젝트] 반응형 웹 페이지 제작</h3>
                   <p>자신을 소개하는 포토폴리오 사이트 제작</p>
+                  <div class="modal-call">
+                    <a v-on:click="show1()">상세보기</a>
+                  </div>
+                  <modal name="hello-world">
+                    <c1 v-on:nameeee="hide()"></c1>
+                  </modal>
                 </div>
               </li>
               <li>
@@ -32,6 +38,9 @@
                   <span>9st July 2019 ~ 18st 7th 2019</span>
                   <h3>[2주 프로젝트] 외부 API 연동을 통한 기능 추가</h3>
                   <p>Git Graph, Firebase, Vuetify 등 다양한 API를 이용하여 프로젝트 진행</p>
+                  <div class="modal-call">
+                    <a v-on:click="show2()">상세보기</a>
+                  </div>
                 </div>
               </li>
               <li>
@@ -39,6 +48,9 @@
                   <span>22st July 2019 ~ 16st Aug 2019</span>
                   <h3>[4주 프로젝트] SW 개발 비서 구현</h3>
                   <p>SW 개발 비서 구현</p>
+                  <div class="modal-call">
+                    <a v-on:click="show3()">상세보기</a>
+                  </div>
                 </div>
               </li>
             </ul>
@@ -46,16 +58,47 @@
         </div> 
       </div>
     </div>
+    <modal name="hello-world2">
+      <c2 v-on:nameeee="hide2()"></c2>
+    </modal>
+    <modal name="hello-world3">
+      <c3 v-on:nameeee="hide3()"></c3>
+    </modal>
   </div>
 </template>
 
 <script>
+import c1 from './ChildComponents/Child1';
+import c2 from './ChildComponents/Child2';
+import c3 from './ChildComponents/Child3';
 export default {
-
+  components:{
+    c1,c2,c3
+  },
+  methods:{
+    show1 () {
+      this.$modal.show('hello-world');
+    },
+    show2 () {
+      this.$modal.show('hello-world2');
+    },
+    show3 () {
+      this.$modal.show('hello-world3');
+    },
+    hide () {
+      this.$modal.hide('hello-world');
+    },
+        hide2 () {
+      this.$modal.hide('hello-world2');
+    },
+        hide3 () {
+      this.$modal.hide('hello-world3');
+    }
+  }
 }
 </script>
 
-<style>
+<style >
   .team-contents-contain {
     margin-top: 3vh;
     display:table;
@@ -210,5 +253,8 @@ export default {
   }
   h2:hover span:nth-child(3){
     transform: translateY(-50%) scaleY(1);
+  }
+  .modal-call{
+    cursor:pointer;
   }
 </style>
