@@ -7,8 +7,12 @@
         class="skillItem"
         v-for="skill in skills"
       >
-        <div class="image" v-bind:style="{ 'background-image': 'url(' + skill.url + ')' }"></div>
-        <div class="skill-title">{{skill.title}}</div>
+        <div class="image-container">
+          <div class="image" v-bind:style="{ 'background-image': 'url(' + skill.url + ')' }"></div>
+          <div class="skill-title">{{skill.title}}</div>
+        </div>
+
+        <div class="skill-desc">{{skill.desc}}</div>
       </div>
       <div
         @mouseleave="mouseLeave"
@@ -16,8 +20,11 @@
         class="skillItem"
         v-for="skill in skills"
       >
-        <div class="image" v-bind:style="{ 'background-image': 'url(' + skill.url + ')' }"></div>
-        <div class="skill-title">{{skill.title}}</div>
+        <div class="image-container">
+          <div class="image" v-bind:style="{ 'background-image': 'url(' + skill.url + ')' }"></div>
+          <div class="skill-title">{{skill.title}}</div>
+        </div>
+        <div class="skill-desc">{{skill.desc}}</div>
       </div>
     </div>
   </div>
@@ -45,27 +52,46 @@ export default {
 </script>
 
 <style>
+.skill-desc {
+  /* position: absolute; */
+  height: 30px;
+  width: 100%;
+  top: 0;
+  font-size: 18px;
+  font-weight: 100;
+  z-index: -3;
+  transition: 0.5s ease-in-out;
+  opacity: 0;
+  /* transform: translateY(-20px); */
+}
+.image-container {
+  transition: 0.5s ease-in-out;
+  transform: translateY(30px);
+  z-index: 2;
+}
+.skillItem:hover .image-container {
+  transform: translateY(-30px);
+}
+.skillItem:hover .skill-desc {
+  transform: translateY(20px);
+  opacity: 1;
+}
 .image {
   height: 65px;
   width: 65px;
   background-size: cover;
   background-position: center center;
   margin: auto;
+  padding: 60 50px;
 }
 .skill-title {
   text-align: center;
 }
 .skillItem {
   font-size: 24px;
-  padding: 10px;
   cursor: pointer;
   transition: 0.5s ease-in-out;
-  margin: 0 50px;
-}
-.skillItem:hover {
-  /* transform: scale(1.5); */
-  /* transform: perspective(500px) rotateY(360deg); */
-  transform: translate3D(0px, -80px, 0px);
+  position: relative;
 }
 .tech-slideshow {
   height: 100%;
@@ -86,7 +112,7 @@ export default {
   transform: translate3d(0, 0, 0);
 }
 .mover {
-  /* animation: moveSlideshow 12s linear infinite; */
+  animation: moveSlideshow 12s linear infinite;
 }
 
 .mover {
