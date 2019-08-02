@@ -40,9 +40,11 @@
           </div>
         </div>
         <div class="infoContent">
-          <div class="page__container">
-            <a href="#popup-article" class="open-popup">More</a>
-          </div>
+          <a href="#popup-article" class="open-popup">
+            <div class="page__container">
+              <a>More</a>
+            </div>
+          </a>
           <!-- {{member.skills}} -->
           <SkillSlider v-bind:skills="member.skills"></SkillSlider>
         </div>
@@ -182,16 +184,15 @@ export default {
 
 .left {
   position: absolute;
-  left: 5px;
-  top: 50%;
+  left: 9vw;
+  top: 46.5%;
   cursor: pointer;
 }
 
 .right {
   position: absolute;
-  right: 5px;
-  top: 50%;
-
+  right: 8.5vw;
+  top: 46.5%;
   cursor: pointer;
 }
 svg {

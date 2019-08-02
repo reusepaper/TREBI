@@ -8,7 +8,7 @@
         v-for="skill in skills"
       >
         <div class="image" v-bind:style="{ 'background-image': 'url(' + skill.url + ')' }"></div>
-        {{skill.title}}
+        <div class="skill-title">{{skill.title}}</div>
       </div>
       <div
         @mouseleave="mouseLeave"
@@ -17,7 +17,7 @@
         v-for="skill in skills"
       >
         <div class="image" v-bind:style="{ 'background-image': 'url(' + skill.url + ')' }"></div>
-        {{skill.title}}
+        <div class="skill-title">{{skill.title}}</div>
       </div>
     </div>
   </div>
@@ -46,18 +46,27 @@ export default {
 
 <style>
 .image {
-  height: 80px;
-  width: 80px;
+  height: 65px;
+  width: 65px;
   background-size: cover;
   background-position: center center;
+  margin: auto;
 }
-
+.skill-title {
+  text-align: center;
+}
 .skillItem {
-  font-size: 30px;
-  padding: 30px;
+  font-size: 24px;
+  padding: 10px;
   cursor: pointer;
+  transition: 0.5s ease-in-out;
+  margin: 0 50px;
 }
-
+.skillItem:hover {
+  /* transform: scale(1.5); */
+  /* transform: perspective(500px) rotateY(360deg); */
+  transform: translate3D(0px, -80px, 0px);
+}
 .tech-slideshow {
   height: 100%;
 
@@ -77,7 +86,7 @@ export default {
   transform: translate3d(0, 0, 0);
 }
 .mover {
-  animation: moveSlideshow 12s linear infinite;
+  /* animation: moveSlideshow 12s linear infinite; */
 }
 
 .mover {
@@ -90,7 +99,14 @@ export default {
     transform: translateX(-50%);
   }
 }
-
+@keyframes showSkillDetail {
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 .stop {
   animation-play-state: paused;
 }
