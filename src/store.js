@@ -15,7 +15,8 @@ export default new Vuex.Store({
     },
     adminPage: null,
     navbarstate: false,
-    messages: []
+    messages: [],
+    modal_remoter:false
   },
   mutations: {
     setUser(state, currentUser) {
@@ -49,6 +50,9 @@ export default new Vuex.Store({
     },
     upMessages(state, newMessage){
       state.messages.push(newMessage);
+    },
+    setModalRemote(state){
+      state.modal_remoter = !state.modal_remoter;
     }
   },
   getters: {
