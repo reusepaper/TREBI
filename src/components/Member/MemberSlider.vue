@@ -43,6 +43,7 @@
           <div class="page__container">
             <a href="#popup-article" class="open-popup">More</a>
           </div>
+          <!-- {{member.skills}} -->
           <SkillSlider v-bind:skills="member.skills"></SkillSlider>
         </div>
       </div>
