@@ -1,6 +1,6 @@
 <template>
   <div class="Wrapper">
-    <div id="popup-article" class="popup">
+    <div id="popup-article" class="popup" v-bind:class="{modalShow : ismodalShow}">
       <div class="popup__block">
         <h1 class="popup__title">The my adventure in the France and photography with Tour De France</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eaque optio vitae in explicabo recusandae sit id sapiente excepturi tempore, nemo, nulla odio deleniti rerum nisi perferendis aut molestias! Incidunt nesciunt iusto praesentium! In at maiores quibusdam enim quis, quam!</p>
@@ -10,7 +10,7 @@
         <p>Dicta eum amet impedit maiores accusamus numquam saepe necessitatibus temporibus ut! Velit ducimus repellendus fuga repudiandae culpa voluptatibus delectus praesentium totam odit ratione, tenetur assumenda, labore esse et nostrum a, aut veritatis. Nihil, voluptas, impedit? Magnam dolorum, iure repellendus vitae.</p>
         <p>Temporibus voluptatum voluptatibus iste, nam atque dignissimos quam labore sequi adipisci tempore exercitationem quos, libero, reprehenderit facere quasi soluta, itaque at eum cum possimus! Facilis, tempora soluta at quis. Nemo expedita voluptate esse nam ex odit, sequi eveniet quibusdam, dolores?</p>
         <p>Praesentium laboriosam iste dolore cumque voluptatibus deleniti quia, delectus provident, illum aperiam, atque molestiae. Cum delectus, doloribus expedita eius veritatis assumenda deleniti veniam reprehenderit animi ut, eaque asperiores, dicta incidunt omnis repellendus dolorum enim inventore rerum voluptatem saepe error id.</p>
-        <a href="/" class="popup__close">close</a>
+        <div @click="togglePopUp" class="popup__close">close</div>
       </div>
     </div>
 
@@ -40,8 +40,12 @@
           </div>
         </div>
         <div class="infoContent">
-          <a href="#popup-article" class="open-popup">
-            <div class="page__container">
+          <a class="open-popup">
+            <div
+              class="page__container"
+              @click="togglePopUp"
+              v-bind:class="{modalShow : ismodalShow}"
+            >
               <a>More</a>
             </div>
           </a>
@@ -67,7 +71,8 @@ export default {
     return {
       length: this.members.length,
       selected: 1,
-      imgWidth: 88.3
+      imgWidth: 88.3,
+      ismodalShow: false
     };
   },
   mounted() {},
@@ -87,6 +92,10 @@ export default {
         this.selected = this.selected - 1;
       }
       console.log(this.selected);
+    },
+    togglePopUp() {
+      this.ismodalShow = !this.ismodalShow;
+      console.log("클릭");
     }
   }
 };
@@ -156,6 +165,7 @@ export default {
   padding: 0 10px;
   border-radius: 3px;
   cursor: pointer;
+  z-index: 3;
 }
 .page__container a {
   text-decoration: none;
@@ -221,10 +231,9 @@ P.S: if you like my content maybe you will become a donator and donate some mone
   right: 0;
 }
 
-#popup-article:target {
+.modalShow {
   display: flex;
 }
-
 .popup:before {
   content: "";
   box-sizing: border-box;

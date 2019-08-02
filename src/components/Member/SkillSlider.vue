@@ -66,11 +66,11 @@ export default {
 }
 .image-container {
   transition: 0.5s ease-in-out;
-  transform: translateY(30px);
+  /* transform: translateY(30px); */
   z-index: 2;
 }
 .skillItem:hover .image-container {
-  transform: translateY(-30px);
+  /* transform: translateY(-30px); */
 }
 .skillItem:hover .skill-desc {
   transform: translateY(20px);
