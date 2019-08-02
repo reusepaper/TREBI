@@ -53,16 +53,36 @@ export default {
             { title: "blog", url: "https://leeiopd.github.io/" }
           ],
           skills: [
-            "python",
-            "C",
-            "Java",
-            "C++"
-            // "Swift",
-            // "ObectC",
-            // "React",
-            // "Django",
-            // "Spring",
-            // "AWS"
+            {
+              title: "Java",
+              url:
+                "https://seeklogo.com/images/J/java-logo-7F8B35BAB3-seeklogo.com.png"
+            },
+            {
+              title: "C++",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png"
+            },
+            {
+              title: "C#",
+              url:
+                "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67"
+            },
+            {
+              title: "Python",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png"
+            },
+
+            {
+              title: "Android",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/872px-Android_robot.svg.png"
+            },
+            {
+              title: "Django",
+              url: "https://www.paulox.net/images/django-postgresql-fts.svg"
+            }
           ]
         },
         {
@@ -79,16 +99,45 @@ export default {
             }
           ],
           skills: [
-            "python",
-            "C",
-            "Java",
-            // "C++",
-            // "Swift",
-            // "ObectC",
-            "React",
-            "Django",
-            "Spring",
-            "AWS"
+            {
+              title: "Java",
+              url:
+                "https://seeklogo.com/images/J/java-logo-7F8B35BAB3-seeklogo.com.png"
+            },
+            {
+              title: "C++",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png"
+            },
+            {
+              title: "C#",
+              url:
+                "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67"
+            },
+            {
+              title: "Python",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png"
+            },
+            {
+              title: "React",
+              url:
+                "http://indigo.amsterdam/wp-content/uploads/2017/06/React-icon.svg_-e1498055414258.png"
+            },
+            {
+              title: "ReactNative",
+              url:
+                "https://raw.githubusercontent.com/kristerkari/react-native-svg-transformer/HEAD/images/react-native-logo.png"
+            },
+            {
+              title: "Android",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/872px-Android_robot.svg.png"
+            },
+            {
+              title: "Django",
+              url: "https://www.paulox.net/images/django-postgresql-fts.svg"
+            }
           ]
         },
         {
@@ -98,16 +147,36 @@ export default {
             "기호 3번 잘부탁드립니당. 못받은 계약금 받아드립니다 연락주세용",
           socials: [{ title: "github", url: "https://github.com/yeonjilim" }],
           skills: [
-            // "python",
-            // "C",
-            // "Java",
-            "C++",
-            "Swift",
-            "ObectC",
-            "React",
-            "Django",
-            "Spring",
-            "AWS"
+            {
+              title: "Java",
+              url:
+                "https://seeklogo.com/images/J/java-logo-7F8B35BAB3-seeklogo.com.png"
+            },
+            {
+              title: "C++",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png"
+            },
+            {
+              title: "C#",
+              url:
+                "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67"
+            },
+            {
+              title: "Python",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png"
+            },
+
+            {
+              title: "Android",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/872px-Android_robot.svg.png"
+            },
+            {
+              title: "Django",
+              url: "https://www.paulox.net/images/django-postgresql-fts.svg"
+            }
           ]
         },
         {
@@ -119,16 +188,31 @@ export default {
             { title: "blog", url: "https://sweetlog.netlify.com/" }
           ],
           skills: [
-            "python",
-            "C",
-            "Java",
-            "C++",
-            "Swift",
-            // "ObectC",
-            // "React",
-            "Django",
-            "Spring",
-            "AWS"
+            {
+              title: "C++",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png"
+            },
+            {
+              title: "C#",
+              url:
+                "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67"
+            },
+            {
+              title: "Python",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png"
+            },
+            {
+              title: "React",
+              url:
+                "http://indigo.amsterdam/wp-content/uploads/2017/06/React-icon.svg_-e1498055414258.png"
+            },
+
+            {
+              title: "Django",
+              url: "https://www.paulox.net/images/django-postgresql-fts.svg"
+            }
           ]
         },
         {
@@ -140,16 +224,30 @@ export default {
             { title: "blog", url: "https://13akstjq.github.io/" }
           ],
           skills: [
-            // "python",
-            // "C",
-            // "Java",
-            // "C++",
-            // "Swift",
-            "ObectC",
-            "React",
-            "Django",
-            "Spring",
-            "AWS"
+            {
+              title: "Java",
+              url:
+                "https://seeklogo.com/images/J/java-logo-7F8B35BAB3-seeklogo.com.png"
+            },
+            {
+              title: "React",
+              url:
+                "http://indigo.amsterdam/wp-content/uploads/2017/06/React-icon.svg_-e1498055414258.png"
+            },
+            {
+              title: "ReactNative",
+              url:
+                "https://raw.githubusercontent.com/kristerkari/react-native-svg-transformer/HEAD/images/react-native-logo.png"
+            },
+            {
+              title: "Android",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/872px-Android_robot.svg.png"
+            },
+            {
+              title: "Django",
+              url: "https://www.paulox.net/images/django-postgresql-fts.svg"
+            }
           ]
         },
         {

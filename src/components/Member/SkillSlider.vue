@@ -6,13 +6,19 @@
         @mouseover="mouseover"
         class="skillItem"
         v-for="skill in skills"
-      >{{skill}}</div>
+      >
+        <div class="image" v-bind:style="{ 'background-image': 'url(' + skill.url + ')' }"></div>
+        {{skill.title}}
+      </div>
       <div
         @mouseleave="mouseLeave"
         @mouseover="mouseover"
         class="skillItem"
         v-for="skill in skills"
-      >{{skill}}</div>
+      >
+        <div class="image" v-bind:style="{ 'background-image': 'url(' + skill.url + ')' }"></div>
+        {{skill.title}}
+      </div>
     </div>
   </div>
 </template>
@@ -39,6 +45,13 @@ export default {
 </script>
 
 <style>
+.image {
+  height: 80px;
+  width: 80px;
+  background-size: cover;
+  background-position: center center;
+}
+
 .skillItem {
   font-size: 30px;
   padding: 30px;
