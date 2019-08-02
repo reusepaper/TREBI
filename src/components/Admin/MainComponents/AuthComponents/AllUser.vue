@@ -24,9 +24,11 @@
           <td v-else-if="key === 'level'">
             <select v-bind:id="oneUser.uid" class="level_select">
               <!-- <option value disabled selected>수정</option> -->
-              <option value="visitor" selected="filed === 'visitor'? true : false">방문자</option>
-              <option value="member" selected="filed === 'member'? true : false">팀원</option>
-              <option value="maintainer" selected="filed === 'maintainer'? true : false">관리자</option>
+              <option
+                v-for="level in userLevel"
+                v-bind:selected="oneUser.level == level"
+                :value="level"
+              >{{ levelKor[level] }}</option>
             </select>
             <button id="select_button" @click="changeLevel(oneUser)">변경</button>
           </td>
@@ -53,7 +55,9 @@ export default {
       selectLevel: "",
       userFields: null,
       allUsers: [],
-      usersNum: 0
+      usersNum: 0,
+      userLevel: ["maintainer", "member", "visitor"],
+      levelKor: { maintainer: "관리자", member: "멤버", visitor: "방문자" }
     };
   },
   methods: {
@@ -64,6 +68,8 @@ export default {
     },
     async getUsers() {
       this.allUsers = await firebaseService.getUsers();
+
+      console.log(this.allUsers);
       this.usersNum = this.allUsers.length;
     },
     formatDate(date) {
