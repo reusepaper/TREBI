@@ -56,32 +56,38 @@ export default {
             {
               title: "Java",
               url:
-                "https://seeklogo.com/images/J/java-logo-7F8B35BAB3-seeklogo.com.png"
+                "https://seeklogo.com/images/J/java-logo-7F8B35BAB3-seeklogo.com.png",
+              desc: "자바를 이용한 프로그래밍 가능"
             },
             {
               title: "C++",
               url:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png",
+              desc: "C++로 알고리즘 B형 취득"
             },
             {
               title: "C#",
               url:
-                "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67"
+                "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67",
+              desc: "C# 으로 게임 만들기 가능"
             },
             {
               title: "Python",
               url:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png",
+              desc: "파이썬으로 빅데이터 가능"
             },
 
             {
               title: "Android",
               url:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/872px-Android_robot.svg.png"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/872px-Android_robot.svg.png",
+              desc: "어플리케이션 개발 가능"
             },
             {
               title: "Django",
-              url: "https://www.paulox.net/images/django-postgresql-fts.svg"
+              url: "https://www.paulox.net/images/django-postgresql-fts.svg",
+              desc: "장고로 백엔드 구축 가능"
             }
           ]
         },
@@ -102,41 +108,38 @@ export default {
             {
               title: "Java",
               url:
-                "https://seeklogo.com/images/J/java-logo-7F8B35BAB3-seeklogo.com.png"
+                "https://seeklogo.com/images/J/java-logo-7F8B35BAB3-seeklogo.com.png",
+              desc: "자바를 이용한 프로그래밍 가능"
             },
             {
               title: "C++",
               url:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png",
+              desc: "C++로 알고리즘 B형 취득"
             },
             {
               title: "C#",
               url:
-                "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67"
+                "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67",
+              desc: "C# 으로 게임 만들기 가능"
             },
             {
               title: "Python",
               url:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png",
+              desc: "파이썬으로 빅데이터 가능"
             },
-            {
-              title: "React",
-              url:
-                "http://indigo.amsterdam/wp-content/uploads/2017/06/React-icon.svg_-e1498055414258.png"
-            },
-            {
-              title: "ReactNative",
-              url:
-                "https://raw.githubusercontent.com/kristerkari/react-native-svg-transformer/HEAD/images/react-native-logo.png"
-            },
+
             {
               title: "Android",
               url:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/872px-Android_robot.svg.png"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/872px-Android_robot.svg.png",
+              desc: "어플리케이션 개발 가능"
             },
             {
               title: "Django",
-              url: "https://www.paulox.net/images/django-postgresql-fts.svg"
+              url: "https://www.paulox.net/images/django-postgresql-fts.svg",
+              desc: "장고로 백엔드 구축 가능"
             }
           ]
         },
@@ -150,32 +153,38 @@ export default {
             {
               title: "Java",
               url:
-                "https://seeklogo.com/images/J/java-logo-7F8B35BAB3-seeklogo.com.png"
+                "https://seeklogo.com/images/J/java-logo-7F8B35BAB3-seeklogo.com.png",
+              desc: "자바를 이용한 프로그래밍 가능"
             },
             {
               title: "C++",
               url:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png",
+              desc: "C++로 알고리즘 B형 취득"
             },
             {
               title: "C#",
               url:
-                "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67"
+                "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67",
+              desc: "C# 으로 게임 만들기 가능"
             },
             {
               title: "Python",
               url:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png",
+              desc: "파이썬으로 빅데이터 가능"
             },
 
             {
               title: "Android",
               url:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/872px-Android_robot.svg.png"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/872px-Android_robot.svg.png",
+              desc: "어플리케이션 개발 가능"
             },
             {
               title: "Django",
-              url: "https://www.paulox.net/images/django-postgresql-fts.svg"
+              url: "https://www.paulox.net/images/django-postgresql-fts.svg",
+              desc: "장고로 백엔드 구축 가능"
             }
           ]
         },
@@ -189,29 +198,40 @@ export default {
           ],
           skills: [
             {
+              title: "Java",
+              url:
+                "https://seeklogo.com/images/J/java-logo-7F8B35BAB3-seeklogo.com.png",
+              desc: "자바를 이용한 프로그래밍 가능"
+            },
+            {
               title: "C++",
               url:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png",
+              desc: "C++로 알고리즘 B형 취득"
             },
             {
               title: "C#",
               url:
-                "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67"
+                "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67",
+              desc: "C# 으로 게임 만들기 가능"
             },
             {
               title: "Python",
               url:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png"
-            },
-            {
-              title: "React",
-              url:
-                "http://indigo.amsterdam/wp-content/uploads/2017/06/React-icon.svg_-e1498055414258.png"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png",
+              desc: "파이썬으로 빅데이터 가능"
             },
 
             {
+              title: "Android",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/872px-Android_robot.svg.png",
+              desc: "어플리케이션 개발 가능"
+            },
+            {
               title: "Django",
-              url: "https://www.paulox.net/images/django-postgresql-fts.svg"
+              url: "https://www.paulox.net/images/django-postgresql-fts.svg",
+              desc: "장고로 백엔드 구축 가능"
             }
           ]
         },
@@ -227,26 +247,38 @@ export default {
             {
               title: "Java",
               url:
-                "https://seeklogo.com/images/J/java-logo-7F8B35BAB3-seeklogo.com.png"
+                "https://seeklogo.com/images/J/java-logo-7F8B35BAB3-seeklogo.com.png",
+              desc: "자바를 이용한 프로그래밍 가능"
             },
             {
-              title: "React",
+              title: "C++",
               url:
-                "http://indigo.amsterdam/wp-content/uploads/2017/06/React-icon.svg_-e1498055414258.png"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/306px-ISO_C%2B%2B_Logo.svg.png",
+              desc: "C++로 알고리즘 B형 취득"
             },
             {
-              title: "ReactNative",
+              title: "C#",
               url:
-                "https://raw.githubusercontent.com/kristerkari/react-native-svg-transformer/HEAD/images/react-native-logo.png"
+                "https://camo.githubusercontent.com/0617f4657fef12e8d16db45b8d73def73144b09f/68747470733a2f2f646576656c6f7065722e6665646f726170726f6a6563742e6f72672f7374617469632f6c6f676f2f6373686172702e706e67",
+              desc: "C# 으로 게임 만들기 가능"
             },
+            {
+              title: "Python",
+              url:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png",
+              desc: "파이썬으로 빅데이터 가능"
+            },
+
             {
               title: "Android",
               url:
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/872px-Android_robot.svg.png"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/872px-Android_robot.svg.png",
+              desc: "어플리케이션 개발 가능"
             },
             {
               title: "Django",
-              url: "https://www.paulox.net/images/django-postgresql-fts.svg"
+              url: "https://www.paulox.net/images/django-postgresql-fts.svg",
+              desc: "장고로 백엔드 구축 가능"
             }
           ]
         },
