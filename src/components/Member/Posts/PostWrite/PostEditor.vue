@@ -14,7 +14,7 @@
         <v-flex xs12 sm6 d-flex>
           <v-select v-model="category" :items="categories" label="Solo field" solo></v-select>
         </v-flex>
-      </v-layout> -->
+      </v-layout>-->
     </p>
     <div class="container">
       <textarea class="md-text" rows="10" v-model="content"></textarea>
@@ -26,13 +26,13 @@
     <div>
       <br />
       <button class="button buttonblue" v-on:click="submit()">등록</button>
-    </div> -->
+    </div>-->
   </div>
 </template>
 
 <script>
-import MarkdownItVue from 'markdown-it-vue'
-import 'markdown-it-vue/dist/markdown-it-vue.css'
+import MarkdownItVue from "markdown-it-vue";
+import "markdown-it-vue/dist/markdown-it-vue.css";
 
 export default {
   components: {
@@ -40,10 +40,10 @@ export default {
   },
   data() {
     return {
-      content: '# 이 곳에 내용을 입력하세요 8-)'
-    }
+      content: "# 이 곳에 내용을 입력하세요 8-)"
+    };
   }
-}
+};
 </script>
 
 <style scoped>

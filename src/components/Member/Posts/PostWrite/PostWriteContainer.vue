@@ -1,20 +1,18 @@
 <template>
-  <div id="postEditor">
+  <div>
+    <h1>PostWrite</h1>
     <PostEditor></PostEditor>
   </div>
 </template>
 
 <script>
-import PostEditor from './WirteComponents/PostEditor'
+import PostEditor from "./PostEditor";
 export default {
   components: {
     PostEditor
   }
-}
+};
 </script>
 
 <style>
-#postEditor {
-  padding: 10px;
-}
 </style>
