@@ -1,16 +1,16 @@
 <template>
   <div id="fullscreen">
     <div class="navbar">
-      <a href="#" class="brand">TREBI</a>
+      <a href="#" v-on:click="moveTREBI()" class="brand">TREBI</a>
       <!-- show pc screen -->
       <div id='pc-menu'>
         <ul>
-          <li><a href="#" class="nav-menu">Team</a></li>
-          <li><a href="#" class="nav-menu">Member</a></li>
-          <li><a href="#" class="nav-menu">Post</a></li>
-          <li><a href="#" class="nav-menu">GitGraph</a></li>
-          <li><a href="#" class="nav-menu">Contact</a></li>
-          <li><a href="#" class="nav-menu">Login</a></li>
+          <li><a href="#" v-on:click="moveTeam()" class="nav-menu">Team</a></li>
+          <li><a href="#" v-on:click="moveMember()" class="nav-menu">Member</a></li>
+          <li><a href="#" v-on:click="movePost()" class="nav-menu">Post</a></li>
+          <li><a href="#" v-on:click="moveGitGraph()" class="nav-menu">GitGraph</a></li>
+          <li><a href="#" v-on:click="moveContact()" class="nav-menu">Contact</a></li>
+          <li><a href="#" v-on:click="moveLogin()" class="nav-menu">Login</a></li>
         </ul>
       </div>
       <!-- show mobile&tablet screen -->
@@ -34,12 +34,12 @@
     
     <div id="overlay" v-show="this.$store.getters.getNavbarState === true">
       <ul>
-        <li><a href="#">Team</a></li>
-        <li><a href="#">Member</a></li>
-        <li><a href="#">Post</a></li>
-        <li><a href="#">GitGraph</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Login</a></li>
+        <li><a href="#" v-on:click="moveTeam()" class="mobile-nav-menu">Team</a></li>
+        <li><a href="#" v-on:click="moveMember()" class="mobile-nav-menu">Member</a></li>
+        <li><a href="#" v-on:click="movePost()" class="mobile-nav-menu">Post</a></li>
+        <li><a href="#" v-on:click="moveGitGraph()" class="mobile-nav-menu">GitGraph</a></li>
+        <li><a href="#" v-on:click="moveContact()" class="mobile-nav-menu">Contact</a></li>
+        <li><a href="#" v-on:click="moveLogin()" class="mobile-nav-menu">Login</a></li>
       </ul>
     </div>
   </div>
@@ -47,15 +47,100 @@
 
 <script type="text/javascript">
 import $ from 'jquery';
+import { setTimeout } from 'timers';
+import { async } from 'q';
 
 export default {
   name: "HeaderContain",
+  mounted: function() {
+    $('.nav-menu').click(function(e){
+      e.preventDefault();
+    }),
+    $('.mobile-nav-menu').click(function(e){
+      e.preventDefault();
+    })
+  },
   computed: {
     sidebar: {
       set(value) {
         this.$store.commit('setNavbarState', value)
         // console.log(this.$store.state.navbarstate);
       }
+    }
+  },
+  methods: {
+    moveTREBI: async function(){
+      await this.$store.commit('setNavbarState', false);
+      $("#overlay-input").prop("checked", false);
+      // var scrollPosition = $().offset().top;
+      // $("body").animate({
+      //   scrollTop: scrollPosition
+      // }, 500);
+      // $(window).screenTop(0);
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    },
+    moveTeam: async function(){
+      // this.$store.commit('setNavbarState', false);
+      // $("#overlay-input").prop("checked", false);
+      await this.$store.commit('setNavbarState', false);
+      $("#overlay-input").prop("checked", false);
+      var height = $(window).height();
+      height += 1;
+      // $(window).screenTop(height);
+      window.scrollTo({
+        top: height,
+        behavior: 'smooth'
+      });
+    },
+    moveMember: async function(){
+      await this.$store.commit('setNavbarState', false);
+      $("#overlay-input").prop("checked", false);
+      var height = $(window).height();
+      height *= 2;
+      height += 2;
+      window.scrollTo({
+        top: height,
+        behavior: 'smooth'
+      });
+    },
+    movePost: function(){
+
+    },
+    moveGitGraph: async function(){
+      await this.$store.commit('setNavbarState', false);
+      $("#overlay-input").prop("checked", false);
+      // var scrollPosition = $('.${this.page4}').offset().top;
+      // $("body").animate({
+      //   scrollTop: scrollPosition
+      // }, 500);
+      var height = $(window).height();
+      height *= 3;
+      height += 3;
+      window.scrollTo({
+        top: height,
+        behavior: 'smooth'
+      });
+    },
+    moveContact: async function(){
+      await this.$store.commit('setNavbarState', false);
+      $("#overlay-input").prop("checked", false);
+      // var scrollPosition = $('.${this.page5}').offset().top;
+      // $("body").animate({
+      //   scrollTop: scrollPosition
+      // }, 500);
+      var height = $(window).height();
+      height *= 4;
+      height += 4;
+      window.scrollTo({
+        top: height,
+        behavior: 'smooth'
+      });
+    },
+    moveLogin: function(){
+
     }
   }
 }
