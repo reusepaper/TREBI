@@ -16,7 +16,8 @@ export default new Vuex.Store({
     adminPage: null,
     navbarstate: false,
     messages: [],
-    modal_remoter:false
+    modal_remoter: false,
+    isPostShow: true
   },
   mutations: {
     setUser(state, currentUser) {
@@ -39,27 +40,27 @@ export default new Vuex.Store({
       state.adminPage = CurrnetAdminPage;
       console.log(state.adminPage);
     },
-    setNavbarState(state, currentNavbar){
+    setNavbarState(state, currentNavbar) {
       state.navbarstate = currentNavbar;
     },
-    getMessages(){
-
-    },
+    getMessages() {},
     setMessages(state) {
       state.messages = [];
     },
-    upMessages(state, newMessage){
+    upMessages(state, newMessage) {
       state.messages.push(newMessage);
     },
-    setModalRemote(state){
+    setModalRemote(state) {
       state.modal_remoter = !state.modal_remoter;
+    },
+    toggleIsPostShow(state) {
+      state.isPostShow = !state.isPostShow;
     }
   },
   getters: {
-    getNavbarState: function(state){
-      return state.navbarstate; 
-    },
-    
+    getNavbarState: function(state) {
+      return state.navbarstate;
+    }
   },
   actions: {},
   plugins: [createPersistedState()]

@@ -1,23 +1,14 @@
 <template>
   <div class="member">
-    <MemberTitle class="fadeInRight"></MemberTitle>
-    <!-- <MemberListContain></MemberListContain> -->
-    <!-- <MemberContentsContain></MemberContentsContain> -->
     <MemberSlider v-bind:members="members"></MemberSlider>
   </div>
 </template>
 <script>
-import MemberTitle from "../components/Member/MemberTitle";
-import MemberListContain from "../components/Member/MemberListContain";
-import MemberContentsContain from "../components/Member/MemberContentsContain";
 import MemberSlider from "../components/Member/MemberSlider";
 import $ from "jquery";
 
 export default {
   components: {
-    MemberTitle,
-    MemberListContain,
-    MemberContentsContain,
     MemberSlider
   },
   mounted: function() {
@@ -295,8 +286,7 @@ export default {
 .member {
   background: #ededee;
   display: grid;
-  grid-template-rows: auto 1fr;
-  padding-bottom: 50px;
+  grid-template-rows: 1fr;
 }
 
 .fadeInRight {

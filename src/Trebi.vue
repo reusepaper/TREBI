@@ -27,7 +27,9 @@
   <div>
     <Header class="page-header"></Header>
     <!-- <Main_copy class="page"></Main_copy> -->
-    <div v-show="(((this.$store.getters.getNavbarState === true) && (window.width <= 991))) === false">
+    <div
+      v-show="(((this.$store.getters.getNavbarState === true) && (window.width <= 991))) === false"
+    >
       <Main class="page"></Main>
       <Team class="page"></Team>
       <Member class="page"></Member>
@@ -65,10 +67,12 @@ export default {
     };
   },
   created() {
-    window.addEventListener('resize', this.handleResize)
+    window.addEventListener("resize", this.handleResize);
     this.handleResize();
   },
   mounted: function() {
+    console.log(this.$store.state.isPostShow);
+
     $(".page").each(function() {
       $(this).on("mousewheel DOMMouseScroll", function(event) {
         event.preventDefault();
@@ -121,32 +125,30 @@ export default {
     });
   },
   destroyed() {
-    window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener("resize", this.handleResize);
   },
   methods: {
     handleResize() {
       this.window.width = window.innerWidth;
     }
   },
-  watch: {
-
-  }
+  watch: {}
 };
 </script>
 <style scoped>
-  div {
-    width: 100%;
-    overflow: hidden;
-  }
+div {
+  width: 100%;
+  overflow: hidden;
+}
 
-  div .page {
-    width: 100%;
-    height: 100vh;
-    position: relative;
-  }
+div .page {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
 
-  div .page-header {
-    width: 100%;
-    position: relative;
-  }
+div .page-header {
+  width: 100%;
+  position: relative;
+}
 </style>
