@@ -1,7 +1,7 @@
 <template>
 <div v-if="this.$store.state.user">
   <transition name="fade">
-    <div v-if="!show" id=chat_mini @click="show = !show" >
+    <div v-if="!show" id=chat_mini @click="chat_button_click" >
       <i id="chat_mini_icon" class="fas fa-comment-dots"></i>
     </div>
   </transition>
@@ -62,9 +62,9 @@
 </template>
 
 <script>
+import { setInterval } from 'timers';
 const { WebClient } = require('@slack/web-api');
 const token = process.env.VUE_APP_SLACK_TOKEN;
-// console.log(token);
 // Initialize
 const web = new WebClient(token);
 
@@ -81,29 +81,35 @@ export default {
   },
   mounted() {
     this.readMessages();
+    this.repliesInterval();
     // this.$store.commit("setMessages");
   },
   methods:{
+    chat_button_click(){
+      this.show = !this.show;
+      
+      
+      // this.messages = [];
+      // this.readMessages();
+    },
+    repliesInterval(){
+      // this.checkReply();
+      setInterval(() => {
+        this.checkReply();
+      }, 60000)
+    },
     async sendMessage(){
       let now = new Date();
       await this.postMessage();
       await this.readMessageOne();
-      await console.log(this.message_thread_ts);
 
-      // let newMessage = await {
-      //   username: this.$store.state.user.displayName,
-      //   time: now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate() + '. ' + now.getHours() + ':' + now.getMinutes(),
-      //   message: this.message,
-      //   isMe: true,
-      //   thread_ts: this.message_thread_ts
-      // }
 
       let newMessage = await this.message_thread_ts;
       // this.$store.commit("setMessages");
       await this.$store.commit("upMessages", newMessage);
       // await console.log(this.$store.state.messages);
       // await this.readMessages();
-      messages = await this.$store.state.messages
+      // this.messages = await this.$store.state.messages
       this.message = "";
     },
     async postMessage(){
@@ -112,7 +118,7 @@ export default {
           username: this.$store.state.user.displayName,
           text: this.message
         });
-        console.log(result)
+        // console.log(result)
     },
     async readMessageOne(){
       const result = await web.conversations.history({
@@ -137,7 +143,7 @@ export default {
         
         if (result.messages[0].hasOwnProperty('replies')){
           for(let replies=1; replies<=result.messages[0].reply_count; replies++){
-            await console.log(result.messages[replies]);
+            // await console.log(result.messages[replies]);
             let trebiMessages = {
               username: "trebi",
               isMe: false,
@@ -147,7 +153,32 @@ export default {
           }
         }
       }
-      await console.log(this.messages);
+      
+      // await console.log(this.messages);
+    },
+    async checkReply(){
+      const ts = this.$store.state.messages[this.$store.state.messages.length - 1];
+      let result = await web.channels.replies({
+        channel: "CLYG23CHW",
+        thread_ts: ts
+      })
+      if (result.messages[0].hasOwnProperty('replies')){
+        for(let replies=result.messages[0].reply_count; replies>0; replies--){
+          // await console.log(replies);
+          // await console.log(result.messages[replies]);
+          let trebiMessages = {
+            username: "trebi",
+            isMe: false,
+            message: result.messages[replies].text
+          }
+          if (this.messages[this.messages.length - 1].message != trebiMessages.message){
+            // await this.messages.push(trebiMessages);
+            await this.messages.splice(this.messages.length-(result.messages[0].reply_count-replies), 0, trebiMessages)
+            return;
+          } else return;
+          // await this.messages.push(trebiMessages);
+        }
+      } 
     }
   }
 }
@@ -245,6 +276,7 @@ div#chat_send_text>span:hover{
 #chat_body{
   height: 400px;
   overflow-y: scroll;
+  background-color: white;
 }
 #chat_send{
   height: 54px;
