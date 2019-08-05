@@ -174,12 +174,15 @@ export default {
     moveLogout: function(e) {
       this.logoutCurrentUser();
       window.location.reload();
+     
     },
     async logoutCurrentUser(){
       auth.signOut();
       this.$store.commit("setUser", null);
       this.$store.commit("setUserLevel", null);
       await this.$store.commit("setLogin", false);
+      await this.$store.commit('setNavbarState', false);
+      $("#overlay-input").prop("checked", false);
     }
   }
 }
