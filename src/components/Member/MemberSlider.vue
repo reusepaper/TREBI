@@ -1,18 +1,6 @@
 <template>
   <div class="Wrapper">
-    <div id="popup-article" class="popup" v-bind:class="{modalShow : ismodalShow}">
-      <div class="popup__block">
-        <h1 class="popup__title">The my adventure in the France and photography with Tour De France</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam eaque optio vitae in explicabo recusandae sit id sapiente excepturi tempore, nemo, nulla odio deleniti rerum nisi perferendis aut molestias! Incidunt nesciunt iusto praesentium! In at maiores quibusdam enim quis, quam!</p>
-        <p>Architecto magni dolores cumque tenetur nemo id aperiam, ratione temporibus at, consectetur totam, fuga et illo rerum earum dicta. Vitae ullam harum enim aliquid hic commodi voluptas cumque iste ex accusantium architecto doloremque reprehenderit, asperiores vero dolor, esse inventore dolorem.</p>
-        <p>Excepturi eaque, reprehenderit dolores, cum molestias repellendus in expedita. Placeat totam, quos pariatur quidem explicabo id harum ab voluptatum. Necessitatibus, aliquam! Dolorum voluptatem ut laudantium excepturi cumque, hic iure impedit ullam accusantium error natus recusandae, quia fuga quo voluptates officiis?</p>
-        <p>Dignissimos debitis eos necessitatibus accusantium natus voluptates illo blanditiis corporis minus. Repudiandae libero quae, illo error expedita consectetur possimus voluptate eum esse quam molestiae tempore dignissimos ipsam similique ab quod. Ea earum adipisci rem voluptatem aliquid voluptatum deleniti necessitatibus provident.</p>
-        <p>Dicta eum amet impedit maiores accusamus numquam saepe necessitatibus temporibus ut! Velit ducimus repellendus fuga repudiandae culpa voluptatibus delectus praesentium totam odit ratione, tenetur assumenda, labore esse et nostrum a, aut veritatis. Nihil, voluptas, impedit? Magnam dolorum, iure repellendus vitae.</p>
-        <p>Temporibus voluptatum voluptatibus iste, nam atque dignissimos quam labore sequi adipisci tempore exercitationem quos, libero, reprehenderit facere quasi soluta, itaque at eum cum possimus! Facilis, tempora soluta at quis. Nemo expedita voluptate esse nam ex odit, sequi eveniet quibusdam, dolores?</p>
-        <p>Praesentium laboriosam iste dolore cumque voluptatibus deleniti quia, delectus provident, illum aperiam, atque molestiae. Cum delectus, doloribus expedita eius veritatis assumenda deleniti veniam reprehenderit animi ut, eaque asperiores, dicta incidunt omnis repellendus dolorum enim inventore rerum voluptatem saepe error id.</p>
-        <div @click="togglePopUp" class="popup__close">close</div>
-      </div>
-    </div>
+    <PostPopup></PostPopup>
 
     <div v-on:click="pre" v-bind:class="{hidden : selected == 1}">
       <i class="fas fa-chevron-circle-left fa-2x left"></i>
@@ -49,7 +37,6 @@
               <a>More</a>
             </div>
           </a>
-          <!-- {{member.skills}} -->
           <SkillSlider v-bind:skills="member.skills"></SkillSlider>
         </div>
       </div>
@@ -62,9 +49,11 @@
 
 <script>
 import SkillSlider from "./SkillSlider";
+import PostPopup from "./Posts/PostPopup";
 export default {
   components: {
-    SkillSlider
+    SkillSlider,
+    PostPopup
   },
   props: ["members"],
   data() {
@@ -72,7 +61,7 @@ export default {
       length: this.members.length,
       selected: 1,
       imgWidth: 88.3,
-      ismodalShow: false
+      ismodalShow: this.$store.state.isPostShow
     };
   },
   mounted() {},
@@ -83,7 +72,6 @@ export default {
       } else {
         this.selected = this.selected + 1;
       }
-      console.log(this.selected);
     },
     pre() {
       if (this.selected == 1) {
@@ -91,11 +79,10 @@ export default {
       } else {
         this.selected = this.selected - 1;
       }
-      console.log(this.selected);
     },
     togglePopUp() {
-      this.ismodalShow = !this.ismodalShow;
-      console.log("클릭");
+      // this.ismodalShow = !this.ismodalShow;
+      this.$store.commit("toggleIsPostShow");
     }
   }
 };
@@ -110,6 +97,7 @@ export default {
   /* overflow: hidden; */
 }
 .imageContainer {
+  padding-top: 50px;
   height: 100%;
   width: 100%;
   display: flex;
@@ -195,14 +183,14 @@ export default {
 .left {
   position: absolute;
   left: 9vw;
-  top: 46.5%;
+  top: 43.5%;
   cursor: pointer;
 }
 
 .right {
   position: absolute;
   right: 8.5vw;
-  top: 46.5%;
+  top: 43 0.5%;
   cursor: pointer;
 }
 svg {
@@ -211,141 +199,5 @@ svg {
 }
 .hidden {
   display: none;
-}
-
-/* button modal popup style */
-
-/*
-P.S: if you like my content maybe you will become a donator and donate some money? That helps me to create new awesome materials. https://www.paypal.me/melnik909
-*/
-
-/* popup */
-
-.popup {
-  width: 100%;
-  height: 100vh;
-  display: none;
-  z-index: 100;
-  position: fixed;
-  top: 0;
-  right: 0;
-}
-
-.modalShow {
-  display: flex;
-}
-.popup:before {
-  content: "";
-  box-sizing: border-box;
-  width: 100%;
-  background-color: white;
-
-  position: fixed;
-  left: 0;
-  top: 50%;
-  will-change: height, top;
-  animation: open-animation 0.6s cubic-bezier(0.83, 0.04, 0, 1.16) 0.65s both;
-}
-
-.popup:after {
-  content: "";
-  width: 0;
-  height: 2px;
-  background-color: white;
-
-  will-change: width, opacity;
-  animation: line-animation 0.6s cubic-bezier(0.83, 0.04, 0, 1.16) both;
-
-  position: absolute;
-  top: 52%;
-  left: 0;
-  margin-top: -1px;
-}
-
-@keyframes line-animation {
-  0% {
-    width: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    opacity: 1;
-  }
-
-  99% {
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    opacity: 1;
-  }
-
-  100% {
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    opacity: 0;
-  }
-}
-
-@keyframes dot-animation {
-  0% {
-    width: 100%;
-    opacity: 0;
-  }
-  1% {
-    width: 100%;
-    opacity: 1;
-  }
-
-  100% {
-    width: 0;
-    opacity: 1;
-  }
-}
-@keyframes open-animation {
-  0% {
-    height: 0;
-    top: 50%;
-  }
-
-  100% {
-    height: 100vh;
-    top: 0;
-  }
-}
-
-.popup__block {
-  height: calc(100vh - 40px);
-  padding: 5% 15%;
-  box-sizing: border-box;
-  position: relative;
-
-  margin: auto;
-  overflow: auto;
-  animation: fade 0.5s ease-out 1.3s both;
-}
-
-@keyframes fade {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-.popup__title {
-  font-size: 2.5rem;
-  margin: 0 0 1em;
-}
-
-.popup__close {
-  width: 3.2rem;
-  height: 3.2rem;
-  text-indent: -9999px;
-  position: fixed;
-  top: 20px;
-  right: 20px;
-
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: contain;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPHBhdGggZD0iTTE5IDYuNDFMMTcuNTkgNSAxMiAxMC41OSA2LjQxIDUgNSA2LjQxIDEwLjU5IDEyIDUgMTcuNTkgNi40MSAxOSAxMiAxMy40MSAxNy41OSAxOSAxOSAxNy41OSAxMy40MSAxMnoiLz4gICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==);
 }
 </style>
