@@ -5,6 +5,7 @@
       <!-- show pc screen -->
       <div id='pc-menu'>
         <ul>
+          <li v-if="this.$store.state.userLevel=='maintainer'"><a href="#" v-on:click="moveAdmin">Admin</a></li>
           <li><a href="#" v-on:click="moveTeam" class="nav-menu">Team</a></li>
           <li><a href="#" v-on:click="moveMember" class="nav-menu">Member</a></li>
           <li><a href="#" v-on:click="movePost" class="nav-menu">Post</a></li>
@@ -35,6 +36,7 @@
     
     <div id="overlay" v-show="this.$store.getters.getNavbarState === true">
       <ul>
+        <li v-if="this.$store.state.userLevel=='maintainer'"><a href="#" v-on:click="moveAdmin">Admin</a></li>
         <li><a href="#" v-on:click="moveTeam" class="mobile-nav-menu">Team</a></li>
         <li><a href="#" v-on:click="moveMember" class="mobile-nav-menu">Member</a></li>
         <li><a href="#" v-on:click="movePost" class="mobile-nav-menu">Post</a></li>
@@ -183,6 +185,9 @@ export default {
       await this.$store.commit("setLogin", false);
       await this.$store.commit('setNavbarState', false);
       $("#overlay-input").prop("checked", false);
+    },
+    moveAdmin: function(){
+      this.$router.push('/admin')
     }
   }
 }
