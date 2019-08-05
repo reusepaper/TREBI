@@ -12,35 +12,32 @@
         <span id="close" @click="show = !show">&times;</span>
       </div>
       <div id="chat_body">
-        <div>
-          <ul>
-            <li 
-              v-for="(slackMessage, index) in messages"
-              v-bind:key="slackMessage.item"
-              class="clearfix">
-              <div v-if="slackMessage.isMe" >
-                <div class="message-data align-right">
-                  <!-- <span class="message-data-time" >{{slackMessage.time}}</span> &nbsp; &nbsp; -->
-                  <span class="message-data-name" >{{slackMessage.username}}</span>
-                </div>
-                <div class="message other-message float-right">
-                  {{slackMessage.message}}
-                </div>
+        <ul>
+          <li 
+            v-for="(slackMessage, index) in messages"
+            v-bind:key="slackMessage.item"
+            class="clearfix">
+            <div v-if="slackMessage.isMe" >
+              <div class="message-data align-right">
+                <!-- <span class="message-data-time" >{{slackMessage.time}}</span> &nbsp; &nbsp; -->
+                <span class="message-data-name" >{{slackMessage.username}}</span>
               </div>
-              <div v-else>
-                <div class="message-data align-left">
-                  <span class="message-data-name"> {{slackMessage.username}}</span>
-                  <span class="message-data-time">10:12 AM, Today</span>
-                </div>
-                <div class="message my-message">
-                  {{slackMessage.message}}
-                </div>
+              <div class="message other-message float-right">
+                {{slackMessage.message}}
               </div>
-            </li>
-            
+            </div>
+            <div v-else>
+              <div class="message-data align-left">
+                <span class="message-data-name"> {{slackMessage.username}}</span>
+                <span class="message-data-time">10:12 AM, Today</span>
+              </div>
+              <div class="message my-message">
+                {{slackMessage.message}}
+              </div>
+            </div>
+          </li>
+        </ul>
 
-          </ul>
-        </div>
       </div>
       <div id="chat_send">
         <div id="chat_send_text">
@@ -62,13 +59,13 @@
 </template>
 
 <script>
-import { setInterval } from 'timers';
+import { setInterval, setTimeout } from 'timers';
 const { WebClient } = require('@slack/web-api');
 const token = process.env.VUE_APP_SLACK_TOKEN;
 // Initialize
 const web = new WebClient(token);
 
-
+// var intElemScrollHeight = document.getElementById("#chat_body").scrollHeight;
 
 export default {
   data(){
@@ -87,16 +84,24 @@ export default {
   methods:{
     chat_button_click(){
       this.show = !this.show;
+      this.firstScroll();
       // console.log(this.show);
     },
     repliesInterval(){
       // this.checkReply();
       setInterval(() => {
-        if(this.show){
-          this.checkReply();
-        }
+        this.checkReply();
       }, 60000)
-      
+    },
+    firstScroll(){
+      setTimeout(function(){
+        $("#chat_body").scrollTop($("#chat_body")[0].scrollHeight);
+      }, 300);
+    },
+    scrollToBottom(){
+      setTimeout(function(){
+        $("#chat_body").scrollTop($("#chat_body")[0].scrollHeight);
+      }, 100);
     },
     async sendMessage(){
       let now = new Date();
@@ -106,6 +111,7 @@ export default {
           message: this.message
         }
       await this.messages.push(myMessages);
+      await this.scrollToBottom();
       await this.postMessage();
       await this.readMessageOne();
 
@@ -114,7 +120,6 @@ export default {
       // this.$store.commit("setMessages");
       await this.$store.commit("upMessages", newMessage);
       // await console.log(this.$store.state.messages);
-      // await this.readMessages();
       // this.messages = await this.$store.state.messages
       this.message = "";
     },
@@ -180,9 +185,9 @@ export default {
           if (this.messages[this.messages.length - 1].message != trebiMessages.message){
             // await this.messages.push(trebiMessages);
             await this.messages.splice(this.messages.length-(result.messages[0].reply_count-replies), 0, trebiMessages)
+            await this.scrollToBottom();
             return;
           } else return;
-          // await this.messages.push(trebiMessages);
         }
       } 
     }
