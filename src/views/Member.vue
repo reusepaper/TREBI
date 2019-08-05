@@ -1,5 +1,11 @@
 <template>
   <div class="member">
+<<<<<<< HEAD
+=======
+    <MemberTitle data-aos="fade-left" data-aos-delay="100"></MemberTitle>
+    <!-- <MemberListContain></MemberListContain> -->
+    <!-- <MemberContentsContain></MemberContentsContain> -->
+>>>>>>> [#33] PC화면에서 링크 이동 구현
     <MemberSlider v-bind:members="members"></MemberSlider>
   </div>
 </template>
@@ -10,23 +16,6 @@ import $ from "jquery";
 export default {
   components: {
     MemberSlider
-  },
-  mounted: function() {
-    $(window).scroll(function() {
-      $(".fadeInRight").each(function(i) {
-        var bottom_of_element = $(this).offset().top + $(this).outerHeight();
-        var bottom_of_window = $(window).scrollTop() + $(window).height();
-        if (bottom_of_window > bottom_of_element) {
-          $(this).animate(
-            {
-              opacity: "1",
-              "margin-right": "0px"
-            },
-            1000
-          );
-        }
-      });
-    });
   },
   data() {
     return {
@@ -285,12 +274,13 @@ export default {
 <style scoped>
 .member {
   background: #ededee;
+  height: 100vh;
   display: grid;
+<<<<<<< HEAD
   grid-template-rows: 1fr;
-}
-
-.fadeInRight {
-  opacity: 0;
-  margin-right: -400px;
+=======
+  grid-template-rows: auto 1fr;
+  /* padding-bottom: 50px; */
+>>>>>>> [#33] S1P2213002-75
 }
 </style>
