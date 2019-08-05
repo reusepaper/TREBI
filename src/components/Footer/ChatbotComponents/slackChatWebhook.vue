@@ -16,7 +16,8 @@
           <ul>
             <li 
               v-for="(slackMessage, index) in messages"
-              v-bind:key="slackMessage.item">
+              v-bind:key="slackMessage.item"
+              class="clearfix">
               <div v-if="slackMessage.isMe" >
                 <div class="message-data align-right">
                   <!-- <span class="message-data-time" >{{slackMessage.time}}</span> &nbsp; &nbsp; -->
@@ -61,28 +62,11 @@
 </template>
 
 <script>
-
-
 const { WebClient } = require('@slack/web-api');
-const token = "xoxp-670239397110-670254160774-712885402592-dad841589ccf2d2ee7d575ae57fc8328";
-
+const token = process.env.VUE_APP_SLACK_TOKEN;
+// console.log(token);
 // Initialize
 const web = new WebClient(token);
-
-// Given some known conversation ID (representing a public channel, private channel, DM or group DM)
-const conversationId = '#test_chat';
- (async () => {
- 
-  // Post a message to the channel, and await the result.
-  // Find more arguments and details of the response: https://api.slack.com/methods/chat.postMessage
-  const result = await web.conversations.history({
-    channel: 'CLYG23CHW'
-  });
- 
-  // The result contains an identifier for the message, `ts`.
-  console.log(`Successfully send message ${result} in conversation ${conversationId}`);
-})();
-
 
 
 
@@ -97,6 +81,7 @@ export default {
   },
   mounted() {
     this.readMessages();
+    // this.$store.commit("setMessages");
   },
   methods:{
     async sendMessage(){
@@ -116,7 +101,9 @@ export default {
       let newMessage = await this.message_thread_ts;
       // this.$store.commit("setMessages");
       await this.$store.commit("upMessages", newMessage);
-      await console.log(this.$store.state.messages);
+      // await console.log(this.$store.state.messages);
+      // await this.readMessages();
+      messages = await this.$store.state.messages
       this.message = "";
     },
     async postMessage(){
@@ -125,6 +112,7 @@ export default {
           username: this.$store.state.user.displayName,
           text: this.message
         });
+        console.log(result)
     },
     async readMessageOne(){
       const result = await web.conversations.history({
@@ -339,5 +327,12 @@ li{
 .float-right {
   float: right;
 }
-
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
 </style>
