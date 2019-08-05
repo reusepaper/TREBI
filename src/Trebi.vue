@@ -25,7 +25,7 @@
   </div>-->
   <!-- </full-page> -->
   <div>
-    <Header :page1="section1" :page2="section2" :page3="section3" :page4="section4" :page5="section5" class="page-header"></Header>
+    <Header class="page-header"></Header>
     <!-- <Main_copy class="page"></Main_copy> -->
     <div
       v-show="(((this.$store.getters.getNavbarState === true) && (window.width <= 991))) === false"

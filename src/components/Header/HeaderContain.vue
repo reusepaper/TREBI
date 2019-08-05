@@ -1,16 +1,17 @@
 <template>
   <div id="fullscreen">
     <div class="navbar">
-      <a href="#" v-on:click="moveTREBI()" class="brand">TREBI</a>
+      <a href="#" v-on:click="moveTREBI" class="brand">TREBI</a>
       <!-- show pc screen -->
       <div id='pc-menu'>
         <ul>
-          <li><a href="#" v-on:click="moveTeam()" class="nav-menu">Team</a></li>
-          <li><a href="#" v-on:click="moveMember()" class="nav-menu">Member</a></li>
-          <li><a href="#" v-on:click="movePost()" class="nav-menu">Post</a></li>
-          <li><a href="#" v-on:click="moveGitGraph()" class="nav-menu">GitGraph</a></li>
-          <li><a href="#" v-on:click="moveContact()" class="nav-menu">Contact</a></li>
-          <li><a href="#" v-on:click="moveLogin()" class="nav-menu">Login</a></li>
+          <li><a href="#" v-on:click="moveTeam" class="nav-menu">Team</a></li>
+          <li><a href="#" v-on:click="moveMember" class="nav-menu">Member</a></li>
+          <li><a href="#" v-on:click="movePost" class="nav-menu">Post</a></li>
+          <li><a href="#" v-on:click="moveGitGraph" class="nav-menu">GitGraph</a></li>
+          <li><a href="#" v-on:click="moveContact" class="nav-menu">Contact</a></li>
+          <li v-if="this.$store.state.is_login == false"><a href="#" v-on:click="moveLogin" class="nav-menu">Login</a></li>
+          <li v-else><a href="#" v-on:click="moveLogout" class="nav-menu">Logout</a></li>
         </ul>
       </div>
       <!-- show mobile&tablet screen -->
@@ -34,21 +35,42 @@
     
     <div id="overlay" v-show="this.$store.getters.getNavbarState === true">
       <ul>
-        <li><a href="#" v-on:click="moveTeam()" class="mobile-nav-menu">Team</a></li>
-        <li><a href="#" v-on:click="moveMember()" class="mobile-nav-menu">Member</a></li>
-        <li><a href="#" v-on:click="movePost()" class="mobile-nav-menu">Post</a></li>
-        <li><a href="#" v-on:click="moveGitGraph()" class="mobile-nav-menu">GitGraph</a></li>
-        <li><a href="#" v-on:click="moveContact()" class="mobile-nav-menu">Contact</a></li>
-        <li><a href="#" v-on:click="moveLogin()" class="mobile-nav-menu">Login</a></li>
+        <li><a href="#" v-on:click="moveTeam" class="mobile-nav-menu">Team</a></li>
+        <li><a href="#" v-on:click="moveMember" class="mobile-nav-menu">Member</a></li>
+        <li><a href="#" v-on:click="movePost" class="mobile-nav-menu">Post</a></li>
+        <li><a href="#" v-on:click="moveGitGraph" class="mobile-nav-menu">GitGraph</a></li>
+        <li><a href="#" v-on:click="moveContact" class="mobile-nav-menu">Contact</a></li>
+        <li v-if="this.$store.state.is_login == false"><a href="#" v-on:click="moveLogin" class="nav-menu">Login</a></li>
+        <li v-else><a href="#" v-on:click="moveLogout" class="nav-menu">Logout</a></li>
       </ul>
+    </div>
+
+    <div id="myModal" class="modal" style="display:none" v-bind:style="this.$store.state.modal_style" v-on:click.stop="close_modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" v-on:click="close_modal">&times;</span>
+        <div v-on:click.stop="moveLogin"><Login></Login></div>
+      </div>
     </div>
   </div>
 </template>
 
 <script type="text/javascript">
+import Login from "../Main/AuthComponents/Login";
 import $ from 'jquery';
 import { setTimeout } from 'timers';
 import { async } from 'q';
+import * as firebase from "firebase/app"
+
+const auth = firebase.auth();
+
+// Get the modal
+let modal = document.getElementById("myModal");
+// Get the button that opens the modal
+let btn = document.getElementById("myBtn");
+// Get the <span> element that closes the modal
+let span = document.getElementsByClassName("close")[0];
+
 
 export default {
   name: "HeaderContain",
@@ -59,6 +81,9 @@ export default {
     $('.mobile-nav-menu').click(function(e){
       e.preventDefault();
     })
+  },
+  components: {
+    Login
   },
   computed: {
     sidebar: {
@@ -139,8 +164,22 @@ export default {
         behavior: 'smooth'
       });
     },
-    moveLogin: function(){
-
+    moveLogin: function(e){
+      this.$store.commit("setModalStyle", "block");
+    },
+    close_modal: function(e){
+      // this.modal_style.display = "none";
+      this.$store.commit("setModalStyle", "none");
+    },
+    moveLogout: function(e) {
+      this.logoutCurrentUser();
+      window.location.reload();
+    },
+    async logoutCurrentUser(){
+      auth.signOut();
+      this.$store.commit("setUser", null);
+      this.$store.commit("setUserLevel", null);
+      await this.$store.commit("setLogin", false);
     }
   }
 }
@@ -315,5 +354,47 @@ export default {
     #mobile-menu {
       display: inline-block;
     }
+  }
+
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 320px;
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: relative;
+    top: -25px;
+    right: -13px;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
   }
 </style>
