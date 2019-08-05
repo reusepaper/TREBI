@@ -25,9 +25,8 @@
   </div>-->
   <!-- </full-page> -->
   <div>
-    <Header class="page-header"></Header>
+    <Header :page1="section1" :page2="section2" :page3="section3" :page4="section4" :page5="section5" class="page-header"></Header>
     <!-- <Main_copy class="page"></Main_copy> -->
-<<<<<<< HEAD
     <div
       v-show="(((this.$store.getters.getNavbarState === true) && (window.width <= 991))) === false"
     >
@@ -36,22 +35,6 @@
       <Member class="page"></Member>
       <GitGraph class="page"></GitGraph>
       <Footer class="page"></Footer>
-=======
-    <div v-show="(((this.$store.getters.getNavbarState === true) && (window.width <= 991))) === false">
-<<<<<<< HEAD
-      <Main class="page section1"></Main>
-      <Team class="page section2"></Team>
-      <Member class="page section3"></Member>
-      <GitGraph class="page section4"></GitGraph>
-      <Footer class="page section5"></Footer>
->>>>>>> [#33] PC화면에서 링크 이동 구현
-=======
-      <Main class="page"></Main>
-      <Team class="page"></Team>
-      <Member class="page"></Member>
-      <GitGraph class="page"></GitGraph>
-      <Footer class="page"></Footer>
->>>>>>> [#33] S1P2213002-75
     </div>
   </div>
 </template>
