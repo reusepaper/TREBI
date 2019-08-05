@@ -274,7 +274,13 @@ export default {
 <style scoped>
 .member {
   background: #ededee;
+  height: 100vh;
   display: grid;
+<<<<<<< HEAD
   grid-template-rows: 1fr;
+=======
+  grid-template-rows: auto 1fr;
+  /* padding-bottom: 50px; */
+>>>>>>> [#33] S1P2213002-75
 }
 </style>

@@ -47,16 +47,11 @@
 
 <script type="text/javascript">
 import $ from 'jquery';
+import { setTimeout } from 'timers';
+import { async } from 'q';
 
 export default {
   name: "HeaderContain",
-  props:[
-    'page1',
-    'page2',
-    'page3',
-    'page4',
-    'page5'
-  ],
   mounted: function() {
     $('.nav-menu').click(function(e){
       e.preventDefault();
@@ -74,66 +69,73 @@ export default {
     }
   },
   methods: {
-    moveTREBI: function(){
-      this.$store.commit('setNavbarState', false);
+    moveTREBI: async function(){
+      await this.$store.commit('setNavbarState', false);
       $("#overlay-input").prop("checked", false);
-      var scrollPosition = $('.${page1}').offset().top;
-      $("body").animate({
-        scrollTop: scrollPosition
-      }, 500);
-      // // $(window).screenTop() = 
-      // window.scrollTo({
-      //   top: 0,
-      //   behavior: 'smooth'
-      // });
+      // var scrollPosition = $().offset().top;
+      // $("body").animate({
+      //   scrollTop: scrollPosition
+      // }, 500);
+      // $(window).screenTop(0);
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     },
-    moveTeam: function(){
-      this.$store.commit('setNavbarState', false);
-      $("#overlay-input").prop("checked", false);
-      var scrollPosition = $('.${page2}').offset().top;
-      $("body").animate({
-        scrollTop: scrollPosition
-      }, 500);
-      // var height = $(window).height();
-      // // console.log(height);
-      // window.scrollTo({
-      //   top: height,
-      //   behavior: 'smooth'
-      // });
-    },
-    moveMember: function(){
-      this.$store.commit('setNavbarState', false);
+    moveTeam: async function(){
+      // this.$store.commit('setNavbarState', false);
+      // $("#overlay-input").prop("checked", false);
+      await this.$store.commit('setNavbarState', false);
       $("#overlay-input").prop("checked", false);
       var height = $(window).height();
-      console.log(height);
-      height *= 2;
+      height += 1;
+      // $(window).screenTop(height);
       window.scrollTo({
-        top: height+1,
+        top: height,
+        behavior: 'smooth'
+      });
+    },
+    moveMember: async function(){
+      await this.$store.commit('setNavbarState', false);
+      $("#overlay-input").prop("checked", false);
+      var height = $(window).height();
+      height *= 2;
+      height += 2;
+      window.scrollTo({
+        top: height,
         behavior: 'smooth'
       });
     },
     movePost: function(){
 
     },
-    moveGitGraph: function(){
-      this.$store.commit('setNavbarState', false);
+    moveGitGraph: async function(){
+      await this.$store.commit('setNavbarState', false);
       $("#overlay-input").prop("checked", false);
+      // var scrollPosition = $('.${this.page4}').offset().top;
+      // $("body").animate({
+      //   scrollTop: scrollPosition
+      // }, 500);
       var height = $(window).height();
-      // console.log(height);
       height *= 3;
+      height += 3;
       window.scrollTo({
-        top: height+51,
+        top: height,
         behavior: 'smooth'
       });
     },
-    moveContact: function(){
-      this.$store.commit('setNavbarState', false);
+    moveContact: async function(){
+      await this.$store.commit('setNavbarState', false);
       $("#overlay-input").prop("checked", false);
+      // var scrollPosition = $('.${this.page5}').offset().top;
+      // $("body").animate({
+      //   scrollTop: scrollPosition
+      // }, 500);
       var height = $(window).height();
-      // console.log(height);
       height *= 4;
+      height += 4;
       window.scrollTo({
-        top: height+52,
+        top: height,
         behavior: 'smooth'
       });
     },
