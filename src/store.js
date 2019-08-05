@@ -17,7 +17,8 @@ export default new Vuex.Store({
     navbarstate: false,
     messages: [],
     modal_remoter: false,
-    isPostShow: true
+    isPostShow: true,
+    PostPopupIndex: 1
   },
   mutations: {
     setUser(state, currentUser) {
@@ -55,6 +56,9 @@ export default new Vuex.Store({
     },
     toggleIsPostShow(state) {
       state.isPostShow = !state.isPostShow;
+    },
+    setPostPopupIndex(state, index) {
+      state.PostPopupIndex = index;
     }
   },
   getters: {

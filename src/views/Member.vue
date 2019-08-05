@@ -1,8 +1,5 @@
 <template>
   <div class="member">
-    <MemberTitle data-aos="fade-left" data-aos-delay="100"></MemberTitle>
-    <!-- <MemberListContain></MemberListContain> -->
-    <!-- <MemberContentsContain></MemberContentsContain> -->
     <MemberSlider v-bind:members="members"></MemberSlider>
   </div>
 </template>

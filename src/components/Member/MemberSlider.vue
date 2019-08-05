@@ -190,7 +190,7 @@ export default {
 .right {
   position: absolute;
   right: 8.5vw;
-  top: 43 0.5%;
+  top: 43.5%;
   cursor: pointer;
 }
 svg {
