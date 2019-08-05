@@ -87,19 +87,25 @@ export default {
   methods:{
     chat_button_click(){
       this.show = !this.show;
-      
-      
-      // this.messages = [];
-      // this.readMessages();
+      // console.log(this.show);
     },
     repliesInterval(){
       // this.checkReply();
       setInterval(() => {
-        this.checkReply();
+        if(this.show){
+          this.checkReply();
+        }
       }, 60000)
+      
     },
     async sendMessage(){
       let now = new Date();
+      let myMessages = {
+          username: this.$store.state.user.displayName,
+          isMe: true,
+          message: this.message
+        }
+      await this.messages.push(myMessages);
       await this.postMessage();
       await this.readMessageOne();
 
