@@ -1,6 +1,9 @@
 <template>
   <div id="popup-article" class="popup" v-bind:class="{modalShow :this.$store.state.isPostShow}">
-    <div class="popup__container">
+    <div
+      class="popup__container"
+      v-bind:style="{'transform': 'translate(-' + (this.$store.state.PostPopupIndex)*100   + 'vw, 0px)'}"
+    >
       <div class="popup__block" style="background-color : red;">
         <PostDetailContainer></PostDetailContainer>
       </div>
@@ -26,9 +29,15 @@ export default {
     PostDetailContainer,
     PostListContainer
   },
+  data() {
+    return {
+      width: 100
+    };
+  },
   methods: {
     togglePopUp() {
       this.$store.commit("toggleIsPostShow");
+      this.$store.commit("setPostPopupIndex", 1);
     }
   }
 };
@@ -46,8 +55,8 @@ export default {
 }
 .popup__container {
   display: flex;
-  transform: translate3d(-100vw, 0px, 0px);
-  transition: 0.5s ease-in-out;
+  /* transform: translate3d(-100vw, 0px, 0px); */
+  transition: 0.3s ease-in-out;
 }
 
 .popup__block {
@@ -55,7 +64,7 @@ export default {
   height: 100vh;
   box-sizing: border-box;
   position: relative;
-
+  padding: 50px;
   margin: auto;
   overflow: auto;
   animation: fade 0.5s ease-out 1.3s both;
