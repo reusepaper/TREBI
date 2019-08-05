@@ -46,6 +46,8 @@ export default {
 }
 .popup__container {
   display: flex;
+  transform: translate3d(-100vw, 0px, 0px);
+  transition: 0.5s ease-in-out;
 }
 
 .popup__block {
