@@ -3,13 +3,13 @@ import "firebase/auth";
 import * as firebase from "firebase/app"
 
 const config = {
-  apiKey: "AIzaSyCBToAXiNSn5EIUwm0AbYF3jtRJkzGQRs8",
+  apiKey: process.env.VUE_APP_FIREBASE_apiKey,
   authDomain: "webmobile-sub2-510fa.firebaseapp.com",
   databaseURL: "https://webmobile-sub2-510fa.firebaseio.com",
   projectId: "webmobile-sub2-510fa",
   storageBucket: "",
-  messagingSenderId: "69251272917",
-  appId: "1:69251272917:web:e3d748f5c506995f"
+  messagingSenderId: process.env.VUE_APP_FIREBASE_messagingSenderId,
+  appId: process.env.VUE_APP_FIREBASE_appId,
 };
 firebase.initializeApp(config);
 // const auth = firebase.auth();
