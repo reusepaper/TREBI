@@ -1,17 +1,14 @@
 <template>
   <div class="member">
-<<<<<<< HEAD
-=======
     <MemberTitle data-aos="fade-left" data-aos-delay="100"></MemberTitle>
     <!-- <MemberListContain></MemberListContain> -->
     <!-- <MemberContentsContain></MemberContentsContain> -->
->>>>>>> [#33] PC화면에서 링크 이동 구현
     <MemberSlider v-bind:members="members"></MemberSlider>
   </div>
 </template>
 <script>
 import MemberSlider from "../components/Member/MemberSlider";
-import $ from "jquery";
+// import $ from "jquery";
 
 export default {
   components: {
@@ -274,13 +271,7 @@ export default {
 <style scoped>
 .member {
   background: #ededee;
-  height: 100vh;
   display: grid;
-<<<<<<< HEAD
   grid-template-rows: 1fr;
-=======
-  grid-template-rows: auto 1fr;
-  /* padding-bottom: 50px; */
->>>>>>> [#33] S1P2213002-75
 }
 </style>
