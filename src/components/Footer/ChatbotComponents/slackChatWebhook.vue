@@ -41,14 +41,14 @@
       </div>
       <div id="chat_send">
         <div id="chat_send_text">
-          <span>
+          <span class="icon">
             <i class="fas fa-paperclip"></i>
           </span>
-          <span>
+          <span class="icon">
             <i class="far fa-smile"></i>
           </span>
           <input type="text" v-model="message" placeholder="질문을 입력해주세요." v-on:keyup.enter="sendMessage">
-          <span>
+          <span class="icon" @click="sendMessage">
             <i class="fas fa-paper-plane"></i>
           </span>
         </div>
@@ -82,9 +82,9 @@ export default {
     // this.$store.commit("setMessages");
   },
   methods:{
-    chat_button_click(){
+    async chat_button_click(){
       this.show = !this.show;
-      this.firstScroll();
+      await this.firstScroll();
       // console.log(this.show);
     },
     repliesInterval(){
@@ -96,7 +96,7 @@ export default {
     firstScroll(){
       setTimeout(function(){
         $("#chat_body").scrollTop($("#chat_body")[0].scrollHeight);
-      }, 300);
+      }, 500);
     },
     scrollToBottom(){
       setTimeout(function(){
@@ -236,18 +236,21 @@ div{
   transform: translateY(100vh);
   opacity: 0 .2s;
 }
-
-div#chat_send_text>span{
+#chat_send_text{
+  background-color: white;
+  border-radius: 0px 0px 10px 10px;
+}
+.icon{
   color:rgb(199, 199, 199);
   font-size: 20px;
   margin: 5px;
   cursor: pointer;
 }
-div#chat_send_text>span:hover{
+.icon:hover{
   color: rgb(133, 201, 239);
 }
 #close {
-  color: #c3c3c3;
+  color: #fff;
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -269,10 +272,10 @@ div#chat_send_text>span:hover{
   position: fixed;
   bottom: 10px;
   right: 10px;
-  /* border: 1px black solid; */
+  z-index: 10;
 }
 #chat_head {
-  background-color: #524F5a;
+  background-color: #a0a0a0;
   /* background-color: linear-gradient(130deg,#4f5bff 0%,#4f5bff 50%,#6c4fff) 100%; */
   height: 60px;
   line-height: 60px;
