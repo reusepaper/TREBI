@@ -6,42 +6,85 @@
       </label>
       <input class="w3-input w3-border" name="last" type="text" v-model="title" />
     </p>
-    <p>
-      <label class="w3-text-blue">
-        <b>Category</b>
-      </label>
-      <!-- <v-layout wrap align-center>
-        <v-flex xs12 sm6 d-flex>
-          <v-select v-model="category" :items="categories" label="Solo field" solo></v-select>
-        </v-flex>
-      </v-layout>-->
-    </p>
     <div class="container">
       <textarea class="md-text" rows="10" v-model="content"></textarea>
       <markdown-it-vue class="md-body" :content="content" :options="options"></markdown-it-vue>
     </div>
 
-    <!-- <ImgUpLoad v-on:upLoadImg="upLoadImg"></ImgUpLoad>
+    <ImgUpLoad v-on:upLoadImg="upLoadImg"></ImgUpLoad>
+
     <img :src="image" />
     <div>
       <br />
       <button class="button buttonblue" v-on:click="submit()">등록</button>
-    </div>-->
+    </div>
   </div>
 </template>
 
 <script>
 import MarkdownItVue from "markdown-it-vue";
 import "markdown-it-vue/dist/markdown-it-vue.css";
+import FirebaseService from "../../../../services/FirebaseService";
+import ImgUpLoad from "./ImgUpLoad";
 
 export default {
   components: {
-    MarkdownItVue
+    MarkdownItVue,
+    ImgUpLoad
   },
   data() {
     return {
-      content: "# 이 곳에 내용을 입력하세요 8-)"
+      title: "",
+      postWriter: "",
+      writerUid: "",
+      content: "# 이곳에 게시글을 작성해보세요! 8-)",
+      image: "",
+      configs: {
+        spellChecker: false // disable spell check
+      },
+      options: {
+        markdownIt: {
+          linkify: true
+        },
+        linkAttributes: {
+          target: "_blank",
+          rel: "noopener"
+        }
+      }
     };
+  },
+  methods: {
+    submit() {
+      if (this.title == "") {
+        alert("제목을 입력하세요");
+      } else if (this.content == "") {
+        alert("내용을 입력하세요");
+      } else if (this.image == "") {
+        alert("사진을 업로드하세요");
+      } else {
+        FirebaseService.postPost(
+          this.title,
+          this.postWriter,
+          this.writerUid,
+          this.content,
+          this.image
+        );
+        alert("업로드 되었습니다");
+        this.title = "";
+        this.postWriter = "";
+        this.writerUid = "";
+        this.image = "";
+        this.content = "";
+        // window.location.assign("/postlist");
+      }
+    },
+    removeImage() {
+      this.image = "";
+    },
+    upLoadImg(image) {
+      console.log("업로드 : ", image);
+      this.image = image;
+    }
   }
 };
 </script>

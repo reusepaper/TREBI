@@ -7,8 +7,18 @@
 </template>
 
 <script>
+import FirebaseService from "../../../../services/FirebaseService";
+import { async } from "q";
+
 export default {
+  mounted() {
+    console.log(this.$store.state.user);
+    // this.getPosts();
+  },
   methods: {
+    getPosts: async function() {
+      await FirebaseService.getPosts();
+    },
     goPostDetail: function() {
       this.$store.commit("setPostPopupIndex", 0);
     },

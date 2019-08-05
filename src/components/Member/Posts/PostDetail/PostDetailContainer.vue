@@ -1,12 +1,18 @@
 <template>
   <div>
     <h1>PostDetail</h1>
-    <Button>글목록</Button>
+    <Button @click="goPostList">글 목록보기</Button>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    goPostList: function() {
+      this.$store.commit("setPostPopupIndex", 1);
+    }
+  }
+};
 </script>
 
 <style>

@@ -61,7 +61,8 @@ export default {
       length: this.members.length,
       selected: 1,
       imgWidth: 88.3,
-      ismodalShow: this.$store.state.isPostShow
+      ismodalShow: this.$store.state.isPostShow,
+      member: [""]
     };
   },
   mounted() {},
