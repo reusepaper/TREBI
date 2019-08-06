@@ -25,6 +25,7 @@ export default {
     return postsCollection.get().then(docSnapshots => {
       return docSnapshots.docs.map(doc => {
         let data = doc.data();
+        data.id = doc.id
         return data;
       });
     });
@@ -37,6 +38,11 @@ export default {
       content,
       image
     });
+  },
+  deletePost(deletePostId){
+    const deletePost = firestore.collection(POSTS).doc(deletePostId);
+    deletePost.delete();
+    return true;
   },
   getPostsByCategoryId(category, uid) {
     return firestore
