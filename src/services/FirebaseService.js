@@ -22,8 +22,9 @@ const TODO = "ToDo";
 export default {
   getPosts() {
     const postsCollection = firestore.collection(POSTS);
-    return postsCollection.get().then(docSnapshots => {
+    return postsCollection.orderBy('createdAt', 'desc').get().then(docSnapshots => {
       return docSnapshots.docs.map(doc => {
+        console.log(doc)
         let data = doc.data();
         data.id = doc.id
         return data;
@@ -36,7 +37,8 @@ export default {
       postWriter,
       writerUid,
       content,
-      image
+      image,
+      createdAt: new Date()
     });
   },
   deletePost(deletePostId){
