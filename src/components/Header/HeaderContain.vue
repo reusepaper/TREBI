@@ -29,7 +29,7 @@
         <li v-if="this.$store.state.userLevel=='maintainer'"><a href="#" v-on:click="moveAdmin">Admin</a></li>
         <li><a href="#" v-on:click="moveTeam" class="mobile-nav-menu">Team</a></li>
         <li><a href="#" v-on:click="moveMember" class="mobile-nav-menu">Member</a></li>
-        <li><a href="#" v-on:click="movePost" class="mobile-nav-menu">Post</a></li>
+        <li><a href="#" v-on:click="movePost" v-bind:class="{modalShow : ismodalShow}" class="mobile-nav-menu">Post</a></li>
         <li><a href="#" v-on:click="moveGitGraph" class="mobile-nav-menu">GitGraph</a></li>
         <li><a href="#" v-on:click="moveContact" class="mobile-nav-menu">Contact</a></li>
         <li v-if="this.$store.state.is_login == false"><a href="#" v-on:click="moveLogin" class="nav-menu">Login</a></li>
@@ -66,6 +66,11 @@ let span = document.getElementsByClassName("close")[0];
 
 export default {
   name: "HeaderContain",
+  data(){
+    return {
+      ismodalShow: this.$store.state.isPostShow
+    }
+  },
   mounted: function() {
     $('.nav-menu').click(function(e){
       e.preventDefault();
@@ -115,8 +120,10 @@ export default {
         behavior: 'smooth'
       });
     },
-    movePost: function(){
-
+    movePost: async function(){
+      await this.$store.commit('setNavbarState', false);
+      $("#overlay-input").prop("checked", false);
+      this.$store.commit("toggleIsPostShow");
     },
     moveGitGraph: async function(){
       await this.$store.commit('setNavbarState', false);
@@ -149,7 +156,6 @@ export default {
     moveLogout: function(e) {
       this.logoutCurrentUser();
       window.location.reload();
-     
     },
     async logoutCurrentUser(){
       auth.signOut();
