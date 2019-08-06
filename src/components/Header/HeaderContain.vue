@@ -195,7 +195,7 @@ export default {
     list-style: none;
   }
   .navbar ul li a, .navbar a{
-    color: #b7c0c8;
+    color: #919191;
     padding: 0 20px;
     font-size: 1.1em;
     text-decoration: none;
@@ -214,7 +214,7 @@ export default {
   a.brand {
     font-family: Ubuntu;
     font-size:1.8em;
-    color:#b7c0c8;
+    color:#919191;
     font-weight: bold;
     text-decoration: none;
   }
@@ -232,7 +232,7 @@ export default {
     height: 4px;
     width: 35px;
     border-radius: 2px;
-    background-color: #b7c0c8;
+    background-color: #919191;
     position: relative;
     display: block;
     transition: all .2s ease-in-out;
@@ -249,7 +249,7 @@ export default {
     height: 4px;
     width: 35px;
     border-radius: 2px;
-    background-color: #b7c0c8;
+    background-color: #919191;
     position: absolute;
     content: "";
     transition: all .2s ease-in-out;
@@ -298,7 +298,8 @@ export default {
     padding: 1em;
   }
   #overlay ul li a {
-    color: #b7c0c8;
+    color: #919191;
+    font-weight: bold;
     text-decoration: none;
     font-size: 1.5em;
   }
