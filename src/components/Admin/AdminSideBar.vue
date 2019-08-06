@@ -29,7 +29,7 @@
                 <button v-on:click="viewAdmin" class="menuDetailBtn">Admin User List</button>
               </div>
               <div style="display: table; width:100%;">
-                <button class="menuDetailBtn">User Add</button>
+                <button v-on:click="viewVisitor" class="menuDetailBtn">Member and Visitor List</button>
               </div>
             </div>
           </li>
@@ -83,6 +83,9 @@ export default {
     },
     viewAdmin: function() {
       this.$store.state.adminPage = "Admin";
+    },
+    viewVisitor: function() {
+      this.$store.state.adminPage = "Visitor";
     },
     viewAllUser: function() {
       this.$store.state.adminPage = "AllUser";
