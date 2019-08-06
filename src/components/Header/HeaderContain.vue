@@ -21,16 +21,6 @@
         <label for="overlay-input" id="overlay-button">
           <span></span>
         </label>
-        <!-- <div id="overlay">
-          <ul>
-            <li><a href="#">Team</a></li>
-            <li><a href="#">Member</a></li>
-            <li><a href="#">Post</a></li>
-            <li><a href="#">GitGraph</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Login</a></li>
-          </ul>
-        </div> -->
       </div>
     </div>
     
@@ -99,24 +89,16 @@ export default {
     moveTREBI: async function(){
       await this.$store.commit('setNavbarState', false);
       $("#overlay-input").prop("checked", false);
-      // var scrollPosition = $().offset().top;
-      // $("body").animate({
-      //   scrollTop: scrollPosition
-      // }, 500);
-      // $(window).screenTop(0);
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
       });
     },
     moveTeam: async function(){
-      // this.$store.commit('setNavbarState', false);
-      // $("#overlay-input").prop("checked", false);
       await this.$store.commit('setNavbarState', false);
       $("#overlay-input").prop("checked", false);
       var height = $(window).height();
       height += 1;
-      // $(window).screenTop(height);
       window.scrollTo({
         top: height,
         behavior: 'smooth'
@@ -139,10 +121,6 @@ export default {
     moveGitGraph: async function(){
       await this.$store.commit('setNavbarState', false);
       $("#overlay-input").prop("checked", false);
-      // var scrollPosition = $('.${this.page4}').offset().top;
-      // $("body").animate({
-      //   scrollTop: scrollPosition
-      // }, 500);
       var height = $(window).height();
       height *= 3;
       height += 3;
@@ -154,10 +132,6 @@ export default {
     moveContact: async function(){
       await this.$store.commit('setNavbarState', false);
       $("#overlay-input").prop("checked", false);
-      // var scrollPosition = $('.${this.page5}').offset().top;
-      // $("body").animate({
-      //   scrollTop: scrollPosition
-      // }, 500);
       var height = $(window).height();
       height *= 4;
       height += 4;
@@ -170,7 +144,6 @@ export default {
       this.$store.commit("setModalStyle", "block");
     },
     close_modal: function(e){
-      // this.modal_style.display = "none";
       this.$store.commit("setModalStyle", "none");
     },
     moveLogout: function(e) {
