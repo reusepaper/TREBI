@@ -2,7 +2,7 @@
   <div>
     <h1>PostList</h1>
     <Button @click="goPostDetail">글 상세보기</Button>
-    <Button @click="goPostWrite">글작성</Button>
+    <Button v-if="this.$store.state.userLevel != 'visitor' && this.$store.state.is_login == true" @click="goPostWrite">글작성</Button>
   </div>
 </template>
 
