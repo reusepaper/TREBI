@@ -1,5 +1,6 @@
 <template>
   <div class="team-contents-contain">
+    <child1popup></child1popup>
     <div class="team-contents">
       <div class="box">
         <div class="box-row">
@@ -21,7 +22,10 @@
                 </div>
               </li>
               <li>
-                <div class="item">
+                <div class="item" 
+                @click="togglePopUp" 
+                v-bind:class="{modalShow:this.$store.state.Child1}"
+                >
                   <span>1st July 2019 ~ 7st 7th 2019</span>
                   <h3>[1주 프로젝트] 반응형 웹 페이지 제작</h3>
                   <p>자신을 소개하는 포토폴리오 사이트 제작</p>
@@ -71,9 +75,22 @@
 import c1 from './ChildComponents/Child1';
 import c2 from './ChildComponents/Child2';
 import c3 from './ChildComponents/Child3';
+import child1popup from './ChildComponents/Child1Popup';
 export default {
   components:{
-    c1,c2,c3
+    c1,c2,c3,child1popup
+  },
+  data:function(){
+    return {
+      isModalShow: this.$store.state.Child1
+    }
+  },
+  methods:{
+    togglePopUp() {
+      console.log("togglePopUp");
+      // this.ismodalShow = !this.ismodalShow;
+      this.$store.commit("toggleFirstChildShow");
+    }
   }
 }
 </script>
