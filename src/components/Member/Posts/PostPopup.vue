@@ -1,17 +1,43 @@
 <template>
   <div id="popup-article" class="popup" v-bind:class="{modalShow :this.$store.state.isPostShow}">
-    <div class="popup__block">
-      <Button>글 sdfsdf</Button>
-      <div @click="togglePopUp" class="popup__close">close</div>
+    <div
+      class="popup__container"
+      v-bind:style="{'transform': 'translate(-' + (this.$store.state.PostPopupIndex)*100   + 'vw, 0px)'}"
+    >
+      <div class="popup__block" style="background-color : #EDEDEE;">
+        <PostDetailContainer></PostDetailContainer>
+      </div>
+      <div class="popup__block" style="background-color : #EDEDEE;">
+        <PostListContainer></PostListContainer>
+      </div>
+      <div class="popup__block" style="background-color : #EDEDEE;">
+        <PostWriteContainer></PostWriteContainer>
+      </div>
     </div>
+    <div @click="togglePopUp" class="popup__close">close</div>
   </div>
 </template>
 
 <script>
+import PostDetailContainer from "../Posts/PostDetail/PostDetailContainer";
+import PostListContainer from "../Posts/PostList/PostListContainer";
+import PostWriteContainer from "../Posts/PostWrite/PostWriteContainer";
+
 export default {
+  components: {
+    PostWriteContainer,
+    PostDetailContainer,
+    PostListContainer
+  },
+  data() {
+    return {
+      width: 100
+    };
+  },
   methods: {
     togglePopUp() {
       this.$store.commit("toggleIsPostShow");
+      this.$store.commit("setPostPopupIndex", 1);
     }
   }
 };
@@ -27,7 +53,22 @@ export default {
   top: 0;
   right: 0;
 }
+.popup__container {
+  display: flex;
+  /* transform: translate3d(-100vw, 0px, 0px); */
+  transition: 0.3s ease-in-out;
+}
 
+.popup__block {
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  padding: 50px;
+  margin: auto;
+  overflow: auto;
+  animation: fade 0.5s ease-out 1.3s both;
+}
 .modalShow {
   display: flex;
 }
@@ -104,17 +145,6 @@ export default {
     height: 100vh;
     top: 0;
   }
-}
-
-.popup__block {
-  height: calc(100vh - 40px);
-  padding: 5% 15%;
-  box-sizing: border-box;
-  position: relative;
-
-  margin: auto;
-  overflow: auto;
-  animation: fade 0.5s ease-out 1.3s both;
 }
 
 @keyframes fade {

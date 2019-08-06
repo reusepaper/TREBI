@@ -26,6 +26,6 @@ export default {
   margin-left: 30px;
 }
 .CopyrightContain span:last-child {
-  margin-right: 30px;
+  margin-right: 100px;
 }
 </style>

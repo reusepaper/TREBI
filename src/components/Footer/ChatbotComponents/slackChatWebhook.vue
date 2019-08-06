@@ -1,7 +1,7 @@
 <template>
 <div v-if="this.$store.state.user">
   <transition name="fade">
-    <div v-if="!show" id=chat_mini @click="show = !show" >
+    <div v-if="!show" id=chat_mini @click="chat_button_click" >
       <i id="chat_mini_icon" class="fas fa-comment-dots"></i>
     </div>
   </transition>
@@ -12,46 +12,43 @@
         <span id="close" @click="show = !show">&times;</span>
       </div>
       <div id="chat_body">
-        <div>
-          <ul>
-            <li 
-              v-for="(slackMessage, index) in messages"
-              v-bind:key="slackMessage.item"
-              class="clearfix">
-              <div v-if="slackMessage.isMe" >
-                <div class="message-data align-right">
-                  <!-- <span class="message-data-time" >{{slackMessage.time}}</span> &nbsp; &nbsp; -->
-                  <span class="message-data-name" >{{slackMessage.username}}</span>
-                </div>
-                <div class="message other-message float-right">
-                  {{slackMessage.message}}
-                </div>
+        <ul>
+          <li 
+            v-for="(slackMessage, index) in messages"
+            v-bind:key="slackMessage.item"
+            class="clearfix">
+            <div v-if="slackMessage.isMe" >
+              <div class="message-data align-right">
+                <!-- <span class="message-data-time" >{{slackMessage.time}}</span> &nbsp; &nbsp; -->
+                <span class="message-data-name" >{{slackMessage.username}}</span>
               </div>
-              <div v-else>
-                <div class="message-data align-left">
-                  <span class="message-data-name"> {{slackMessage.username}}</span>
-                  <span class="message-data-time">10:12 AM, Today</span>
-                </div>
-                <div class="message my-message">
-                  {{slackMessage.message}}
-                </div>
+              <div class="message other-message float-right">
+                {{slackMessage.message}}
               </div>
-            </li>
-            
+            </div>
+            <div v-else>
+              <div class="message-data align-left">
+                <span class="message-data-name"> {{slackMessage.username}}</span>
+                <span class="message-data-time">10:12 AM, Today</span>
+              </div>
+              <div class="message my-message">
+                {{slackMessage.message}}
+              </div>
+            </div>
+          </li>
+        </ul>
 
-          </ul>
-        </div>
       </div>
       <div id="chat_send">
         <div id="chat_send_text">
-          <span>
+          <span class="icon">
             <i class="fas fa-paperclip"></i>
           </span>
-          <span>
+          <span class="icon">
             <i class="far fa-smile"></i>
           </span>
           <input type="text" v-model="message" placeholder="질문을 입력해주세요." v-on:keyup.enter="sendMessage">
-          <span>
+          <span class="icon" @click="sendMessage">
             <i class="fas fa-paper-plane"></i>
           </span>
         </div>
@@ -62,13 +59,13 @@
 </template>
 
 <script>
+import { setInterval, setTimeout } from 'timers';
 const { WebClient } = require('@slack/web-api');
 const token = process.env.VUE_APP_SLACK_TOKEN;
-// console.log(token);
 // Initialize
 const web = new WebClient(token);
 
-
+// var intElemScrollHeight = document.getElementById("#chat_body").scrollHeight;
 
 export default {
   data(){
@@ -81,30 +78,56 @@ export default {
   },
   mounted() {
     this.readMessages();
+    this.repliesInterval();
     // this.$store.commit("setMessages");
   },
   methods:{
+    async chat_button_click(){
+      this.show = !this.show;
+      await this.firstScroll();
+      // console.log(this.show);
+    },
+    repliesInterval(){
+      // this.checkReply();
+      setInterval(() => {
+        this.checkReply();
+      }, 60000)
+    },
+    firstScroll(){
+      setTimeout(function(){
+        $("#chat_body").scrollTop($("#chat_body")[0].scrollHeight);
+      }, 500);
+    },
+    scrollToBottom(){
+      setTimeout(function(){
+        $("#chat_body").scrollTop($("#chat_body")[0].scrollHeight);
+      }, 100);
+    },
     async sendMessage(){
+      // console.log(this.message);
+      if(this.message == '') {
+        alert("질문을 입력해주세요");
+        return;
+      }
       let now = new Date();
+      let myMessages = {
+          username: this.$store.state.user.displayName,
+          isMe: true,
+          message: this.message
+        }
+      await this.messages.push(myMessages);
+      await this.botMessage(this.message);
+      await this.scrollToBottom();
       await this.postMessage();
       await this.readMessageOne();
-      await console.log(this.message_thread_ts);
 
-      // let newMessage = await {
-      //   username: this.$store.state.user.displayName,
-      //   time: now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate() + '. ' + now.getHours() + ':' + now.getMinutes(),
-      //   message: this.message,
-      //   isMe: true,
-      //   thread_ts: this.message_thread_ts
-      // }
 
       let newMessage = await this.message_thread_ts;
       // this.$store.commit("setMessages");
       await this.$store.commit("upMessages", newMessage);
       // await console.log(this.$store.state.messages);
-      // await this.readMessages();
-      messages = await this.$store.state.messages
-      this.message = "";
+      // this.messages = await this.$store.state.messages
+      this.message = await "";
     },
     async postMessage(){
       const result = await web.chat.postMessage({
@@ -112,7 +135,7 @@ export default {
           username: this.$store.state.user.displayName,
           text: this.message
         });
-        console.log(result)
+        // console.log(result)
     },
     async readMessageOne(){
       const result = await web.conversations.history({
@@ -134,10 +157,9 @@ export default {
           message: result.messages[0].text
         }
         await this.messages.push(myMessages);
-        
         if (result.messages[0].hasOwnProperty('replies')){
           for(let replies=1; replies<=result.messages[0].reply_count; replies++){
-            await console.log(result.messages[replies]);
+            // await console.log(result.messages[replies]);
             let trebiMessages = {
               username: "trebi",
               isMe: false,
@@ -145,9 +167,74 @@ export default {
             }
             await this.messages.push(trebiMessages);
           }
+        } else{
+          this.botMessage(result.messages[0].text);
         }
       }
-      await console.log(this.messages);
+      
+      // await console.log(this.messages);
+    },
+    async botMessage(inputMessage){
+      if(inputMessage.includes('안녕')){
+        let trebiMessages = {
+          username: "trebi",
+          isMe: false,
+          message: "반갑습니다. 트레비입니다."
+        }
+        await this.messages.push(trebiMessages);
+      } else if(inputMessage.includes('페이지') && inputMessage.includes('어떻게')){
+        let trebiMessages = {
+          username: "trebi",
+          isMe: false,
+          message: "저희 페이지는 Vue cli를 기반으로, firebase를 DB로 사용했습니다.\n 더 자세한 답변을 원하시면 잠시 기다려주세요. 답변까지는 최대 하루가 소요됩니다."
+        }
+        await this.messages.push(trebiMessages);
+      } else if(inputMessage.includes('연락')){
+        let trebiMessages = {
+          username: "trebi",
+          isMe: false,
+          message: "저희와 연락하시려면 페이지 최하단 contact us를 참고해주시기 바랍니다. 감사합니다."
+        }
+        await this.messages.push(trebiMessages);
+      } else if((inputMessage.includes('왜') || inputMessage.includes('팀')) && (inputMessage.includes('트레비') || inputMessage.includes('trebi') || inputMessage.includes('트래비')) ){
+        let trebiMessages = {
+          username: "trebi",
+          isMe: false,
+          message: "유난히 덥던 여름.. 저는 하염없이 길을 걷고 있었죠.. 타는듯한 더위에 갈증을 느끼던 저는 우연히 한 사람의 얼굴에 피어있는 행복감을 보았어요. 저 사람은 무슨 일이 있기에 저렇게 행복한걸까? 오늘 생일인가? 아니면 취업에 성공했나? 그러다 저는 깨달았습니다. 그의 손에 들려있는 트래비를.. 크.. 무더위를 한번에 날려줄 트래비의 청량감에 행복해하는 그를 보면서, 나는 누군가에게 청량한 적이 있었는가. 라는 생각을 하게 되었어요. 누군가에게 행복을 준다는거. 쉽지 않잖아요. 누군가에게 제 정보를 전달하면서 궁굼했던 것, 가려운 부분을 시원하게 해결해 주면어떨까. 트래비는 그런 시원함을 담고자 하는 이유로 만들었습니다. -by 유초록"
+        }
+        await this.messages.push(trebiMessages);
+      } else {
+        let trebiMessages = {
+          username: "trebi",
+          isMe: false,
+          message: "질문을 남겼습니다. 답변까지는 최대 1일이 소요됩니다."
+        }
+        await this.messages.push(trebiMessages);
+      }
+    },
+    async checkReply(){
+      const ts = this.$store.state.messages[this.$store.state.messages.length - 1];
+      let result = await web.channels.replies({
+        channel: "CLYG23CHW",
+        thread_ts: ts
+      })
+      if (result.messages[0].hasOwnProperty('replies')){
+        for(let replies=result.messages[0].reply_count; replies>0; replies--){
+          // await console.log(replies);
+          // await console.log(result.messages[replies]);
+          let trebiMessages = {
+            username: "trebi",
+            isMe: false,
+            message: result.messages[replies].text
+          }
+          if (this.messages[this.messages.length - 1].message != trebiMessages.message){
+            // await this.messages.push(trebiMessages);
+            await this.messages.splice(this.messages.length-(result.messages[0].reply_count-replies), 0, trebiMessages)
+            await this.scrollToBottom();
+            return;
+          } else return;
+        }
+      } 
     }
   }
 }
@@ -194,18 +281,21 @@ div{
   transform: translateY(100vh);
   opacity: 0 .2s;
 }
-
-div#chat_send_text>span{
+#chat_send_text{
+  background-color: white;
+  border-radius: 0px 0px 10px 10px;
+}
+.icon{
   color:rgb(199, 199, 199);
   font-size: 20px;
   margin: 5px;
   cursor: pointer;
 }
-div#chat_send_text>span:hover{
+.icon:hover{
   color: rgb(133, 201, 239);
 }
 #close {
-  color: #c3c3c3;
+  color: #fff;
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -227,10 +317,10 @@ div#chat_send_text>span:hover{
   position: fixed;
   bottom: 10px;
   right: 10px;
-  /* border: 1px black solid; */
+  z-index: 10;
 }
 #chat_head {
-  background-color: #524F5a;
+  background-color: #a0a0a0;
   /* background-color: linear-gradient(130deg,#4f5bff 0%,#4f5bff 50%,#6c4fff) 100%; */
   height: 60px;
   line-height: 60px;
@@ -245,6 +335,7 @@ div#chat_send_text>span:hover{
 #chat_body{
   height: 400px;
   overflow-y: scroll;
+  background-color: white;
 }
 #chat_send{
   height: 54px;

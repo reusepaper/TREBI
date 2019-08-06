@@ -36,6 +36,7 @@
       <GitGraph class="page"></GitGraph>
       <Footer class="page"></Footer>
     </div>
+    <chat></chat>
   </div>
 </template>
 <script>
@@ -46,6 +47,7 @@ import Team from "./views/Team";
 import Member from "./views/Member";
 import GitGraph from "./views/GitGraph";
 import Footer from "./views/Footer";
+import chat from './components/Footer/ChatbotComponents/slackChatWebhook';
 import $ from "jquery";
 
 export default {
@@ -57,7 +59,8 @@ export default {
     Member,
     GitGraph,
     Footer,
-    Header
+    Header,
+    chat
   },
   data() {
     return {

@@ -100,7 +100,7 @@ export default {
             text: "Commit"
           },
           min: 0,
-          max: 50
+          max: 25
         },
         legend: {
           position: "top",
@@ -133,7 +133,7 @@ export default {
         result = result.substring(0, dateIndex);
         commitCount.unshift(count);
       }
-      console.log(commitCount);
+      // console.log(commitCount);
       this.series[index].data = commitCount;
     }
   }
