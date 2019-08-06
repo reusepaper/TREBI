@@ -163,7 +163,8 @@ export default {
         nickname,
         eamil,
         level,
-        createdAt
+        createdAt,
+        post: 0
       });
   },
   getToDo() {

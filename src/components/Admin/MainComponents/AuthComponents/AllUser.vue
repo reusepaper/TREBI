@@ -10,7 +10,7 @@
           <th>User Id</th>
           <th>Level</th>
           <th>Name</th>
-          <th>uid</th>
+          <th>Post Cnt</th>
           <th>Delete</th>
         </tr>
       </thead>
@@ -31,6 +31,8 @@
               >{{ levelKor[level] }}</option>
             </select>
             <button id="select_button" @click="changeLevel(oneUser)">변경</button>
+          </td>
+          <td v-else-if="key === 'uid'" style="display:none">
           </td>
           <td v-else>{{field}}</td>
           <td>
