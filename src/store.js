@@ -18,7 +18,8 @@ export default new Vuex.Store({
     messages: [],
     modal_remoter: false,
     isPostShow: true,
-    PostPopupIndex: 1
+    PostPopupIndex: 1,
+    nowDisplayMember: ""
   },
   mutations: {
     setUser(state, currentUser) {
@@ -59,6 +60,9 @@ export default new Vuex.Store({
     },
     setPostPopupIndex(state, index) {
       state.PostPopupIndex = index;
+    },
+    setNowDisplayMember(state, value) {
+      state.nowDisplayMember = value;
     }
   },
   getters: {

@@ -100,7 +100,7 @@ export default {
             text: "Commit"
           },
           min: 0,
-          max: 50
+          max: 25
         },
         legend: {
           position: "top",
