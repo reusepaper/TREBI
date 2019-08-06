@@ -72,6 +72,7 @@ export default {
           this.content,
           this.image
         );
+        FirebaseService.updateUserPostUP(this.writerUid);
         alert("업로드 되었습니다");
         this.title = "";
         this.image = "";

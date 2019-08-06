@@ -20,7 +20,7 @@
           <td>{{post.title}}</td>
           <td style="text-align: center;">{{post.postWriter}}</td>
           <td style="text-align: center;">
-            <img style="height: 25px; cursor:pointer;" @click="delete_event(post.id)" src="../../../../assets/delete.png" />
+            <img style="height: 25px; cursor:pointer;" @click="delete_event(post)" src="../../../../assets/delete.png" />
           </td>
         </tr>
       </tbody>
@@ -46,14 +46,15 @@ export default {
       this.Allposts = await FirebaseService.getPosts();
       this.postsNums = this.Allposts.length;
     },
-    async deletePost(deletePostId){
-      await FirebaseService.deletePost(deletePostId);
+    async deletePost(deletePost){
+      await FirebaseService.deletePost(deletePost.id);
+      await FirebaseService.updateUserPostDOWN(deletePost.writerUid);
       await alert("삭제되었습니다.");
       this.Allposts = await FirebaseService.getPosts();
     },
-    delete_event(deletePostId) {
+    delete_event(deletePost) {
       if (confirm("정말 삭제하시겠습니까?") == true)
-        this.deletePost(deletePostId);
+        this.deletePost(deletePost);
       else alert("삭제하지 않았습니다.");
     },
   }
