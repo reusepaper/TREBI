@@ -24,7 +24,6 @@ export default {
     const postsCollection = firestore.collection(POSTS);
     return postsCollection.orderBy('createdAt', 'desc').get().then(docSnapshots => {
       return docSnapshots.docs.map(doc => {
-        console.log(doc)
         let data = doc.data();
         data.id = doc.id
         return data;
@@ -116,7 +115,25 @@ export default {
   },
   getUsers() {
     const usersList = firestore.collection(USERS);
-    return usersList.get().then(docSnapshots => {
+    return usersList.orderBy('createdAt', 'desc').get().then(docSnapshots => {
+      return docSnapshots.docs.map(doc => {
+        let data = doc.data();
+        return data;
+      });
+    });
+  },
+  getAdminUsers() {
+    const usersList = firestore.collection(USERS);
+    return usersList.where('level', '==', 'maintainer').orderBy('createdAt', 'desc').get().then(docSnapshots => {
+      return docSnapshots.docs.map(doc => {
+        let data = doc.data();
+        return data;
+      });
+    });
+  },
+  getVisitorUsers() {
+    const usersList = firestore.collection(USERS);
+    return usersList.where('level', '>=', 'visitor').get().then(docSnapshots => {
       return docSnapshots.docs.map(doc => {
         let data = doc.data();
         return data;
@@ -146,7 +163,8 @@ export default {
         nickname,
         eamil,
         level,
-        createdAt
+        createdAt,
+        post: 0
       });
   },
   getToDo() {

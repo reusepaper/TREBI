@@ -68,8 +68,8 @@ export default {
       // await console.log(this.userFields[0]);
       this.userFields = await this.userFields[0];
     },
-    async getUsers() {
-      this.allUsers = await firebaseService.getUsers();
+    async getVisitorUsers() {
+      this.allUsers = await firebaseService.getVisitorUsers();
 
       console.log(this.allUsers);
       this.usersNum = this.allUsers.length;
@@ -106,7 +106,7 @@ export default {
         change_level
       );
       await alert("변경되었습니다.");
-      await this.getUsers();
+      await this.getVisitorUsers();
     },
     delete_event(deleteUser) {
       if (confirm("정말 삭제하시겠습니까?") == true)
@@ -115,12 +115,12 @@ export default {
     },
     async deleteUser(deleteUser) {
       await firebaseService.deleteUser(deleteUser.uid);
-      await this.getUsers();
+      await this.getVisitorUsers();
     }
   },
   mounted: function() {
     this.getUserFields();
-    this.getUsers();
+    this.getVisitorUsers();
   }
 };
 </script>
