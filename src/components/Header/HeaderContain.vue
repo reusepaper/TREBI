@@ -21,16 +21,6 @@
         <label for="overlay-input" id="overlay-button">
           <span></span>
         </label>
-        <!-- <div id="overlay">
-          <ul>
-            <li><a href="#">Team</a></li>
-            <li><a href="#">Member</a></li>
-            <li><a href="#">Post</a></li>
-            <li><a href="#">GitGraph</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Login</a></li>
-          </ul>
-        </div> -->
       </div>
     </div>
     
@@ -39,7 +29,7 @@
         <li v-if="this.$store.state.userLevel=='maintainer'"><a href="#" v-on:click="moveAdmin">Admin</a></li>
         <li><a href="#" v-on:click="moveTeam" class="mobile-nav-menu">Team</a></li>
         <li><a href="#" v-on:click="moveMember" class="mobile-nav-menu">Member</a></li>
-        <li><a href="#" v-on:click="movePost" class="mobile-nav-menu">Post</a></li>
+        <li><a href="#" v-on:click="movePost" v-bind:class="{modalShow : ismodalShow}" class="mobile-nav-menu">Post</a></li>
         <li><a href="#" v-on:click="moveGitGraph" class="mobile-nav-menu">GitGraph</a></li>
         <li><a href="#" v-on:click="moveContact" class="mobile-nav-menu">Contact</a></li>
         <li v-if="this.$store.state.is_login == false"><a href="#" v-on:click="moveLogin" class="nav-menu">Login</a></li>
@@ -76,6 +66,11 @@ let span = document.getElementsByClassName("close")[0];
 
 export default {
   name: "HeaderContain",
+  data(){
+    return {
+      ismodalShow: this.$store.state.isPostShow
+    }
+  },
   mounted: function() {
     $('.nav-menu').click(function(e){
       e.preventDefault();
@@ -99,24 +94,16 @@ export default {
     moveTREBI: async function(){
       await this.$store.commit('setNavbarState', false);
       $("#overlay-input").prop("checked", false);
-      // var scrollPosition = $().offset().top;
-      // $("body").animate({
-      //   scrollTop: scrollPosition
-      // }, 500);
-      // $(window).screenTop(0);
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
       });
     },
     moveTeam: async function(){
-      // this.$store.commit('setNavbarState', false);
-      // $("#overlay-input").prop("checked", false);
       await this.$store.commit('setNavbarState', false);
       $("#overlay-input").prop("checked", false);
       var height = $(window).height();
       height += 1;
-      // $(window).screenTop(height);
       window.scrollTo({
         top: height,
         behavior: 'smooth'
@@ -133,16 +120,14 @@ export default {
         behavior: 'smooth'
       });
     },
-    movePost: function(){
-
+    movePost: async function(){
+      await this.$store.commit('setNavbarState', false);
+      $("#overlay-input").prop("checked", false);
+      this.$store.commit("toggleIsPostShow");
     },
     moveGitGraph: async function(){
       await this.$store.commit('setNavbarState', false);
       $("#overlay-input").prop("checked", false);
-      // var scrollPosition = $('.${this.page4}').offset().top;
-      // $("body").animate({
-      //   scrollTop: scrollPosition
-      // }, 500);
       var height = $(window).height();
       height *= 3;
       height += 3;
@@ -154,10 +139,6 @@ export default {
     moveContact: async function(){
       await this.$store.commit('setNavbarState', false);
       $("#overlay-input").prop("checked", false);
-      // var scrollPosition = $('.${this.page5}').offset().top;
-      // $("body").animate({
-      //   scrollTop: scrollPosition
-      // }, 500);
       var height = $(window).height();
       height *= 4;
       height += 4;
@@ -170,13 +151,11 @@ export default {
       this.$store.commit("setModalStyle", "block");
     },
     close_modal: function(e){
-      // this.modal_style.display = "none";
       this.$store.commit("setModalStyle", "none");
     },
     moveLogout: function(e) {
       this.logoutCurrentUser();
       window.location.reload();
-     
     },
     async logoutCurrentUser(){
       auth.signOut();
