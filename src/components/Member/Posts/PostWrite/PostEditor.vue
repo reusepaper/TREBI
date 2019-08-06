@@ -74,8 +74,6 @@ export default {
         );
         alert("업로드 되었습니다");
         this.title = "";
-        this.postWriter = "";
-        this.writerUid = "";
         this.image = "";
         this.content = "";
         this.$store.commit("setPostPopupIndex", 1);

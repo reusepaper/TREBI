@@ -4,13 +4,13 @@
       class="popup__container"
       v-bind:style="{'transform': 'translate(-' + (this.$store.state.PostPopupIndex)*100   + 'vw, 0px)'}"
     >
-      <div class="popup__block" style="background-color : red;">
+      <div class="popup__block" style="background-color : #EDEDEE;">
         <PostDetailContainer></PostDetailContainer>
       </div>
-      <div class="popup__block" style="background-color : blue;">
+      <div class="popup__block" style="background-color : #EDEDEE;">
         <PostListContainer></PostListContainer>
       </div>
-      <div class="popup__block" style="background-color : yellow;">
+      <div class="popup__block" style="background-color : #EDEDEE;">
         <PostWriteContainer></PostWriteContainer>
       </div>
     </div>
