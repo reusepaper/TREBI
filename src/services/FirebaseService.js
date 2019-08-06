@@ -1,6 +1,7 @@
 import "firebase/firestore";
 import "firebase/auth";
 import * as firebase from "firebase/app";
+import "firebase/messaging";
 
 const config = {
   apiKey: process.env.VUE_APP_FIREBASE_apiKey,
@@ -14,6 +15,9 @@ const config = {
 firebase.initializeApp(config);
 // const auth = firebase.auth();
 // const ui = new firebaseui.auth.AuthUI(auth);
+const messaging = firebase.messaging();
+const messagingKey = process.env.VUE_APP_FIREBASE_fcm;
+messaging.usePublicVapidKey(messagingKey);
 
 const firestore = firebase.firestore();
 const POSTS = "Posts";
@@ -22,14 +26,17 @@ const TODO = "ToDo";
 export default {
   getPosts() {
     const postsCollection = firestore.collection(POSTS);
-    return postsCollection.orderBy('createdAt', 'desc').get().then(docSnapshots => {
-      return docSnapshots.docs.map(doc => {
-        console.log(doc)
-        let data = doc.data();
-        data.id = doc.id
-        return data;
+    return postsCollection
+      .orderBy("createdAt", "desc")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          console.log(doc);
+          let data = doc.data();
+          data.id = doc.id;
+          return data;
+        });
       });
-    });
   },
   postPost(title, postWriter, writerUid, content, image) {
     return firestore.collection(POSTS).add({
@@ -41,7 +48,7 @@ export default {
       createdAt: new Date()
     });
   },
-  deletePost(deletePostId){
+  deletePost(deletePostId) {
     const deletePost = firestore.collection(POSTS).doc(deletePostId);
     deletePost.delete();
     return true;
