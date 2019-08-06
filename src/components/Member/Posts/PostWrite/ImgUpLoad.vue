@@ -19,7 +19,7 @@ export default {
     removeImage() {
       this.image = "";
     },
-    onFileChange(e) {
+    async onFileChange(e) {
       // file 세팅
       let files = e.target.files || e.dataTransfer.files;
       console.log(files);
@@ -42,7 +42,7 @@ export default {
 
       data.append("image", files[0]);
 
-      fetch(apiUrl, content)
+      await fetch(apiUrl, content)
         .then(response => response.json())
         .then(success => {
           this.image = success.data.link;

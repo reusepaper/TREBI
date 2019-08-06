@@ -32,11 +32,14 @@ export default {
     MarkdownItVue,
     ImgUpLoad
   },
+  mounted() {
+    console.log(this.$store.state.user);
+  },
   data() {
     return {
       title: "",
-      postWriter: "",
-      writerUid: "",
+      postWriter: this.$store.state.user.displayName,
+      writerUid: this.$store.state.user.uid,
       content: "# 이곳에 게시글을 작성해보세요! 8-)",
       image: "",
       configs: {
@@ -75,7 +78,7 @@ export default {
         this.writerUid = "";
         this.image = "";
         this.content = "";
-        // window.location.assign("/postlist");
+        this.$store.commit("setPostPopupIndex", 1);
       }
     },
     removeImage() {
