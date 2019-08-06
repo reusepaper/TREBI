@@ -16,6 +16,7 @@ firebase.initializeApp(config);
 // const ui = new firebaseui.auth.AuthUI(auth);
 
 const firestore = firebase.firestore();
+let db = firebase.firestore();
 const POSTS = "Posts";
 const USERS = "Users";
 const TODO = "ToDo";
@@ -148,6 +149,30 @@ export default {
       level: updateUserLevel
     });
     return true;
+  },
+  updateUserPostUP(loginUserUid) {
+    const changeUser = firestore.collection(USERS).doc(loginUserUid);
+    return db.runTransaction(function(transaction) {
+      return transaction.get(changeUser).then(function(changeUserDoc) {
+        if (!changeUserDoc.exists) {
+          throw "Document does not exist!";
+        }
+        let newPost = changeUserDoc.data().post + 1;
+        transaction.update(changeUser, { post: newPost });
+      });
+    })
+  },
+  updateUserPostDOWN(loginUserUid) {
+    const changeUser = firestore.collection(USERS).doc(loginUserUid);
+    return db.runTransaction(function(transaction) {
+      return transaction.get(changeUser).then(function(changeUserDoc) {
+        if (!changeUserDoc.exists) {
+          throw "Document does not exist!";
+        }
+        let newPost = changeUserDoc.data().post - 1;
+        transaction.update(changeUser, { post: newPost });
+      });
+    })
   },
   deleteUser(deleteUserUid) {
     const deleteUser = firestore.collection(USERS).doc(deleteUserUid);
