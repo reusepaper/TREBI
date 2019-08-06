@@ -2,7 +2,11 @@
   <div>
     <h1>PostList</h1>
     <Button @click="goPostDetail">글 상세보기</Button>
-    <Button v-if="this.$store.state.userLevel != 'visitor' && this.$store.state.is_login == true" @click="goPostWrite">글작성</Button>
+    {{this.$store.state.nowDisplayMember}}
+    <Button
+      v-if="this.$store.state.userLevel != 'visitor' && this.$store.state.is_login == true"
+      @click="goPostWrite"
+    >글작성</Button>
   </div>
 </template>
 
@@ -12,8 +16,18 @@ import { async } from "q";
 
 export default {
   mounted() {
-    console.log(this.$store.state.user);
     // this.getPosts();
+    console.log(displayMember);
+  },
+  data() {
+    return {
+      displayMember: this.$store.state.nowDisplayMember
+    };
+  },
+  watch: {
+    displayMember() {
+      console.log("바뀜");
+    }
   },
   methods: {
     getPosts: async function() {

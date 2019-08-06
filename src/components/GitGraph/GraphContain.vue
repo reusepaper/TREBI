@@ -133,7 +133,7 @@ export default {
         result = result.substring(0, dateIndex);
         commitCount.unshift(count);
       }
-      console.log(commitCount);
+      // console.log(commitCount);
       this.series[index].data = commitCount;
     }
   }

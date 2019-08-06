@@ -62,29 +62,21 @@ export default {
       selected: 1,
       imgWidth: 88.3,
       ismodalShow: this.$store.state.isPostShow,
-      member: ["이주호", "유동관", "임연지", "한단비", "한만섭"]
+      member: ["", "이주호", "유동관", "임연지", "한단비", "한만섭"]
     };
   },
   mounted() {},
   methods: {
     next() {
-      if (this.selected == this.length) {
-        this.$store.commit("setNowDisplayMember", this.member[this.selected]);
-        this.selected = 1;
-      } else {
-        this.$store.commit("setNowDisplayMember", this.member[this.selected]);
+      if (this.selected < this.length) {
         this.selected = this.selected + 1;
+        this.$store.commit("setNowDisplayMember", this.member[this.selected]);
       }
     },
     pre() {
-      if (this.selected == 1) {
-        this.selected = this.length;
-      } else {
+      if (this.selected > 1) {
         this.selected = this.selected - 1;
-        this.$store.commit(
-          "setNowDisplayMember",
-          this.member[this.selected - 1]
-        );
+        this.$store.commit("setNowDisplayMember", this.member[this.selected]);
       }
     },
     togglePopUp() {
