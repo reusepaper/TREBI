@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
+import { stat } from "fs";
 
 Vue.use(Vuex);
 
@@ -17,7 +18,10 @@ export default new Vuex.Store({
     navbarstate: false,
     messages: [],
     modal_remoter: false,
-    isPostShow: true
+    isPostShow: true,
+    Child1:false,
+    Child2:true,
+    Child3:true
   },
   mutations: {
     setUser(state, currentUser) {
@@ -31,14 +35,12 @@ export default new Vuex.Store({
     },
     setPostTarget(state, newTarget) {
       state.postTarget = newTarget;
-      console.log(state.postTarget);
     },
     setModalStyle(state, currentState) {
       state.modal_style.display = currentState;
     },
     setAdminPAge(state, CurrnetAdminPage) {
       state.adminPage = CurrnetAdminPage;
-      console.log(state.adminPage);
     },
     setNavbarState(state, currentNavbar) {
       state.navbarstate = currentNavbar;
@@ -55,6 +57,15 @@ export default new Vuex.Store({
     },
     toggleIsPostShow(state) {
       state.isPostShow = !state.isPostShow;
+    },
+    toggleFirstChildShow(state){
+      console.log("toggleFirstChildShow 시작",state.Child1);
+      state.Child1 = !state.Child1;
+      console.log("여기까지는 왔음",state.Child1);
+    },
+    closeChildShow(state){
+      state.Child1= false;
+      console.log("closeChildShow 실행",state.Child1);
     }
   },
   getters: {
