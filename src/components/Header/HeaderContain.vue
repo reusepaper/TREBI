@@ -211,6 +211,10 @@ export default {
     color:salmon;
   }
 
+  .brand:hover {
+    color:salmon;
+  }
+
   a.brand {
     font-family: Ubuntu;
     font-size:1.8em;
