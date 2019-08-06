@@ -5,7 +5,7 @@
       <!-- show pc screen -->
       <div id='pc-menu'>
         <ul>
-          <li v-if="this.$store.state.userLevel=='maintainer'"><a href="#" v-on:click="moveAdmin">Admin</a></li>
+          <li v-if="this.$store.state.userLevel=='maintainer'"><a href="#" v-on:click="moveAdmin" class="nav-menu">Admin</a></li>
           <li><a href="#" v-on:click="moveTeam" class="nav-menu">Team</a></li>
           <li><a href="#" v-on:click="moveMember" class="nav-menu">Member</a></li>
           <li><a href="#" v-on:click="movePost" class="nav-menu">Post</a></li>
@@ -195,7 +195,7 @@ export default {
     list-style: none;
   }
   .navbar ul li a, .navbar a{
-    color: #fff;
+    color: #919191;
     padding: 0 20px;
     font-size: 1.1em;
     text-decoration: none;
@@ -211,27 +211,16 @@ export default {
     color:salmon;
   }
 
+  .brand:hover {
+    color:salmon;
+  }
+
   a.brand {
     font-family: Ubuntu;
     font-size:1.8em;
-    color:#fff;
+    color:#919191;
     font-weight: bold;
     text-decoration: none;
-    text-shadow: 
-      1px 1px 1px #222222, 
-      -1px 1px 1px #222222, 
-      1px -1px 1px #222222, 
-      -1px -1px 1px #222222,
-      1px  1px 1px #555555;
-  }
-
-  a.brand, a.nav-menu {
-    text-shadow: 
-      1px 1px 1px #222222, 
-      -1px 1px 1px #222222, 
-      1px -1px 1px #222222, 
-      -1px -1px 1px #222222,
-      1px  1px 1px #555555;
   }
 
   /* mobile css */
@@ -247,7 +236,7 @@ export default {
     height: 4px;
     width: 35px;
     border-radius: 2px;
-    background-color: white;
+    background-color: #919191;
     position: relative;
     display: block;
     transition: all .2s ease-in-out;
@@ -264,7 +253,7 @@ export default {
     height: 4px;
     width: 35px;
     border-radius: 2px;
-    background-color: white;
+    background-color: #919191;
     position: absolute;
     content: "";
     transition: all .2s ease-in-out;
@@ -313,7 +302,8 @@ export default {
     padding: 1em;
   }
   #overlay ul li a {
-    color: white;
+    color: #919191;
+    font-weight: bold;
     text-decoration: none;
     font-size: 1.5em;
   }
