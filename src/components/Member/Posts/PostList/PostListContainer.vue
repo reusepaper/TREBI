@@ -12,21 +12,24 @@
 
 <script>
 import FirebaseService from "../../../../services/FirebaseService";
-import { async } from "q";
+import { mapState } from "vuex";
 
 export default {
   mounted() {
     // this.getPosts();
     console.log(displayMember);
+    displayMember: this.$store.state.nowDisplayMember;
   },
   data() {
     return {
-      displayMember: this.$store.state.nowDisplayMember
+      displayMember: ""
     };
   },
+
+  computed: mapState(["nowDisplayMember"]),
   watch: {
-    displayMember() {
-      console.log("바뀜");
+    nowDisplayMember() {
+      // this.displayMember = this.$store.state.nowDisplayMember;
     }
   },
   methods: {

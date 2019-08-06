@@ -26,7 +26,6 @@ export default {
     return postsCollection.orderBy('createdAt', 'desc').get().then(docSnapshots => {
       return docSnapshots.docs.map(doc => {
         let data = doc.data();
-        data.id = doc.id
         return data;
       });
     });
@@ -40,11 +39,6 @@ export default {
       image,
       createdAt: new Date()
     });
-  },
-  deletePost(deletePostId){
-    const deletePost = firestore.collection(POSTS).doc(deletePostId);
-    deletePost.delete();
-    return true;
   },
   getPostsByCategoryId(category, uid) {
     return firestore
