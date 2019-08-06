@@ -104,6 +104,11 @@ export default {
       }, 100);
     },
     async sendMessage(){
+      // console.log(this.message);
+      if(this.message == '') {
+        alert("질문을 입력해주세요");
+        return;
+      }
       let now = new Date();
       let myMessages = {
           username: this.$store.state.user.displayName,
