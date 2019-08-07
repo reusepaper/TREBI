@@ -9,21 +9,21 @@ exports.sendMessage = functions.firestore
   .document("/Posts/{PostsId}")
   .onWrite(async (change, context) => {
     // change includes changed data in firestore
-    console.log("change: ", change);
+    // console.log("change: ", change);
     // context includes params
-    console.log("context: ", context);
-    // get user id from the context params
-    const sender = context.params.userId;
+    // console.log("context: ", context);
     // get the changed data
     const data = change.after.data();
-    console.log("message", data);
+    // console.log("message", data);
+    // get user id from the change data
+    const sender = data.writerUid;
     // get users collection
     const users = admin.firestore().collection("Users");
     // build push notification
     const payload = {
       notification: {
-        title: "이타인클럽 도움요청",
-        body: data.message
+        title: data.title,
+        body: data.content
       }
     };
 
@@ -31,18 +31,20 @@ exports.sendMessage = functions.firestore
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
-          console.log("doc.id", doc.id);
-          console.log("sender", sender);
-          console.log("doc", doc);
+          //   console.log("doc.id", doc.id);
+          //   console.log("sender", sender);
+          //   console.log("doc", doc);
           // do not send notification to the sender
           if (doc.id !== sender) {
             // get the push token of a user
             pushToken = doc.data().pushToken;
-            console.log("token, sending message", pushToken, payload);
+            // console.log(pushToken);
+            // console.log("token, sending message", pushToken, payload);
             // send notification trhough firebase cloud messaging (fcm)
             admin.messaging().sendToDevice(pushToken, payload);
+            console.log("sendMessage");
           } else {
-            console.log("the sender is the same", doc.id, sender);
+            // console.log("the sender is the same", doc.id, sender);
           }
         });
         return "sent message to all users";
