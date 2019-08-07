@@ -109,23 +109,23 @@ export default {
         pushToken: null
       });
   },
-  getUserfield() {
-    return (
-      firestore
-        .collection(USERS)
-        // .orderBy("uid")
-        .limit(1)
-        .get()
-        .then(docSnapshots => {
-          return docSnapshots.docs.map(doc => {
-            let data = doc.data();
-            let userFields = Object.getOwnPropertyNames(data);
-            // console.log(data);
-            return userFields;
-          });
-        })
-    );
-  },
+  // getUserfield() {
+  //   return (
+  //     firestore
+  //       .collection(USERS)
+  //       // .orderBy("uid")
+  //       .limit(1)
+  //       .get()
+  //       .then(docSnapshots => {
+  //         return docSnapshots.docs.map(doc => {
+  //           let data = doc.data();
+  //           let userFields = Object.getOwnPropertyNames(data);
+  //           // console.log(data);
+  //           return userFields;
+  //         });
+  //       })
+  //   );
+  // },
   getisSignup(loginUid) {
     return firestore
       .collection(USERS)
