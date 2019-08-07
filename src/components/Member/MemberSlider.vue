@@ -77,6 +77,12 @@ export default {
       "현재 보여지는 멤버 이름 : ",
       this.$store.state.nowDisplayMember
     );
+    $('#ModalPopup').on('mousewheel', function(e){
+      var event = e.originalEvent;
+      var d = event.wheelDelta || -event.detail;
+      this.scrollTop += (d < 0 ? 1 : -1) * 30;
+      e.preventDefault();
+    })
   },
   methods: {
     next() {
@@ -227,5 +233,12 @@ svg {
 }
 .hidden {
   display: none;
+}
+
+#ModalPopup {
+  /* overflow-y: scroll;
+  overflow-x: hidden; */
+  /* height: 100vh; */
+  /* clear: both; */
 }
 </style>
