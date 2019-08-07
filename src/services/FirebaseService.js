@@ -1,6 +1,7 @@
 import "firebase/firestore";
 import "firebase/auth";
 import * as firebase from "firebase/app";
+import "firebase/messaging";
 
 const config = {
   apiKey: process.env.VUE_APP_FIREBASE_apiKey,
@@ -14,6 +15,9 @@ const config = {
 firebase.initializeApp(config);
 // const auth = firebase.auth();
 // const ui = new firebaseui.auth.AuthUI(auth);
+const messaging = firebase.messaging();
+const messagingKey = process.env.VUE_APP_FIREBASE_fcm;
+messaging.usePublicVapidKey(messagingKey);
 
 const firestore = firebase.firestore();
 let db = firebase.firestore();
@@ -30,7 +34,13 @@ export default {
       .get()
       .then(docSnapshots => {
         return docSnapshots.docs.map(doc => {
+<<<<<<< HEAD
           let data = doc.data();
+=======
+          console.log(doc);
+          let data = doc.data();
+          data.id = doc.id;
+>>>>>>> 897517f0f5a4b00940b66f3e65459ee59694c788
           return data;
         });
       });
@@ -45,6 +55,14 @@ export default {
       createdAt: new Date()
     });
   },
+<<<<<<< HEAD
+=======
+  deletePost(deletePostId) {
+    const deletePost = firestore.collection(POSTS).doc(deletePostId);
+    deletePost.delete();
+    return true;
+  },
+>>>>>>> 897517f0f5a4b00940b66f3e65459ee59694c788
   getPostsByCategoryId(category, uid) {
     return firestore
       .collection(POSTS)
