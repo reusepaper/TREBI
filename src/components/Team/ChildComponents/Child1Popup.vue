@@ -34,14 +34,14 @@
               <h1>댓글</h1>
             </div>
             <span class="comment--input">
-              <input type="text" v-model="comment" v-on:keyup.enter="createComment">
-              <span v-on:click="createComment">
+              <input type="text" v-model="comment" v-on:keyup.enter="createTeamPostComment">
+              <span v-on:click="createTeamPostComment">
                 <i class="fas fa-plus addBtn"></i>
               </span>
             </span>
             <ul id="comment--content">
               <li v-for="comment in comments" v-bind:key="comment">
-                {{comment}}
+                {{comment.displayName}} | {{comment.comment}}
               </li>
             </ul>
           </div>
@@ -79,29 +79,19 @@ export default {
     async getTeamPost(){
       const allContents = await FirebaseService.getTeamPost();
       this.content = allContents[0];
+      await this.getTeamPostComment();
       console.log(this.content);
     },
-    async createComment(){
-      await FirebaseService.createComment(this.content.id, this.user, this.comment);
+    async createTeamPostComment(){
+      await FirebaseService.createTeamPostComment(this.content.id, this.user, this.comment);
+      await this.getTeamPostComment();
       await this.clearComment();
+    },
+    async getTeamPostComment(){
+      this.comments = await FirebaseService.getTeamPostComment(this.content.id);
+      await console.log(this.comments);
     }
   },
-  created(){
-    if(localStorage.length>0){
-      for(var i=0;i<localStorage.length;i++){
-        if(localStorage.key(i).length==0)continue;
-        this.comments.push(localStorage.key(i));
-      }
-    }
-  },
-  // addComment(){
-    
-  //   console.log(this.comment);
-  //   // 유저아이디 key값(일단 임의로 둘다 똑같이 해놓음), value는 댓글
-  //   localStorage.setItem(this.comment,this.comment);
-  //   this.comments.push(this.comment);
-  //   this.clearComment();
-  // },
   
 };
 </script>
