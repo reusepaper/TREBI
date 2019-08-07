@@ -20,6 +20,8 @@ let db = firebase.firestore();
 const POSTS = "Posts";
 const USERS = "Users";
 const TODO = "ToDo";
+const TEAMPOST = "TeamPost";
+const TEAMCOMMENT = "TeamComment";
 export default {
   getPosts() {
     const postsCollection = firestore.collection(POSTS);
@@ -81,6 +83,19 @@ export default {
           let data = doc.data();
           return data;
         });
+      });
+  },
+  createUser(uid, nickname, eamil, level, createdAt) {
+    return firestore
+      .collection(USERS)
+      .doc(uid)
+      .set({
+        uid,
+        nickname,
+        eamil,
+        level,
+        createdAt,
+        post: 0
       });
   },
   getUserfield() {
@@ -200,32 +215,38 @@ export default {
     deleteUser.delete();
     return true;
   },
-  createUser(uid, nickname, eamil, level, createdAt) {
-    return firestore
-      .collection(USERS)
-      .doc(uid)
-      .set({
-        uid,
-        nickname,
-        eamil,
-        level,
-        createdAt,
-        post: 0
-      });
-  },
-  getToDo() {
-    const postsCollection = firestore.collection(TODO);
-    return postsCollection.get().then(docSnapshots => {
+  getTeamPost(){
+    const TeamPostCollection = firestore.collection(TEAMPOST);
+    return TeamPostCollection.get().then(docSnapshots => {
       return docSnapshots.docs.map(doc => {
         let data = doc.data();
+        data.id = doc.id;
         return data;
       });
     });
   },
-  createToDo(completed, item) {
-    return firestore.collection(TODO).add({
-      completed,
-      item
+  createComment(postId, commentUser, newComment){
+    const TeamCommentCollection = firestore.collection(TEAMPOST).doc(postId).collection(TEAMCOMMENT)
+    return TeamCommentCollection.add({
+      displayName: commentUser.displayName,
+      uid: commentUser.uid,
+      comment: newComment,
+      createdAt: new Date()
     });
-  }
+  },
+  // getToDo() {
+  //   const postsCollection = firestore.collection(TODO);
+  //   return postsCollection.get().then(docSnapshots => {
+  //     return docSnapshots.docs.map(doc => {
+  //       let data = doc.data();
+  //       return data;
+  //     });
+  //   });
+  // },
+  // createToDo(completed, item) {
+  //   return firestore.collection(TODO).add({
+  //     completed,
+  //     item
+  //   });
+  // },
 };
