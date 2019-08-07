@@ -105,7 +105,8 @@ export default {
         eamil,
         level,
         createdAt,
-        post: 0
+        post: 0,
+        pushToken: null
       });
   },
   getUserfield() {
@@ -219,6 +220,13 @@ export default {
         transaction.update(changeUser, { post: newPost });
       });
     });
+  },
+  updateUserPushToken(loginUserUid, token){
+    const changeUser = firestore.collection(USERS).doc(loginUserUid);
+    changeUser.update({
+      pushToken: token
+    });
+    return true;
   },
   deleteUser(deleteUserUid) {
     const deleteUser = firestore.collection(USERS).doc(deleteUserUid);

@@ -6,9 +6,10 @@
 </template>
 
 <script>
-import FirebaseService from '@/services/FirebaseService'
-import * as firebaseui from 'firebaseui'
-import * as firebase from "firebase/app"
+import FirebaseService from '@/services/FirebaseService';
+import * as firebaseui from 'firebaseui';
+import * as firebase from "firebase/app";
+import "firebase/messaging";
 
 const auth = firebase.auth();
 const ui = new firebaseui.auth.AuthUI(auth);
@@ -19,6 +20,7 @@ export default {
       loginUser: null,
       userLevel: null,
       firebaseUser: null,
+      token: ''
     }
   },
   methods: {
@@ -85,6 +87,19 @@ export default {
       } else {
         this.userLevel = this.firebaseUser[0].level;
       }
+      this.firebaseUser = await FirebaseService.getisSignup(this.loginUser.uid);
+      // pushToken이 있는지 체크하고 없으면 넣기
+      await Notification.requestPermission().then((permission) => {
+        if (permission === 'granted' && (this.firebaseUser[0].pushToken == null)) {
+          // console.log('Notification permission granted.');
+          firebase.messaging().getToken()
+            .then(token=>{
+              FirebaseService.updateUserPushToken(this.loginUser.uid, token);
+          })
+        } else {
+          console.log('Unable to get permission to notify.');
+        }
+      });
       await this.$store.commit("setLogin", true);
       await this.$store.commit("setUser", this.loginUser);
       await this.$store.commit("setUserLevel", this.userLevel);
