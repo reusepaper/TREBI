@@ -23,7 +23,7 @@ export default new Vuex.Store({
     Child3: true,
     PostPopupIndex: 1,
     nowDisplayMemberIndex: 1,
-    nowDisplayMember: ""
+    nowDisplayMember: "이주호"
   },
   mutations: {
     setUser(state, currentUser) {

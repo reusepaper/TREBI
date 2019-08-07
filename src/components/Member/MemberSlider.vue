@@ -69,8 +69,14 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$store.state.nowDisplayMemberIndex);
-    console.log(this.$store.state.nowDisplayMember);
+    console.log(
+      "현재 보여지는 멤버 인덱스 : ",
+      this.$store.state.nowDisplayMemberIndex
+    );
+    console.log(
+      "현재 보여지는 멤버 이름 : ",
+      this.$store.state.nowDisplayMember
+    );
   },
   methods: {
     next() {
