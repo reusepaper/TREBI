@@ -2,12 +2,12 @@
   <div class="Wrapper">
     <PostPopup></PostPopup>
 
-    <div v-on:click="pre" v-bind:class="{hidden : selected == 1}">
+    <div v-on:click="pre" v-bind:class="{hidden : this.$store.state.nowDisplayMemberIndex == 1}">
       <i class="fas fa-chevron-circle-left fa-2x left"></i>
     </div>
     <div
       class="imageContainer"
-      v-bind:style="{'transform': 'translate(-' + (selected)*imgWidth + 'vw, 0px)'}"
+      v-bind:style="{'transform': 'translate(-' + (this.$store.state.nowDisplayMemberIndex)*imgWidth + 'vw, 0px)'}"
     >
       <div class="memberInfo" v-for="member in members">
         <!-- <div class="image" v-bind:style="{ 'background-image': 'url(' + i + ')' }"></div> -->
@@ -41,7 +41,10 @@
         </div>
       </div>
     </div>
-    <div v-on:click="next" v-bind:class="{hidden : selected == length-2}">
+    <div
+      v-on:click="next"
+      v-bind:class="{hidden : this.$store.state.nowDisplayMemberIndex == length-2}"
+    >
       <i class="fas fa-chevron-circle-right fa-2x right"></i>
     </div>
   </div>
@@ -59,24 +62,44 @@ export default {
   data() {
     return {
       length: this.members.length,
-      selected: 1,
+      // selected: 1,
       imgWidth: 88.3,
       ismodalShow: this.$store.state.isPostShow,
       member: ["", "이주호", "유동관", "임연지", "한단비", "한만섭"]
     };
   },
-  mounted() {},
+  mounted() {
+    console.log(this.$store.state.nowDisplayMemberIndex);
+    console.log(this.$store.state.nowDisplayMember);
+  },
   methods: {
     next() {
-      if (this.selected < this.length) {
-        this.selected = this.selected + 1;
-        this.$store.commit("setNowDisplayMember", this.member[this.selected]);
+      if (this.$store.state.nowDisplayMemberIndex < this.length) {
+        console.log(this.$store.state.nowDisplayMemberIndex);
+        // console.log(this.selected);
+        // this.selected = this.selected + 1;
+        this.$store.commit(
+          "setNowDisplayMemberIndex",
+          this.$store.state.nowDisplayMemberIndex + 1
+        );
+        this.$store.commit(
+          "setNowDisplayMember",
+          this.member[this.$store.state.nowDisplayMemberIndex]
+        );
       }
     },
     pre() {
-      if (this.selected > 1) {
-        this.selected = this.selected - 1;
-        this.$store.commit("setNowDisplayMember", this.member[this.selected]);
+      if (this.$store.state.nowDisplayMemberIndex > 1) {
+        console.log(this.$store.state.nowDisplayMemberIndex);
+        // this.selected = this.selected - 1;
+        this.$store.commit(
+          "setNowDisplayMemberIndex",
+          this.$store.state.nowDisplayMemberIndex - 1
+        );
+        this.$store.commit(
+          "setNowDisplayMember",
+          this.member[this.$store.state.nowDisplayMemberIndex]
+        );
       }
     },
     togglePopUp() {

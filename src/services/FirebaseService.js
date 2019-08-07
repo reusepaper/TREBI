@@ -23,12 +23,15 @@ const TODO = "ToDo";
 export default {
   getPosts() {
     const postsCollection = firestore.collection(POSTS);
-    return postsCollection.orderBy('createdAt', 'desc').get().then(docSnapshots => {
-      return docSnapshots.docs.map(doc => {
-        let data = doc.data();
-        return data;
+    return postsCollection
+      .orderBy("createdAt", "desc")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          return data;
+        });
       });
-    });
   },
   postPost(title, postWriter, writerUid, content, image) {
     return firestore.collection(POSTS).add({
@@ -73,6 +76,7 @@ export default {
       .where("writerUid", "==", uid)
       .get()
       .then(docSnapshots => {
+        // console.log(docSnapshots);
         return docSnapshots.docs.map(doc => {
           let data = doc.data();
           return data;
@@ -110,30 +114,53 @@ export default {
   },
   getUsers() {
     const usersList = firestore.collection(USERS);
-    return usersList.orderBy('createdAt', 'desc').get().then(docSnapshots => {
-      return docSnapshots.docs.map(doc => {
-        let data = doc.data();
-        return data;
+    return usersList
+      .orderBy("createdAt", "desc")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          return data;
+        });
       });
-    });
   },
   getAdminUsers() {
     const usersList = firestore.collection(USERS);
-    return usersList.where('level', '==', 'maintainer').orderBy('createdAt', 'desc').get().then(docSnapshots => {
-      return docSnapshots.docs.map(doc => {
-        let data = doc.data();
-        return data;
+    return usersList
+      .where("level", "==", "maintainer")
+      .orderBy("createdAt", "desc")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          return data;
+        });
       });
-    });
   },
   getVisitorUsers() {
     const usersList = firestore.collection(USERS);
-    return usersList.where('level', '>=', 'visitor').get().then(docSnapshots => {
-      return docSnapshots.docs.map(doc => {
-        let data = doc.data();
-        return data;
+    return usersList
+      .where("level", ">=", "visitor")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          return data;
+        });
       });
-    });
+  },
+  getUIdByName(name) {
+    return firestore
+      .collection(USERS)
+      .where("nickname", "==", name)
+      .where("level", "==", "maintainer")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          return data.uid;
+        });
+      });
   },
   updateUserLevel(loginUserUid, updateUserLevel) {
     // console.log(loginUserUid, updateUserLevel)
@@ -154,7 +181,7 @@ export default {
         let newPost = changeUserDoc.data().post + 1;
         transaction.update(changeUser, { post: newPost });
       });
-    })
+    });
   },
   updateUserPostDOWN(loginUserUid) {
     const changeUser = firestore.collection(USERS).doc(loginUserUid);
@@ -166,7 +193,7 @@ export default {
         let newPost = changeUserDoc.data().post - 1;
         transaction.update(changeUser, { post: newPost });
       });
-    })
+    });
   },
   deleteUser(deleteUserUid) {
     const deleteUser = firestore.collection(USERS).doc(deleteUserUid);
