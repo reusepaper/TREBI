@@ -93,7 +93,7 @@
 
       function notify() {
         if (Notification.permission !== "granted") {
-          alert("notification is disabled");
+          alert("알림을 허용해 주세요!");
         } else {
           var notification = new Notification("Notification title", {
             icon:
@@ -102,7 +102,7 @@
           });
 
           notification.onclick = function() {
-            window.open("http://google.com");
+            window.open("https://webmobile-sub2-510fa.firebaseapp.com/");
           };
         }
       }
