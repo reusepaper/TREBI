@@ -57,6 +57,7 @@ export default {
         callbacks: {
           // 로그인이 성공하면,
           signInSuccessWithAuthResult: (authResult, redirectUrl) => {
+            firebase.messaging().requestPermission();
             this.updateCurrentUser();
 
             return false;
@@ -89,17 +90,22 @@ export default {
       }
       this.firebaseUser = await FirebaseService.getisSignup(this.loginUser.uid);
       // pushToken이 있는지 체크하고 없으면 넣기
-      await Notification.requestPermission().then((permission) => {
-        if (permission === 'granted' && (this.firebaseUser[0].pushToken == null)) {
-          // console.log('Notification permission granted.');
-          firebase.messaging().getToken()
-            .then(token=>{
-              FirebaseService.updateUserPushToken(this.loginUser.uid, token);
-          })
-        } else {
-          console.log('Unable to get permission to notify.');
-        }
-      });
+      // await Notification.requestPermission().then((permission) => {
+      //   if (permission === 'granted' && (this.firebaseUser[0].pushToken == null)) {
+      //     // console.log('Notification permission granted.');
+      //     firebase.messaging().getToken()
+      //       .then(token=>{
+      //         FirebaseService.updateUserPushToken(this.loginUser.uid, token);
+      //     })
+      //   } else {
+      //     console.log('Unable to get permission to notify.');
+      //   }
+      // });
+      await firebase.messaging().getToken()
+      .then(token=>{
+        if(token && (this.firebaseUser[0].pushToken == null))
+          FirebaseService.updateUserPushToken(this.loginUser.uid, token);
+      })
       await this.$store.commit("setLogin", true);
       await this.$store.commit("setUser", this.loginUser);
       await this.$store.commit("setUserLevel", this.userLevel);
