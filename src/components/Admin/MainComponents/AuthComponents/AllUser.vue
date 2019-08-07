@@ -16,14 +16,10 @@
       </thead>
       <tbody>
         <tr v-for="oneUser in allUsers" style="border-bottom: solid 1px #ccc;">
-          <!-- {{oneUser}} -->
-          <td
-            v-for="field, key in oneUser"
-            v-if="typeof(field) === 'object'"
-          >{{formatDate(field.toDate())}}</td>
-          <td v-else-if="key === 'level'">
+          <td>{{formatDate(oneUser.createdAt.toDate())}}</td>
+          <td>{{oneUser.eamil}}</td>
+          <td v-if="oneUser.level">
             <select v-bind:id="oneUser.uid" class="level_select">
-              <!-- <option value disabled selected>수정</option> -->
               <option
                 v-for="level in userLevel"
                 v-bind:selected="oneUser.level == level"
@@ -32,9 +28,8 @@
             </select>
             <button id="select_button" @click="changeLevel(oneUser)">변경</button>
           </td>
-          <td v-else-if="key === 'uid'" style="display:none">
-          </td>
-          <td v-else>{{field}}</td>
+          <td>{{oneUser.nickname}}</td>
+          <td>{{oneUser.post}}</td>
           <td>
             <button
               @click="delete_event(oneUser)"
@@ -55,7 +50,6 @@ export default {
   data() {
     return {
       selectLevel: "",
-      userFields: null,
       allUsers: [],
       usersNum: 0,
       userLevel: ["maintainer", "member", "visitor"],
@@ -63,11 +57,6 @@ export default {
     };
   },
   methods: {
-    async getUserFields() {
-      this.userFields = await firebaseService.getUserfield();
-      // await console.log(this.userFields[0]);
-      this.userFields = await this.userFields[0];
-    },
     async getUsers() {
       this.allUsers = await firebaseService.getUsers();
 
@@ -119,7 +108,6 @@ export default {
     }
   },
   mounted: function() {
-    this.getUserFields();
     this.getUsers();
   }
 };

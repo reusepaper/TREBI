@@ -34,6 +34,8 @@
           </td>
           <td v-else-if="key === 'uid'" style="display:none">
           </td>
+          <td v-else-if="key === 'pushToken'" style="display:none">
+          </td>
           <td v-else>{{field}}</td>
           <td>
             <button
@@ -55,7 +57,6 @@ export default {
   data() {
     return {
       selectLevel: "",
-      userFields: null,
       allUsers: [],
       usersNum: 0,
       userLevel: ["maintainer", "member", "visitor"],
@@ -63,11 +64,6 @@ export default {
     };
   },
   methods: {
-    async getUserFields() {
-      this.userFields = await firebaseService.getUserfield();
-      // await console.log(this.userFields[0]);
-      this.userFields = await this.userFields[0];
-    },
     async getVisitorUsers() {
       this.allUsers = await firebaseService.getVisitorUsers();
 
@@ -119,7 +115,6 @@ export default {
     }
   },
   mounted: function() {
-    this.getUserFields();
     this.getVisitorUsers();
   }
 };
