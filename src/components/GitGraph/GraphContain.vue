@@ -28,7 +28,7 @@ export default {
     this.$store.commit("clearGitGraphData");
     this.githubId.forEach(async (id, index) => {
       await this.getGithub(id, index);
-      console.log(this.$store.state.gitGraphData[index]);
+      // console.log(this.$store.state.gitGraphData[index]);
       this.series[index].name = this.$store.state.gitGraphData[index].githubId;
       this.series[index].data = this.$store.state.gitGraphData[
         index
@@ -124,7 +124,7 @@ export default {
   },
   methods: {
     getGithub: async function(githubId, index) {
-      console.log(githubId, index);
+      // console.log(githubId, index);
       const proxyurl = "https://cors-anywhere.herokuapp.com/";
       const url = `https://github.com/${githubId}`; // site that doesn’t send Access-Control-*
       let result = await fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com

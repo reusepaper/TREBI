@@ -70,7 +70,7 @@ export default {
           this.weather = json.weather[0].main;
           this.temp = Math.floor(json.main.temp - 273.15);
           /*eslint-disable*/
-          console.log(this.weather);
+          // console.log(this.weather);
           // console.log(this.temp, this.place, this.weather);
         });
     },

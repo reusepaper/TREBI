@@ -74,7 +74,6 @@ export default {
     this.handleResize();
   },
   mounted: function() {
-    console.log(this.$store.state.isPostShow);
     this.$store.commit("setNowDisplayMember", "이주호");
     this.$store.commit("setNowDisplayMemberIndex", 1);
 

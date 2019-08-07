@@ -68,20 +68,11 @@ export default {
       member: ["", "이주호", "유동관", "임연지", "한단비", "한만섭"]
     };
   },
-  mounted() {
-    console.log(
-      "현재 보여지는 멤버 인덱스 : ",
-      this.$store.state.nowDisplayMemberIndex
-    );
-    console.log(
-      "현재 보여지는 멤버 이름 : ",
-      this.$store.state.nowDisplayMember
-    );
-  },
+  mounted() {},
   methods: {
     next() {
       if (this.$store.state.nowDisplayMemberIndex < this.length) {
-        console.log(this.$store.state.nowDisplayMemberIndex);
+        // console.log(this.$store.state.nowDisplayMemberIndex);
         // console.log(this.selected);
         // this.selected = this.selected + 1;
         this.$store.commit(
@@ -96,7 +87,7 @@ export default {
     },
     pre() {
       if (this.$store.state.nowDisplayMemberIndex > 1) {
-        console.log(this.$store.state.nowDisplayMemberIndex);
+        // console.log(this.$store.state.nowDisplayMemberIndex);
         // this.selected = this.selected - 1;
         this.$store.commit(
           "setNowDisplayMemberIndex",
