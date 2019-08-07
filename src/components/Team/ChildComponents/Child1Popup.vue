@@ -34,8 +34,8 @@
               <h1>댓글</h1>
             </div>
             <span class="comment--input">
-              <input type="text" v-model="comment" v-on:keyup.enter="createComment">
-              <span v-on:click="createComment">
+              <input type="text" v-model="comment" v-on:keyup.enter="createTeamPostComment">
+              <span v-on:click="createTeamPostComment">
                 <i class="fas fa-plus addBtn"></i>
               </span>
             </span>
@@ -81,8 +81,8 @@ export default {
       this.content = allContents[0];
       console.log(this.content);
     },
-    async createComment(){
-      await FirebaseService.createComment(this.content.id, this.user, this.comment);
+    async createTeamPostComment(){
+      await FirebaseService.createTeamPostComment(this.content.id, this.user, this.comment);
       await this.clearComment();
     }
   },

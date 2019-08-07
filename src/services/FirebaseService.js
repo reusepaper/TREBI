@@ -243,12 +243,15 @@ export default {
       });
     });
   },
-  createComment(postId, commentUser, newComment) {
+  getTeamPostComment(){
+    
+  },
+  createTeamPostComment(postId, commentUser, newComment) {
     const TeamCommentCollection = firestore
       .collection(TEAMPOST)
       .doc(postId)
       .collection(TEAMCOMMENT);
-    return TeamCommentCollection.add({
+      return TeamCommentCollection.add({
       displayName: commentUser.displayName,
       uid: commentUser.uid,
       comment: newComment,
