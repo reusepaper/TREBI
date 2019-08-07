@@ -1,23 +1,36 @@
 <template>
   <div>
-    <p>
+    <div class="title-container">
       <label class="w3-text-blue">
-        <b>TITLE</b>
+        <b>TITLE&nbsp;&nbsp;</b>
       </label>
-      <input class="w3-input w3-border" name="last" type="text" v-model="title" />
-    </p>
+      <input class="w3-input w3-border title-context" name="last" type="text" v-model="title" />
+      &nbsp;
+      <div class="gotolist">
+        <label for="listbutton">리스트보기</label>
+        <input type="button" @click="goPostList" id="listbutton" />
+      </div>
+      <!-- <Button @click="goPostList">리스트 보기</Button> -->
+    </div>
     <div class="container">
       <textarea class="md-text" rows="10" v-model="content"></textarea>
       <markdown-it-vue class="md-body" :content="content" :options="options"></markdown-it-vue>
     </div>
 
-    <ImgUpLoad v-on:upLoadImg="upLoadImg"></ImgUpLoad>
-
-    <img :src="image" />
-    <div>
-      <br />
-      <button class="button buttonblue" v-on:click="submit()">등록</button>
+    <div class="upload-container">
+      <div class="image-upload-container">
+        <ImgUpLoad v-on:upLoadImg="upLoadImg"></ImgUpLoad>
+        <img :src="image" />
+      </div>
+      <div class="upload-button-container">
+        <div class="upload">
+          <label for="uploadButton">등록</label>
+          <input type="button" @click="submit" id="uploadButton"/>
+        </div>
+        <!-- <button class="button buttonblue" v-on:click="submit()">등록</button> -->
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -72,6 +85,7 @@ export default {
           this.content,
           this.image
         );
+        FirebaseService.updateUserPostUP(this.writerUid);
         alert("업로드 되었습니다");
         this.title = "";
         this.image = "";
@@ -85,15 +99,42 @@ export default {
     upLoadImg(image) {
       console.log("업로드 : ", image);
       this.image = image;
+    },
+    goPostList: function() {
+      this.$store.commit("setPostPopupIndex", 1);
     }
   }
 };
 </script>
 
 <style scoped>
+.title-container {
+  margin-top: 2vh;
+  width: 100%;
+  text-align: center;
+}
+
+.title-context {
+  width: 80%;
+}
+
 .container {
+  margin-top: 1vh;
   display: inline-flex;
   width: 100%;
+}
+
+.upload-container {
+  display: flex;
+}
+
+.image-upload-container, 
+.upload-button-container {
+  width: 50%;
+}
+
+.upload-button-container {
+  text-align: right;
 }
 
 .md-text {
@@ -111,6 +152,84 @@ export default {
   margin-left: 20px;
   overflow: auto;
   max-height: 500px;
+}
+
+.gotolist {
+  display: inline-block;
+}
+
+.gotolist label {
+  margin-bottom: 0.5vh;
+  display: inline-block;
+  padding: 0.1em 0.2em;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  border: 2px solid #b8b8b8;
+  border-radius: 0.25em;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.gotolist label:hover {
+  background-color: #b8b8b8;
+  color: white;
+}
+
+.gotolist label:active {
+  background-color: #b8b8b8;
+  color: white;
+}
+
+.gotolist input[type="button"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.upload label {
+  margin-top: 1vh;
+  display: inline-block;
+  padding: 0.5em 0.75em;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  border: 2px solid #b8b8b8;
+  border-radius: 0.25em;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.upload label:hover {
+  background-color: #b8b8b8;
+  color: white;
+}
+
+.upload label:active {
+  background-color: #b8b8b8;
+  color: white;
+}
+
+.upload input[type="button"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 /* .button {

@@ -1,6 +1,7 @@
 import "firebase/firestore";
 import "firebase/auth";
 import * as firebase from "firebase/app";
+import "firebase/messaging";
 
 const config = {
   apiKey: process.env.VUE_APP_FIREBASE_apiKey,
@@ -14,22 +15,45 @@ const config = {
 firebase.initializeApp(config);
 // const auth = firebase.auth();
 // const ui = new firebaseui.auth.AuthUI(auth);
+const messaging = firebase.messaging();
+const messagingKey = process.env.VUE_APP_FIREBASE_fcm;
+messaging.usePublicVapidKey(messagingKey);
 
 const firestore = firebase.firestore();
+let db = firebase.firestore();
 const POSTS = "Posts";
 const USERS = "Users";
 const TODO = "ToDo";
+const TEAMPOST = "TeamPost";
+const TEAMCOMMENT = "TeamComment";
 export default {
   getPosts() {
     const postsCollection = firestore.collection(POSTS);
-    return postsCollection.orderBy('createdAt', 'desc').get().then(docSnapshots => {
-      return docSnapshots.docs.map(doc => {
-        console.log(doc)
-        let data = doc.data();
-        data.id = doc.id
-        return data;
+    return postsCollection
+      .orderBy("createdAt", "desc")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+<<<<<<< HEAD
+<<<<<<< HEAD
+          let data = doc.data();
+=======
+          console.log(doc);
+          let data = doc.data();
+          data.id = doc.id;
+>>>>>>> 897517f0f5a4b00940b66f3e65459ee59694c788
+=======
+          console.log(doc);
+          let data = doc.data();
+          data.id = doc.id;
+<<<<<<< HEAD
+>>>>>>> 897517f... [#34] S1P2213002-27 PWA
+=======
+>>>>>>> 431c496... [#34] S1P2213002-27 PWA
+>>>>>>> [#34] S1P2213002-27 PWA
+          return data;
+        });
       });
-    });
   },
   postPost(title, postWriter, writerUid, content, image) {
     return firestore.collection(POSTS).add({
@@ -41,11 +65,24 @@ export default {
       createdAt: new Date()
     });
   },
-  deletePost(deletePostId){
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> [#34] S1P2213002-27 PWA
+  deletePost(deletePostId) {
     const deletePost = firestore.collection(POSTS).doc(deletePostId);
     deletePost.delete();
     return true;
   },
+<<<<<<< HEAD
+>>>>>>> 897517f0f5a4b00940b66f3e65459ee59694c788
+=======
+<<<<<<< HEAD
+>>>>>>> 897517f... [#34] S1P2213002-27 PWA
+=======
+>>>>>>> 431c496... [#34] S1P2213002-27 PWA
+>>>>>>> [#34] S1P2213002-27 PWA
   getPostsByCategoryId(category, uid) {
     return firestore
       .collection(POSTS)
@@ -79,10 +116,24 @@ export default {
       .where("writerUid", "==", uid)
       .get()
       .then(docSnapshots => {
+        // console.log(docSnapshots);
         return docSnapshots.docs.map(doc => {
           let data = doc.data();
           return data;
         });
+      });
+  },
+  createUser(uid, nickname, eamil, level, createdAt) {
+    return firestore
+      .collection(USERS)
+      .doc(uid)
+      .set({
+        uid,
+        nickname,
+        eamil,
+        level,
+        createdAt,
+        post: 0
       });
   },
   getUserfield() {
@@ -116,12 +167,53 @@ export default {
   },
   getUsers() {
     const usersList = firestore.collection(USERS);
-    return usersList.get().then(docSnapshots => {
-      return docSnapshots.docs.map(doc => {
-        let data = doc.data();
-        return data;
+    return usersList
+      .orderBy("createdAt", "desc")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          return data;
+        });
       });
-    });
+  },
+  getAdminUsers() {
+    const usersList = firestore.collection(USERS);
+    return usersList
+      .where("level", "==", "maintainer")
+      .orderBy("createdAt", "desc")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          return data;
+        });
+      });
+  },
+  getVisitorUsers() {
+    const usersList = firestore.collection(USERS);
+    return usersList
+      .where("level", ">=", "visitor")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          return data;
+        });
+      });
+  },
+  getUIdByName(name) {
+    return firestore
+      .collection(USERS)
+      .where("nickname", "==", name)
+      .where("level", "==", "maintainer")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          return data.uid;
+        });
+      });
   },
   updateUserLevel(loginUserUid, updateUserLevel) {
     // console.log(loginUserUid, updateUserLevel)
@@ -132,36 +224,70 @@ export default {
     });
     return true;
   },
+  updateUserPostUP(loginUserUid) {
+    const changeUser = firestore.collection(USERS).doc(loginUserUid);
+    return db.runTransaction(function(transaction) {
+      return transaction.get(changeUser).then(function(changeUserDoc) {
+        if (!changeUserDoc.exists) {
+          throw "Document does not exist!";
+        }
+        let newPost = changeUserDoc.data().post + 1;
+        transaction.update(changeUser, { post: newPost });
+      });
+    });
+  },
+  updateUserPostDOWN(loginUserUid) {
+    const changeUser = firestore.collection(USERS).doc(loginUserUid);
+    return db.runTransaction(function(transaction) {
+      return transaction.get(changeUser).then(function(changeUserDoc) {
+        if (!changeUserDoc.exists) {
+          throw "Document does not exist!";
+        }
+        let newPost = changeUserDoc.data().post - 1;
+        transaction.update(changeUser, { post: newPost });
+      });
+    });
+  },
   deleteUser(deleteUserUid) {
     const deleteUser = firestore.collection(USERS).doc(deleteUserUid);
     deleteUser.delete();
     return true;
   },
-  createUser(uid, nickname, eamil, level, createdAt) {
-    return firestore
-      .collection(USERS)
-      .doc(uid)
-      .set({
-        uid,
-        nickname,
-        eamil,
-        level,
-        createdAt
-      });
-  },
-  getToDo() {
-    const postsCollection = firestore.collection(TODO);
-    return postsCollection.get().then(docSnapshots => {
+  getTeamPost() {
+    const TeamPostCollection = firestore.collection(TEAMPOST);
+    return TeamPostCollection.get().then(docSnapshots => {
       return docSnapshots.docs.map(doc => {
         let data = doc.data();
+        data.id = doc.id;
         return data;
       });
     });
   },
-  createToDo(completed, item) {
-    return firestore.collection(TODO).add({
-      completed,
-      item
+  createComment(postId, commentUser, newComment) {
+    const TeamCommentCollection = firestore
+      .collection(TEAMPOST)
+      .doc(postId)
+      .collection(TEAMCOMMENT);
+    return TeamCommentCollection.add({
+      displayName: commentUser.displayName,
+      uid: commentUser.uid,
+      comment: newComment,
+      createdAt: new Date()
     });
   }
+  // getToDo() {
+  //   const postsCollection = firestore.collection(TODO);
+  //   return postsCollection.get().then(docSnapshots => {
+  //     return docSnapshots.docs.map(doc => {
+  //       let data = doc.data();
+  //       return data;
+  //     });
+  //   });
+  // },
+  // createToDo(completed, item) {
+  //   return firestore.collection(TODO).add({
+  //     completed,
+  //     item
+  //   });
+  // },
 };

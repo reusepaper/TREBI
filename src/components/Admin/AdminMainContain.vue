@@ -9,6 +9,14 @@
           All User List
           <img src="../../assets/settings.png" style="width: 45px;" />
         </span>
+        <span class="adminMainTitle" v-show="this.$store.state.adminPage==='Admin'">
+          Admin User List
+          <img src="../../assets/settings.png" style="width: 45px;" />
+        </span>
+        <span class="adminMainTitle" v-show="this.$store.state.adminPage==='Visitor'">
+          Member and Visitor List
+          <img src="../../assets/settings.png" style="width: 45px;" />
+        </span>
         <span class="adminMainTitle" v-show="this.$store.state.adminPage==='PostList'">
           Post List
           <img src="../../assets/settings.png" style="width: 45px;" />
@@ -20,6 +28,8 @@
       </div>
       <div>
         <AdminMainTable v-show="this.$store.state.adminPage==='AllUser'"></AdminMainTable>
+        <AdminUsersTable v-show="this.$store.state.adminPage==='Admin'"></AdminUsersTable>
+        <VisitorUsersTable v-show="this.$store.state.adminPage==='Visitor'"></VisitorUsersTable>
         <PostList v-show="this.$store.state.adminPage==='PostList'"></PostList>
         <PortfolioList v-show="this.$store.state.adminPage==='PortfolioList'"></PortfolioList>
       </div>
@@ -30,6 +40,8 @@
 <script>
 import AdminMain from "./MainComponents/AdminMain";
 import AdminMainTable from "./MainComponents/AuthComponents/AllUser";
+import AdminUsersTable from "./MainComponents/AuthComponents/AdminUsers";
+import VisitorUsersTable from "./MainComponents/AuthComponents/VisitorUsers";
 import PostList from "./MainComponents/PostComponents/PostList";
 import PortfolioList from "./MainComponents/PostComponents/PortfolioList";
 
@@ -37,6 +49,8 @@ export default {
   components: {
     AdminMain,
     AdminMainTable,
+    AdminUsersTable,
+    VisitorUsersTable,
     PostList,
     PortfolioList
   },

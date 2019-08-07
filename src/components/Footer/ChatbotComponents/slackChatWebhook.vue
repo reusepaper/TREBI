@@ -60,6 +60,8 @@
 
 <script>
 import { setInterval, setTimeout } from 'timers';
+import $ from 'jquery';
+
 const { WebClient } = require('@slack/web-api');
 const token = process.env.VUE_APP_SLACK_TOKEN;
 // Initialize

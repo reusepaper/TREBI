@@ -15,11 +15,6 @@
     <!-- animation of scroll-->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-    <!--border effect -->
-    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="css/component.css" />
-
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -29,6 +24,8 @@
 
       gtag("config", "UA-143603759-1");
     </script>
+    <!-- Manifest -- 설치 알림 -->
+    <link rel="manifest" href="/manifest.json" />
     <link
       href="https://fonts.googleapis.com/css?family=PT+Serif:700|Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean"
       rel="stylesheet"
@@ -36,7 +33,7 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <script
       type="text/javascript"
-      src="http://code.jquery.com/jquery-1.12.4.min.js"
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
     ></script>
     <link
       href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap"
@@ -80,6 +77,35 @@
         mirror: false, // whether elements should animate out while scrolling past them
         anchorPlacement: "top-bottom" // defines which position of the element regarding to window should trigger the animation
       });
+    </script>
+    <script type="text/javascript">
+      window.onload = function() {
+        if (window.Notification) {
+          Notification.requestPermission();
+        }
+      };
+
+      function calculate() {
+        setTimeout(function() {
+          notify();
+        }, 5000);
+      }
+
+      function notify() {
+        if (Notification.permission !== "granted") {
+          alert("notification is disabled");
+        } else {
+          var notification = new Notification("Notification title", {
+            icon:
+              "http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png",
+            body: "Notification text"
+          });
+
+          notification.onclick = function() {
+            window.open("http://google.com");
+          };
+        }
+      }
     </script>
   </body>
 </html>

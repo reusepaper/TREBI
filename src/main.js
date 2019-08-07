@@ -1,8 +1,11 @@
 import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
+
 // import VueFullPage from "vue-fullpage.js";
 import router from './router'
+
+import './registerServiceWorker'
 
 // firebaseui css
 require("../node_modules/firebaseui/dist/firebaseui.js");
