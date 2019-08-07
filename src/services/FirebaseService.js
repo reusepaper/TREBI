@@ -243,8 +243,17 @@ export default {
       });
     });
   },
-  getTeamPostComment(){
-    
+  getTeamPostComment(postId){
+    const TeamCommentCollection = firestore
+      .collection(TEAMPOST)
+      .doc(postId)
+      .collection(TEAMCOMMENT);
+      return TeamCommentCollection.orderBy("createdAt", "desc").get().then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          return data;
+        })
+      })
   },
   createTeamPostComment(postId, commentUser, newComment) {
     const TeamCommentCollection = firestore
