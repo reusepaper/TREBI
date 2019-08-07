@@ -1,5 +1,5 @@
 <template>
-  <div class="post__container">
+  <div class="post__container" @click="goPostDetail">
     <div class="post__image" v-bind:style="{ 'background-image': 'url(' + this.post.image + ')' }"></div>
     <div class="overlay"></div>
   </div>
@@ -7,7 +7,13 @@
 
 <script>
 export default {
-  props: ["post"]
+  props: ["post"],
+  methods: {
+    goPostDetail: function() {
+      this.$store.commit("setPostPopupIndex", 0);
+      this.$store.commit("setNowDisplayPost", this.post);
+    }
+  }
 };
 </script>
 
