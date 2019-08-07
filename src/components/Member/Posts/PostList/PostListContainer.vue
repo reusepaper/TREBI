@@ -52,7 +52,6 @@ export default {
     },
     getPostsById: async function(uid) {
       this.postList = await FirebaseService.getPostsById(uid);
-      console.log(this.postList);
     },
     goPostDetail: function() {
       this.$store.commit("setPostPopupIndex", 0);

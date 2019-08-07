@@ -8,6 +8,7 @@
 
 <script>
 import VueApexCharts from "vue-apexcharts";
+import { async } from "q";
 export default {
   components: {
     apexchart: VueApexCharts
@@ -24,9 +25,18 @@ export default {
   },
 
   mounted() {
-    this.githubId.forEach((id, index) => {
-      this.getGithub(id, index);
+    this.$store.commit("clearGitGraphData");
+    this.githubId.forEach(async (id, index) => {
+      await this.getGithub(id, index);
+      // console.log(this.$store.state.gitGraphData[index]);
+      this.series[index].name = this.$store.state.gitGraphData[index].githubId;
+      this.series[index].data = this.$store.state.gitGraphData[
+        index
+      ].commitCount;
     });
+    // const gitGraphData = this.$store.state.gitGraphData[0];
+    // console.log("gitGraphData", gitGraphData);
+    // console.log(gitGraphData[0], gitGraphData[1]);
     // this.getGithub("13akstjq", 0);
   },
   props: ["githubId"],
@@ -114,6 +124,7 @@ export default {
   },
   methods: {
     getGithub: async function(githubId, index) {
+      // console.log(githubId, index);
       const proxyurl = "https://cors-anywhere.herokuapp.com/";
       const url = `https://github.com/${githubId}`; // site that doesn’t send Access-Control-*
       let result = await fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
@@ -133,8 +144,17 @@ export default {
         result = result.substring(0, dateIndex);
         commitCount.unshift(count);
       }
-      // console.log(commitCount);
-      this.series[index].data = commitCount;
+      // console.log(githubId, commitCount);
+      await this.$store.commit("setGitGraphData", {
+        index,
+        githubId,
+        commitCount
+      });
+      // console.log(githubId, commitCount);
+      // const id = this.$store.state.gitGraphData[index].githubId;
+      // const count = this.$store.state.gitGraphData[index].commitCount;
+      // console.log(id, count);
+      // this.series[index].data = this.$store.state.gitGraphData[index];
     }
   }
 };

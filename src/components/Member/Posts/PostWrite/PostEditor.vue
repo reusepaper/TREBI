@@ -25,12 +25,11 @@
       <div class="upload-button-container">
         <div class="upload">
           <label for="uploadButton">등록</label>
-          <input type="button" @click="submit" id="uploadButton"/>
+          <input type="button" @click="submit" id="uploadButton" />
         </div>
         <!-- <button class="button buttonblue" v-on:click="submit()">등록</button> -->
       </div>
     </div>
-
   </div>
 </template>
 
@@ -46,7 +45,7 @@ export default {
     ImgUpLoad
   },
   mounted() {
-    console.log(this.$store.state.user);
+    // console.log(this.$store.state.user);
   },
   data() {
     return {
@@ -128,7 +127,7 @@ export default {
   display: flex;
 }
 
-.image-upload-container, 
+.image-upload-container,
 .upload-button-container {
   width: 50%;
 }

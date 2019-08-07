@@ -1,31 +1,31 @@
 <template>
-  <div id="popup-article" class="popup" v-bind:class="{modalShow :this.$store.state.Child1}">
+  <div id="popup-article" class="popup" v-bind:class="{modalShow :this.$store.state.Child2}">
     <div class="popup__block">
       <div class="block-row">
         <div class="block-cell upload">
-          <div class="carousel-wrapper">
-            <span id="target-item-1"></span>
-            <span id="target-item-2"></span>
-            <span id="target-item-3"></span>
-            <div class="carousel-item item-1" style="background-color: khaki;">
-              <h2>{{content.content1}}</h2>
-              <p>Content goes here.</p>
-              <a class="arrow arrow-prev" href="#target-item-3"></a>
-              <a class="arrow arrow-next" href="#target-item-2"></a>
-            </div>
-            <div class="carousel-item item-2 light" style="background-color: royalblue;">
-              <h2>{{content.content2}}</h2>
-              <p>Content goes here.</p>
-              <a class="arrow arrow-prev" href="#target-item-1"></a>
-              <a class="arrow arrow-next" href="#target-item-3"></a>
-            </div>
-            <div class="carousel-item item-3" style="background-color: aliceblue;">
-              <h2>{{content.content3}}</h2>
-              <p>Content goes here.</p>
-              <a class="arrow arrow-prev" href="#target-item-2"></a>
-              <a class="arrow arrow-next" href="#target-item-1"></a>
-            </div>
-          </div>  
+        <div class="carousel-wrapper">
+          <span id="target-item-1"></span>
+          <span id="target-item-2"></span>
+          <span id="target-item-3"></span>
+          <div class="carousel-item item-1" style="background-color: khaki;">
+            <h2>Item 1</h2>
+            <p>Content goes here.</p>
+            <a class="arrow arrow-prev" href="#target-item-3"></a>
+            <a class="arrow arrow-next" href="#target-item-2"></a>
+          </div>
+          <div class="carousel-item item-2 light" style="background-color: royalblue;">
+            <h2>Item 2</h2>
+            <p>Content goes here.</p>
+            <a class="arrow arrow-prev" href="#target-item-1"></a>
+            <a class="arrow arrow-next" href="#target-item-3"></a>
+          </div>
+          <div class="carousel-item item-3" style="background-color: aliceblue;">
+            <h2>Item 3</h2>
+            <p>Content goes here.</p>
+            <a class="arrow arrow-prev" href="#target-item-2"></a>
+            <a class="arrow arrow-next" href="#target-item-1"></a>
+          </div>
+        </div>  
         </div>
         <div @click="popUpClose" class="popup__close">close</div>
         <div class="block-cell comment">
@@ -34,8 +34,8 @@
               <h1>댓글</h1>
             </div>
             <span class="comment--input">
-              <input type="text" v-model="comment" v-on:keyup.enter="createComment">
-              <span v-on:click="createComment">
+              <input type="text" v-model="comment" v-on:keyup.enter="addComment">
+              <span v-on:click="addComment">
                 <i class="fas fa-plus addBtn"></i>
               </span>
             </span>
@@ -52,39 +52,30 @@
 </template>
 
 <script scoped>
-import FirebaseService from '@/services/FirebaseService'
 export default {
   data:function(){
     return{
-      content: [],
       comment:'',
-      comments: [],
-      user: this.$store.state.user,
+      comments:[]
     }
-  },
-  mounted: function(){
-    this.getTeamPost();
   },
   methods: {
     popUpClose() {
       // this.$store.commit("closeChildShow");
-      this.$store.commit("toggleNthChildShow",1);
+      this.$store.commit("toggleNthChildShow",2);
 
       console.log("closeChildShow 끝");
     },
-    
+    addComment(){
+      console.log(this.comment);
+      // 유저아이디 key값(일단 임의로 둘다 똑같이 해놓음), value는 댓글
+      localStorage.setItem(this.comment,this.comment);
+      this.comments.push(this.comment);
+      this.clearComment();
+    },
     clearComment(){
       console.log("commentclear");
       this.comment='';
-    },
-    async getTeamPost(){
-      const allContents = await FirebaseService.getTeamPost();
-      this.content = allContents[0];
-      console.log(this.content);
-    },
-    async createComment(){
-      await FirebaseService.createComment(this.content.id, this.user, this.comment);
-      await this.clearComment();
     }
   },
   created(){
@@ -94,16 +85,7 @@ export default {
         this.comments.push(localStorage.key(i));
       }
     }
-  },
-  // addComment(){
-    
-  //   console.log(this.comment);
-  //   // 유저아이디 key값(일단 임의로 둘다 똑같이 해놓음), value는 댓글
-  //   localStorage.setItem(this.comment,this.comment);
-  //   this.comments.push(this.comment);
-  //   this.clearComment();
-  // },
-  
+  }
 };
 </script>
 
@@ -384,7 +366,8 @@ any element whose id starts with 'target-item'. */
 /* So, up above we made all our carousel items transparent, which means
 that on page-load, we'd have a big empty box where our carousel should be.
 Let's set our first item's opacity to 1 so that it displays instead. Also,
-we're setting its z-index to 2, so that it's positioned on top of the other carousel items. */
+we're setting its z-index to 2, so that it's positioned on top of the
+other carousel items. */
 .item-1 {
   z-index: 2;
   opacity: 1;

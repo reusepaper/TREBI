@@ -1,6 +1,7 @@
 import "firebase/firestore";
 import "firebase/auth";
 import * as firebase from "firebase/app";
+import "firebase/messaging";
 
 const config = {
   apiKey: process.env.VUE_APP_FIREBASE_apiKey,
@@ -14,6 +15,9 @@ const config = {
 firebase.initializeApp(config);
 // const auth = firebase.auth();
 // const ui = new firebaseui.auth.AuthUI(auth);
+const messaging = firebase.messaging();
+const messagingKey = process.env.VUE_APP_FIREBASE_fcm;
+messaging.usePublicVapidKey(messagingKey);
 
 const firestore = firebase.firestore();
 let db = firebase.firestore();
@@ -31,6 +35,7 @@ export default {
       .then(docSnapshots => {
         return docSnapshots.docs.map(doc => {
           let data = doc.data();
+          data.id = doc.id;
           return data;
         });
       });
@@ -44,6 +49,11 @@ export default {
       image,
       createdAt: new Date()
     });
+  },
+  deletePost(deletePostId) {
+    const deletePost = firestore.collection(POSTS).doc(deletePostId);
+    deletePost.delete();
+    return true;
   },
   getPostsByCategoryId(category, uid) {
     return firestore
@@ -95,26 +105,27 @@ export default {
         eamil,
         level,
         createdAt,
-        post: 0
+        post: 0,
+        pushToken: null
       });
   },
-  getUserfield() {
-    return (
-      firestore
-        .collection(USERS)
-        // .orderBy("uid")
-        .limit(1)
-        .get()
-        .then(docSnapshots => {
-          return docSnapshots.docs.map(doc => {
-            let data = doc.data();
-            let userFields = Object.getOwnPropertyNames(data);
-            // console.log(data);
-            return userFields;
-          });
-        })
-    );
-  },
+  // getUserfield() {
+  //   return (
+  //     firestore
+  //       .collection(USERS)
+  //       // .orderBy("uid")
+  //       .limit(1)
+  //       .get()
+  //       .then(docSnapshots => {
+  //         return docSnapshots.docs.map(doc => {
+  //           let data = doc.data();
+  //           let userFields = Object.getOwnPropertyNames(data);
+  //           // console.log(data);
+  //           return userFields;
+  //         });
+  //       })
+  //   );
+  // },
   getisSignup(loginUid) {
     return firestore
       .collection(USERS)
@@ -210,12 +221,19 @@ export default {
       });
     });
   },
+  updateUserPushToken(loginUserUid, token){
+    const changeUser = firestore.collection(USERS).doc(loginUserUid);
+    changeUser.update({
+      pushToken: token
+    });
+    return true;
+  },
   deleteUser(deleteUserUid) {
     const deleteUser = firestore.collection(USERS).doc(deleteUserUid);
     deleteUser.delete();
     return true;
   },
-  getTeamPost(){
+  getTeamPost() {
     const TeamPostCollection = firestore.collection(TEAMPOST);
     return TeamPostCollection.get().then(docSnapshots => {
       return docSnapshots.docs.map(doc => {
@@ -225,15 +243,18 @@ export default {
       });
     });
   },
-  createComment(postId, commentUser, newComment){
-    const TeamCommentCollection = firestore.collection(TEAMPOST).doc(postId).collection(TEAMCOMMENT)
+  createComment(postId, commentUser, newComment) {
+    const TeamCommentCollection = firestore
+      .collection(TEAMPOST)
+      .doc(postId)
+      .collection(TEAMCOMMENT);
     return TeamCommentCollection.add({
       displayName: commentUser.displayName,
       uid: commentUser.uid,
       comment: newComment,
       createdAt: new Date()
     });
-  },
+  }
   // getToDo() {
   //   const postsCollection = firestore.collection(TODO);
   //   return postsCollection.get().then(docSnapshots => {

@@ -47,7 +47,7 @@ import Team from "./views/Team";
 import Member from "./views/Member";
 import GitGraph from "./views/GitGraph";
 import Footer from "./views/Footer";
-import chat from './components/Footer/ChatbotComponents/slackChatWebhook';
+import chat from "./components/Footer/ChatbotComponents/slackChatWebhook";
 import $ from "jquery";
 
 export default {
@@ -74,7 +74,8 @@ export default {
     this.handleResize();
   },
   mounted: function() {
-    console.log(this.$store.state.isPostShow);
+    this.$store.commit("setNowDisplayMember", "이주호");
+    this.$store.commit("setNowDisplayMemberIndex", 1);
 
     $(".page").each(function() {
       $(this).on("mousewheel DOMMouseScroll", function(event) {

@@ -87,7 +87,7 @@ export default {
   methods: {
     next() {
       if (this.$store.state.nowDisplayMemberIndex < this.length) {
-        console.log(this.$store.state.nowDisplayMemberIndex);
+        // console.log(this.$store.state.nowDisplayMemberIndex);
         // console.log(this.selected);
         // this.selected = this.selected + 1;
         this.$store.commit(
@@ -102,7 +102,7 @@ export default {
     },
     pre() {
       if (this.$store.state.nowDisplayMemberIndex > 1) {
-        console.log(this.$store.state.nowDisplayMemberIndex);
+        // console.log(this.$store.state.nowDisplayMemberIndex);
         // this.selected = this.selected - 1;
         this.$store.commit(
           "setNowDisplayMemberIndex",
