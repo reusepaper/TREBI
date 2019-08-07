@@ -18,12 +18,12 @@ export default new Vuex.Store({
     messages: [],
     modal_remoter: false,
     isPostShow: true,
-    Child1: false,
-    Child2: true,
-    Child3: true,
+    Child1:true,
+    Child2:true,
+    Child3:true,
     PostPopupIndex: 1,
-    nowDisplayMemberIndex: 1,
-    nowDisplayMember: "이주호"
+    nowDisplayMember: ""
+
   },
   mutations: {
     setUser(state, currentUser) {
@@ -62,21 +62,28 @@ export default new Vuex.Store({
     toggleIsPostShow(state) {
       state.isPostShow = !state.isPostShow;
     },
-    toggleFirstChildShow(state) {
-      state.Child1 = !state.Child1;
+    toggleNthChildShow(state,msg){
+      console.log("메세지",msg);
+      if(msg==1){
+        state.Child1 = !state.Child1;
+      }else if(msg==2){
+        state.Child2 = !state.Child2;
+      }else if(msg==3){
+        state.Child3 = !state.Child3;
+      }
     },
-    closeChildShow(state) {
-      state.Child1 = false;
-    },
-    setNowDisplayMemberIndex(state, index) {
-      state.nowDisplayMemberIndex = index;
+    closeChildShow(state){
+      state.Child1= false;
     },
     setPostPopupIndex(state, index) {
       state.PostPopupIndex = index;
     },
     setNowDisplayMember(state, value) {
       state.nowDisplayMember = value;
-    }
+    },
+    setNowDisplayMemberIndex(state, index) {
+      state.nowDisplayMemberIndex = index;
+    },
   },
   getters: {
     getNavbarState: function(state) {

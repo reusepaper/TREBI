@@ -1,6 +1,8 @@
 <template>
   <div class="team-contents-contain">
     <child1popup></child1popup>
+    <child2popup></child2popup>
+    <child3popup></child3popup>
     <div class="team-contents">
       <div class="box">
         <div class="box-row">
@@ -23,7 +25,7 @@
               </li>
               <li>
                 <div class="item" 
-                @click="togglePopUp" 
+                @click="togglePopUp(1)" 
                 v-bind:class="{modalShow:this.$store.state.Child1}"
                 >
                   <span>1st July 2019 ~ 7st 7th 2019</span>
@@ -38,7 +40,10 @@
                 </div>
               </li>
               <li>
-                <div class="item">
+                <div class="item" 
+                @click="togglePopUp(2)" 
+                v-bind:class="{modalShow:this.$store.state.Child2}"
+                >
                   <span>9st July 2019 ~ 18st 7th 2019</span>
                   <h3>[2주 프로젝트] 외부 API 연동을 통한 기능 추가</h3>
                   <p>Git Graph, Firebase, Vuetify 등 다양한 API를 이용하여 프로젝트 진행</p>
@@ -48,7 +53,10 @@
                 </div>
               </li>
               <li>
-                <div class="item">
+                <div class="item" 
+                @click="togglePopUp(3)" 
+                v-bind:class="{modalShow:this.$store.state.Child3}"
+                >
                   <span>22st July 2019 ~ 16st Aug 2019</span>
                   <h3>[4주 프로젝트] SW 개발 비서 구현</h3>
                   <p>SW 개발 비서 구현</p>
@@ -76,20 +84,21 @@ import c1 from './ChildComponents/Child1';
 import c2 from './ChildComponents/Child2';
 import c3 from './ChildComponents/Child3';
 import child1popup from './ChildComponents/Child1Popup';
+import child2popup from './ChildComponents/Child2Popup';
+import child3popup from './ChildComponents/Child3Popup';
 export default {
   components:{
-    c1,c2,c3,child1popup
+    c1,c2,c3,child1popup,child2popup,child3popup
   },
   data:function(){
     return {
-      isModalShow: this.$store.state.Child1
     }
   },
   methods:{
-    togglePopUp() {
+    togglePopUp(msg) {
       console.log("togglePopUp");
       // this.ismodalShow = !this.ismodalShow;
-      this.$store.commit("toggleFirstChildShow");
+      this.$store.commit("toggleNthChildShow",msg);
     }
   }
 }

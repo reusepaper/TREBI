@@ -68,7 +68,7 @@ export default {
   methods: {
     popUpClose() {
       // this.$store.commit("closeChildShow");
-      this.$store.commit("toggleFirstChildShow");
+      this.$store.commit("toggleNthChildShow",1);
 
       console.log("closeChildShow 끝");
     },
@@ -384,8 +384,7 @@ any element whose id starts with 'target-item'. */
 /* So, up above we made all our carousel items transparent, which means
 that on page-load, we'd have a big empty box where our carousel should be.
 Let's set our first item's opacity to 1 so that it displays instead. Also,
-we're setting its z-index to 2, so that it's positioned on top of the
-other carousel items. */
+we're setting its z-index to 2, so that it's positioned on top of the other carousel items. */
 .item-1 {
   z-index: 2;
   opacity: 1;

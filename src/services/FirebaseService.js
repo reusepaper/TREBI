@@ -34,23 +34,8 @@ export default {
       .get()
       .then(docSnapshots => {
         return docSnapshots.docs.map(doc => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-          let data = doc.data();
-=======
-          console.log(doc);
           let data = doc.data();
           data.id = doc.id;
->>>>>>> 897517f0f5a4b00940b66f3e65459ee59694c788
-=======
-          console.log(doc);
-          let data = doc.data();
-          data.id = doc.id;
-<<<<<<< HEAD
->>>>>>> 897517f... [#34] S1P2213002-27 PWA
-=======
->>>>>>> 431c496... [#34] S1P2213002-27 PWA
->>>>>>> [#34] S1P2213002-27 PWA
           return data;
         });
       });
@@ -65,24 +50,11 @@ export default {
       createdAt: new Date()
     });
   },
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> [#34] S1P2213002-27 PWA
   deletePost(deletePostId) {
     const deletePost = firestore.collection(POSTS).doc(deletePostId);
     deletePost.delete();
     return true;
   },
-<<<<<<< HEAD
->>>>>>> 897517f0f5a4b00940b66f3e65459ee59694c788
-=======
-<<<<<<< HEAD
->>>>>>> 897517f... [#34] S1P2213002-27 PWA
-=======
->>>>>>> 431c496... [#34] S1P2213002-27 PWA
->>>>>>> [#34] S1P2213002-27 PWA
   getPostsByCategoryId(category, uid) {
     return firestore
       .collection(POSTS)
