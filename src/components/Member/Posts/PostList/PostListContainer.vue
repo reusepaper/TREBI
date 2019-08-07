@@ -59,6 +59,9 @@ export default {
     },
     goPostWrite: function() {
       this.$store.commit("setPostPopupIndex", 2);
+    },
+    showDetail: function() {
+      alert("디테일");
     }
   }
 };

@@ -24,7 +24,8 @@ export default new Vuex.Store({
     PostPopupIndex: 1,
     nowDisplayMemberIndex: 1,
     nowDisplayMember: "이주호",
-    gitGraphData: []
+    gitGraphData: [],
+    nowDisplayPost: ""
   },
   mutations: {
     setUser(state, currentUser) {
@@ -93,6 +94,9 @@ export default new Vuex.Store({
     },
     clearGitGraphData(state) {
       state.gitGraphData = [];
+    },
+    setNowDisplayPost(state, value) {
+      state.nowDisplayPost = value;
     }
   },
   getters: {
