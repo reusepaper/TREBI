@@ -56,6 +56,7 @@ export default {
 
 <style>
 .filebox label {
+  margin-top: 1vh;
   display: inline-block;
   padding: 0.5em 0.75em;
   font-size: inherit;
@@ -64,19 +65,19 @@ export default {
   background-color: white;
   color: black;
   cursor: pointer;
-  border: 2px solid #92c5ff;
+  border: 2px solid #b8b8b8;
   border-radius: 0.25em;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
 }
 
 .filebox label:hover {
-  background-color: #92c5ff;
+  background-color: #b8b8b8;
   color: white;
 }
 
 .filebox label:active {
-  background-color: #92c5ff;
+  background-color: #b8b8b8;
   color: white;
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="Wrapper">
-    <PostPopup></PostPopup>
+    <PostPopup id="ModalPopup"></PostPopup>
 
     <div v-on:click="pre" v-bind:class="{hidden : this.$store.state.nowDisplayMemberIndex == 1}">
       <i class="fas fa-chevron-circle-left fa-2x left"></i>
