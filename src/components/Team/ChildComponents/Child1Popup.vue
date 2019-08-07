@@ -69,7 +69,6 @@ export default {
     popUpClose() {
       // this.$store.commit("closeChildShow");
       this.$store.commit("toggleNthChildShow",1);
-
       console.log("closeChildShow 끝");
     },
     
