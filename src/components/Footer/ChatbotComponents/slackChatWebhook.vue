@@ -167,7 +167,7 @@ export default {
         let myMessages = {
           username: result.messages[0].username,
           isMe: true,
-          message: result.messages[0].text
+          message: emojis.unicode(result.messages[0].text)
         }
         await this.messages.push(myMessages);
         if (result.messages[0].hasOwnProperty('replies')){
@@ -176,7 +176,7 @@ export default {
             let trebiMessages = {
               username: "trebi",
               isMe: false,
-              message: result.messages[replies].text
+              message: emojis.unicode(result.messages[replies].text)
             }
             await this.messages.push(trebiMessages);
           }
@@ -238,7 +238,7 @@ export default {
           let trebiMessages = {
             username: "trebi",
             isMe: false,
-            message: result.messages[replies].text
+            message: emojis.unicode(result.messages[replies].text)
           }
           if(this.$store.state.reply != trebiMessages){
             await this.$store.commit("setReply", trebiMessages);
