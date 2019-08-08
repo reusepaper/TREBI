@@ -101,7 +101,6 @@ export default {
       // console.log(this.show);
     },
     repliesInterval(){
-      // this.checkReply();
       setInterval(() => {
         this.checkReply();
       }, 60000)
@@ -243,13 +242,18 @@ export default {
           if(this.$store.state.reply != trebiMessages){
             await this.$store.commit("setReply", trebiMessages);
           }
-          if(this.$store.state.reply != trebiMessages){
-            await this.$store.commit("setReply", trebiMessages);
-          }
+          // if(this.$store.state.reply != trebiMessages){
+          //   await this.$store.commit("setReply", trebiMessages);
+            
+            
+          // }
           if (this.messages[this.messages.length - 1].message != trebiMessages.message){
             // await this.messages.push(trebiMessages);
-            await this.messages.splice(this.messages.length-(result.messages[0].reply_count-replies), 0, trebiMessages)
+            await this.messages.splice(this.messages.length-(result.messages[0].reply_count-replies), 0, trebiMessages);
             await this.scrollToBottom();
+            if(this.show == false){
+              await alert("답변이 도착했습니다. 확인해주세요.")
+            }
             return;
           } else return;
         }

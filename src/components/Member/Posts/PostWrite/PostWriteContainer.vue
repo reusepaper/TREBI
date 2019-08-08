@@ -24,6 +24,7 @@ export default {
 
 <style>
   .postWriteContainer {
+    margin-top: 7vh;
     height: 100%;
   }
   .postwrite-title {

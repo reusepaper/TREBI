@@ -1,8 +1,16 @@
 <template>
   <div class="Wrapper">
     <div class="post__header">
-      <h1>PostDetail</h1>
-      <Button @click="goPostList">글 목록보기</Button>
+      <div class="post__title">
+        PostDetail
+      </div>
+      <div class="postlist__show">
+        <div class="postlistbtn">
+          <label for="showlist">목록보기</label>
+          <input type="button" @click="goPostList" id="showlist" />
+        </div>
+      </div>
+      <!-- <Button @click="goPostList">글 목록보기</Button> -->
     </div>
     <div class="post__contaniner">
       <div
@@ -41,7 +49,7 @@ export default {
 
 <style scoped>
 .Wrapper {
-  height: 100%;
+  margin: 0;
   width: 100%;
   /* background-color: aquamarine; */
 }
@@ -50,13 +58,25 @@ export default {
   height: 100%;
   width: 100%;
 }
+
 .post__header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  width: 100%;
 }
 .post__content {
   background-color: white;
 }
+
+.post_title {
+  width: 50vw;
+  text-align: left;
+}
+.postlist__show {
+  width: 50vw;
+  text-align: right;
+}
+ 
 .content__header {
   display: flex;
   align-items: center;
@@ -81,5 +101,43 @@ export default {
   display: grid;
   grid-template-columns: 6fr 4fr;
   grid-auto-rows: minmax(550px, 1fr);
+}
+
+
+.postlistbtn label {
+  margin-top: 1vh;
+  display: inline-block;
+  padding: 0.5em 0.75em;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  border: 2px solid #b8b8b8;
+  border-radius: 0.25em;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.postlistbtn label:hover {
+  background-color: #b8b8b8;
+  color: white;
+}
+
+.postlistbtn label:active {
+  background-color: #b8b8b8;
+  color: white;
+}
+
+.postlistbtn input[type="button"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 </style>
