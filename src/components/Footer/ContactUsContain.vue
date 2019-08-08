@@ -50,4 +50,13 @@ export default {
 .contactTitle:hover {
   color: white;
 }
+@media (max-width: 369px) {
+  .contactContainer {
+    padding: 0;
+    padding-top: 50px;
+  }
+  .contactTitle {
+    font-size: 40px;
+  }
+}
 </style>

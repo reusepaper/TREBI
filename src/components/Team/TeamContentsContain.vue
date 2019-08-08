@@ -199,8 +199,10 @@ export default {
   }
   @media screen and (max-width: 1054px) {
     .box1 h2{
-      top:38%;
-      left:0%;
+      display:none;
+    }
+    .box .box-row .box-cell{
+      width:0%;
     }
   }
   h2 span:nth-child(1){

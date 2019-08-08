@@ -6,7 +6,7 @@
       <i class="fas fa-chevron-circle-left fa-2x left"></i>
     </div>
     <div
-      class="imageContainer"
+      class="memberContainer"
       v-bind:style="{'transform': 'translate(-' + (this.$store.state.nowDisplayMemberIndex)*imgWidth + 'vw, 0px)'}"
     >
       <div class="memberInfo" v-for="member in members">
@@ -110,10 +110,10 @@ export default {
           "setNowDisplayMemberIndex",
           this.$store.state.nowDisplayMemberIndex + 1
         );
-        this.$store.commit(
-          "setNowDisplayMember",
-          this.member[this.$store.state.nowDisplayMemberIndex]
-        );
+        // this.$store.commit(
+        //   "setNowDisplayMember",
+        //   this.member[this.$store.state.nowDisplayMemberIndex]
+        // );
       }
     },
     pre() {
@@ -124,14 +124,18 @@ export default {
           "setNowDisplayMemberIndex",
           this.$store.state.nowDisplayMemberIndex - 1
         );
-        this.$store.commit(
-          "setNowDisplayMember",
-          this.member[this.$store.state.nowDisplayMemberIndex]
-        );
+        // this.$store.commit(
+        //   "setNowDisplayMember",
+        //   this.member[this.$store.state.nowDisplayMemberIndex]
+        // );
       }
     },
     togglePopUp() {
       // this.ismodalShow = !this.ismodalShow;
+      this.$store.commit(
+        "setNowDisplayMember",
+        this.member[this.$store.state.nowDisplayMemberIndex]
+      );
       this.$store.commit("toggleIsPostShow");
     }
   }
@@ -146,7 +150,7 @@ export default {
   margin-top: 50px;
   /* overflow: hidden; */
 }
-.imageContainer {
+.memberContainer {
   padding-top: 50px;
   height: 100%;
   width: 100%;
@@ -163,6 +167,7 @@ export default {
   background-color: #f6f6f6;
 }
 .introContainer {
+  align-self: center;
   padding: 0 20px;
   margin: 50px 0;
   border-left: 3px solid orange;
@@ -251,10 +256,44 @@ svg {
   display: none;
 }
 
-#ModalPopup {
-  /* overflow-y: scroll;
-  overflow-x: hidden; */
-  /* height: 100vh; */
-  /* clear: both; */
+@media (max-width: 1024px) {
+  .memberInfo {
+    grid-template-rows: 6fr 4fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .memberInfo {
+    grid-template-rows: 7fr 3fr;
+  }
+  .right,
+  .left {
+    top: 48%;
+  }
+  .page__container {
+    left: 38%;
+    font-size: 23px;
+    top: -20px;
+  }
+  .infoHeader {
+    grid-template-rows: 6fr 4fr;
+    grid-template-columns: none;
+  }
+  .introContainer {
+    margin: 0;
+    margin-left: 10px;
+    padding-bottom: 5px;
+  }
+  .introContainer .name {
+    font-size: 18px;
+  }
+  .introContainer .intro {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  .socialList {
+    font-size: 14px;
+    margin-top: 5px;
+  }
 }
 </style>

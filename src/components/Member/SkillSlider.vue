@@ -73,7 +73,7 @@ export default {
   /* transform: translateY(-30px); */
 }
 .skillItem:hover .skill-desc {
-  transform: translateY(20px);
+  transform: translateY(8px);
   opacity: 1;
 }
 .image {
@@ -95,7 +95,7 @@ export default {
 }
 .tech-slideshow {
   height: 100%;
-
+  padding-top: 10px;
   max-width: 76vw;
   margin: 0 auto;
   position: relative;
@@ -138,5 +138,21 @@ export default {
 }
 .running {
   animation-play-state: running;
+}
+
+@media (max-width: 768px) {
+  .image-container .skill-title {
+    font-size: 18px;
+  }
+  .image-container .image {
+    width: 30px;
+    height: 30px;
+  }
+  .skill-desc {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 369px) {
 }
 </style>

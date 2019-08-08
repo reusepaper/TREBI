@@ -88,7 +88,7 @@ export default {
         alert("업로드 되었습니다");
         this.title = "";
         this.image = "";
-        this.content = "";
+        this.content = "# 이곳에 게시글을 작성해보세요! 8-)";
         this.$store.commit("setPostPopupIndex", 1);
       }
     },

@@ -95,7 +95,7 @@ export default {
         });
       });
   },
-  createUser(uid, nickname, eamil, level, createdAt) {
+  createUser(uid, nickname, eamil, level, createdAt, photoURL) {
     return firestore
       .collection(USERS)
       .doc(uid)
@@ -105,6 +105,7 @@ export default {
         eamil,
         level,
         createdAt,
+        photoURL,
         post: 0,
         pushToken: null
       });
@@ -228,6 +229,13 @@ export default {
     });
     return true;
   },
+  updateUserPhotoURL(loginUserUid, url){
+    const changeUser = firestore.collection(USERS).doc(loginUserUid);
+    changeUser.update({
+      photoURL: url
+    });
+    return true;
+  },
   deleteUser(deleteUserUid) {
     const deleteUser = firestore.collection(USERS).doc(deleteUserUid);
     deleteUser.delete();
@@ -243,12 +251,24 @@ export default {
       });
     });
   },
-  createComment(postId, commentUser, newComment) {
+  getTeamPostComment(postId){
     const TeamCommentCollection = firestore
       .collection(TEAMPOST)
       .doc(postId)
       .collection(TEAMCOMMENT);
-    return TeamCommentCollection.add({
+      return TeamCommentCollection.orderBy("createdAt", "desc").get().then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          return data;
+        })
+      })
+  },
+  createTeamPostComment(postId, commentUser, newComment) {
+    const TeamCommentCollection = firestore
+      .collection(TEAMPOST)
+      .doc(postId)
+      .collection(TEAMCOMMENT);
+      return TeamCommentCollection.add({
       displayName: commentUser.displayName,
       uid: commentUser.uid,
       comment: newComment,
