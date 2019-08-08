@@ -43,4 +43,10 @@ export default {};
 .memberItem span:first-child {
   margin-right: 50px;
 }
+
+@media (max-width: 369px) {
+  .memberItem {
+    font-size: 18px;
+  }
+}
 </style>

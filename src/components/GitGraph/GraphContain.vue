@@ -86,7 +86,7 @@ export default {
           curve: "smooth"
         },
         title: {
-          text: "최근 커밋 수 ",
+          text: "　",
           align: "left"
         },
         grid: {
@@ -162,10 +162,17 @@ export default {
 
 <style>
 .GraphContain {
-  margin-top: 3vh;
+  margin-top: 8vh;
 }
 .view-chart {
   margin: auto;
   width: 80vw;
+}
+
+@media (max-width: 768px) {
+  .view-chart {
+    width: 100vw;
+    margin: 0;
+  }
 }
 </style>

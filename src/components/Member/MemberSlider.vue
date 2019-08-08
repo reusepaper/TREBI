@@ -231,12 +231,6 @@ svg {
   .memberInfo {
     grid-template-rows: 7fr 3fr;
   }
-}
-
-@media (max-width: 369px) {
-  .memberInfo {
-    grid-template-rows: 7fr 3fr;
-  }
   .right,
   .left {
     top: 48%;
