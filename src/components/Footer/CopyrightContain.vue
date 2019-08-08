@@ -28,4 +28,19 @@ export default {
 .CopyrightContain span:last-child {
   margin-right: 100px;
 }
+
+@media (max-width: 369px) {
+  .CopyrightContain {
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+  }
+  .CopyrightContain span:first-child {
+    margin-left: 0;
+  }
+  .CopyrightContain span:last-child {
+    margin-right: 0;
+  }
+}
 </style>

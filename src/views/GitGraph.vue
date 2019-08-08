@@ -28,7 +28,7 @@ export default {
   height: 100vh;
   display: grid;
   grid-template-rows: 2fr 8fr;
-  background: #EDEDEE;
+  background: #ededee;
 }
 </style>
 

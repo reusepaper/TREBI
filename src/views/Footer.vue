@@ -28,4 +28,10 @@ export default {
   background-color: rgb(82, 79, 90);
   color: rgba(255, 255, 255, 0.7);
 }
+
+@media (max-width: 369px) {
+  .footerContainer {
+    grid-template-rows: 1fr 200px;
+  }
+}
 </style>
