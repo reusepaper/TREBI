@@ -64,6 +64,17 @@
               </div>
             </button>
           </li>
+          <li class="TrebiBtnLi">
+            <button
+              class="TrebiBtn"
+              onclick="location.href='https://webmobile-sub2-510fa.firebaseapp.com/' "
+            >
+              <div style="display: table;">
+                <img src="../../assets/trebiMain.png" width="40px;" class="TrebiImg" />
+                <span style="display: table-cell; vertical-align: middle">TREBI Main</span>
+              </div>
+            </button>
+          </li>
         </ul>
       </div>
     </div>
@@ -104,6 +115,33 @@ export default {
 </script>
 
 <style>
+.TrebiBtnLi {
+  height: 60px;
+  border-top: 1px solid #404854;
+  border-bottom: 1px solid #404854;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.TrebiBtn {
+  padding-left: 15px;
+  text-align: left;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ffffff;
+  background-color: #262f3d;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+}
+.TrebiImg {
+  background-color: none;
+  margin-right: 5px;
+}
 /* Google Analytics 링크 Btn Style */
 .AnalyticsBtnLi {
   height: 60px;
