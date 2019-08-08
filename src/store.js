@@ -16,6 +16,7 @@ export default new Vuex.Store({
     adminPage: null,
     navbarstate: false,
     messages: [],
+    reply: {},
     modal_remoter: false,
     isPostShow: true,
     Child1: true,
@@ -51,12 +52,14 @@ export default new Vuex.Store({
     setNavbarState(state, currentNavbar) {
       state.navbarstate = currentNavbar;
     },
-    getMessages() {},
     setMessages(state) {
       state.messages = [];
     },
     upMessages(state, newMessage) {
       state.messages.push(newMessage);
+    },
+    setReply(state, newReply) {
+      state.reply = newReply;
     },
     setModalRemote(state) {
       state.modal_remoter = !state.modal_remoter;

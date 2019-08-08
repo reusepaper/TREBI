@@ -229,6 +229,9 @@ export default {
             isMe: false,
             message: result.messages[replies].text
           }
+          if(this.$store.state.reply != trebiMessages){
+            await this.$store.commit("setReply", trebiMessages);
+          }
           if (this.messages[this.messages.length - 1].message != trebiMessages.message){
             // await this.messages.push(trebiMessages);
             await this.messages.splice(this.messages.length-(result.messages[0].reply_count-replies), 0, trebiMessages)
