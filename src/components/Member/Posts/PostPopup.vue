@@ -22,7 +22,7 @@
 import PostDetailContainer from "../Posts/PostDetail/PostDetailContainer";
 import PostListContainer from "../Posts/PostList/PostListContainer";
 import PostWriteContainer from "../Posts/PostWrite/PostWriteContainer";
-import $ from 'jquery';
+import $ from "jquery";
 
 export default {
   components: {
@@ -57,7 +57,6 @@ export default {
   display: flex;
   /* transform: translate3d(-100vw, 0px, 0px); */
   transition: 0.3s ease-in-out;
-  background-color: #EDEDEE;
 }
 
 /* .popup__block {
@@ -213,4 +212,14 @@ export default {
   background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPHBhdGggZD0iTTE5IDYuNDFMMTcuNTkgNSAxMiAxMC41OSA2LjQxIDUgNSA2LjQxIDEwLjU5IDEyIDUgMTcuNTkgNi40MSAxOSAxMiAxMy40MSAxNy41OSAxOSAxOSAxNy41OSAxMy40MSAxMnoiLz4gICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==);
 }
 
+@media (max-width: 769px) {
+  .popup__block__postdetail {
+    padding: 30px 20px;
+  }
+  .popup__block__postlist {
+    padding: 30px 20px;
+  }
+  .popup__block__postwrite {
+  }
+}
 </style>
