@@ -154,8 +154,5 @@ export default {
 }
 
 @media (max-width: 369px) {
-  .mover {
-    justify-content: center;
-  }
 }
 </style>
