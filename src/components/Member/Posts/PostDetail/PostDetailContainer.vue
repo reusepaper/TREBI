@@ -12,8 +12,9 @@
       <div class="post__content">
         <div class="content__header">
           <div
+            v-if="this.$store.state.nowDisplayMemberInfo.photoURL !== null"
             class="avatar"
-            v-bind:style="{ 'background-image': 'url(' + this.$store.state.user.photoURL + ')' }"
+            v-bind:style="{ 'background-image': 'url(' + this.$store.state.nowDisplayMemberInfo.photoURL + ')' }"
           ></div>
           <div class="writer">{{this.$store.state.nowDisplayPost.postWriter}}</div>
         </div>
