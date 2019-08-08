@@ -95,7 +95,7 @@ export default {
         });
       });
   },
-  createUser(uid, nickname, eamil, level, createdAt) {
+  createUser(uid, nickname, eamil, level, createdAt, photoURL) {
     return firestore
       .collection(USERS)
       .doc(uid)
@@ -105,6 +105,7 @@ export default {
         eamil,
         level,
         createdAt,
+        photoURL,
         post: 0,
         pushToken: null
       });
@@ -225,6 +226,13 @@ export default {
     const changeUser = firestore.collection(USERS).doc(loginUserUid);
     changeUser.update({
       pushToken: token
+    });
+    return true;
+  },
+  updateUserPhotoURL(loginUserUid, url){
+    const changeUser = firestore.collection(USERS).doc(loginUserUid);
+    changeUser.update({
+      photoURL: url
     });
     return true;
   },
