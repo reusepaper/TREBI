@@ -176,7 +176,7 @@ export default {
         });
       });
   },
-  getUIdByName(name) {
+  getUserByName(name) {
     return firestore
       .collection(USERS)
       .where("nickname", "==", name)
@@ -185,7 +185,7 @@ export default {
       .then(docSnapshots => {
         return docSnapshots.docs.map(doc => {
           let data = doc.data();
-          return data.uid;
+          return data;
         });
       });
   },
@@ -222,14 +222,14 @@ export default {
       });
     });
   },
-  updateUserPushToken(loginUserUid, token){
+  updateUserPushToken(loginUserUid, token) {
     const changeUser = firestore.collection(USERS).doc(loginUserUid);
     changeUser.update({
       pushToken: token
     });
     return true;
   },
-  updateUserPhotoURL(loginUserUid, url){
+  updateUserPhotoURL(loginUserUid, url) {
     const changeUser = firestore.collection(USERS).doc(loginUserUid);
     changeUser.update({
       photoURL: url
@@ -251,24 +251,26 @@ export default {
       });
     });
   },
-  getTeamPostComment(postId){
+  getTeamPostComment(postId) {
     const TeamCommentCollection = firestore
       .collection(TEAMPOST)
       .doc(postId)
       .collection(TEAMCOMMENT);
-      return TeamCommentCollection.orderBy("createdAt", "desc").get().then(docSnapshots => {
+    return TeamCommentCollection.orderBy("createdAt", "desc")
+      .get()
+      .then(docSnapshots => {
         return docSnapshots.docs.map(doc => {
           let data = doc.data();
           return data;
-        })
-      })
+        });
+      });
   },
   createTeamPostComment(postId, commentUser, newComment) {
     const TeamCommentCollection = firestore
       .collection(TEAMPOST)
       .doc(postId)
       .collection(TEAMCOMMENT);
-      return TeamCommentCollection.add({
+    return TeamCommentCollection.add({
       displayName: commentUser.displayName,
       uid: commentUser.uid,
       comment: newComment,

@@ -22,7 +22,6 @@ export default {
     async onFileChange(e) {
       // file 세팅
       let files = e.target.files || e.dataTransfer.files;
-      console.log(files);
       if (!files.length) {
         return;
       }
@@ -46,6 +45,7 @@ export default {
         .then(response => response.json())
         .then(success => {
           this.image = success.data.link;
+          this.$emit("upLoadImg", this.image);
         })
         .catch();
     }
