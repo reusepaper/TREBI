@@ -64,15 +64,23 @@ export default {
 </script>
 
 <style>
+
 .postList__header {
   display: flex;
   justify-content: center;
 }
 
 .postList__container {
+  height: 80vh;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-auto-rows: 260px;
   grid-gap: 20px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.postList__wrapper {
+  height: 100vh;
 }
 </style>

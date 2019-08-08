@@ -53,6 +53,9 @@
 <script>
 import SkillSlider from "./SkillSlider";
 import PostPopup from "./Posts/PostPopup";
+import $ from 'jquery';
+import { setInterval } from 'timers';
+
 export default {
   components: {
     SkillSlider,
@@ -68,7 +71,35 @@ export default {
       member: ["", "이주호", "유동관", "임연지", "한단비", "한만섭"]
     };
   },
-  mounted() {},
+  mounted() {
+    console.log(
+      "현재 보여지는 멤버 인덱스 : ",
+      this.$store.state.nowDisplayMemberIndex
+    );
+    console.log(
+      "현재 보여지는 멤버 이름 : ",
+      this.$store.state.nowDisplayMember
+    );
+    // $('#ModalPopup').on('click', function(e){
+    //    $('html, body').css('overflow', 'hidden');
+    //   var event = e.originalEvent;
+    //   var d = event.wheelDelta || -event.detail;
+    //   this.scrollTop += (d < 0 ? 1 : -1) * 30;
+    //   e.preventDefault();
+    // })
+    this.$store.watch(() => this.$store.getters.getPostShow, ismodalShow => {
+      console.log('watched:', ismodalShow);
+      if(ismodalShow) {
+        $('#ModalPopup').on('scroll touchmove mousewheel', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        });
+      } else {
+        $('#ModalPopup').off('scroll touchmove mousewheel');
+      }
+    })
+  },
   methods: {
     next() {
       if (this.$store.state.nowDisplayMemberIndex < this.length) {

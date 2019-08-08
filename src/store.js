@@ -105,6 +105,9 @@ export default new Vuex.Store({
   getters: {
     getNavbarState: function(state) {
       return state.navbarstate;
+    },
+    getPostShow: function(state){
+      return state.isPostShow;
     }
   },
   actions: {},

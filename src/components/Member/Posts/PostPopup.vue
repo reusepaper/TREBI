@@ -2,15 +2,15 @@
   <div id="popup-article" class="popup" v-bind:class="{modalShow :this.$store.state.isPostShow}">
     <div
       class="popup__container"
-      v-bind:style="{'transform': 'translate(-' + (this.$store.state.PostPopupIndex)*100   + 'vw, 0px)'}"
+      v-bind:style="{'transform': 'translate(-' + (this.$store.state.PostPopupIndex)*wd + 'vw, 0px)'}"
     >
-      <div class="popup__block" style="background-color : #EDEDEE;">
+      <div class="popup__block__postdetail" style="background-color : #EDEDEE;">
         <PostDetailContainer></PostDetailContainer>
       </div>
-      <div class="popup__block" style="background-color : #EDEDEE;">
+      <div class="popup__block__postlist" style="background-color : #EDEDEE;">
         <PostListContainer></PostListContainer>
       </div>
-      <div class="popup__block" style="background-color : #EDEDEE;">
+      <div class="popup__block__postwrite" style="background-color : #EDEDEE;">
         <PostWriteContainer></PostWriteContainer>
       </div>
     </div>
@@ -22,6 +22,7 @@
 import PostDetailContainer from "../Posts/PostDetail/PostDetailContainer";
 import PostListContainer from "../Posts/PostList/PostListContainer";
 import PostWriteContainer from "../Posts/PostWrite/PostWriteContainer";
+import $ from 'jquery';
 
 export default {
   components: {
@@ -31,7 +32,7 @@ export default {
   },
   data() {
     return {
-      width: 100
+      wd: 100
     };
   },
   methods: {
@@ -46,7 +47,6 @@ export default {
 <style>
 .popup {
   width: 100%;
-  height: 100vh;
   display: none;
   z-index: 100;
   position: fixed;
@@ -57,9 +57,10 @@ export default {
   display: flex;
   /* transform: translate3d(-100vw, 0px, 0px); */
   transition: 0.3s ease-in-out;
+  background-color: #EDEDEE;
 }
 
-.popup__block {
+/* .popup__block {
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
@@ -68,7 +69,44 @@ export default {
   margin: auto;
   overflow: auto;
   animation: fade 0.5s ease-out 1.3s both;
+} */
+
+.popup__block__postdetail {
+  height: 100vh !important;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  padding: 50px;
+  margin: auto;
+  /* overflow: auto; */
+  animation: fade 0.5s ease-out 1.3s both;
 }
+
+.popup__block__postlist {
+  height: 100vh !important;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  padding: 50px;
+  margin: auto;
+  /* overflow: auto; */
+  animation: fade 0.5s ease-out 1.3s both;
+}
+
+.popup__block__postwrite {
+  height: 100vh !important;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  padding: 0px 50px;
+  margin: auto;
+  /* overflow: auto; */
+  animation: fade 0.5s ease-out 1.3s both;
+}
+
 .modalShow {
   display: flex;
 }
@@ -77,7 +115,6 @@ export default {
   box-sizing: border-box;
   width: 100%;
   background-color: white;
-
   position: fixed;
   left: 0;
   top: 45%;
@@ -175,4 +212,5 @@ export default {
   background-size: contain;
   background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPHBhdGggZD0iTTE5IDYuNDFMMTcuNTkgNSAxMiAxMC41OSA2LjQxIDUgNSA2LjQxIDEwLjU5IDEyIDUgMTcuNTkgNi40MSAxOSAxMiAxMy40MSAxNy41OSAxOSAxOSAxNy41OSAxMy40MSAxMnoiLz4gICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==);
 }
+
 </style>

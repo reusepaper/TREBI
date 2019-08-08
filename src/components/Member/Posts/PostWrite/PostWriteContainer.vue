@@ -23,6 +23,9 @@ export default {
 </script>
 
 <style>
+  .postWriteContainer {
+    height: 100%;
+  }
   .postwrite-title {
     color: #524F5A;
     text-align: center;
