@@ -79,10 +79,10 @@ export default {
           "setNowDisplayMemberIndex",
           this.$store.state.nowDisplayMemberIndex + 1
         );
-        this.$store.commit(
-          "setNowDisplayMember",
-          this.member[this.$store.state.nowDisplayMemberIndex]
-        );
+        // this.$store.commit(
+        //   "setNowDisplayMember",
+        //   this.member[this.$store.state.nowDisplayMemberIndex]
+        // );
       }
     },
     pre() {
@@ -93,14 +93,18 @@ export default {
           "setNowDisplayMemberIndex",
           this.$store.state.nowDisplayMemberIndex - 1
         );
-        this.$store.commit(
-          "setNowDisplayMember",
-          this.member[this.$store.state.nowDisplayMemberIndex]
-        );
+        // this.$store.commit(
+        //   "setNowDisplayMember",
+        //   this.member[this.$store.state.nowDisplayMemberIndex]
+        // );
       }
     },
     togglePopUp() {
       // this.ismodalShow = !this.ismodalShow;
+      this.$store.commit(
+        "setNowDisplayMember",
+        this.member[this.$store.state.nowDisplayMemberIndex]
+      );
       this.$store.commit("toggleIsPostShow");
     }
   }
