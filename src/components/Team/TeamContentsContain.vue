@@ -7,12 +7,12 @@
       <div class="box">
         <div class="box-row">
           <div class="box-cell box1">
-            <h2>
-              History
-              <span>History</span>
-              <span>History</span>
-              <span>우리가 걸어온 길</span>
-            </h2>
+              <h2>
+                History
+                <span>History</span>
+                <span>History</span>
+                <span>우리가 걸어온 길</span>
+              </h2>
           </div>
           <div class="box-cell box2">
             <ul>
@@ -26,7 +26,6 @@
               <li>
                 <div class="item" 
                 @click="togglePopUp(1)" 
-                v-bind:class="{modalShow:this.$store.state.Child1}"
                 >
                   <span>1st July 2019 ~ 7st 7th 2019</span>
                   <h3>[1주 프로젝트] 반응형 웹 페이지 제작</h3>
@@ -36,7 +35,6 @@
               <li>
                 <div class="item" 
                 @click="togglePopUp(2)" 
-                v-bind:class="{modalShow:this.$store.state.Child2}"
                 >
                   <span>9st July 2019 ~ 18st 7th 2019</span>
                   <h3>[2주 프로젝트] 외부 API 연동을 통한 기능 추가</h3>
@@ -46,7 +44,6 @@
               <li>
                 <div class="item" 
                 @click="togglePopUp(3)" 
-                v-bind:class="{modalShow:this.$store.state.Child3}"
                 >
                   <span>22st July 2019 ~ 16st Aug 2019</span>
                   <h3>[4주 프로젝트] SW 개발 비서 구현</h3>
@@ -84,6 +81,9 @@ export default {
 </script>
 
 <style >
+.wrapper{
+  display:grid;
+}
 .v--modal-overlay {
   background:orange;
 }
@@ -104,9 +104,8 @@ export default {
   }
   .box{
     position:relative;
-    margin: 10px auto;
     width:100%;
-    height:300px;
+    height:100%;
     box-sizing:border-box;
     display:table;
   }
@@ -116,11 +115,15 @@ export default {
   .box .box-row .box-cell{
     display: table-cell;
     width:50%;
+    height:100%;
   }
   .box ul{
     margin:0;
     padding:0;
     border-left: 2px solid orange;
+    display:grid;
+    height: 100%;
+    align-items:center;
   }
   .box ul li{
     list-style: none;
@@ -129,6 +132,7 @@ export default {
     position:relative;
     padding:15px 45px;
     transition : .5s ease;
+    cursor:pointer;
   }
   .box ul li .item::before{
     content:'';
@@ -190,14 +194,42 @@ export default {
   }
   .box1 h2{
     position: absolute;
-    top:40%;
-    left:10%;
+    top:35%;
+    left:9%;
     transform: trasnlate(-50%,-50%);
     font-size: 6em;
     text-transform: uppercase;
     color: transparent;
   }
-  @media screen and (max-width: 1054px) {
+    @media screen and (max-width: 361px) {
+    .item p{
+      display:none;
+    }
+    .team-contents{
+      height:80vh;
+    }
+  }
+  @media screen and (max-width: 447px) {
+    .item p{
+      display:none;
+    }
+    .team-contents{
+      height:74vh;
+    }
+  }
+  @media screen and (max-width: 1300px) {
+     .box1 h2{
+        top:35%;
+        left:5%;
+     }
+   }
+   @media screen and (max-width: 1140px) {
+     .box1 h2{
+      top:37%;
+      left:2%;
+     }
+   }
+  @media screen and (max-width: 1024px) {
     .box1 h2{
       display:none;
     }
