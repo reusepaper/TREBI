@@ -12,8 +12,9 @@
       <div class="post__content">
         <div class="content__header">
           <div
+            v-if="this.$store.state.nowDisplayMemberInfo.photoURL !== null"
             class="avatar"
-            v-bind:style="{ 'background-image': 'url(' + this.$store.state.user.photoURL + ')' }"
+            v-bind:style="{ 'background-image': 'url(' + this.$store.state.nowDisplayMemberInfo.photoURL + ')' }"
           ></div>
           <div class="writer">{{this.$store.state.nowDisplayPost.postWriter}}</div>
         </div>
@@ -45,6 +46,7 @@ export default {
   /* background-color: aquamarine; */
 }
 .image {
+  border: 1px solid rgba(0, 0, 0, 0.2);
   height: 100%;
   width: 100%;
 }
@@ -52,7 +54,9 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-
+.post__content {
+  background-color: white;
+}
 .content__header {
   display: flex;
   align-items: center;
@@ -62,16 +66,16 @@ export default {
 
 .content__header .avatar {
   margin-right: 20px;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background-position: center;
   background-size: cover;
 }
 
 .content__header .writer {
-  font-weight: 600;
-  font-size: 28px;
+  font-weight: 400;
+  font-size: 24px;
 }
 .post__contaniner {
   display: grid;

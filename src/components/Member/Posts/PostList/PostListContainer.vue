@@ -7,7 +7,7 @@
         @click="goPostWrite"
       >글작성</Button>
     </div>
-    <Button @click="goPostDetail">글 상세보기</Button>
+    <!-- <Button @click="goPostDetail">글 상세보기</Button> -->
     <div class="postList__container">
       <div v-for="post in postList">
         <PostCard v-bind:post="post"></PostCard>
@@ -38,7 +38,6 @@ export default {
     nowDisplayMember() {
       this.displayMember = this.$store.state.nowDisplayMember;
       this.getUId(this.$store.state.nowDisplayMember);
-      // this.getPostsById(uid);
     },
     postList: function() {}
   },
@@ -47,8 +46,9 @@ export default {
       await FirebaseService.getPosts();
     },
     getUId: async function(name) {
-      const [uid] = await FirebaseService.getUIdByName(name);
-      this.getPostsById(uid);
+      const [result] = await FirebaseService.getUserByName(name);
+      this.$store.commit("setNowDisplayMemberInfo", result);
+      this.getPostsById(result.uid);
     },
     getPostsById: async function(uid) {
       this.postList = await FirebaseService.getPostsById(uid);
@@ -64,7 +64,9 @@ export default {
 </script>
 
 <style>
-
+.postList__wrapper {
+  padding: 30px;
+}
 .postList__header {
   display: flex;
   justify-content: center;
@@ -82,5 +84,6 @@ export default {
 
 .postList__wrapper {
   height: 100vh;
+  grid-gap: 60px;
 }
 </style>

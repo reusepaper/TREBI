@@ -25,6 +25,7 @@ export default new Vuex.Store({
     PostPopupIndex: 1,
     nowDisplayMemberIndex: 1,
     nowDisplayMember: "이주호",
+    nowDisplayMemberInfo: null,
     gitGraphData: [],
     nowDisplayPost: ""
   },
@@ -100,6 +101,9 @@ export default new Vuex.Store({
     },
     setNowDisplayPost(state, value) {
       state.nowDisplayPost = value;
+    },
+    setNowDisplayMemberInfo(state, value) {
+      state.nowDisplayMemberInfo = value;
     }
   },
   getters: {
