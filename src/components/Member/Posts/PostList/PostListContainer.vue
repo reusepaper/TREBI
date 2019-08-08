@@ -94,7 +94,7 @@ export default {
 }
 .postList__container {
   margin-top: 3vh;
-  height: 80vh;
+  height: 70vh;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   grid-auto-rows: 260px;

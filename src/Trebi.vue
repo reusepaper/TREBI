@@ -1,32 +1,6 @@
 <template>
-  <!-- <full-page ref="fullpage" :options="options" id="fullpage">
-    <Header></Header>
-    <div class="section">
-      <Main_copy></Main_copy>
-    </div>
-    <div class="section">
-      <Main></Main>
-    </div>
-    <div class="section">
-      <div class="teampageContain">
-        <Team></Team>
-      </div>
-    </div>
-    <div class="section">
-      <Member></Member>
-    </div>
-    <div class="section">
-      <div class="GraphPageContain">
-        <GitGraph></GitGraph>
-      </div>
-    </div>
-    <div class="section">
-      <Footer></Footer>
-  </div>-->
-  <!-- </full-page> -->
   <div>
     <Header class="page-header"></Header>
-    <!-- <Main_copy class="page"></Main_copy> -->
     <div
       v-show="(((this.$store.getters.getNavbarState === true) && (window.width <= 991))) === false"
     >
