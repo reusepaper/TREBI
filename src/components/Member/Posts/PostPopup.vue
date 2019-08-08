@@ -100,7 +100,7 @@ export default {
   height: 100vh;
   box-sizing: border-box;
   position: relative;
-  padding: 0px 50px;
+  padding: 50px;
   margin: auto;
   /* overflow: auto; */
   animation: fade 0.5s ease-out 1.3s both;
@@ -220,6 +220,7 @@ export default {
     padding: 30px 20px;
   }
   .popup__block__postwrite {
+    padding: 30px 20px;
   }
 }
 </style>
