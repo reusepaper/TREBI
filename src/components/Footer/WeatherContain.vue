@@ -26,6 +26,9 @@
       <template v-if="weather ==='Haze'">
         <Cloudy></Cloudy>
       </template>
+      <template v-if="weather ==='Thunderstorm'">
+        <Cloudy></Cloudy>
+      </template>
     </div>
   </div>
 </template>
@@ -70,7 +73,7 @@ export default {
           this.weather = json.weather[0].main;
           this.temp = Math.floor(json.main.temp - 273.15);
           /*eslint-disable*/
-          // console.log(this.weather);
+          console.log(this.weather);
           // console.log(this.temp, this.place, this.weather);
         });
     },
