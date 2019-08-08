@@ -41,12 +41,18 @@
       </div>
       <div id="chat_send">
         <div id="chat_send_text">
-          <span class="icon">
+          <!-- <span class="icon">
             <i class="fas fa-paperclip"></i>
-          </span>
-          <span class="icon">
+          </span> -->
+          <span class="icon" @click="emojiDisplay =! emojiDisplay">
             <i class="far fa-smile"></i>
           </span>
+          <div id="emoji_box" v-if="emojiDisplay">
+            <span class="emoji_span" v-for="(emoji, index) in emojiList" @click="ClickEmoji(emoji)">
+              {{emojiView(emoji)}}
+              <br v-if="index % 5 == 4">
+            </span>
+          </div>
           <input type="text" v-model="message" placeholder="질문을 입력해주세요." v-on:keyup.enter="sendMessage">
           <span class="icon" @click="sendMessage">
             <i class="fas fa-paper-plane"></i>
@@ -66,7 +72,7 @@ const { WebClient } = require('@slack/web-api');
 const token = process.env.VUE_APP_SLACK_TOKEN;
 // Initialize
 const web = new WebClient(token);
-
+let emojis = require('emojis');
 // var intElemScrollHeight = document.getElementById("#chat_body").scrollHeight;
 
 export default {
@@ -76,6 +82,11 @@ export default {
       message:'',
       show: false,
       message_thread_ts: '',
+      emojiDisplay: false,
+      emojiList: [':smile:', ':smiley:', ':sweat_smile:', ':blush:', ':confused:',
+                  ':cry:', ':disappointed:', ':disappointed_relieved:', ':fearful:', ':expressionless:',
+                  ':grin:', ':grinning:', ':heart_eyes:', ':joy:', ':kissing_heart:',
+                  ':+1:', ':-1:', ':heart:', ':sparkling_heart:', ':broken_heart:']
     }
   },
   mounted() {
@@ -240,6 +251,12 @@ export default {
           } else return;
         }
       } 
+    },
+    emojiView(emoji){
+      return emojis.unicode(emoji);
+    },
+    ClickEmoji(emoji){
+      this.message = this.message + emojis.unicode(emoji);
     }
   }
 }
@@ -355,9 +372,19 @@ input{
   border: none;
   font-size: 14px;
   margin: 0px 5px;
-  width: 200px;
+  width: 230px;
+}
+#emoji_box{
+  position: fixed;
+  bottom: 60px;
+  right: 138px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid gray;
+  padding: 0px 5px 0px 10px;
 }
 
+/* 채팅 내용 */
 ul{
   list-style: none;
 }
@@ -430,5 +457,12 @@ li{
 	content: " ";
 	clear: both;
 	height: 0;
+}
+.emoji_span{
+  padding: 3px 3px;
+}
+.emoji_span:hover{
+  background-color:skyblue;
+  cursor:pointer;
 }
 </style>
