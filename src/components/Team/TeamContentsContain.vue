@@ -201,7 +201,7 @@ export default {
     text-transform: uppercase;
     color: transparent;
   }
-    @media screen and (max-width: 361px) {
+  @media screen and (max-width: 361px) {
     .item p{
       display:none;
     }

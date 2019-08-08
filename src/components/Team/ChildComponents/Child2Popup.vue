@@ -1,7 +1,27 @@
 <template>
   <div id="popup-article" class="popup" v-bind:class="{modalShow :this.$store.state.Child2}">
+    <div @click="popUpClose" class="popup__close">close</div>
     <div class="popup__block">
-      <div class="block-row">
+      <div class="a">
+        <div class="left__arrow"><i class="fas fa-arrow-left"></i></div>
+        <div class="left__contents">내용</div>
+        <div class="right__arrow"><i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="b">
+        <div class="header">
+          <h1>댓글</h1>
+        </div>
+        <div class="comment--input">
+          <input type="text"/>
+          <span v-on:click="addComment">
+            <i class="fas fa-plus addBtn"></i>
+          </span>
+        </div>
+        <div class="content__comment">
+          댓글 쭉쭉쭈욱
+        </div>
+      </div>
+      <!-- <div class="block-row">
         <div class="block-cell upload">
         <div class="carousel-wrapper">
           <span id="target-item-1"></span>
@@ -46,7 +66,7 @@
             </ul>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -90,6 +110,25 @@ export default {
 </script>
 
 <style>
+.left__arrow{
+  position:relative;
+  top:50%;
+}
+.right__arrow{
+  position:relative;
+  top:50%;
+}
+.a{
+  display:grid;
+  grid-template-columns: 5% 90% 5%;
+}
+.b .header{
+  margin: 10px auto;
+}
+.b{
+  grid-template-rows:10% 10% 80%;
+  display:grid;
+}
 .addBtn{
   color:white;
   font-size:2em;
@@ -111,17 +150,11 @@ export default {
   border-style:groove;
   width:90%;
   height:60px;
-  border-radius: 10px 0 0 10px;
   font-size: 20px;
   border-right-color: transparent;
 }
 .comment--input input:focus{
   outline:none;
-}
-#comment--content button{
-  border-style: groove;
-  border-radius: 0 10px 10px 0;
-  float:right;
 }
 #comment--content{
   margin:10px;
@@ -240,7 +273,9 @@ export default {
   margin: auto;
   overflow: auto;
   animation: fade 0.5s ease-out 1.3s both;
-  display: table;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-column-gap: 10px;
 }
 .block-cell{
   display: table-cell;

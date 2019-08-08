@@ -351,7 +351,10 @@ a dark gray one. Again, make sure this arrow image exists somewhere */
 .arrow {
     background: url("http://haloxp.com/codepen/carousel-arrow-light.png") 50% 50% / 20px no-repeat;
 }
+  @media screen and (max-width: 361px) {
     
+
+  }
 
 /* Let's use using some media queries to resize the arrows
 on smaller devices.*/
