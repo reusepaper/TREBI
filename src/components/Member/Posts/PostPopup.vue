@@ -22,6 +22,7 @@
 import PostDetailContainer from "../Posts/PostDetail/PostDetailContainer";
 import PostListContainer from "../Posts/PostList/PostListContainer";
 import PostWriteContainer from "../Posts/PostWrite/PostWriteContainer";
+import $ from 'jquery';
 
 export default {
   components: {
@@ -46,8 +47,7 @@ export default {
 <style>
 .popup {
   width: 100%;
-  /* height: 100vh; */
-  display: table;
+  display: none;
   z-index: 100;
   position: fixed;
   top: 0;
@@ -72,6 +72,7 @@ export default {
 } */
 
 .popup__block__postdetail {
+  height: 100vh !important;
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
@@ -83,6 +84,7 @@ export default {
 }
 
 .popup__block__postlist {
+  height: 100vh !important;
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
@@ -94,6 +96,7 @@ export default {
 }
 
 .popup__block__postwrite {
+  height: 100vh !important;
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;

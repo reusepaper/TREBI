@@ -97,7 +97,7 @@ export default {
           delta = -winEvent.detail / 3;
         }
         if (delta < 0) {
-          if ($(this).index() <= pageMax) {
+          if ($(this).index() < pageMax) {
             if ($(this).next() != undefined) {
               moveTop = $(this)
                 .next()
