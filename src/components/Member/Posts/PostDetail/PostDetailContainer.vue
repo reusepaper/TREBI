@@ -1,16 +1,8 @@
 <template>
   <div class="Wrapper">
     <div class="post__header">
-      <div class="post__title">
-        PostDetail
-      </div>
-      <div class="postlist__show">
-        <div class="postlistbtn">
-          <label for="showlist">목록보기</label>
-          <input type="button" @click="goPostList" id="showlist" />
-        </div>
-      </div>
-      <!-- <Button @click="goPostList">글 목록보기</Button> -->
+      <Button class="go__list" @click="goPostList">글 목록보기</Button>
+      <div class="title">PostDetail</div>
     </div>
     <div class="post__contaniner">
       <div
@@ -28,14 +20,38 @@
         </div>
         <div class="title">{{this.$store.state.nowDisplayPost.title}}</div>
         <div class="content">{{this.$store.state.nowDisplayPost.content}}</div>
-        <div class="meta"></div>
+        <!-- <div class="comment__container"></div> -->
+        <div class="meta">
+          <div class="icon">
+            <Heart></Heart>
+          </div>
+          <div class="icon">
+            <Bubble></Bubble>
+          </div>
+          <div class="icon">
+            <Share></Share>
+          </div>
+        </div>
+        <div class="comment__input">
+          <input class="input" type="text" placeholder="...comment" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import EmptyHeart from "../Icons/EmptyHeart";
+import Bubble from "../Icons/Bubble";
+import Share from "../Icons/Share";
+import FullHeart from "../Icons/FullHeart";
 export default {
+  components: {
+    EmptyHeart,
+    FullHeart,
+    Share,
+    Bubble
+  },
   methods: {
     goPostList: function() {
       this.$store.commit("setPostPopupIndex", 1);
@@ -53,6 +69,7 @@ export default {
   width: 100%;
   /* background-color: aquamarine; */
 }
+
 .image {
   border: 1px solid rgba(0, 0, 0, 0.2);
   height: 100%;
@@ -62,10 +79,23 @@ export default {
 .post__header {
   display: flex;
   justify-content: center;
-  width: 100%;
+}
+.post__header .title {
+  font-size: 22px;
+}
+.go__list {
+  position: absolute;
+  align-self: center;
+  left: 50px;
+  background-color: rgb(250, 250, 250);
+  padding: 4px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
 }
 .post__content {
-  background-color: white;
+  background-color: rgb(250, 250, 250);
+  display: grid;
+  grid-template-rows: 2fr 1fr 5fr 1fr 1fr;
 }
 
 .post_title {
@@ -76,7 +106,7 @@ export default {
   width: 50vw;
   text-align: right;
 }
- 
+
 .content__header {
   display: flex;
   align-items: center;
@@ -102,42 +132,74 @@ export default {
   grid-template-columns: 6fr 4fr;
   grid-auto-rows: minmax(550px, 1fr);
 }
-
-
-.postlistbtn label {
-  margin-top: 1vh;
-  display: inline-block;
-  padding: 0.5em 0.75em;
-  font-size: inherit;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: white;
-  color: black;
-  cursor: pointer;
-  border: 2px solid #b8b8b8;
-  border-radius: 0.25em;
-  -webkit-transition: background-color 0.2s;
-  transition: background-color 0.2s;
+.title,
+.content {
+  padding: 10px;
+}
+.title {
+  font-size: 22px;
+}
+.content {
+  font-weight: lighter;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.postlistbtn label:hover {
-  background-color: #b8b8b8;
-  color: white;
+.comment__container {
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.postlistbtn label:active {
-  background-color: #b8b8b8;
-  color: white;
+.meta {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  padding-left: 10px;
+}
+.meta .icon {
+  margin-right: 10px;
+}
+.comment__input {
+  padding: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+.comment__input .input {
+  border: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+}
+.input:focus {
+  outline: none;
 }
 
-.postlistbtn input[type="button"] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+@media (max-width: 768px) {
+  .Wrapper {
+    margin: 0;
+  }
+  .post__contaniner {
+    grid-template-columns: none;
+    grid-template-rows: 4fr 6fr;
+  }
+  .post__content {
+    grid-template-rows: 0.5fr 0.5fr 3fr 0.5fr 0.5fr;
+  }
+  .content__header {
+    padding: 5px;
+  }
+  .content__header .writer {
+    font-size: 18px;
+  }
+  .title {
+    font-size: 18px;
+  }
+  .content__header .avatar {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    border-radius: 50%;
+  }
+  .go__list {
+    left: 20px;
+  }
 }
 </style>

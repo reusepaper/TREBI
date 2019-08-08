@@ -1,11 +1,12 @@
 <template>
   <div class="postList__wrapper">
     <div class="postList__header">
+      <Button
+        class="go__write"
+        v-if="this.$store.state.userLevel != 'visitor' && this.$store.state.is_login == true"
+        @click="goPostWrite"
+      >글작성</Button>
       <div class="post__title">{{this.$store.state.nowDisplayMember}}님의 Post</div>
-      <div class="writeButton" v-if="this.$store.state.userLevel != 'visitor' && this.$store.state.is_login == true">
-        <label for="writebtn">글작성</label>
-        <input type="button" @click="goPostWrite" id="writebtn" />
-      </div>
     </div>
     <!-- <Button @click="goPostDetail">글 상세보기</Button> -->
     <div class="postList__container">
@@ -65,13 +66,25 @@ export default {
 
 <style>
 .postList__wrapper {
-  padding: 30px;
+  /* padding: 30px; */
 }
 .postList__header {
   display: flex;
   justify-content: center;
 }
-
+.post__title {
+  padding: 10px;
+  font-size: 1.5em;
+}
+.go__write {
+  position: absolute;
+  left: 50px;
+  align-self: center;
+  background-color: rgb(250, 250, 250);
+  padding: 4px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
 .postList__container {
   margin-top: 3vh;
   height: 80vh;
@@ -88,48 +101,12 @@ export default {
   grid-gap: 60px;
 }
 
-.post__title {
-  width: 90%;
-  color: #524F5A;
-  text-align: left;
-  font-size: 3vw;
-  font-weight: bold;
-}
-
-.writeButton label {
-  margin-top: 1vh;
-  display: inline-block;
-  padding: 0.5em 0.75em;
-  font-size: inherit;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: white;
-  color: black;
-  cursor: pointer;
-  border: 2px solid #b8b8b8;
-  border-radius: 0.25em;
-  -webkit-transition: background-color 0.2s;
-  transition: background-color 0.2s;
-}
-
-.writeButton label:hover {
-  background-color: #b8b8b8;
-  color: white;
-}
-
-.writeButton label:active {
-  background-color: #b8b8b8;
-  color: white;
-}
-
-.writeButton input[type="button"] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+@media (max-width: 768px) {
+  .go__write {
+    left: 20px;
+  }
+  .post__title {
+    font-size: 22px;
+  }
 }
 </style>
