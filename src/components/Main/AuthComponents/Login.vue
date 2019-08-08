@@ -82,7 +82,8 @@ export default {
           this.loginUser.displayName, 
           this.loginUser.email.toString(), 
           "visitor", 
-          new Date()
+          new Date(),
+          this.loginUser.photoURL
         );
         this.userLevel = 'visitor';
       } else {
@@ -90,17 +91,9 @@ export default {
       }
       this.firebaseUser = await FirebaseService.getisSignup(this.loginUser.uid);
       // pushToken이 있는지 체크하고 없으면 넣기
-      // await Notification.requestPermission().then((permission) => {
-      //   if (permission === 'granted' && (this.firebaseUser[0].pushToken == null)) {
-      //     // console.log('Notification permission granted.');
-      //     firebase.messaging().getToken()
-      //       .then(token=>{
-      //         FirebaseService.updateUserPushToken(this.loginUser.uid, token);
-      //     })
-      //   } else {
-      //     console.log('Unable to get permission to notify.');
-      //   }
-      // });
+      if (this.firebaseUser.photoURL == null){
+        await FirebaseService.updateUserPhotoURL(this.loginUser.uid, this.loginUser.photoURL);
+      }
       await firebase.messaging().getToken()
       .then(token=>{
         if(token && (this.firebaseUser[0].pushToken == null))
