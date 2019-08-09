@@ -1,10 +1,19 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-  	match /{collections = **}{
-//     user level의 권한이 maintainer 일 때만 작성 수정 삭제 부여
-    	allow write, update, delete: if (/databases/$(database)/documents/Users/$(userId)).data.level == "maintainer";
-//       모든 user에게 읽기 권한 부여
+  	match /Posts/{postId}{
+    	allow create;
+      allow write;
+      allow update, delete: if(/databases/$(database)/documents/Users/$(request.auth.uid)).data.level== "maintainer";
       allow read;
-      }
+    }
+  	
+    match /Users/{document=**}{
+    	allow delete, update: if(/databases/$(database)/documents/Users/$(request.auth.uid)).data.level == "maintainer";
+      allow write, read;
+    }
+    match /TeamPost/{document=**}{
+    	allow write, read;
+      allow delete: if resource.data.uid == request.auth.uid;
+    }
   }
 }
