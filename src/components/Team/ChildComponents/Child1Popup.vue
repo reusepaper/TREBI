@@ -33,17 +33,24 @@
             <div class="comment--header">
               <h1>댓글</h1>
             </div>
+            <ul id="comment--content">
+              <li v-for="comment in comments" v-bind:key="comment">
+                {{comment.displayName}} | {{comment.comment}} 
+                <button 
+                  v-if="$store.state.user.uid == comment.uid"
+                  class="deleteButton"
+                  @click="delete_event(content.id, comment.id)"
+                  >
+                  삭제
+                </button>
+              </li>
+            </ul>
             <span class="comment--input">
               <input type="text" v-model="comment" v-on:keyup.enter="createTeamPostComment">
               <span v-on:click="createTeamPostComment">
-                <i class="fas fa-plus addBtn"></i>
+                <i id="plusButton" class="fas fa-plus addBtn"></i>
               </span>
             </span>
-            <ul id="comment--content">
-              <li v-for="comment in comments" v-bind:key="comment">
-                {{comment.displayName}} | {{comment.comment}}
-              </li>
-            </ul>
           </div>
         </div>
       </div>
@@ -83,6 +90,10 @@ export default {
       console.log(this.content);
     },
     async createTeamPostComment(){
+      if(this.comment == ''){
+        alert("댓글을 입력해주세요");
+        return ;
+      }
       await FirebaseService.createTeamPostComment(this.content.id, this.user, this.comment);
       await this.getTeamPostComment();
       await this.clearComment();
@@ -90,46 +101,60 @@ export default {
     async getTeamPostComment(){
       this.comments = await FirebaseService.getTeamPostComment(this.content.id);
       await console.log(this.comments);
+    },
+    delete_event(postId, commentId) {
+      if (confirm("정말 삭제하시겠습니까?") == true)
+        this.deleteTeamPostComment(postId, commentId);
+      else alert("삭제하지 않았습니다.");
+    },
+    async deleteTeamPostComment(postId, comment){
+      await FirebaseService.deleteTeamPostComment(postId, comment);
+      await this.getTeamPostComment();
     }
   },
   
 };
 </script>
 
-<style>
+<style scoped>
 .addBtn{
   color:white;
   font-size:2em;
   background:linear-gradient(to right,orange, orangered);
-  border-radius: 10px;
-  height:60px;
+  border-radius: 0px 10px 10px 0px;
+  height:40px;
+  width: 26px;
+  padding: 0px 3px;
 }
 .block-cell > .box{
   display:grid;
   position: absolute;
-  grid-template-rows: 10% 10% 78%;
+  grid-template-rows: 10% 78% 10%;
   height: 100%;
+  width: 100%;
   grid-column-gap: 5px;
 }
 .comment--input{
   display: flex;
+  padding: 0px 5px;
+  align-items: center;
 }
 .comment--input input{
   border-style:groove;
   width:90%;
-  height:60px;
+  height:36px;
   border-radius: 10px 0 0 10px;
-  font-size: 20px;
+  font-size: 16px;
   border-right-color: transparent;
 }
 .comment--input input:focus{
   outline:none;
 }
-#comment--content button{
+/* #comment--content button{
   border-style: groove;
   border-radius: 0 10px 10px 0;
   float:right;
-}
+} */
 #comment--content{
   margin:10px;
   text-align:left;
@@ -137,8 +162,9 @@ export default {
 }
 #comment--content > li {
   display: flex;
-  min-height:50px;
-  font-size:20px;
+  min-height:38px;
+  font-size:16px;
+  align-items: center;
 }
 .comment-title{
     position: absolute;
@@ -166,8 +192,8 @@ export default {
   content: "";
   box-sizing: border-box;
   width: 100%;
-  background-color: rgba(255,255,255, 0.6);
-
+  /* background-color: rgba(255,255,255, 0.6); */
+  background-color: rgb(255, 255, 255);
   position: fixed;
   left: 0;
   top: 45%;
@@ -189,7 +215,19 @@ export default {
   left: 0;
   margin-top: -1px;
 }
-
+.deleteButton{
+  margin: 5px;
+  background-color: white;
+  border: 1px salmon solid;
+  border-radius: 5px;
+  width: 32px;
+}
+#plusButton{
+  font-size:20px;
+}
+.comment--header{
+  border-bottom: 2px black solid;
+}
 @keyframes line-animation {
   0% {
     width: 0;
@@ -278,6 +316,7 @@ export default {
 }
 
 .popup__close {
+  cursor:pointer;
   width: 3.2rem;
   height: 3.2rem;
   text-indent: -9999px;
