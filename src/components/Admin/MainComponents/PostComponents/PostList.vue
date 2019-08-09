@@ -1,16 +1,16 @@
 <template>
   <div class="postlist">
     <!-- <PostPagination :listArray="Allposts" :pageSize="postsNums"/> -->
-    <PostPagination :listArray="Allposts"/>
+    <PostPagination :listArray="Allposts" />
   </div>
 </template>
 
 <script>
 import FirebaseService from "@/services/FirebaseService";
-import PostPagination from './PostPagination';
+import PostPagination from "./PostPagination";
 
 export default {
-  name: 'PostList',
+  name: "PostList",
   data() {
     return {
       Allposts: null

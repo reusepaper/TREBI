@@ -19,6 +19,46 @@ const messaging = firebase.messaging();
 const messagingKey = process.env.VUE_APP_FIREBASE_fcm;
 messaging.usePublicVapidKey(messagingKey);
 
+messaging
+  .requestPermission()
+  .then(function() {
+    MsgElem.innerHTML = "Notification permission granted.";
+    console.log("Notification permission granted.");
+
+    // get the token in the form of promise
+    return messaging.getToken();
+  })
+  .then(function(token) {
+    TokenElem.innerHTML = "token is : " + token;
+  })
+  .catch(function(err) {
+    ErrElem.innerHTML = ErrElem.innerHTML + "; " + err;
+    console.log("Unable to get permission to notify.", err);
+  });
+
+// forground Message
+messaging.onMessage(function(payload) {
+  const notificationTitle = payload.data.message;
+  const notificationOptions = {
+    body: payload.data.body
+    // icon: payload.data.icon
+  };
+
+  if (!("Notification" in window)) {
+    console.log("This browser does not support system notifications");
+  }
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === "granted") {
+    // If it's okay let's create a notification
+    var notification = new Notification(notificationTitle, notificationOptions);
+    notification.onclick = function(event) {
+      event.preventDefault(); // prevent the browser from focusing the Notification's tab
+      window.open("https://webmobile-sub2-510fa.firebaseapp.com/");
+      notification.close();
+    };
+  }
+});
+
 const firestore = firebase.firestore();
 let db = firebase.firestore();
 const POSTS = "Posts";
