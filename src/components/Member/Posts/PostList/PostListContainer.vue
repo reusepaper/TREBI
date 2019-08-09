@@ -8,7 +8,7 @@
       >글작성</Button>
       <div class="post__title">{{this.$store.state.nowDisplayMember}}님의 Post</div>
     </div>
-    <!-- <Button @click="goPostDetail">글 상세보기</Button> -->
+    <Button @click="goPostDetail">글 상세보기</Button>
     <div class="postList__container">
       <div v-for="post in postList">
         <PostCard v-bind:post="post"></PostCard>
@@ -21,9 +21,16 @@
 import FirebaseService from "../../../../services/FirebaseService";
 import { mapState } from "vuex";
 import PostCard from "./PostCard";
+import { setInterval } from 'timers';
+
+// $("#ModalPopup").on("mousewheel", function (event) {
+//   event.stopPropagation();
+// });
+
 export default {
   mounted() {
     this.getUId(this.$store.state.nowDisplayMember);
+    
   },
   data() {
     return {

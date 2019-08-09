@@ -18,7 +18,7 @@ export default new Vuex.Store({
     messages: [],
     reply: {},
     modal_remoter: false,
-    isPostShow: true,
+    isPostShow: false,
     Child1: true,
     Child2: true,
     Child3: true,

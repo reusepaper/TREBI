@@ -13,10 +13,12 @@
         <!-- <div class="image" v-bind:style="{ 'background-image': 'url(' + i + ')' }"></div> -->
 
         <div class="infoHeader">
+          <!-- 좌상단 프로필사진 -->
           <div
             class="profileImgContanier"
             v-bind:style="{ 'background-image': 'url(https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814049_960_720.png )' }"
           ></div>
+          <!-- 우상단 설명부분 -->
           <div class="introContainer">
             <span class="name">{{member.name}}</span>
             <div class="intro">{{member.intro}}</div>
@@ -28,15 +30,16 @@
           </div>
         </div>
         <div class="infoContent">
-          <a class="open-popup">
-            <div
-              class="page__container"
-              @click="togglePopUp"
-              v-bind:class="{modalShow : ismodalShow}"
-            >
-              <a>More</a>
-            </div>
-          </a>
+          <!-- more 버튼 -->
+          <div
+            class="page__container"
+            @click="togglePopUp"
+            v-bind:class="{modalShow : ismodalShow}"
+            style="cursor:pointer"
+          >
+            <a>More</a>
+          </div>
+          <!-- 스킬바 -->
           <SkillSlider v-bind:skills="member.skills"></SkillSlider>
         </div>
       </div>
@@ -72,33 +75,14 @@ export default {
     };
   },
   mounted() {
-    console.log(
-      "현재 보여지는 멤버 인덱스 : ",
-      this.$store.state.nowDisplayMemberIndex
-    );
-    console.log(
-      "현재 보여지는 멤버 이름 : ",
-      this.$store.state.nowDisplayMember
-    );
-    // $('#ModalPopup').on('click', function(e){
-    //    $('html, body').css('overflow', 'hidden');
-    //   var event = e.originalEvent;
-    //   var d = event.wheelDelta || -event.detail;
-    //   this.scrollTop += (d < 0 ? 1 : -1) * 30;
-    //   e.preventDefault();
-    // })
-    this.$store.watch(() => this.$store.getters.getPostShow, ismodalShow => {
-      console.log('watched:', ismodalShow);
-      if(ismodalShow) {
-        $('#ModalPopup').on('scroll touchmove mousewheel', function(event) {
-          event.preventDefault();
-          event.stopPropagation();
-          return false;
-        });
-      } else {
-        $('#ModalPopup').off('scroll touchmove mousewheel');
-      }
-    })
+    // console.log(
+    //   "현재 보여지는 멤버 인덱스 : ",
+    //   this.$store.state.nowDisplayMemberIndex
+    // );
+    // console.log(
+    //   "현재 보여지는 멤버 이름 : ",
+    //   this.$store.state.nowDisplayMember
+    // );
   },
   methods: {
     next() {
