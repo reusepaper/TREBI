@@ -33,7 +33,8 @@
           </div>
         </div>
         <div class="comment__input">
-          <input class="input" type="text" placeholder="...comment" />
+          <input class="input" type="text" v-model="comment" @keyup.enter="createComment" placeholder="...comment" />
+          <button class="postButton" @click="createComment">입력</button>
         </div>
       </div>
     </div>
@@ -46,6 +47,9 @@ import Bubble from "../Icons/Bubble";
 import Share from "../Icons/Share";
 import FullHeart from "../Icons/FullHeart";
 export default {
+  data:{
+    comment: ""
+  },
   components: {
     EmptyHeart,
     FullHeart,
@@ -55,6 +59,14 @@ export default {
   methods: {
     goPostList: function() {
       this.$store.commit("setPostPopupIndex", 1);
+    },
+    createComment(){
+      if(this.comment == "") {
+        alert("댓글을 작성해주세요");
+        return;
+      }
+      console.log(this.comment)
+      
     }
   },
   mounted() {
@@ -72,7 +84,7 @@ export default {
 
 .image {
   border: 1px solid rgba(0, 0, 0, 0.2);
-  height: 100%;
+  height: 550px;
   width: 100%;
 }
 
@@ -94,8 +106,9 @@ export default {
 }
 .post__content {
   background-color: rgb(250, 250, 250);
+  height: 552px;
   display: grid;
-  grid-template-rows: 2fr 1fr 5fr 1fr 1fr;
+  grid-template-rows: 1.5fr 1fr 5fr 1fr 0.8fr;
 }
   
 .post_title {
@@ -159,14 +172,33 @@ export default {
   margin-right: 10px;
 }
 .comment__input {
+  border: none;
+  /* width: 100%; */
+  /* height: 100%; */
+  /* background-color: rgba(0, 0, 0, 0); */
+  background-color: white;
   padding: 10px;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
-.comment__input .input {
+.input {
+  width:85%;
+  margin:0px;
+  padding: 0px;
   border: none;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0);
+  font-size: 16px;
+  float:left;
+}
+.postButton {
+  width:10%;
+  margin:0px;
+  padding: 0px;
+  background-color: white;
+  border: none;
+  border: 1px solid salmon;
+  border-radius: 3px;
+  padding: 3px 0px;
+  color: salmon;
+  margin-left: 10px;
 }
 .input:focus {
   outline: none;
