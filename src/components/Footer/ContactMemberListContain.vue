@@ -2,19 +2,19 @@
   <ul class="memberList">
     <li data-aos="fade-right" class="memberItem">
       <span>이주호</span>
-      <span>13akstjq@naver.com</span>
+      <span>leeiopd@gmail.com</span>
     </li>
     <li data-aos="fade-right" data-aos-delay="50" class="memberItem">
       <span>유동관</span>
-      <span>13akstjq@naver.com</span>
+      <span>dkyou7@gmail.com</span>
     </li>
     <li data-aos="fade-right" data-aos-delay="100" class="memberItem">
       <span>임연지</span>
-      <span>13akstjq@naver.com</span>
+      <span>reusepaper210@gmail.com</span>
     </li>
     <li data-aos="fade-right" data-aos-delay="150" class="memberItem">
       <span>한단비</span>
-      <span>13akstjq@naver.com</span>
+      <span>rainhan96@gmail.com</span>
     </li>
     <li data-aos="fade-right" data-aos-delay="200" class="memberItem">
       <span>한만섭</span>

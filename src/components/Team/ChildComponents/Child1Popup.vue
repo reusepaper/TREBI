@@ -37,7 +37,7 @@
               <li v-for="comment in comments" v-bind:key="comment">
                 {{comment.displayName}} | {{comment.comment}} 
                 <button 
-                  v-if="$store.state.user.uid == comment.uid"
+                  v-if="$store.state.user && $store.state.user.uid == comment.uid"
                   class="deleteButton"
                   @click="delete_event(content.id, comment.id)"
                   >
@@ -46,7 +46,9 @@
               </li>
             </ul>
             <span class="comment--input">
-              <input type="text" v-model="comment" v-on:keyup.enter="createTeamPostComment">
+              <input type="text" v-model="comment" 
+                v-on:keyup.enter="createTeamPostComment"
+                placeholder="댓글을 입력해주세요">
               <span v-on:click="createTeamPostComment">
                 <i id="plusButton" class="fas fa-plus addBtn"></i>
               </span>
@@ -76,31 +78,38 @@ export default {
     popUpClose() {
       // this.$store.commit("closeChildShow");
       this.$store.commit("toggleNthChildShow",1);
-      console.log("closeChildShow 끝");
+      // console.log("closeChildShow 끝");
     },
     
     clearComment(){
-      console.log("commentclear");
+      // console.log("commentclear");
       this.comment='';
     },
     async getTeamPost(){
       const allContents = await FirebaseService.getTeamPost();
+      // console.log(allContents)
       this.content = allContents[0];
       await this.getTeamPostComment();
-      console.log(this.content);
+      // console.log(this.content);
     },
     async createTeamPostComment(){
-      if(this.comment == ''){
-        alert("댓글을 입력해주세요");
-        return ;
+      if(this.user === null){
+        alert("로그인을 해야 댓글을 작성할 수 있습니다.");
+        return;
+      } else{
+        if(this.comment == ''){
+          alert("댓글을 입력해주세요");
+          return ;
+        }
       }
+      
       await FirebaseService.createTeamPostComment(this.content.id, this.user, this.comment);
       await this.getTeamPostComment();
       await this.clearComment();
     },
     async getTeamPostComment(){
       this.comments = await FirebaseService.getTeamPostComment(this.content.id);
-      await console.log(this.comments);
+      // await console.log(this.comments);
     },
     delete_event(postId, commentId) {
       if (confirm("정말 삭제하시겠습니까?") == true)
