@@ -20,10 +20,9 @@ messaging.setBackgroundMessageHandler(function(payload) {
     payload
   );
   // Customize notification here
-  var notificationTitle = "TREBI";
+  var notificationTitle = payload.data.message;
   var notificationOptions = {
-    body: "Background Message body.",
-    icon: "/firebase-logo.png"
+    body: payload.data.body
   };
 
   return self.registration.showNotification(

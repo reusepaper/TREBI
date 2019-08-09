@@ -13,11 +13,7 @@
         </div>
         <div id="chat_body">
           <ul>
-            <li
-              v-for="(slackMessage, index) in messages"
-              v-bind:key="slackMessage.item"
-              class="clearfix"
-            >
+            <li v-for="(slackMessage) in messages" v-bind:key="slackMessage.item" class="clearfix">
               <div v-if="slackMessage.isMe">
                 <div class="message-data align-right">
                   <!-- <span class="message-data-time" >{{slackMessage.time}}</span> &nbsp; &nbsp; -->
@@ -144,7 +140,6 @@ export default {
         alert("질문을 입력해주세요");
         return;
       }
-      let now = new Date();
       let myMessages = {
         username: this.$store.state.user.displayName,
         isMe: true,
@@ -164,7 +159,7 @@ export default {
       this.message = await "";
     },
     async postMessage() {
-      const result = await web.chat.postMessage({
+      await web.chat.postMessage({
         channel: "#test_chat",
         username: this.$store.state.user.displayName,
         text: this.message
@@ -285,9 +280,10 @@ export default {
           if (this.$store.state.reply != trebiMessages) {
             await this.$store.commit("setReply", trebiMessages);
           }
-          if (this.$store.state.reply != trebiMessages) {
-            await this.$store.commit("setReply", trebiMessages);
-          }
+          // if(this.$store.state.reply != trebiMessages){
+          //   await this.$store.commit("setReply", trebiMessages);
+
+          // }
           if (
             this.messages[this.messages.length - 1].message !=
             trebiMessages.message

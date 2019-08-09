@@ -66,28 +66,12 @@ import Bubble from "../Icons/Bubble";
 import Share from "../Icons/Share";
 import FullHeart from "../Icons/FullHeart";
 export default {
-  data() {
-    return {
-      comments: [
-        // { writer: "1", content: "a" },
-        // { writer: "2", content: "b" },
-        // { writer: "3", content: "c" },
-        // { writer: "4", content: "d" },
-        // { writer: "1", content: "a" },
-        // { writer: "2", content: "b" },
-        // { writer: "3", content: "c" },
-        // { writer: "4", content: "d" },
-        // { writer: "1", content: "a" },
-        // { writer: "2", content: "b" },
-        // { writer: "3", content: "c" },
-        // { writer: "4", content: "d" }
-      ],
-      comment: "",
-      isLike: {
-        length: 0
-      },
-      displayPost: ""
-    };
+  data: {
+    comment: "",
+    isLike: {
+      length: 0
+    },
+    displayPost: ""
   },
   components: {
     EmptyHeart,

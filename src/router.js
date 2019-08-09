@@ -1,31 +1,25 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Trebi from './Trebi.vue'
-import Admin from './views/Admin.vue'
-import Auth from './views/Login.vue'
-import VModal from 'vue-js-modal'
- 
-Vue.use(VModal)
-Vue.use(Router)
+import Vue from "vue";
+import Router from "vue-router";
+import Trebi from "./Trebi.vue";
+import Admin from "./views/Admin.vue";
+import VModal from "vue-js-modal";
+
+Vue.use(VModal);
+Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'Trebi',
+      path: "/",
+      name: "Trebi",
       component: Trebi
     },
     {
-      path: '/admin',
-      name: 'admin',
+      path: "/admin",
+      name: "admin",
       component: Admin
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Auth
     }
   ]
-})
+});

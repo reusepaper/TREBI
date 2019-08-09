@@ -20,7 +20,7 @@
     <div class="upload-container">
       <div class="image-upload-container">
         <ImgUpLoad v-on:upLoadImg="upLoadImg"></ImgUpLoad>
-        <img :src="image" />
+        <img :src="image" alt="Post Img" />
       </div>
       <div class="upload-button-container">
         <div class="upload">
