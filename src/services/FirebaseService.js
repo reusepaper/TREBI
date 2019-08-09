@@ -26,6 +26,40 @@ const USERS = "Users";
 const TODO = "ToDo";
 const TEAMPOST = "TeamPost";
 const TEAMCOMMENT = "TeamComment";
+
+// The default cache size threshold is 40 MB. Configure "cacheSizeBytes"
+// for a different threshold (minimum 1 MB) or set to "CACHE_SIZE_UNLIMITED"
+// to disable clean-up.
+firestore.settings({
+  cacheSizeBytes: firestore.CACHE_SIZE_UNLIMITED
+});
+
+firestore.enablePersistence().catch(function(err) {
+  if (err.code == "failed-precondition") {
+    // Multiple tabs open, persistence can only be enabled
+    // in one tab at a a time.
+    // ...
+  } else if (err.code == "unimplemented") {
+    // The current browser does not support all of the
+    // features required to enable persistence
+    // ...
+  }
+});
+// Subsequent queries will use persistence, if it was enabled successfully
+
+// db.collection("Posts")
+//   .where("state", "==", "CA")
+//   .onSnapshot({ includeMetadataChanges: true }, function(snapshot) {
+//     snapshot.docChanges().forEach(function(change) {
+//       if (change.type === "added") {
+//         console.log("New city: ", change.doc.data());
+//       }
+
+//       var source = snapshot.metadata.fromCache ? "local cache" : "server";
+//       console.log("Data came from " + source);
+//     });
+//   });
+
 export default {
   getPosts() {
     const postsCollection = firestore.collection(POSTS);
