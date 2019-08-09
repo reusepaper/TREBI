@@ -142,6 +142,10 @@ export default {
   background-color: none;
   margin-right: 5px;
 }
+
+.TrebiBtn:hover {
+  background-color: #324558;
+}
 /* Google Analytics 링크 Btn Style */
 .AnalyticsBtnLi {
   height: 60px;
