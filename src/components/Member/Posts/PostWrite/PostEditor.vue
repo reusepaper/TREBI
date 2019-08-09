@@ -1,17 +1,17 @@
 <template>
   <div>
-    <div class="title-container">
+    <div class="writer__header">
+      <div class="postwrite__title">PostWrite</div>
+      <Button class="go__list" @click="goPostList">리스트 보기</Button>
+    </div>
+
+    <div class="title__container">
       <label class="w3-text-blue">
-        <b>TITLE&nbsp;&nbsp;</b>
+        <b>TITLE : &nbsp;&nbsp;</b>
       </label>
       <input class="w3-input w3-border title-context" name="last" type="text" v-model="title" />
-      &nbsp;
-      <div class="gotolist">
-        <label for="listbutton">리스트보기</label>
-        <input type="button" @click="goPostList" id="listbutton" />
-      </div>
-      <!-- <Button @click="goPostList">리스트 보기</Button> -->
     </div>
+
     <div class="container">
       <textarea class="md-text" rows="10" v-model="content"></textarea>
       <markdown-it-vue class="md-body" :content="content" :options="options"></markdown-it-vue>
@@ -107,20 +107,44 @@ export default {
 </script>
 
 <style scoped>
-.title-container {
+.writer__header {
+  display: flex;
+  justify-content: center;
+}
+.writer__header .tpostwrite__titleitle {
+  font-size: 40px;
+}
+.go__list {
+  position: absolute;
+  align-self: center;
+  left: 50px;
+  background-color: rgb(250, 250, 250);
+  padding: 4px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+.title__container {
   margin-top: 2vh;
   width: 100%;
-  text-align: center;
+  display: flex;
 }
 
 .title-context {
   width: 80%;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+}
+.title-context:focus {
+  outline: none;
 }
 
 .container {
   margin-top: 1vh;
-  display: inline-flex;
-  width: 100%;
+  /* display: inline-flex; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: minmax(500px, 1fr);
 }
 
 .upload-container {
@@ -137,8 +161,8 @@ export default {
 }
 
 .md-text {
-  width: 50%;
-  height: 500px;
+  /* width: 50%; */
+  /* height: 500px; */
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 2px;
@@ -147,8 +171,8 @@ export default {
 }
 
 .md-body {
-  width: 50%;
-  margin-left: 20px;
+  /* width: 50%; */
+  /* margin-left: 20px; */
   overflow: auto;
   max-height: 500px;
 }
@@ -231,6 +255,22 @@ export default {
   border: 0;
 }
 
+@media (max-width: 768px) {
+  .writer__header .tpostwrite__titleitle {
+    font-size: 22px;
+  }
+  .go__list {
+    left: 20px;
+  }
+  .container {
+    grid-template-columns: none;
+    grid-template-rows: 1fr 1fr;
+    /* grid-auto-flow: dense; */
+  }
+  .md-body {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
 /* .button {
   background-color: #92c5ff;
   border: none;
