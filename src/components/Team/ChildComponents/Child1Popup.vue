@@ -162,7 +162,7 @@ export default {
 }
 #comment--content > li {
   display: flex;
-  min-height:42px;
+  min-height:38px;
   font-size:16px;
   align-items: center;
 }
