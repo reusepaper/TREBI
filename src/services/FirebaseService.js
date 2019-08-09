@@ -290,11 +290,12 @@ export default {
       .collection(TEAMPOST)
       .doc(postId)
       .collection(TEAMCOMMENT);
-    return TeamCommentCollection.orderBy("createdAt", "desc")
+    return TeamCommentCollection.orderBy("createdAt")
       .get()
       .then(docSnapshots => {
         return docSnapshots.docs.map(doc => {
           let data = doc.data();
+          data.id = doc.id;
           return data;
         });
       });
@@ -310,6 +311,15 @@ export default {
       comment: newComment,
       createdAt: new Date()
     });
+  },
+  deleteTeamPostComment(postId, comment){
+    const deleteComment = firestore
+      .collection(TEAMPOST)
+      .doc(postId)
+      .collection(TEAMCOMMENT)
+      .doc(comment);
+      deleteComment.delete();
+    return true;
   }
   // getToDo() {
   //   const postsCollection = firestore.collection(TODO);
