@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll-down">
+  <div class="scroll-down" @click="moveTeam">
     <span></span>
     <span></span>
     <span></span>
@@ -8,7 +8,18 @@
 
 <script>
 export default {
-
+  methods:{
+    moveTeam: async function(){
+      await this.$store.commit('setNavbarState', false);
+      $("#overlay-input").prop("checked", false);
+      var height = $(window).height();
+      height += 1;
+      window.scrollTo({
+        top: height,
+        behavior: 'smooth'
+      });
+    },
+  }
 }
 </script>
 
@@ -20,6 +31,7 @@ export default {
     width:40px;
     height:40px;
     transform: translateY(-80px) translateX(-50%) rotate(45deg);
+    cursor: pointer;
   }
   .scroll-down:hover span:nth-child(1){
     border-color: orange;

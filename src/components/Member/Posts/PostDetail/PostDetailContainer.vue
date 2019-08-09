@@ -97,7 +97,7 @@ export default {
   display: grid;
   grid-template-rows: 2fr 1fr 5fr 1fr 1fr;
 }
-
+  
 .post_title {
   width: 50vw;
   text-align: left;
@@ -202,4 +202,14 @@ export default {
     left: 20px;
   }
 }
+  .postlistbtn input[type="button"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
 </style>

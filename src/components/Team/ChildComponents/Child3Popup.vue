@@ -89,7 +89,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .addBtn{
   color:white;
   font-size:2em;
@@ -118,11 +118,11 @@ export default {
 .comment--input input:focus{
   outline:none;
 }
-#comment--content button{
+/* #comment--content button{
   border-style: groove;
   border-radius: 0 10px 10px 0;
   float:right;
-}
+} */
 #comment--content{
   margin:10px;
   text-align:left;

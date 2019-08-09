@@ -8,7 +8,7 @@
         <PostDetailContainer></PostDetailContainer>
       </div>
       <div class="popup__block__postlist" style="background-color : #EDEDEE;">
-        <PostListContainer></PostListContainer>
+        <PostListContainer id="postListContainer"></PostListContainer>
       </div>
       <div class="popup__block__postwrite" style="background-color : #EDEDEE;">
         <PostWriteContainer></PostWriteContainer>
@@ -23,7 +23,6 @@ import PostDetailContainer from "../Posts/PostDetail/PostDetailContainer";
 import PostListContainer from "../Posts/PostList/PostListContainer";
 import PostWriteContainer from "../Posts/PostWrite/PostWriteContainer";
 import $ from "jquery";
-
 export default {
   components: {
     PostWriteContainer,
@@ -32,13 +31,58 @@ export default {
   },
   data() {
     return {
-      wd: 100
+      wd: 100,
+      // posY: null
     };
+  },
+  mounted: function(){
+    this.$store.watch(() => this.$store.getters.getPostShow, ismodalShow => {
+      // console.log('watched:', ismodalShow);
+      // this.posY = $(window).scrollTop();
+      if(ismodalShow) {
+        // console.log(this.posY);
+        var height = $(window).height();
+        height *= 2;
+        height += 2;
+        window.scrollTo({
+          top: height,
+          behavior: 'smooth'
+        });
+        // $("html, body").addClass("not_scroll");
+        $("body").css("overflow", "hidden");
+        $("#postListContainer").on("mousewheel", function (event) {
+          event.stopPropagation();
+        });
+      } else{
+        // $("html, body").removeClass("not_scroll");
+        // posY = $(window).scrollTop(posY);
+        var height = $(window).height();
+        height *= 2;
+        height += 2;
+        window.scrollTo({
+          top: height
+          // behavior: 'smooth'
+        });
+        $("body").css("overflow", "visible");
+        // $("html, body").removeClass("not_scroll");
+        // this.posY = $(window).scrollTop(this.posY);
+      }
+    })
   },
   methods: {
     togglePopUp() {
+      // $(".not_scroll").css("top", 'height + "px"');
       this.$store.commit("toggleIsPostShow");
       this.$store.commit("setPostPopupIndex", 1);
+      // var height = $(window).height();
+      // height *= 2;
+      // height += 2;
+      // window.scrollTo({
+      //   top: height
+      //   // behavior: 'smooth'
+      // });
+      // $("html, body").removeClass("not_scroll");
+      // // this.posY = $(window).scrollTop(this.posY);
     }
   }
 };
@@ -57,6 +101,7 @@ export default {
   display: flex;
   /* transform: translate3d(-100vw, 0px, 0px); */
   transition: 0.3s ease-in-out;
+  /* background-color: #EDEDEE; */
 }
 
 /* .popup__block {
@@ -113,7 +158,7 @@ export default {
   content: "";
   box-sizing: border-box;
   width: 100%;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   position: fixed;
   left: 0;
   top: 45%;
@@ -125,7 +170,7 @@ export default {
   content: "";
   width: 0;
   height: 2px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
 
   will-change: width, opacity;
   animation: line-animation 0.6s cubic-bezier(0.83, 0.04, 0, 1.16) both;
@@ -134,6 +179,17 @@ export default {
   top: 45%;
   left: 0;
   margin-top: -1px;
+}
+
+.not_scroll{
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+.not_scroll .cont {
+    position: relative;
+    top: 0;
 }
 
 @keyframes line-animation {
@@ -211,7 +267,6 @@ export default {
   background-size: contain;
   background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPHBhdGggZD0iTTE5IDYuNDFMMTcuNTkgNSAxMiAxMC41OSA2LjQxIDUgNSA2LjQxIDEwLjU5IDEyIDUgMTcuNTkgNi40MSAxOSAxMiAxMy40MSAxNy41OSAxOSAxOSAxNy41OSAxMy40MSAxMnoiLz4gICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==);
 }
-
 @media (max-width: 769px) {
   .popup__block__postdetail {
     padding: 30px 20px;
@@ -223,4 +278,5 @@ export default {
     padding: 30px 20px;
   }
 }
+
 </style>
