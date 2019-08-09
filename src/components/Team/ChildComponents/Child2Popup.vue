@@ -8,19 +8,19 @@
           <span id="target-item-2"></span>
           <span id="target-item-3"></span>
           <div class="carousel-item item-1" style="background-color: khaki;">
-            <h2>Item 1</h2>
+            <h2>{{content.content1}}</h2>
             <p>Content goes here.</p>
             <a class="arrow arrow-prev" href="#target-item-3"></a>
             <a class="arrow arrow-next" href="#target-item-2"></a>
           </div>
           <div class="carousel-item item-2 light" style="background-color: royalblue;">
-            <h2>Item 2</h2>
+            <h2>{{content.content2}}</h2>
             <p>Content goes here.</p>
             <a class="arrow arrow-prev" href="#target-item-1"></a>
             <a class="arrow arrow-next" href="#target-item-3"></a>
           </div>
           <div class="carousel-item item-3" style="background-color: aliceblue;">
-            <h2>Item 3</h2>
+            <h2>{{content.content3}}</h2>
             <p>Content goes here.</p>
             <a class="arrow arrow-prev" href="#target-item-2"></a>
             <a class="arrow arrow-next" href="#target-item-1"></a>
@@ -33,17 +33,26 @@
             <div class="comment--header">
               <h1>댓글</h1>
             </div>
-            <span class="comment--input">
-              <input type="text" v-model="comment" v-on:keyup.enter="addComment">
-              <span v-on:click="addComment">
-                <i class="fas fa-plus addBtn"></i>
-              </span>
-            </span>
             <ul id="comment--content">
               <li v-for="comment in comments" v-bind:key="comment">
-                {{comment}}
+                {{comment.displayName}} | {{comment.comment}} 
+                <button 
+                  v-if="$store.state.user && $store.state.user.uid == comment.uid"
+                  class="deleteButton"
+                  @click="delete_event(content.id, comment.id)"
+                  >
+                  삭제
+                </button>
               </li>
             </ul>
+            <span class="comment--input">
+              <input type="text" v-model="comment" 
+                v-on:keyup.enter="createTeamPostComment"
+                placeholder="댓글을 입력해주세요">
+              <span v-on:click="createTeamPostComment">
+                <i id="plusButton" class="fas fa-plus addBtn"></i>
+              </span>
+            </span>
           </div>
         </div>
       </div>
@@ -52,40 +61,67 @@
 </template>
 
 <script scoped>
+import FirebaseService from '@/services/FirebaseService'
 export default {
   data:function(){
     return{
+      content: [],
       comment:'',
-      comments:[]
+      comments: [],
+      user: this.$store.state.user,
     }
+  },
+  mounted: function(){
+    this.getTeamPost();
   },
   methods: {
     popUpClose() {
       // this.$store.commit("closeChildShow");
       this.$store.commit("toggleNthChildShow",2);
-
-      console.log("closeChildShow 끝");
+      // console.log("closeChildShow 끝");
     },
-    addComment(){
-      console.log(this.comment);
-      // 유저아이디 key값(일단 임의로 둘다 똑같이 해놓음), value는 댓글
-      localStorage.setItem(this.comment,this.comment);
-      this.comments.push(this.comment);
-      this.clearComment();
-    },
+    
     clearComment(){
-      console.log("commentclear");
+      // console.log("commentclear");
       this.comment='';
+    },
+    async getTeamPost(){
+      const allContents = await FirebaseService.getTeamPost();
+      // console.log(allContents)
+      this.content = allContents[1];
+      await this.getTeamPostComment();
+      // console.log(this.content);
+    },
+    async createTeamPostComment(){
+      if(this.user === null){
+        alert("로그인을 해야 댓글을 작성할 수 있습니다.");
+        return;
+      } else{
+        if(this.comment == ''){
+          alert("댓글을 입력해주세요");
+          return ;
+        }
+      }
+      
+      await FirebaseService.createTeamPostComment(this.content.id, this.user, this.comment);
+      await this.getTeamPostComment();
+      await this.clearComment();
+    },
+    async getTeamPostComment(){
+      this.comments = await FirebaseService.getTeamPostComment(this.content.id);
+      // await console.log(this.comments);
+    },
+    delete_event(postId, commentId) {
+      if (confirm("정말 삭제하시겠습니까?") == true)
+        this.deleteTeamPostComment(postId, commentId);
+      else alert("삭제하지 않았습니다.");
+    },
+    async deleteTeamPostComment(postId, comment){
+      await FirebaseService.deleteTeamPostComment(postId, comment);
+      await this.getTeamPostComment();
     }
   },
-  created(){
-    if(localStorage.length>0){
-      for(var i=0;i<localStorage.length;i++){
-        if(localStorage.key(i).length==0)continue;
-        this.comments.push(localStorage.key(i));
-      }
-    }
-  }
+  
 };
 </script>
 
@@ -94,25 +130,30 @@ export default {
   color:white;
   font-size:2em;
   background:linear-gradient(to right,orange, orangered);
-  border-radius: 10px;
-  height:60px;
+  border-radius: 0px 10px 10px 0px;
+  height:40px;
+  width: 26px;
+  padding: 0px 3px;
 }
 .block-cell > .box{
   display:grid;
   position: absolute;
-  grid-template-rows: 10% 10% 78%;
+  grid-template-rows: 10% 78% 10%;
   height: 100%;
+  width: 100%;
   grid-column-gap: 5px;
 }
 .comment--input{
   display: flex;
+  padding: 0px 5px;
+  align-items: center;
 }
 .comment--input input{
   border-style:groove;
   width:90%;
-  height:60px;
+  height:36px;
   border-radius: 10px 0 0 10px;
-  font-size: 20px;
+  font-size: 16px;
   border-right-color: transparent;
 }
 .comment--input input:focus{
@@ -130,8 +171,9 @@ export default {
 }
 #comment--content > li {
   display: flex;
-  min-height:50px;
-  font-size:20px;
+  min-height:38px;
+  font-size:16px;
+  align-items: center;
 }
 .comment-title{
     position: absolute;
@@ -159,8 +201,8 @@ export default {
   content: "";
   box-sizing: border-box;
   width: 100%;
-  background-color: rgba(255,255,255, 0.6);
-
+  /* background-color: rgba(255,255,255, 0.6); */
+  background-color: rgb(255, 255, 255);
   position: fixed;
   left: 0;
   top: 45%;
@@ -182,7 +224,19 @@ export default {
   left: 0;
   margin-top: -1px;
 }
-
+.deleteButton{
+  margin: 5px;
+  background-color: white;
+  border: 1px salmon solid;
+  border-radius: 5px;
+  width: 32px;
+}
+#plusButton{
+  font-size:20px;
+}
+.comment--header{
+  border-bottom: 2px black solid;
+}
 @keyframes line-animation {
   0% {
     width: 0;
@@ -271,6 +325,7 @@ export default {
 }
 
 .popup__close {
+  cursor:pointer;
   width: 3.2rem;
   height: 3.2rem;
   text-indent: -9999px;
@@ -366,8 +421,7 @@ any element whose id starts with 'target-item'. */
 /* So, up above we made all our carousel items transparent, which means
 that on page-load, we'd have a big empty box where our carousel should be.
 Let's set our first item's opacity to 1 so that it displays instead. Also,
-we're setting its z-index to 2, so that it's positioned on top of the
-other carousel items. */
+we're setting its z-index to 2, so that it's positioned on top of the other carousel items. */
 .item-1 {
   z-index: 2;
   opacity: 1;
