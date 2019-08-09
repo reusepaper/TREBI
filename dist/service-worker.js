@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.63607771ee4bc53491012b9638102ed4.js"
+  "/precache-manifest.08dfd6c55043290b90a32e618f6898bf.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "webmobile-sub3"});

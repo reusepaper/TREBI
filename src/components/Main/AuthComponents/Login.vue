@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import FirebaseService from '@/services/FirebaseService';
-import * as firebaseui from 'firebaseui';
+import FirebaseService from "@/services/FirebaseService";
+import * as firebaseui from "firebaseui";
 import * as firebase from "firebase/app";
 import "firebase/messaging";
 
@@ -20,8 +20,8 @@ export default {
       loginUser: null,
       userLevel: null,
       firebaseUser: null,
-      token: ''
-    }
+      token: ""
+    };
   },
   methods: {
     initUI: function() {
@@ -66,9 +66,9 @@ export default {
       });
     },
     // 현재 유저 veux에 저장 및 firebase 비교.
-    async updateCurrentUser(){
+    async updateCurrentUser() {
       // 로그인 정보를 각각의 data에 저장한다.
-      
+
       await this.$store.commit("setModalStyle", "none");
       await auth.onAuthStateChanged(user => {
         this.loginUser = user;
@@ -76,55 +76,58 @@ export default {
       });
       this.firebaseUser = await FirebaseService.getisSignup(this.loginUser.uid);
       // await console.log(this.firebaseUser)
-      if (this.firebaseUser.length == 0){
+      if (this.firebaseUser.length == 0) {
         await FirebaseService.createUser(
-          this.loginUser.uid, 
-          this.loginUser.displayName, 
-          this.loginUser.email.toString(), 
-          "visitor", 
+          this.loginUser.uid,
+          this.loginUser.displayName,
+          this.loginUser.email.toString(),
+          "visitor",
           new Date(),
           this.loginUser.photoURL
         );
-        this.userLevel = 'visitor';
+        this.userLevel = "visitor";
       } else {
         this.userLevel = this.firebaseUser[0].level;
       }
       this.firebaseUser = await FirebaseService.getisSignup(this.loginUser.uid);
       // pushToken이 있는지 체크하고 없으면 넣기
-      if (this.firebaseUser.photoURL == null){
-        await FirebaseService.updateUserPhotoURL(this.loginUser.uid, this.loginUser.photoURL);
+      if (this.firebaseUser.photoURL == null) {
+        await FirebaseService.updateUserPhotoURL(
+          this.loginUser.uid,
+          this.loginUser.photoURL
+        );
       }
-      await firebase.messaging().getToken()
-      .then(token=>{
-        if(token && (this.firebaseUser[0].pushToken == null))
-          FirebaseService.updateUserPushToken(this.loginUser.uid, token);
-      })
+      await firebase
+        .messaging()
+        .getToken()
+        .then(token => {
+          if (token && this.firebaseUser[0].pushToken == null)
+            FirebaseService.updateUserPushToken(this.loginUser.uid, token);
+        });
       await this.$store.commit("setLogin", true);
       await this.$store.commit("setUser", this.loginUser);
       await this.$store.commit("setUserLevel", this.userLevel);
       // await console.log(this.$store.state.userLevel);
     },
-    checkIsSignup: function(currentUser){
+    checkIsSignup: function(currentUser) {
       // console.log(this.allUsers);
       if (currentUser == null) return true;
-      for(let i=0; i<this.allUsers.length; i++){
-        if(this.allUsers[i].uid == currentUser.uid){
+      for (let i = 0; i < this.allUsers.length; i++) {
+        if (this.allUsers[i].uid == currentUser.uid) {
           this.userLevel = this.allUsers[i].level;
           return true;
         }
       }
       return false;
-    },
-    
+    }
   },
   mounted: function() {
     // 현재 로그인한 회원의 정보를 알 수 있는 함수이다. 존재하면 딕셔너리가, 아니면 null값이 나온다.
-    
     if (this.$store.state.user == null) {
       this.initUI();
     }
   }
-}
+};
 </script>
 <style>
 #firebaseui-auth-container {
