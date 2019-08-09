@@ -8,7 +8,6 @@
       >글작성</Button>
       <div class="post__title">{{this.$store.state.nowDisplayMember}}님의 Post</div>
     </div>
-    <Button @click="goPostDetail">글 상세보기</Button>
     <div class="postList__container">
       <div v-for="post in postList">
         <PostCard v-bind:post="post"></PostCard>
