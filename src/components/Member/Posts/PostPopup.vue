@@ -32,31 +32,57 @@ export default {
   data() {
     return {
       wd: 100,
-      posY: null
+      // posY: null
     };
   },
   mounted: function(){
     this.$store.watch(() => this.$store.getters.getPostShow, ismodalShow => {
       // console.log('watched:', ismodalShow);
-      this.posY = $(window).scrollTop();
+      // this.posY = $(window).scrollTop();
       if(ismodalShow) {
-        console.log(this.posY);
-        $("html, body").addClass("not_scroll");  
+        // console.log(this.posY);
+        var height = $(window).height();
+        height *= 2;
+        height += 2;
+        window.scrollTo({
+          top: height,
+          behavior: 'smooth'
+        });
+        // $("html, body").addClass("not_scroll");
+        $("body").css("overflow", "hidden");
         $("#postListContainer").on("mousewheel", function (event) {
           event.stopPropagation();
         });
       } else{
         // $("html, body").removeClass("not_scroll");
         // posY = $(window).scrollTop(posY);
+        var height = $(window).height();
+        height *= 2;
+        height += 2;
+        window.scrollTo({
+          top: height
+          // behavior: 'smooth'
+        });
+        $("body").css("overflow", "visible");
+        // $("html, body").removeClass("not_scroll");
+        // this.posY = $(window).scrollTop(this.posY);
       }
     })
   },
   methods: {
     togglePopUp() {
+      // $(".not_scroll").css("top", 'height + "px"');
       this.$store.commit("toggleIsPostShow");
       this.$store.commit("setPostPopupIndex", 1);
-      $("html, body").removeClass("not_scroll");
-      this.posY = $(window).scrollTop(this.posY);
+      // var height = $(window).height();
+      // height *= 2;
+      // height += 2;
+      // window.scrollTo({
+      //   top: height
+      //   // behavior: 'smooth'
+      // });
+      // $("html, body").removeClass("not_scroll");
+      // // this.posY = $(window).scrollTop(this.posY);
     }
   }
 };
@@ -159,7 +185,7 @@ export default {
     position: fixed;
     overflow: hidden;
     width: 100%;
-    height: 100%
+    height: 100%;
 }
 .not_scroll .cont {
     position: relative;
