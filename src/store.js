@@ -41,14 +41,14 @@ export default new Vuex.Store({
     },
     setPostTarget(state, newTarget) {
       state.postTarget = newTarget;
-      console.log(state.postTarget);
+      // console.log(state.postTarget);
     },
     setModalStyle(state, currentState) {
       state.modal_style.display = currentState;
     },
     setAdminPAge(state, CurrnetAdminPage) {
       state.adminPage = CurrnetAdminPage;
-      console.log(state.adminPage);
+      // console.log(state.adminPage);
     },
     setNavbarState(state, currentNavbar) {
       state.navbarstate = currentNavbar;
@@ -69,7 +69,7 @@ export default new Vuex.Store({
       state.isPostShow = !state.isPostShow;
     },
     toggleNthChildShow(state, msg) {
-      console.log("메세지", msg);
+      // console.log("메세지", msg);
       if (msg == 1) {
         state.Child1 = !state.Child1;
       } else if (msg == 2) {
