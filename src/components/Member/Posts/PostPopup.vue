@@ -14,7 +14,12 @@
         <PostWriteContainer></PostWriteContainer>
       </div>
     </div>
-    <div @click="togglePopUp" class="popup__close">close</div>
+    <div @click="togglePopUp" class="close-container">
+      <div class="leftright"></div>
+      <div class="rightleft"></div>
+      <label class="close">close</label>
+    </div>
+    <!-- <div @click="togglePopUp" class="popup__close">close</div> -->
   </div>
 </template>
 
@@ -88,7 +93,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .popup {
   width: 100%;
   display: none;
@@ -254,7 +259,7 @@ export default {
   margin: 0 0 1em;
 }
 
-.popup__close {
+/* .popup__close {
   width: 3.2rem;
   height: 3.2rem;
   text-indent: -9999px;
@@ -266,7 +271,70 @@ export default {
   background-position: center center;
   background-size: contain;
   background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPHBhdGggZD0iTTE5IDYuNDFMMTcuNTkgNSAxMiAxMC41OSA2LjQxIDUgNSA2LjQxIDEwLjU5IDEyIDUgMTcuNTkgNi40MSAxOSAxMiAxMy40MSAxNy41OSAxOSAxOSAxNy41OSAxMy40MSAxMnoiLz4gICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==);
-}
+} */
+
+  .close-container {
+    /* position: relative;
+    margin: auto; */
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+  .leftright {
+    height: 4px;
+    width: 50px;
+    position: absolute;
+    margin-top: 24px;
+    background-color: rgb(107, 107, 107);
+    border-radius: 2px;
+    transform: rotate(45deg);
+    transition: all .3s ease-in;
+  }
+
+  .rightleft {
+    height: 4px;
+    width: 50px;
+    position: absolute;
+    margin-top: 24px;
+    background-color: rgb(107, 107, 107);
+    border-radius: 2px;
+    transform: rotate(-45deg);
+    transition: all .3s ease-in;
+  }
+
+  label {
+    color: black;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: .6em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all .3s ease-in;
+    opacity: 0;
+  }
+
+  .close {
+    margin: 72px 14px 0 0;
+    position: absolute;
+  }
+
+  .close-container:hover .leftright {
+    transform: rotate(-45deg);
+    background-color: rgb(107, 107, 107);
+  }
+
+  .close-container:hover .rightleft {
+    transform: rotate(45deg);
+    background-color: rgb(107, 107, 107);
+  }
+
+  .close-container:hover label {
+    opacity: 1;
+  }
+
 @media (max-width: 769px) {
   .popup__block__postdetail {
     padding: 30px 20px;
