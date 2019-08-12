@@ -30,7 +30,7 @@ export default {
   padding: 50px;
   display: grid;
   grid-template-rows: 2fr 8fr;
-  grid-auto-columns: 80%;
+  grid-auto-columns: 90%;
   justify-content: center;
 }
 
