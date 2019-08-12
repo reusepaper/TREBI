@@ -1,21 +1,14 @@
 <template>
   <div class="GraphContain">
-    <div class="view-chart" v-bind:class="{ hidden: ismobile }">
+    <div class="view-chart">
       <apexchart class="chart" type="line" height="350" :options="chartOptions" :series="series" />
-    </div>
-    <div class="mobile__message" v-bind:class="{hidden : !ismobile}">
-      커밋 그래프는
-      <br />모바일에서 지원하지 않아요..
-      <br />
-      <b>업데이트 안할거니까</b>
-      <br />기대하지 말아요...
     </div>
   </div>
 </template>
 
 <script>
 import VueApexCharts from "vue-apexcharts";
-
+import FirebaseService from "../../services/FirebaseService";
 import { async } from "q";
 export default {
   components: {
@@ -35,18 +28,61 @@ export default {
   mounted() {
     if (this.$device.mobile) {
       this.ismobile = true;
-    } else {
-      this.$store.commit("clearGitGraphData");
-      this.githubId.forEach(async (id, index) => {
-        await this.getGithub(id, index);
-        // console.log(this.$store.state.gitGraphData[index]);
-        this.series[index].name = this.$store.state.gitGraphData[
-          index
-        ].githubId;
-        this.series[index].data = this.$store.state.gitGraphData[
-          index
-        ].commitCount;
+      this.getGithubData().then(data => {
+        data.forEach((commitData, index) => {
+          this.series[index].name = commitData.githubId;
+          this.series[index].data = commitData.commitCount;
+        });
       });
+    } else {
+      let today = new Date().toString();
+      today = today.split(" ");
+      const curMonth = today[1];
+      const curDate = today[2];
+      const curYear = today[3];
+
+      this.getGithubData().then(data => {
+        let updatedAt = Date(data[0].updatedAt.seconds * 1000);
+        updatedAt = updatedAt.split(" ");
+        const updatedDate = updatedAt[2];
+        const updatedYear = updatedAt[3];
+        const updatedMonth = updatedAt[1];
+        // console.log(curYear, curMonth, curDate);
+        // console.log(updatedYear, updatedMonth, updatedDate);
+        if (
+          curYear === updatedYear &&
+          curMonth === updatedMonth &&
+          curDate === updatedDate
+        ) {
+          // console.log(true);
+          data.forEach((commitData, index) => {
+            // console.log(commitData.githubId, commitData.commitCount);
+            this.series[index].name = commitData.githubId;
+            this.series[index].data = commitData.commitCount;
+          });
+        } else {
+          // console.log(false);
+          this.$store.commit("clearGitGraphData");
+          this.githubId.forEach(async (id, index) => {
+            await this.getGithub(id, index);
+            // console.log(this.$store.state.gitGraphData[index]);
+            this.series[index].name = this.$store.state.gitGraphData[
+              index
+            ].githubId;
+            this.series[index].data = this.$store.state.gitGraphData[
+              index
+            ].commitCount;
+
+            FirebaseService.updateGithubData(
+              this.$store.state.gitGraphData[index].githubId,
+              this.$store.state.gitGraphData[index].commitCount
+            );
+          });
+        }
+      });
+      // console.log(this.commitData);
+      // console.log(this.commitData.values);
+
       // const gitGraphData = this.$store.state.gitGraphData[0];
       // console.log("gitGraphData", gitGraphData);
       // console.log(gitGraphData[0], gitGraphData[1]);
@@ -57,6 +93,7 @@ export default {
   data() {
     return {
       ismobile: false,
+      commitData: [],
       series: [
         {
           name: this.githubId[0],
@@ -138,6 +175,9 @@ export default {
     };
   },
   methods: {
+    getGithubData: async () => {
+      return await FirebaseService.getGithubData();
+    },
     getGithub: async function(githubId, index) {
       // console.log(githubId, index);
       const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -182,9 +222,6 @@ export default {
   width: 80vw;
 }
 
-.hidden {
-  display: none;
-}
 .mobile__message {
   text-align: center;
   font-size: 25px;

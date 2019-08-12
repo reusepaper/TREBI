@@ -28,7 +28,7 @@ const USERS = "Users";
 const TODO = "ToDo";
 const TEAMPOST = "TeamPost";
 const TEAMCOMMENT = "TeamComment";
-
+const GITHUBGRAPH = "GithubGraph";
 // The default cache size threshold is 40 MB. Configure "cacheSizeBytes"
 // for a different threshold (minimum 1 MB) or set to "CACHE_SIZE_UNLIMITED"
 // to disable clean-up.
@@ -343,15 +343,15 @@ export default {
       createdAt: new Date()
     });
   },
-  deleteTeamPostComment(postId, comment){
+  deleteTeamPostComment(postId, comment) {
     const deleteComment = firestore
       .collection(TEAMPOST)
       .doc(postId)
       .collection(TEAMCOMMENT)
       .doc(comment);
-      deleteComment.delete();
+    deleteComment.delete();
     return true;
-  }
+  },
   // getToDo() {
   //   const postsCollection = firestore.collection(TODO);
   //   return postsCollection.get().then(docSnapshots => {
@@ -367,4 +367,22 @@ export default {
   //     item
   //   });
   // },
+  updateGithubData(githubId, commitCount) {
+    return firestore
+      .collection(GITHUBGRAPH)
+      .doc(githubId)
+      .update({
+        commitCount,
+        updatedAt: new Date()
+      });
+  },
+  getGithubData() {
+    const postsCollection = firestore.collection(GITHUBGRAPH);
+    return postsCollection.get().then(docSnapshots => {
+      return docSnapshots.docs.map(doc => {
+        let data = doc.data();
+        return data;
+      });
+    });
+  }
 };
