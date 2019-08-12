@@ -22,7 +22,7 @@ messaging.usePublicVapidKey(messagingKey);
 const firestore = firebase.firestore();
 let db = firebase.firestore();
 const POSTS = "Posts";
-const POSTCOMMENT = "PostComment"
+const POSTCOMMENT = "PostComment";
 const LIKEPOST = "LikePost";
 const USERS = "Users";
 const TODO = "ToDo";
@@ -76,6 +76,7 @@ export default {
         });
       });
   },
+
   postPost(title, postWriter, writerUid, content, image) {
     return firestore.collection(POSTS).add({
       title,
@@ -148,17 +149,27 @@ export default {
     const LikePostCollection = firestore
       .collection(POSTS)
       .doc(postId)
-      .collection(LIKEPOST)
-    return LikePostCollection
-      .get()
-      .then(docSnapshots => {
-        return docSnapshots.docs.map(doc => {
-          let data = doc.data();
-          data.id = doc.id;
-          return data;
-        });
-      })
-
+      .collection(LIKEPOST);
+    return LikePostCollection.get().then(docSnapshots => {
+      return docSnapshots.docs.map(doc => {
+        let data = doc.data();
+        data.id = doc.id;
+        return data;
+      });
+    });
+  },
+  getCommentPost(postId) {
+    const CommentPostCollection = firestore
+      .collection(POSTS)
+      .doc(postId)
+      .collection(POSTCOMMENT);
+    return CommentPostCollection.get().then(docSnapshots => {
+      return docSnapshots.docs.map(doc => {
+        let data = doc.data();
+        data.id = doc.id;
+        return data;
+      });
+    });
   },
   createLikePost(postId, commentUser) {
     const LikePostCollection = firestore
@@ -174,7 +185,7 @@ export default {
       .collection(POSTS)
       .doc(postId)
       .collection(LIKEPOST)
-      .doc(userUid)
+      .doc(userUid);
     LikePostCollection.delete();
   },
   createUser(uid, nickname, eamil, level, createdAt, photoURL) {

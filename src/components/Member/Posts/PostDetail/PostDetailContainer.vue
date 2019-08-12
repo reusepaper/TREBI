@@ -16,9 +16,11 @@
             class="avatar"
             v-bind:style="{ 'background-image': 'url(' + this.$store.state.nowDisplayMemberInfo.photoURL + ')' }"
           ></div>
-          <div class="writer">{{this.$store.state.nowDisplayPost.postWriter}}</div>
+          <div>
+            <div class="writer">{{this.$store.state.nowDisplayPost.postWriter}}</div>
+            <div class>{{this.$store.state.nowDisplayPost.title}}</div>
+          </div>
         </div>
-        <div class="title">{{this.$store.state.nowDisplayPost.title}}</div>
         <div class="content">{{this.$store.state.nowDisplayPost.content}}</div>
         <!-- <div class="comment__container"></div> -->
         <div class="meta">
@@ -27,7 +29,7 @@
             <FullHeart></FullHeart>
           </div>
           <div class="icon heart" v-else @click="createLikePost">
-            <EmptyHeart ></EmptyHeart>
+            <EmptyHeart></EmptyHeart>
           </div>
           <div class="icon">
             <Bubble></Bubble>
@@ -36,8 +38,20 @@
             <Share></Share>
           </div>
         </div>
+        <div id="comment__list">
+          <div class="comment__item" v-for="comment in  comments">
+            <div class="comment__writer">{{comment.displayName}}</div>
+            <div class="comment__content">{{comment.comment}}</div>
+          </div>
+        </div>
         <div class="comment__input">
-          <input class="input" type="text" v-model="comment" @keyup.enter="createComment" placeholder="...comment" />
+          <input
+            class="input"
+            type="text"
+            v-model="comment"
+            @keyup.enter="createComment"
+            placeholder="...comment"
+          />
           <button class="postButton" @click="createComment">입력</button>
         </div>
       </div>
@@ -52,12 +66,28 @@ import Bubble from "../Icons/Bubble";
 import Share from "../Icons/Share";
 import FullHeart from "../Icons/FullHeart";
 export default {
-  data:{
-    comment: "",
-    isLike:{
-      length: 0
-    },
-    displayPost: "",
+  data() {
+    return {
+      comments: [
+        // { writer: "1", content: "a" },
+        // { writer: "2", content: "b" },
+        // { writer: "3", content: "c" },
+        // { writer: "4", content: "d" },
+        // { writer: "1", content: "a" },
+        // { writer: "2", content: "b" },
+        // { writer: "3", content: "c" },
+        // { writer: "4", content: "d" },
+        // { writer: "1", content: "a" },
+        // { writer: "2", content: "b" },
+        // { writer: "3", content: "c" },
+        // { writer: "4", content: "d" }
+      ],
+      comment: "",
+      isLike: {
+        length: 0
+      },
+      displayPost: ""
+    };
   },
   components: {
     EmptyHeart,
@@ -70,16 +100,14 @@ export default {
       this.$store.commit("setPostPopupIndex", 1);
       this.isLike = null;
     },
-    async createComment(){
-      if(this.$store.state.user == null){
+    async createComment() {
+      if (this.$store.state.user == null) {
         await alert("로그인을 해주세요");
         return;
-      }
-      else if(this.comment == "" || this.comment == undefined) {
+      } else if (this.comment == "" || this.comment == undefined) {
         await alert("댓글을 작성해주세요");
         return;
-      }
-      else{
+      } else {
         // console.log(this.$store.state.nowDisplayPost);
         await FirebaseService.createPostComment(
           this.$store.state.nowDisplayPost.id,
@@ -87,38 +115,54 @@ export default {
           this.comment
         );
       }
-      this.comment = await ""
+      this.comment = await "";
       await alert("등록이 완료되었습니다");
     },
-    createLikePost(){
+    createLikePost() {
       this.isLike.length = 1;
       FirebaseService.createLikePost(
         this.$store.state.nowDisplayPost.id,
-        this.$store.state.user.uid)
+        this.$store.state.user.uid
+      );
     },
-    deleteLikePost(){
+    deleteLikePost() {
       this.isLike.length = 0;
       FirebaseService.deleteLikePost(
         this.$store.state.nowDisplayPost.id,
         this.$store.state.user.uid
-      )
+      );
     },
-    async getLikePost(){
+    async getLikePost() {
       this.isLike = await FirebaseService.getLikePost(
         this.$store.state.nowDisplayPost.id,
         this.$store.state.user.uid
       );
       await console.log(this.isLike);
       // await console.log(this.isLike.length);
+    },
+    async getCommentPost() {
+      this.comments = await FirebaseService.getCommentPost(
+        this.$store.state.nowDisplayPost.id
+      );
+      await console.log(this.comments);
+      // await console.log(this.isLike.length);
     }
   },
   mounted() {
     // this.getLikePost();
     // console.log(this.$store.state.user);
-    this.$store.watch(() => this.$store.getters.getNowDisplayPost, n=>{
-      console.log(n);
-      this.getLikePost();
-    })
+    this.$store.watch(
+      () => this.$store.getters.getNowDisplayPost,
+      n => {
+        console.log(n);
+        this.getLikePost();
+        this.getCommentPost();
+      }
+    );
+    const commentList = document.querySelector("#comment__list");
+    commentList.addEventListener("mousewheel", function(event) {
+      event.stopPropagation();
+    });
   }
 };
 </script>
@@ -133,6 +177,8 @@ export default {
 .image {
   border: 1px solid rgba(0, 0, 0, 0.2);
   height: 550px;
+  background-position: center;
+  background-size: cover;
   width: 100%;
 }
 
@@ -157,9 +203,9 @@ export default {
   background-color: rgb(250, 250, 250);
   height: 552px;
   display: grid;
-  grid-template-rows: 1.5fr 1fr 5fr 1fr 0.8fr;
+  grid-template-rows: 0.5fr 4fr 0.5fr 5fr 0.5fr;
 }
-  
+
 .post_title {
   width: 50vw;
   text-align: left;
@@ -173,25 +219,24 @@ export default {
   display: flex;
   align-items: center;
   /* border: 1px solid rgba(0, 0, 0, 0.6); */
-  padding: 10px;
+  padding: 5px;
 }
 
 .content__header .avatar {
-  margin-right: 20px;
-  width: 60px;
-  height: 60px;
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-position: center;
   background-size: cover;
 }
 
 .content__header .writer {
-  font-weight: 400;
-  font-size: 24px;
+  font-size: 15px;
 }
 .post__contaniner {
   display: grid;
-  grid-template-columns: 6fr 4fr;
+  grid-template-columns: 5fr 5fr;
   grid-auto-rows: minmax(550px, 1fr);
 }
 .title,
@@ -199,7 +244,7 @@ export default {
   padding: 10px;
 }
 .title {
-  font-size: 22px;
+  font-size: 18px;
 }
 .content {
   font-weight: lighter;
@@ -220,8 +265,22 @@ export default {
 .meta .icon {
   margin-right: 10px;
 }
-.heart{
+.heart {
   cursor: pointer;
+}
+#comment__list {
+  overflow: scroll;
+}
+.comment__item {
+  display: flex;
+  padding-left: 10px;
+  margin-bottom: 5px;
+}
+.comment__item .comment__writer {
+  margin-right: 10px;
+  font-weight: 600;
+}
+.comment__item .comment__content {
 }
 .comment__input {
   border: none;
@@ -233,17 +292,17 @@ export default {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 .input {
-  width:85%;
-  margin:0px;
+  width: 85%;
+  margin: 0px;
   padding: 0px;
   border: none;
   font-size: 16px;
-  float:left;
+  float: left;
   background-color: #fafafa;
 }
 .postButton {
-  width:10%;
-  margin:0px;
+  width: 10%;
+  margin: 0px;
   padding: 0px;
   background-color: white;
   border: none;
@@ -288,14 +347,14 @@ export default {
     left: 20px;
   }
 }
-  .postlistbtn input[type="button"] {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-  }
+.postlistbtn input[type="button"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
 </style>
