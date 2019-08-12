@@ -46,5 +46,6 @@ export default {
   background-color: black;
   opacity: 0;
   transition: 0.2s ease-in;
+  cursor: pointer;
 }
 </style>

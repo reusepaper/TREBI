@@ -122,6 +122,7 @@ export default {
   padding: 4px 10px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 4px;
+  cursor: pointer;
 }
 .title__container {
   margin-top: 2vh;

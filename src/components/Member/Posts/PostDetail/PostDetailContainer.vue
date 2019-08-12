@@ -22,6 +22,7 @@
         <div class="content">{{this.$store.state.nowDisplayPost.content}}</div>
         <!-- <div class="comment__container"></div> -->
         <div class="meta">
+          <div>{{isLike}}</div>
           <div class="icon heart" v-if="isLike" @click="deleteLikePost">
             <FullHeart></FullHeart>
           </div>
@@ -53,7 +54,9 @@ import FullHeart from "../Icons/FullHeart";
 export default {
   data:{
     comment: "",
-    isLike: false,
+    isLike:{
+      length: 0
+    },
     displayPost: "",
   },
   components: {
@@ -65,6 +68,7 @@ export default {
   methods: {
     goPostList: function() {
       this.$store.commit("setPostPopupIndex", 1);
+      this.isLike = null;
     },
     async createComment(){
       if(this.$store.state.user == null){
@@ -105,7 +109,7 @@ export default {
         this.$store.state.user.uid
       );
       await console.log(this.isLike);
-      await console.log(this.isLike.length);
+      // await console.log(this.isLike.length);
     }
   },
   mounted() {
@@ -147,6 +151,7 @@ export default {
   padding: 4px 10px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 4px;
+  cursor: pointer;
 }
 .post__content {
   background-color: rgb(250, 250, 250);

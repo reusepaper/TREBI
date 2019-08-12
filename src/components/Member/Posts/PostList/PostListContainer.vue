@@ -90,6 +90,7 @@ export default {
   padding: 4px 10px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 4px;
+  cursor: pointer;
 }
 .postList__container {
   margin-top: 3vh;
