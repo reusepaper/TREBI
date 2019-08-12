@@ -13,6 +13,9 @@ export default {
       this.$store.commit("setPostPopupIndex", 0);
       this.$store.commit("setNowDisplayPost", this.post);
     }
+  },
+  mounted() {
+    console.log(this.post);
   }
 };
 </script>
