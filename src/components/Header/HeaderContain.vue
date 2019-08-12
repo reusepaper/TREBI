@@ -84,6 +84,9 @@ export default {
   },
   computed: {
     sidebar: {
+      get () {
+        this.$store.state.navbarstate;
+      },
       set(value) {
         this.$store.commit('setNavbarState', value)
         // console.log(this.$store.state.navbarstate);
