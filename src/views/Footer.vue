@@ -29,9 +29,9 @@ export default {
   color: rgba(255, 255, 255, 0.7);
 }
 
-@media (max-width: 369px) {
+@media (max-width: 415px) {
   .footerContainer {
-    grid-template-rows: 1fr 200px;
+    grid-template-rows: 1fr 160px;
   }
 }
 </style>

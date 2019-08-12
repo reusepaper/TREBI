@@ -30,7 +30,7 @@ export default {
   padding: 50px;
   display: grid;
   grid-template-rows: 2fr 8fr;
-  grid-auto-columns: 80%;
+  grid-auto-columns: 90%;
   justify-content: center;
 }
 
@@ -50,7 +50,7 @@ export default {
 .contactTitle:hover {
   color: white;
 }
-@media (max-width: 369px) {
+@media (max-width: 415px) {
   .contactContainer {
     padding: 0;
     padding-top: 50px;

@@ -41,11 +41,12 @@ export default {};
 .memberItem {
 }
 .memberItem span:first-child {
-  margin-right: 50px;
+  margin-right: 20px;
 }
 
-@media (max-width: 369px) {
+@media (max-width: 415px) {
   .memberItem {
+    white-space: nowrap;
     font-size: 18px;
   }
 }

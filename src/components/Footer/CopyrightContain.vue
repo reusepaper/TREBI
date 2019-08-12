@@ -29,7 +29,7 @@ export default {
   margin-right: 100px;
 }
 
-@media (max-width: 369px) {
+@media (max-width: 415px) {
   .CopyrightContain {
     display: grid;
     justify-content: center;

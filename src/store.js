@@ -112,6 +112,12 @@ export default new Vuex.Store({
     },
     getPostShow: function(state) {
       return state.isPostShow;
+    },
+    getChild1State: function(state) {
+      return state.Child1;
+    },
+    getNowDisplayPost(state){
+      return state.nowDisplayPost;
     }
   },
   actions: {},

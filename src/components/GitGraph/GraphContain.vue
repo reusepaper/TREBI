@@ -1,13 +1,21 @@
 <template>
   <div class="GraphContain">
-    <div class="view-chart">
+    <div class="view-chart" v-bind:class="{ hidden: ismobile }">
       <apexchart class="chart" type="line" height="350" :options="chartOptions" :series="series" />
+    </div>
+    <div class="mobile__message" v-bind:class="{hidden : !ismobile}">
+      커밋 그래프는
+      <br />모바일에서 지원하지 않아요..
+      <br />
+      <b>업데이트 안할거니까</b>
+      <br />기대하지 말아요...
     </div>
   </div>
 </template>
 
 <script>
 import VueApexCharts from "vue-apexcharts";
+
 import { async } from "q";
 export default {
   components: {
@@ -25,23 +33,30 @@ export default {
   },
 
   mounted() {
-    this.$store.commit("clearGitGraphData");
-    this.githubId.forEach(async (id, index) => {
-      await this.getGithub(id, index);
-      // console.log(this.$store.state.gitGraphData[index]);
-      this.series[index].name = this.$store.state.gitGraphData[index].githubId;
-      this.series[index].data = this.$store.state.gitGraphData[
-        index
-      ].commitCount;
-    });
-    // const gitGraphData = this.$store.state.gitGraphData[0];
-    // console.log("gitGraphData", gitGraphData);
-    // console.log(gitGraphData[0], gitGraphData[1]);
-    // this.getGithub("13akstjq", 0);
+    if (this.$device.mobile) {
+      this.ismobile = true;
+    } else {
+      this.$store.commit("clearGitGraphData");
+      this.githubId.forEach(async (id, index) => {
+        await this.getGithub(id, index);
+        // console.log(this.$store.state.gitGraphData[index]);
+        this.series[index].name = this.$store.state.gitGraphData[
+          index
+        ].githubId;
+        this.series[index].data = this.$store.state.gitGraphData[
+          index
+        ].commitCount;
+      });
+      // const gitGraphData = this.$store.state.gitGraphData[0];
+      // console.log("gitGraphData", gitGraphData);
+      // console.log(gitGraphData[0], gitGraphData[1]);
+      // this.getGithub("13akstjq", 0);
+    }
   },
   props: ["githubId"],
   data() {
     return {
+      ismobile: false,
       series: [
         {
           name: this.githubId[0],
@@ -132,9 +147,7 @@ export default {
         .catch(() =>
           console.log("Can’t access " + url + " response. Blocked by browser?")
         );
-
       const commitCount = [];
-
       for (let i = 0; i < 10; i++) {
         const dateIndex = result.lastIndexOf("data-count");
         const count = result
@@ -169,6 +182,14 @@ export default {
   width: 80vw;
 }
 
+.hidden {
+  display: none;
+}
+.mobile__message {
+  text-align: center;
+  font-size: 25px;
+  margin: 10px 20px;
+}
 @media (max-width: 768px) {
   .view-chart {
     width: 100vw;
