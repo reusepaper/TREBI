@@ -2,31 +2,31 @@
   <div>
     <AdminMain v-show="this.$store.state.adminPage==='Main'"></AdminMain>
     <div class="adminMainPageGrid" v-show="this.$store.state.adminPage!=='Main'">
-      <div
+      <div class="admin__title" 
         style=" margin-left: 40px; border-bottom: 3px solid #262F3D; box-shadow: 5px 3px 4px #6a88a6;"
       >
-        <span class="adminMainTitle" v-show="this.$store.state.adminPage==='AllUser'">
+        <div class="adminMainTitle" v-show="this.$store.state.adminPage==='AllUser'">
           All User List
           <img src="../../assets/settings.png" style="width: 45px;" />
-        </span>
-        <span class="adminMainTitle" v-show="this.$store.state.adminPage==='Admin'">
+        </div>
+        <div class="adminMainTitle" v-show="this.$store.state.adminPage==='Admin'">
           Admin User List
           <img src="../../assets/settings.png" style="width: 45px;" />
-        </span>
-        <span class="adminMainTitle" v-show="this.$store.state.adminPage==='Visitor'">
+        </div>
+        <div class="adminMainTitle" v-show="this.$store.state.adminPage==='Visitor'">
           Member and Visitor List
           <img src="../../assets/settings.png" style="width: 45px;" />
-        </span>
-        <span class="adminMainTitle" v-show="this.$store.state.adminPage==='PostList'">
+        </div>
+        <div class="adminMainTitle" v-show="this.$store.state.adminPage==='PostList'">
           Post List
           <img src="../../assets/settings.png" style="width: 45px;" />
-        </span>
-        <span class="adminMainTitle" v-show="this.$store.state.adminPage==='PortfolioList'">
+        </div>
+        <div class="adminMainTitle" v-show="this.$store.state.adminPage==='PortfolioList'">
           Portfolio List
           <img src="../../assets/settings.png" style="width: 45px;" />
-        </span>
+        </div>
       </div>
-      <div>
+      <div class="admin__content">
         <AdminMainTable v-show="this.$store.state.adminPage==='AllUser'"></AdminMainTable>
         <AdminUsersTable v-show="this.$store.state.adminPage==='Admin'"></AdminUsersTable>
         <VisitorUsersTable v-show="this.$store.state.adminPage==='Visitor'"></VisitorUsersTable>
@@ -64,11 +64,12 @@ export default {
 
 <style>
 .adminMainPageGrid {
-  display: grid;
-  grid-template-rows: 2fr 12fr;
+  width: 100%;
+  display: block;
 }
 
-.adminMainTitle {
+.admin__title {
+  height: 15%;
   font-size: 60px;
   font-weight: 900;
   color: #262f3d;
