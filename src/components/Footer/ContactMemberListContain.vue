@@ -44,8 +44,9 @@ export default {};
   margin-right: 20px;
 }
 
-@media (max-width: 369px) {
+@media (max-width: 415px) {
   .memberItem {
+    white-space: nowrap;
     font-size: 18px;
   }
 }
