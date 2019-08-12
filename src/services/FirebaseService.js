@@ -22,6 +22,8 @@ messaging.usePublicVapidKey(messagingKey);
 const firestore = firebase.firestore();
 let db = firebase.firestore();
 const POSTS = "Posts";
+const POSTCOMMENT = "PostComment"
+const LIKEPOST = "LikePost";
 const USERS = "Users";
 const TODO = "ToDo";
 const TEAMPOST = "TeamPost";
@@ -125,9 +127,55 @@ export default {
         // console.log(docSnapshots);
         return docSnapshots.docs.map(doc => {
           let data = doc.data();
+          data.id = doc.id;
           return data;
         });
       });
+  },
+  createPostComment(postId, commentUser, newComment) {
+    const PostCommentCollection = firestore
+      .collection(POSTS)
+      .doc(postId)
+      .collection(POSTCOMMENT);
+    return PostCommentCollection.add({
+      displayName: commentUser.displayName,
+      uid: commentUser.uid,
+      comment: newComment,
+      createdAt: new Date()
+    });
+  },
+  getLikePost(postId, userUid) {
+    const LikePostCollection = firestore
+      .collection(POSTS)
+      .doc(postId)
+      .collection(LIKEPOST)
+    return LikePostCollection
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          data.id = doc.id;
+          return data;
+        });
+      })
+
+  },
+  createLikePost(postId, commentUser) {
+    const LikePostCollection = firestore
+      .collection(POSTS)
+      .doc(postId)
+      .collection(LIKEPOST);
+    return LikePostCollection.doc(commentUser).set({
+      isLike: true
+    });
+  },
+  deleteLikePost(postId, userUid) {
+    const LikePostCollection = firestore
+      .collection(POSTS)
+      .doc(postId)
+      .collection(LIKEPOST)
+      .doc(userUid)
+    LikePostCollection.delete();
   },
   createUser(uid, nickname, eamil, level, createdAt, photoURL) {
     return firestore
@@ -144,23 +192,6 @@ export default {
         pushToken: null
       });
   },
-  // getUserfield() {
-  //   return (
-  //     firestore
-  //       .collection(USERS)
-  //       // .orderBy("uid")
-  //       .limit(1)
-  //       .get()
-  //       .then(docSnapshots => {
-  //         return docSnapshots.docs.map(doc => {
-  //           let data = doc.data();
-  //           let userFields = Object.getOwnPropertyNames(data);
-  //           // console.log(data);
-  //           return userFields;
-  //         });
-  //       })
-  //   );
-  // },
   getisSignup(loginUid) {
     return firestore
       .collection(USERS)

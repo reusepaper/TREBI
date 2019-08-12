@@ -115,6 +115,9 @@ export default new Vuex.Store({
     },
     getChild1State: function(state) {
       return state.Child1;
+    },
+    getNowDisplayPost(state){
+      return state.nowDisplayPost;
     }
   },
   actions: {},
