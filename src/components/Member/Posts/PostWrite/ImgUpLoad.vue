@@ -46,6 +46,8 @@ export default {
         .then(success => {
           this.image = success.data.link;
           this.$emit("upLoadImg", this.image);
+          const uploadInput = document.querySelector("#uploadFile");
+          uploadInput.value = "";
         })
         .catch();
     }
