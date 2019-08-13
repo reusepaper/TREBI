@@ -58,6 +58,9 @@ export default {
         $("#postListContainer").on("mousewheel", function (event) {
           event.stopPropagation();
         });
+        $("#popup-article").on("mousewheel", function (event) {
+          event.stopPropagation();
+        });
       } else{
         // $("html, body").removeClass("not_scroll");
         // posY = $(window).scrollTop(posY);

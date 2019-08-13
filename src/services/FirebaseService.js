@@ -145,20 +145,6 @@ export default {
       createdAt: new Date()
     });
   },
-  // getLikePost(postId, userUid) {
-  getLikePost(postId) {
-    const LikePostCollection = firestore
-      .collection(POSTS)
-      .doc(postId)
-      .collection(LIKEPOST);
-    return LikePostCollection.get().then(docSnapshots => {
-      return docSnapshots.docs.map(doc => {
-        let data = doc.data();
-        data.id = doc.id;
-        return data;
-      });
-    });
-  },
   getCommentPost(postId) {
     const CommentPostCollection = firestore
       .collection(POSTS)
@@ -172,13 +158,45 @@ export default {
       });
     });
   },
+  getIsLikePost(postId, userUid) {
+    const LikePostCollection = firestore
+      .collection(POSTS)
+      .doc(postId)
+      .collection(LIKEPOST);
+    return LikePostCollection
+      .where("uid", "==", userUid)
+      .get()
+      .then(docSnapshots => {
+        // console.log(docSnapshots);
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          // console.log(data)
+          data.id = doc.id;
+          return data;
+        });
+      });
+  },
+  getLikePost(postId, userUid) {
+    const LikePostCollection = firestore
+      .collection(POSTS)
+      .doc(postId)
+      .collection(LIKEPOST);
+    return LikePostCollection.get().then(docSnapshots => {
+      return docSnapshots.docs.map(doc => {
+        let data = doc.data();
+        data.id = doc.id;
+        return data;
+      });
+    });
+  },
   createLikePost(postId, commentUser) {
     const LikePostCollection = firestore
       .collection(POSTS)
       .doc(postId)
       .collection(LIKEPOST);
     return LikePostCollection.doc(commentUser).set({
-      isLike: true
+      isLike: true,
+      uid: commentUser
     });
   },
   deleteLikePost(postId, userUid) {
