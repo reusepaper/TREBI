@@ -32,17 +32,19 @@
             </select>
             <button id="select_button" @click="changeLevel(oneUser)">변경</button>
           </td>
-          <td v-else-if="key === 'uid'" style="display:none">
-          </td>
-          <td v-else-if="key === 'pushToken'" style="display:none">
-          </td>
+          <td v-else-if="key === 'uid'" style="display:none"></td>
+          <td v-else-if="key === 'pushToken'" style="display:none"></td>
           <td v-else>{{field}}</td>
           <td>
             <button
               @click="delete_event(oneUser)"
               style="border: 0; outline: 0;background: none; cursor:pointer;"
             >
-              <img src="../../../../assets/userDelete.png" />
+              <img
+                src="../../../../assets/userDelete.png"
+                srcset="../../../../assets/userDelete.png 1x, ../../../../assets/userDelete.png 2x"
+                alt="User Delete"
+              />
             </button>
           </td>
         </tr>
@@ -67,7 +69,7 @@ export default {
     async getVisitorUsers() {
       this.allUsers = await firebaseService.getVisitorUsers();
 
-      console.log(this.allUsers);
+      // console.log(this.allUsers);
       this.usersNum = this.allUsers.length;
     },
     formatDate(date) {
@@ -96,7 +98,7 @@ export default {
       let change_user = document.getElementById(changeUser.uid);
       // console.log(changeUser);
       let change_level = change_user.options[change_user.selectedIndex].value;
-      console.log(change_level);
+      // console.log(change_level);
       let isUpdate = await firebaseService.updateUserLevel(
         changeUser.uid,
         change_level
@@ -107,7 +109,7 @@ export default {
     delete_event(deleteUser) {
       if (confirm("정말 삭제하시겠습니까?") == true)
         this.deleteUser(deleteUser);
-      else console.log("아니에요!");
+      // else console.log("아니에요!");
     },
     async deleteUser(deleteUser) {
       await firebaseService.deleteUser(deleteUser.uid);

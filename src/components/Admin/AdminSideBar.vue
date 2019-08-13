@@ -12,7 +12,9 @@
               <div style="display: table;">
                 <img
                   src="../../assets/user.png"
+                  srcset="../../assets/user.png 1x, ../../assets/user.png 2x"
                   style="color:white; display: table-cell; vertical-align: middle; width:30px; display:inline; margin-right: 10px;"
+                  alt="User Logo"
                 />
                 <span
                   style="display: table-cell; vertical-align: middle; display:inline;"
@@ -39,7 +41,9 @@
               <div style="display: table;">
                 <img
                   src="../../assets/note.png"
+                  srcset="../../assets/note.png 1x, ../../assets/note.png 2x"
                   style="color:white; display: table-cell; vertical-align: middle; width:30px; display:inline; margin-right: 10px;"
+                  alt="Posts"
                 />
                 <span style="display: table-cell; vertical-align: middle; display:inline;">Post</span>
               </div>
@@ -59,7 +63,13 @@
               onclick="window.open('https://analytics.google.com/analytics/web/?utm_source=marketingplatform.google.com&utm_medium=et&utm_campaign=marketingplatform.google.com%2Fabout%2Fanalytics%2F#/report-home/a143603759w204989459p198246038')"
             >
               <div style="display: table;">
-                <img src="../../assets/googleAnalytics.png" width="30px;" class="AnalyticsImg" />
+                <img
+                  src="../../assets/googleAnalytics.png"
+                  srcset="../../assets/googleAnalytics.png 1x, ../../assets/googleAnalytics.png 2x"
+                  width="30px;"
+                  class="AnalyticsImg"
+                  alt="Google Analytics Logo"
+                />
                 <span style="display: table-cell; vertical-align: middle">Google Analytics</span>
               </div>
             </button>
@@ -70,7 +80,13 @@
               onclick="location.href='https://webmobile-sub2-510fa.firebaseapp.com/' "
             >
               <div style="display: table;">
-                <img src="../../assets/trebiMain.png" width="40px;" class="TrebiImg" />
+                <img
+                  src="../../assets/trebiMain.png"
+                  srcset="../../assets/trebiMain.png 1x, ../../assets/trebiMain.png 2x"
+                  width="40px;"
+                  class="TrebiImg"
+                  alt="Trebi Logo"
+                />
                 <span style="display: table-cell; vertical-align: middle">TREBI Main</span>
               </div>
             </button>

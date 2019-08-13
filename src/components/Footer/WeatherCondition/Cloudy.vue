@@ -6,6 +6,7 @@
     width="64"
     height="64"
     viewBox="0 0 64 64"
+    alt="cloudy"
   >
     <defs>
       <filter id="blur" width="200%" height="200%">

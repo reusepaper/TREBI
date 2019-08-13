@@ -3,29 +3,29 @@
     <div class="popup__block">
       <div class="block-row">
         <div class="block-cell upload">
-        <div class="carousel-wrapper">
-          <span id="target-item-1"></span>
-          <span id="target-item-2"></span>
-          <span id="target-item-3"></span>
-          <div class="carousel-item item-1" style="background-color: khaki;">
-            <h2>{{content.content1}}</h2>
-            <p>Content goes here.</p>
-            <a class="arrow arrow-prev" href="#target-item-3"></a>
-            <a class="arrow arrow-next" href="#target-item-2"></a>
+          <div class="carousel-wrapper">
+            <span id="target-item-1"></span>
+            <span id="target-item-2"></span>
+            <span id="target-item-3"></span>
+            <div class="carousel-item item-1" style="background-color: khaki;">
+              <h2>{{content.content1}}</h2>
+              <p>Content goes here.</p>
+              <a class="arrow arrow-prev" href="#target-item-3"></a>
+              <a class="arrow arrow-next" href="#target-item-2"></a>
+            </div>
+            <div class="carousel-item item-2 light" style="background-color: royalblue;">
+              <h2>{{content.content2}}</h2>
+              <p>Content goes here.</p>
+              <a class="arrow arrow-prev" href="#target-item-1"></a>
+              <a class="arrow arrow-next" href="#target-item-3"></a>
+            </div>
+            <div class="carousel-item item-3" style="background-color: aliceblue;">
+              <h2>{{content.content3}}</h2>
+              <p>Content goes here.</p>
+              <a class="arrow arrow-prev" href="#target-item-2"></a>
+              <a class="arrow arrow-next" href="#target-item-1"></a>
+            </div>
           </div>
-          <div class="carousel-item item-2 light" style="background-color: royalblue;">
-            <h2>{{content.content2}}</h2>
-            <p>Content goes here.</p>
-            <a class="arrow arrow-prev" href="#target-item-1"></a>
-            <a class="arrow arrow-next" href="#target-item-3"></a>
-          </div>
-          <div class="carousel-item item-3" style="background-color: aliceblue;">
-            <h2>{{content.content3}}</h2>
-            <p>Content goes here.</p>
-            <a class="arrow arrow-prev" href="#target-item-2"></a>
-            <a class="arrow arrow-next" href="#target-item-1"></a>
-          </div>
-        </div>  
         </div>
         <div @click="popUpClose" class="popup__close">close</div>
         <div class="block-cell comment">
@@ -35,20 +35,21 @@
             </div>
             <ul id="comment--content">
               <li v-for="comment in comments" v-bind:key="comment">
-                {{comment.displayName}} | {{comment.comment}} 
-                <button 
+                {{comment.displayName}} | {{comment.comment}}
+                <button
                   v-if="$store.state.user && $store.state.user.uid == comment.uid"
                   class="deleteButton"
                   @click="delete_event(content.id, comment.id)"
-                  >
-                  삭제
-                </button>
+                >삭제</button>
               </li>
             </ul>
             <span class="comment--input">
-              <input type="text" v-model="comment" 
+              <input
+                type="text"
+                v-model="comment"
                 v-on:keyup.enter="createTeamPostComment"
-                placeholder="댓글을 입력해주세요">
+                placeholder="댓글을 입력해주세요"
+              />
               <span v-on:click="createTeamPostComment">
                 <i id="plusButton" class="fas fa-plus addBtn"></i>
               </span>
@@ -61,53 +62,57 @@
 </template>
 
 <script scoped>
-import FirebaseService from '@/services/FirebaseService'
+import FirebaseService from "@/services/FirebaseService";
 export default {
-  data:function(){
-    return{
+  data: function() {
+    return {
       content: [],
-      comment:'',
+      comment: "",
       comments: [],
-      user: this.$store.state.user,
-    }
+      user: this.$store.state.user
+    };
   },
-  mounted: function(){
+  mounted: function() {
     this.getTeamPost();
   },
   methods: {
     popUpClose() {
       // this.$store.commit("closeChildShow");
-      this.$store.commit("toggleNthChildShow",3);
+      this.$store.commit("toggleNthChildShow", 3);
       // console.log("closeChildShow 끝");
     },
-    
-    clearComment(){
+
+    clearComment() {
       // console.log("commentclear");
-      this.comment='';
+      this.comment = "";
     },
-    async getTeamPost(){
+    async getTeamPost() {
       const allContents = await FirebaseService.getTeamPost();
       // console.log(allContents)
       this.content = allContents[2];
       await this.getTeamPostComment();
       // console.log(this.content);
     },
-    async createTeamPostComment(){
-      if(this.user === null){
+    async createTeamPostComment() {
+      if (this.user === null) {
         alert("로그인을 해야 댓글을 작성할 수 있습니다.");
         return;
-      } else{
-        if(this.comment == ''){
+      } else {
+        if (this.comment == "") {
           alert("댓글을 입력해주세요");
-          return ;
+          return;
         }
       }
-      
-      await FirebaseService.createTeamPostComment(this.content.id, this.user, this.comment);
+
+      await FirebaseService.createTeamPostComment(
+        this.content.id,
+        this.user,
+        this.comment
+      );
       await this.getTeamPostComment();
       await this.clearComment();
     },
-    async getTeamPostComment(){
+    async getTeamPostComment() {
       this.comments = await FirebaseService.getTeamPostComment(this.content.id);
       // await console.log(this.comments);
     },
@@ -116,72 +121,71 @@ export default {
         this.deleteTeamPostComment(postId, commentId);
       else alert("삭제하지 않았습니다.");
     },
-    async deleteTeamPostComment(postId, comment){
+    async deleteTeamPostComment(postId, comment) {
       await FirebaseService.deleteTeamPostComment(postId, comment);
       await this.getTeamPostComment();
     }
-  },
-  
+  }
 };
 </script>
 
 <style scoped>
-.addBtn{
-  color:white;
-  font-size:2em;
-  background:linear-gradient(to right,orange, orangered);
+.addBtn {
+  color: white;
+  font-size: 2em;
+  background: linear-gradient(to right, orange, orangered);
   border-radius: 0px 10px 10px 0px;
-  height:40px;
+  height: 40px;
   width: 26px;
   padding: 0px 3px;
 }
-.block-cell > .box{
-  display:grid;
+.block-cell > .box {
+  display: grid;
   position: absolute;
   grid-template-rows: 10% 78% 10%;
   height: 100%;
   width: 100%;
   grid-column-gap: 5px;
 }
-.comment--input{
+.comment--input {
   display: flex;
   padding: 0px 5px;
   align-items: center;
 }
-.comment--input input{
-  border-style:groove;
-  width:90%;
-  height:36px;
+.comment--input input {
+  border-style: groove;
+  width: 90%;
+  height: 36px;
   border-radius: 10px 0 0 10px;
   font-size: 16px;
   border-right-color: transparent;
 }
-.comment--input input:focus{
-  outline:none;
+.comment--input input:focus {
+  outline: none;
 }
 /* #comment--content button{
   border-style: groove;
   border-radius: 0 10px 10px 0;
   float:right;
 } */
-#comment--content{
-  margin:10px;
-  text-align:left;
-  border:none;
+#comment--content {
+  margin: 10px;
+  text-align: left;
+  border: none;
 }
 #comment--content > li {
   display: flex;
-  min-height:38px;
-  font-size:16px;
+  min-height: 38px;
+  font-size: 16px;
   align-items: center;
 }
-.comment-title{
-    position: absolute;
-    top: 5%;
-    left: 70%;
-    margin: 10px auto;
+.comment-title {
+  position: absolute;
+  top: 5%;
+  left: 70%;
+  margin: 10px auto;
 }
-.comment{
+.comment {
   position: relative;
 }
 .popup {
@@ -224,17 +228,17 @@ export default {
   left: 0;
   margin-top: -1px;
 }
-.deleteButton{
+.deleteButton {
   margin: 5px;
   background-color: white;
   border: 1px salmon solid;
   border-radius: 5px;
   width: 32px;
 }
-#plusButton{
-  font-size:20px;
+#plusButton {
+  font-size: 20px;
 }
-.comment--header{
+.comment--header {
   border-bottom: 2px black solid;
 }
 @keyframes line-animation {
@@ -286,27 +290,27 @@ export default {
 
 .popup__block {
   height: calc(100vh - 40px);
-  width:80%;
+  width: 80%;
   box-sizing: border-box;
   padding: 1% 1% !important;
   position: relative;
-  box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, .3);
+  box-shadow: 5px 10px 10px 5px rgba(0, 0, 0, 0.3);
   margin: auto;
   overflow: auto;
   animation: fade 0.5s ease-out 1.3s both;
   display: table;
 }
-.block-cell{
+.block-cell {
   display: table-cell;
-  width:50%;
+  width: 50%;
   height: 100%;
-  border : 1px solid;
+  border: 1px solid;
 }
-.block-row{
+.block-row {
   display: table-row;
 }
-.block-cell.comment{
-  border:1px solid red;
+.block-cell.comment {
+  border: 1px solid red;
   text-align: center;
 }
 @keyframes fade {
@@ -325,7 +329,7 @@ export default {
 }
 
 .popup__close {
-  cursor:pointer;
+  cursor: pointer;
   width: 3.2rem;
   height: 3.2rem;
   text-indent: -9999px;
@@ -338,7 +342,6 @@ export default {
   background-size: contain;
   background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPHBhdGggZD0iTTE5IDYuNDFMMTcuNTkgNSAxMiAxMC41OSA2LjQxIDUgNSA2LjQxIDEwLjU5IDEyIDUgMTcuNTkgNi40MSAxOSAxMiAxMy40MSAxNy41OSAxOSAxOSAxNy41OSAxMy40MSAxMnoiLz4gICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==);
 }
-
 
 /* Here's where our carousel begins, with the main wrapper being
 relatively positioned, so that our absolutely positioned items are
@@ -367,15 +370,16 @@ I'm using empty links with a background image so that the links
 look like arrows. Make sure you swap out that URL with an actual
 URL so that your arrow links aren't just transparent rectangles. */
 .arrow {
-position: absolute;
-top: 0;
-display: block;
-width: 50px;
-height: 100%;
--webkit-tap-highlight-color: rgba(0,0,0,0);
-background: url("http://haloxp.com/codepen/carousel-arrow-dark.png") 50% 50% / 20px no-repeat;
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 50px;
+  height: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background: url("http://haloxp.com/codepen/carousel-arrow-dark.png") 50% 50% /
+    20px no-repeat;
 }
-  /* Let's put our arrow to go back on the left. */
+/* Let's put our arrow to go back on the left. */
 .arrow.arrow-prev {
   left: 0;
 }
@@ -384,9 +388,9 @@ background: url("http://haloxp.com/codepen/carousel-arrow-dark.png") 50% 50% / 2
 the same arrow image for both my arrows, I'm rotating this one by
 180 degrees so that it points in the right direction */
 .arrow.arrow-next {
-    right: 0;
-    -webkit-transform: rotate(180deg);
-            transform: rotate(180deg);
+  right: 0;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 /* I really like how these carousel items look on a dark image
@@ -397,14 +401,15 @@ a dark gray one. Again, make sure this arrow image exists somewhere */
   color: white;
 }
 .arrow {
-    background: url("http://haloxp.com/codepen/carousel-arrow-light.png") 50% 50% / 20px no-repeat;
+  background: url("http://haloxp.com/codepen/carousel-arrow-light.png") 50% 50% /
+    20px no-repeat;
 }
-    
 
 /* Let's use using some media queries to resize the arrows
 on smaller devices.*/
 @media (max-width: 480px) {
-  .arrow, .arrow.light .arrow {
+  .arrow,
+  .arrow.light .arrow {
     background-size: 10px;
     background-position: 10px 50%;
   }
@@ -444,7 +449,8 @@ setting its opacity to 1 again :-) */
 selector, make it fade in, and place it on top of the pile using z-index: 3.
 Here's where you'd add more target items if your carousel has more than three
 items. It might be worth adding like 10 items right off the bat. */
-#target-item-2:target ~ .item-2, #target-item-3:target ~ .item-3 {
+#target-item-2:target ~ .item-2,
+#target-item-3:target ~ .item-3 {
   z-index: 3;
   opacity: 1;
 }

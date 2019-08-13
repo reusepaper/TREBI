@@ -2,29 +2,55 @@
   <div>
     <AdminMain v-show="this.$store.state.adminPage==='Main'"></AdminMain>
     <div class="adminMainPageGrid" v-show="this.$store.state.adminPage!=='Main'">
-      <div class="admin__title" 
+      <div
+        class="admin__title"
         style=" margin-left: 40px; border-bottom: 3px solid #262F3D; box-shadow: 5px 3px 4px #6a88a6;"
       >
-        <div class="adminMainTitle" v-show="this.$store.state.adminPage==='AllUser'">
+        <span class="adminMainTitle" v-show="this.$store.state.adminPage==='AllUser'">
           All User List
-          <img src="../../assets/settings.png" style="width: 45px;" />
-        </div>
-        <div class="adminMainTitle" v-show="this.$store.state.adminPage==='Admin'">
+          <img
+            src="../../assets/settings.png"
+            srcset="../../assets/settings.png 1x, ../../assets/settings.png 2x"
+            style="width: 45px;"
+            alt="Setting"
+          />
+        </span>
+        <span class="adminMainTitle" v-show="this.$store.state.adminPage==='Admin'">
           Admin User List
-          <img src="../../assets/settings.png" style="width: 45px;" />
-        </div>
-        <div class="adminMainTitle" v-show="this.$store.state.adminPage==='Visitor'">
+          <img
+            src="../../assets/settings.png"
+            srcset="../../assets/settings.png 1x, ../../assets/settings.png 2x"
+            style="width: 45px;"
+            alt="Setting"
+          />
+        </span>
+        <span class="adminMainTitle" v-show="this.$store.state.adminPage==='Visitor'">
           Member and Visitor List
-          <img src="../../assets/settings.png" style="width: 45px;" />
-        </div>
-        <div class="adminMainTitle" v-show="this.$store.state.adminPage==='PostList'">
+          <img
+            src="../../assets/settings.png"
+            style="width: 45px;"
+            srcset="../../assets/settings.png 1x, ../../assets/settings.png 2x"
+            alt="Setting"
+          />
+        </span>
+        <span class="adminMainTitle" v-show="this.$store.state.adminPage==='PostList'">
           Post List
-          <img src="../../assets/settings.png" style="width: 45px;" />
-        </div>
-        <div class="adminMainTitle" v-show="this.$store.state.adminPage==='PortfolioList'">
+          <img
+            src="../../assets/settings.png"
+            srcset="../../assets/settings.png 1x, ../../assets/settings.png 2x"
+            style="width: 45px;"
+            alt="Setting"
+          />
+        </span>
+        <span class="adminMainTitle" v-show="this.$store.state.adminPage==='PortfolioList'">
           Portfolio List
-          <img src="../../assets/settings.png" style="width: 45px;" />
-        </div>
+          <img
+            src="../../assets/settings.png"
+            srcset="../../assets/settings.png 1x, ../../assets/settings.png 2x"
+            style="width: 45px;"
+            alt="Setting"
+          />
+        </span>
       </div>
       <div class="admin__content">
         <AdminMainTable v-show="this.$store.state.adminPage==='AllUser'"></AdminMainTable>

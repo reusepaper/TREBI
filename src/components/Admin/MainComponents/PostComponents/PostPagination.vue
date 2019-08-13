@@ -1,4 +1,4 @@
-<template>
+b<template>
   <div class="postpageing">
     <div style="margin-top: 20px; padding-right: 40px; text-align: right;">
       <span>total Post: {{listArray.length}}</span>
@@ -16,25 +16,27 @@
         </thead>
         <tbody>
           <tr v-for="(p, i) in paginatedData">
-            <td><b>{{listArray.length - (pageNum*pageSize) - i}}</b></td>
+            <td>
+              <b>{{listArray.length - (pageNum*pageSize) - i}}</b>
+            </td>
             <!-- <td><b>{{pageSize - i}}</b></td> -->
             <td>{{p.category}}</td>
             <td>{{p.title}}</td>
             <td>{{p.postWriter}}</td>
             <td>
-              <img style="height: 25px; cursor:pointer;" @click="delete_event(p)" src="../../../../assets/delete.png" />
+              <img
+                style="height: 25px; cursor:pointer;"
+                @click="delete_event(p)"
+                src="../../../../assets/delete.png"
+              />
             </td>
           </tr>
         </tbody>
       </table>
       <div class="btn-cover">
-        <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
-          이전
-        </button>
+        <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">이전</button>
         <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
-        <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
-          다음
-        </button>
+        <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">다음</button>
       </div>
     </div>
   </div>
@@ -44,10 +46,10 @@
 import FirebaseService from "@/services/FirebaseService";
 
 export default {
-  name: 'PostPagination',
+  name: "PostPagination",
   data() {
     return {
-      pageNum : 0
+      pageNum: 0
     };
   },
   props: {
@@ -62,7 +64,7 @@ export default {
     }
   },
   methods: {
-    async deletePost(deletePost){
+    async deletePost(deletePost) {
       await FirebaseService.deletePost(deletePost.id);
       await FirebaseService.updateUserPostDOWN(deletePost.writerUid);
       await alert("삭제되었습니다.");
@@ -73,15 +75,15 @@ export default {
         this.deletePost(deletePost);
       else alert("삭제하지 않았습니다.");
     },
-    nextPage () {
+    nextPage() {
       this.pageNum += 1;
     },
-    prevPage () {
+    prevPage() {
       this.pageNum -= 1;
     }
   },
   computed: {
-    pageCount () {
+    pageCount() {
       let listLeng = this.listArray.length;
       let listSize = this.pageSize;
       let page = Math.floor(listLeng / listSize);
@@ -90,12 +92,12 @@ export default {
       }
       return page;
     },
-    paginatedData () {
+    paginatedData() {
       const start = this.pageNum * this.pageSize;
       const end = start + this.pageSize;
-      console.log(start);
-      console.log(end);
-      
+      // console.log(start);
+      // console.log(end);
+
       return this.listArray.slice(start, end);
     }
   }
@@ -150,7 +152,6 @@ table td {
   vertical-align: top;
   text-align: center;
 }
-
 
 .btn-cover {
   margin-top: 1.5rem;
