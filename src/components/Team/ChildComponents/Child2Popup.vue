@@ -14,7 +14,7 @@
               <li @click="backSlide"><span><i class="fas fa-arrow-left"></i></span></li>
               <li @click="nextSlide"><span><i class="fas fa-arrow-right"></i></span></li>
             </ul>
-            <div class="showatio">{{current_slide}}/5</div>
+            <div class="showatio">{{current_slide}}/7</div>
             <div class="carousel__item" v-bind:class="{showing: current_slide===1}">
               <img src="..\..\..\assets\portfolio2\portfolio1.png"/>
             </div>
