@@ -6,11 +6,11 @@
     </div>
     <div class="post__contaniner">
       <div class="image__container">
-        <img :src="this.$store.state.nowDisplayPost.image" id="image">
+        <img :src="this.$store.state.nowDisplayPost.image" id="image" />
         <!-- <div
           class="image"
           v-bind:style="{ 'background-image': 'url(' + this.$store.state.nowDisplayPost.image + ')' }"
-        ></div> -->
+        ></div>-->
       </div>
       <div class="post__content">
         <div class="content__header">
@@ -41,7 +41,7 @@
             <Share></Share>
           </div>
         </div>
-        <div>likes: {{likeUsers.length}}</div>
+        <div class="like__container">{{likeUsers.length}} likes</div>
         <div id="comment__list">
           <div class="comment__item" v-for="comment in  comments">
             <div class="comment__writer">{{comment.displayName}}</div>
@@ -191,56 +191,55 @@ export default {
     });
   },
   beforeUpdate() {
-    
-    var frWidth = $('.image__container').width();
+    var frWidth = $(".image__container").width();
     var frHeight = 500;
-    var imgWidth = $('#image').width();
-    var imgHeight = $('#image').height();
+    var imgWidth = $("#image").width();
+    var imgHeight = $("#image").height();
 
-    if(imgWidth <= frWidth && imgHeight <= frHeight) {
-      if(imgWidth >= imgHeight) {
-        $('#image').css({
-          'width' : '100%',
-          'height' : 'auto',
-          'text-align' : 'center'
+    if (imgWidth <= frWidth && imgHeight <= frHeight) {
+      if (imgWidth >= imgHeight) {
+        $("#image").css({
+          width: "100%",
+          height: "auto",
+          "text-align": "center"
         });
       } else {
-        $('#image').css({
-          'width' : 'auto',
-          'height' : '100%'
+        $("#image").css({
+          width: "auto",
+          height: "100%"
         });
       }
-    } 
-    
-    if(imgWidth <= frWidth && imgHeight > frHeight) {
-      $('#image').css({
-        'width' : 'auto',
-        'height' : '100%'
-      });
-    } 
+    }
 
-    if(imgWidth > frWidth && imgHeight <= frHeight) {
-      $('#image').css({
-        'width' : '100%',
-        'height' : 'auto',
-        'text-align' : 'center'
+    if (imgWidth <= frWidth && imgHeight > frHeight) {
+      $("#image").css({
+        width: "auto",
+        height: "100%"
       });
-    } 
+    }
 
-    if(imgWidth > frWidth && imgHeight > frHeight) {
-      if(imgWidth >= imgHeight) {
-        $('#image').css({
-          'width' : '100%',
-          'height' : 'auto',
-          'text-align' : 'center'
+    if (imgWidth > frWidth && imgHeight <= frHeight) {
+      $("#image").css({
+        width: "100%",
+        height: "auto",
+        "text-align": "center"
+      });
+    }
+
+    if (imgWidth > frWidth && imgHeight > frHeight) {
+      if (imgWidth >= imgHeight) {
+        $("#image").css({
+          width: "100%",
+          height: "auto",
+          "text-align": "center"
         });
       } else {
-        $('#image').css({
-          'width' : 'auto',
-          'height' : '100%'
+        $("#image").css({
+          width: "auto",
+          height: "100%"
         });
       }
-    } 
+    }
   }
 };
 </script>
@@ -269,9 +268,9 @@ export default {
 .image__container {
   height: 100%;
   width: 100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: rgb(250, 250, 250);
 }
 
@@ -370,6 +369,10 @@ export default {
 }
 .heart {
   cursor: pointer;
+}
+.like__container {
+  padding-left: 10px;
+  margin-bottom: 5px;
 }
 #comment__list {
   overflow: scroll;
