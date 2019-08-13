@@ -24,13 +24,13 @@
         <div class="content">{{this.$store.state.nowDisplayPost.content}}</div>
         <!-- <div class="comment__container"></div> -->
         <div class="meta">
-          <!-- <div>{{isLike}}</div> -->
-          <div class="icon heart" v-if="isLike.length == 1" @click="deleteLikePost">
-            <FullHeart></FullHeart>
-          </div>
-          <div class="icon heart" v-else @click="createLikePost">
+          <div class="icon heart" v-if="isLike.length == 0" @click="createLikePost">
             <EmptyHeart></EmptyHeart>
           </div>
+          <div class="icon heart" v-else @click="deleteLikePost">
+            <FullHeart></FullHeart>
+          </div>
+          
           <div class="icon">
             <Bubble></Bubble>
           </div>
@@ -38,6 +38,7 @@
             <Share></Share>
           </div>
         </div>
+        <div>likes: {{likeUsers.length}}</div>
         <div id="comment__list">
           <div class="comment__item" v-for="comment in  comments">
             <div class="comment__writer">{{comment.displayName}}</div>
@@ -83,9 +84,8 @@ export default {
         // { writer: "4", content: "d" }
       ],
       comment: "",
-      isLike: {
-        length: 0
-      },
+      isLike: [],
+      likeUsers: [],
       displayPost: ""
     };
   },
@@ -98,7 +98,8 @@ export default {
   methods: {
     goPostList: function() {
       this.$store.commit("setPostPopupIndex", 1);
-      this.isLike = null;
+      this.isLike = [];
+      this.likeUsers = [];
     },
     async createComment() {
       if (this.$store.state.user == null) {
@@ -119,32 +120,50 @@ export default {
       await alert("등록이 완료되었습니다");
     },
     createLikePost() {
-      this.isLike.length = 1;
+      this.isLike = {
+        comment: this.comment,
+        uid: this.$store.state.user.uid
+      };
+      this.likeUsers.push(
+        {
+          comment: this.comment,
+          uid: this.$store.state.user.uid
+        }
+      )
       FirebaseService.createLikePost(
         this.$store.state.nowDisplayPost.id,
         this.$store.state.user.uid
       );
     },
     deleteLikePost() {
-      this.isLike.length = 0;
+      this.isLike = [];
+      this.likeUsers.pop();
       FirebaseService.deleteLikePost(
         this.$store.state.nowDisplayPost.id,
         this.$store.state.user.uid
       );
     },
-    async getLikePost() {
-      this.isLike = await FirebaseService.getLikePost(
+    async getIsLikePost(){
+      this.isLike = await FirebaseService.getIsLikePost(
         this.$store.state.nowDisplayPost.id,
         this.$store.state.user.uid
       );
-      await console.log(this.isLike);
+      // await console.log("1 :", this.isLike);
+      // await console.log(this.isLike.id);
+    },
+    async getLikePost() {
+      this.likeUsers = await FirebaseService.getLikePost(
+        this.$store.state.nowDisplayPost.id,
+        this.$store.state.user.uid
+      );
+      // await console.log(this.likeUsers);
       // await console.log(this.isLike.length);
     },
     async getCommentPost() {
       this.comments = await FirebaseService.getCommentPost(
         this.$store.state.nowDisplayPost.id
       );
-      await console.log(this.comments);
+      // await console.log(this.comments);
       // await console.log(this.isLike.length);
     }
   },
@@ -154,11 +173,13 @@ export default {
     this.$store.watch(
       () => this.$store.getters.getNowDisplayPost,
       n => {
-        console.log(n);
+        // console.log(n);
         this.getLikePost();
+        this.getIsLikePost();
         this.getCommentPost();
       }
     );
+    
     const commentList = document.querySelector("#comment__list");
     commentList.addEventListener("mousewheel", function(event) {
       event.stopPropagation();
@@ -203,7 +224,7 @@ export default {
   background-color: rgb(250, 250, 250);
   height: 552px;
   display: grid;
-  grid-template-rows: 0.5fr 4fr 0.5fr 5fr 0.5fr;
+  grid-template-rows: 0.5fr 4fr 0.4fr 0.3fr 5fr 0.3fr;
 }
 
 .post_title {
