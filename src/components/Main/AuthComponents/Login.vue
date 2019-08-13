@@ -57,7 +57,6 @@ export default {
         callbacks: {
           // 로그인이 성공하면,
           signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-            firebase.messaging().requestPermission();
             this.updateCurrentUser();
 
             return false;
@@ -90,13 +89,19 @@ export default {
         this.userLevel = this.firebaseUser[0].level;
       }
       this.firebaseUser = await FirebaseService.getisSignup(this.loginUser.uid);
-      // pushToken이 있는지 체크하고 없으면 넣기
       if (this.firebaseUser.photoURL == null) {
         await FirebaseService.updateUserPhotoURL(
           this.loginUser.uid,
           this.loginUser.photoURL
         );
       }
+      if (this.firebaseUser.localMessagingToken == null && localStorage.getItem('localMessagingToken')){
+        await FirebaseService.updateUserMessagingToken(
+          this.loginUser.uid,
+          localStorage.getItem('localMessagingToken')
+        )
+      }
+      // pushToken이 있는지 체크하고 없으면 넣기
       await firebase
         .messaging()
         .getToken()
