@@ -88,7 +88,7 @@ export default {
     this.$store.watch(() => this.$store.getters.getChild1State, Child1 => {
       // console.log('watched:', ismodalShow);
       // this.posY = $(window).scrollTop();
-      if(Child1) {
+      if(this.$store.state.Child1) {
         // console.log(this.posY);
         var height = $(window).height();
         height *= 1;

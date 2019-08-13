@@ -249,13 +249,13 @@ export default {
       .doc(userUid);
     LikePostCollection.delete();
   },
-  createUser(uid, nickname, eamil, level, createdAt, photoURL) {
+  createUser(uid, displayName, eamil, level, createdAt, photoURL) {
     return firestore
       .collection(USERS)
       .doc(uid)
       .set({
         uid,
-        nickname,
+        displayName,
         eamil,
         level,
         createdAt,
@@ -316,7 +316,7 @@ export default {
   getUserByName(name) {
     return firestore
       .collection(USERS)
-      .where("nickname", "==", name)
+      .where("displayName", "==", name)
       .where("level", "==", "maintainer")
       .get()
       .then(docSnapshots => {
@@ -416,7 +416,7 @@ export default {
       .doc(postId)
       .collection(TEAMCOMMENT);
     return TeamCommentCollection.add({
-      displayName: commentUser.nickname,
+      displayName: commentUser.displayName,
       uid: commentUser.uid,
       comment: newComment,
       createdAt: new Date()
