@@ -10,24 +10,22 @@
         <b>TITLE : &nbsp;&nbsp;</b>
       </label>
       <input class="w3-input w3-border title-context" name="last" type="text" v-model="title" />
+      <div class="upload">
+        <label for="uploadButton">등록</label>
+        <input type="button" @click="submit" id="uploadButton" />
+      </div>
     </div>
 
     <div class="container">
-      <textarea class="md-text" rows="10" v-model="content"></textarea>
-      <markdown-it-vue class="md-body" :content="content" :options="options"></markdown-it-vue>
-    </div>
-
-    <div class="upload-container">
-      <div class="image-upload-container">
-        <ImgUpLoad v-on:upLoadImg="upLoadImg"></ImgUpLoad>
-        <img :src="image" alt="Post Img" />
-      </div>
-      <div class="upload-button-container">
-        <div class="upload">
-          <label for="uploadButton">등록</label>
-          <input type="button" @click="submit" id="uploadButton" />
+      <div class="upload-container">
+        <ImgUpLoad class="fileSelectBtn" v-on:upLoadImg="upLoadImg"></ImgUpLoad>
+        <div class="image-upload-container">
+          <img class="image" :src="image" alt="Post Img" />
         </div>
-        <!-- <button class="button buttonblue" v-on:click="submit()">등록</button> -->
+      </div>
+      <div class="container__columm">
+        <textarea class="md-text" rows="10" v-model="content"></textarea>
+        <markdown-it-vue class="md-body" :content="content" :options="options"></markdown-it-vue>
       </div>
     </div>
   </div>
@@ -53,7 +51,7 @@ export default {
       postWriter: this.$store.state.user.displayName,
       writerUid: this.$store.state.user.uid,
       content: "# 이곳에 게시글을 작성해보세요! 8-)",
-      image: "",
+      image: "http://design-ec.com/d/e_others_50/l_e_others_500.png",
       configs: {
         spellChecker: false // disable spell check
       },
@@ -69,7 +67,7 @@ export default {
     };
   },
   methods: {
-    submit() {
+    async submit() {
       if (this.title == "") {
         alert("제목을 입력하세요");
       } else if (this.content == "") {
@@ -87,7 +85,7 @@ export default {
         FirebaseService.updateUserPostUP(this.writerUid);
         alert("업로드 되었습니다");
         this.title = "";
-        this.image = "";
+        this.image = "http://design-ec.com/d/e_others_50/l_e_others_500.png";
         this.content = "# 이곳에 게시글을 작성해보세요! 8-)";
         this.$store.commit("setPostPopupIndex", 1);
       }
@@ -128,6 +126,7 @@ export default {
   margin-top: 2vh;
   width: 100%;
   display: flex;
+  align-items: center;
 }
 
 .title-context {
@@ -145,16 +144,18 @@ export default {
   /* display: inline-flex; */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-auto-rows: minmax(500px, 1fr);
+  grid-auto-rows: minmax(600px, 1fr);
 }
 
 .upload-container {
+  position: relative;
   display: flex;
+  justify-content: flex-end;
 }
 
 .image-upload-container,
 .upload-button-container {
-  width: 50%;
+  width: 100%;
 }
 
 .upload-button-container {
@@ -181,7 +182,11 @@ export default {
 .gotolist {
   display: inline-block;
 }
-
+.container__columm {
+  border: 1px solid #ccc;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
 .gotolist label {
   margin-bottom: 0.5vh;
   display: inline-block;
@@ -255,7 +260,16 @@ export default {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+.fileSelectBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
 
+.image {
+  width: 100%;
+  height: 600px;
+}
 @media (max-width: 768px) {
   .writer__header .tpostwrite__titleitle {
     font-size: 22px;
@@ -265,11 +279,22 @@ export default {
   }
   .container {
     grid-template-columns: none;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 0.5fr 0.5fr;
     /* grid-auto-flow: dense; */
   }
   .md-body {
     border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+@media (max-width: 415px) {
+  .image {
+    height: 30vh;
+  }
+  .container__columm {
+    grid-template-rows: 0.6fr 0.8fr;
+  }
+  .title-context {
+    width: 60%;
   }
 }
 /* .button {

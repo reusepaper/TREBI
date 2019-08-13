@@ -46,6 +46,8 @@ export default {
         .then(success => {
           this.image = success.data.link;
           this.$emit("upLoadImg", this.image);
+          const uploadInput = document.querySelector("#uploadFile");
+          uploadInput.value = "";
         })
         .catch();
     }
@@ -55,7 +57,6 @@ export default {
 
 <style>
 .filebox label {
-  margin-top: 1vh;
   display: inline-block;
   padding: 0.5em 0.75em;
   font-size: inherit;
