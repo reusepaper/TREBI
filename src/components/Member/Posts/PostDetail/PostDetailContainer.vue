@@ -5,10 +5,13 @@
       <div class="title">PostDetail</div>
     </div>
     <div class="post__contaniner">
-      <div
-        class="image"
-        v-bind:style="{ 'background-image': 'url(' + this.$store.state.nowDisplayPost.image + ')' }"
-      ></div>
+      <div class="image__container">
+        <img :src="this.$store.state.nowDisplayPost.image" class="image">
+        <!-- <div
+          class="image"
+          v-bind:style="{ 'background-image': 'url(' + this.$store.state.nowDisplayPost.image + ')' }"
+        ></div> -->
+      </div>
       <div class="post__content">
         <div class="content__header">
           <div
@@ -170,6 +173,7 @@ export default {
     }
   },
   mounted() {
+    
     // this.getLikePost();
     // console.log(this.$store.state.user);
     this.$store.watch(
@@ -211,12 +215,22 @@ export default {
   /* background-color: aquamarine; */
 }
 
+.image__container {
+  height: 100%;
+  width: 100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background-color: rgb(250, 250, 250);
+}
+
 .image {
   border: 1px solid rgba(0, 0, 0, 0.2);
-  height: 550px;
-  background-position: center;
-  background-size: cover;
   width: 100%;
+  height: auto;
+  /* background-position: center;
+  background-size: cover; */
+  border: none;
 }
 
 .post__header {
