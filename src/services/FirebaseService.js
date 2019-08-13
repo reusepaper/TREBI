@@ -216,7 +216,7 @@ export default {
         });
       });
   },
-  getLikePost(postId, userUid) {
+  getLikePost(postId) {
     const LikePostCollection = firestore
       .collection(POSTS)
       .doc(postId)

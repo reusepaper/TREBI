@@ -67,12 +67,14 @@ import Bubble from "../Icons/Bubble";
 import Share from "../Icons/Share";
 import FullHeart from "../Icons/FullHeart";
 export default {
-  data: {
-    comment: "",
-    isLike: {
-      length: 0
-    },
-    displayPost: ""
+  data() {
+    return{
+      comment: "",
+      isLike: [],
+      likeUsers: [],
+      displayPost: "",
+      comments: []
+    }
   },
   components: {
     EmptyHeart,
@@ -105,6 +107,10 @@ export default {
       await alert("등록이 완료되었습니다");
     },
     createLikePost() {
+      if(this.$store.state.user == null){
+        alert("로그인을 한 후 좋아요를 눌러주세요");
+        return;
+      }
       this.isLike = {
         comment: this.comment,
         uid: this.$store.state.user.uid
@@ -119,6 +125,7 @@ export default {
       );
     },
     deleteLikePost() {
+      if (this.$store.state.user == null) return;
       this.isLike = [];
       this.likeUsers.pop();
       FirebaseService.deleteLikePost(
@@ -127,6 +134,10 @@ export default {
       );
     },
     async getIsLikePost() {
+      if (this.$store.state.user == null){
+        this.isLike = [];
+        return;
+      };
       this.isLike = await FirebaseService.getIsLikePost(
         this.$store.state.nowDisplayPost.id,
         this.$store.state.user.uid
@@ -137,7 +148,6 @@ export default {
     async getLikePost() {
       this.likeUsers = await FirebaseService.getLikePost(
         this.$store.state.nowDisplayPost.id,
-        this.$store.state.user.uid
       );
       // await console.log(this.likeUsers);
       // await console.log(this.isLike.length);
