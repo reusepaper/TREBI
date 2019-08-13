@@ -248,11 +248,10 @@ label {
 
   .close__container:hover label {
     opacity: 1;
+    position:relative;
+    top: 40px;
+    left: 6px;
   }
-
-.close-container:hover label {
-  opacity: 1;
-}
 
 .addBtn {
   color: white;

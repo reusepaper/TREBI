@@ -191,7 +191,8 @@ export default {
     });
   },
   beforeUpdate() {
-    var frWidth = $(".image__container").width();
+    
+    var frWidth = 718;
     var frHeight = 500;
     var imgWidth = $("#image").width();
     var imgHeight = $("#image").height();
