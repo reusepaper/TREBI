@@ -43,6 +43,7 @@
           <div class="comment__item" v-for="comment in  comments">
             <div class="comment__writer">{{comment.displayName}}</div>
             <div class="comment__content">{{comment.comment}}</div>
+            <div class="comment__timeStamp">{{comment.createdAt}}</div>
           </div>
         </div>
         <div class="comment__input">
@@ -68,13 +69,14 @@ import Share from "../Icons/Share";
 import FullHeart from "../Icons/FullHeart";
 export default {
   data() {
-    return{
+    return {
+      comments: [],
       comment: "",
       isLike: [],
       likeUsers: [],
       displayPost: "",
       comments: []
-    }
+    };
   },
   components: {
     EmptyHeart,
@@ -104,10 +106,11 @@ export default {
         );
       }
       this.comment = await "";
+      this.getCommentPost();
       await alert("등록이 완료되었습니다");
     },
     createLikePost() {
-      if(this.$store.state.user == null){
+      if (this.$store.state.user == null) {
         alert("로그인을 한 후 좋아요를 눌러주세요");
         return;
       }
@@ -134,10 +137,10 @@ export default {
       );
     },
     async getIsLikePost() {
-      if (this.$store.state.user == null){
+      if (this.$store.state.user == null) {
         this.isLike = [];
         return;
-      };
+      }
       this.isLike = await FirebaseService.getIsLikePost(
         this.$store.state.nowDisplayPost.id,
         this.$store.state.user.uid
@@ -147,17 +150,23 @@ export default {
     },
     async getLikePost() {
       this.likeUsers = await FirebaseService.getLikePost(
-        this.$store.state.nowDisplayPost.id,
+        this.$store.state.nowDisplayPost.id
       );
       // await console.log(this.likeUsers);
       // await console.log(this.isLike.length);
     },
     async getCommentPost() {
-      this.comments = await FirebaseService.getCommentPost(
+      const comments = await FirebaseService.getCommentPost(
         this.$store.state.nowDisplayPost.id
       );
+      comments.forEach(comment => {
+        let temp = Date(comment.createdAt.seconds);
+        temp = temp.split(" ");
+        let commentTimeStamp = temp[1] + " " + temp[2] + " " + temp[3];
+        comment.createdAt = commentTimeStamp;
+      });
+      this.comments = comments;
       // await console.log(this.comments);
-      // await console.log(this.isLike.length);
     }
   },
   mounted() {
@@ -182,6 +191,20 @@ export default {
 </script>
 
 <style scoped>
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #919191;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .Wrapper {
   margin: 0;
   width: 100%;
@@ -276,6 +299,7 @@ export default {
   padding: 5px;
   padding-left: 10px;
 }
+
 .meta .icon {
   margin-right: 10px;
 }
@@ -284,12 +308,22 @@ export default {
 }
 #comment__list {
   overflow: scroll;
+  overflow-x: hidden;
 }
 .comment__item {
+  position: relative;
   display: flex;
   padding-left: 10px;
   margin-bottom: 5px;
 }
+
+.comment__item .comment__timeStamp {
+  position: absolute;
+  font-size: 10px;
+  font-weight: lighter;
+  right: 10px;
+}
+
 .comment__item .comment__writer {
   margin-right: 10px;
   font-weight: 600;

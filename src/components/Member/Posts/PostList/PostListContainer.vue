@@ -20,7 +20,7 @@
 import FirebaseService from "../../../../services/FirebaseService";
 import { mapState } from "vuex";
 import PostCard from "./PostCard";
-import { setInterval } from 'timers';
+import { setInterval } from "timers";
 
 // $("#ModalPopup").on("mousewheel", function (event) {
 //   event.stopPropagation();
@@ -29,7 +29,6 @@ import { setInterval } from 'timers';
 export default {
   mounted() {
     this.getUId(this.$store.state.nowDisplayMember);
-    
   },
   data() {
     return {
@@ -115,5 +114,18 @@ export default {
   .post__title {
     font-size: 22px;
   }
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #919191;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 </style>

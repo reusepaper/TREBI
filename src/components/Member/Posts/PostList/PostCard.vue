@@ -14,9 +14,7 @@ export default {
       this.$store.commit("setNowDisplayPost", this.post);
     }
   },
-  mounted() {
-    console.log(this.post);
-  }
+  mounted() {}
 };
 </script>
 
