@@ -2,7 +2,7 @@
   <div id="app">
     <!-- <Header></Header> -->
     <!-- <Trebi></Trebi> -->
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -18,4 +18,6 @@ export default {
   }
 };
 </script>
+
+
 
