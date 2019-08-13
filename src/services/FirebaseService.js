@@ -22,17 +22,17 @@ messaging.usePublicVapidKey(messagingKey);
 messaging
   .requestPermission()
   .then(function() {
-    console.log("Notification permission granted.");
+    // console.log("Notification permission granted.");
 
     // get the token in the form of promise
     return messaging.getToken();
   })
   .then(function(token) {
-    console.log(token)
+    // console.log(token)
     localStorage.setItem('localMessagingToken', token);
   })
   .catch(function(err) {
-    console.log("Unable to get permission to notify.", err);
+    // console.log("Unable to get permission to notify.", err);
     localStorage.setItem('localMessagingToken', null);
   });
 
@@ -163,6 +163,7 @@ export default {
     return firestore
       .collection(POSTS)
       .where("writerUid", "==", uid)
+      .orderBy("createdAt", "desc")
       .get()
       .then(docSnapshots => {
         // console.log(docSnapshots);
@@ -190,7 +191,8 @@ export default {
       .collection(POSTS)
       .doc(postId)
       .collection(POSTCOMMENT);
-    return CommentPostCollection.get().then(docSnapshots => {
+    return CommentPostCollection
+    .orderBy("createdAt", "desc").get().then(docSnapshots => {
       return docSnapshots.docs.map(doc => {
         let data = doc.data();
         data.id = doc.id;
@@ -414,7 +416,7 @@ export default {
       .doc(postId)
       .collection(TEAMCOMMENT);
     return TeamCommentCollection.add({
-      displayName: commentUser.displayName,
+      displayName: commentUser.nickname,
       uid: commentUser.uid,
       comment: newComment,
       createdAt: new Date()
