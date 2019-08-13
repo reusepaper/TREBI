@@ -38,7 +38,7 @@
             <Share></Share>
           </div>
         </div>
-        <div>likes: {{likeUsers.length}}</div>
+        <div class="like__container">{{likeUsers.length}} likes</div>
         <div id="comment__list">
           <div class="comment__item" v-for="comment in  comments">
             <div class="comment__writer">{{comment.displayName}}</div>
@@ -288,7 +288,10 @@ export default {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-
+.like__container {
+  padding-left: 10px;
+  margin-bottom: 5px;
+}
 .comment__container {
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
