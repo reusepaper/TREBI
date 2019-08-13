@@ -6,7 +6,7 @@
     </div>
     <div class="post__contaniner">
       <div class="image__container">
-        <img :src="this.$store.state.nowDisplayPost.image" class="image">
+        <img :src="this.$store.state.nowDisplayPost.image" id="image">
         <!-- <div
           class="image"
           v-bind:style="{ 'background-image': 'url(' + this.$store.state.nowDisplayPost.image + ')' }"
@@ -41,7 +41,7 @@
             <Share></Share>
           </div>
         </div>
-        <div class="like__container">{{likeUsers.length}} likes</div>
+        <div>likes: {{likeUsers.length}}</div>
         <div id="comment__list">
           <div class="comment__item" v-for="comment in  comments">
             <div class="comment__writer">{{comment.displayName}}</div>
@@ -173,24 +173,6 @@ export default {
     }
   },
   mounted() {
-    var frWidth = $('.image__container').width();
-    var frHeight = $('.image__container').height();
-    var frRatio = frWidth/frHeight;
-    var imgWidth = $('.image').width();
-    var imgHeight = $('.image').height();
-    var imgRatio = imgWidth/imgHeight;
-    if(imgRatio >= frRatio){
-      $('.image').css({
-        'width' : 'auto',
-        'height' : '100%'
-      });
-    } else {
-      $('.image').css({
-        'width' : '100%',
-        'height' : 'auto',
-        'text-align' : 'center'
-      });
-    }
     // this.getLikePost();
     // console.log(this.$store.state.user);
     this.$store.watch(
@@ -207,6 +189,48 @@ export default {
     commentList.addEventListener("mousewheel", function(event) {
       event.stopPropagation();
     });
+  },
+  beforeUpdate() {
+    
+    var frWidth = $('.image__container').width();
+    var frHeight = 500;
+    var frRatio = frWidth/frHeight;
+    var imgWidth = $('#image').width();
+    var imgHeight = $('#image').height();
+    var imgRatio = imgWidth/imgHeight;
+
+    console.log(imgWidth);
+    console.log(imgHeight);
+    
+    if(imgRatio >= frRatio){
+      if(imgWidth >= imgHeight) {
+        $('#image').css({
+          'width' : '100%',
+          'height' : 'auto',
+          'text-align' : 'center'
+        });
+      } else if(imgWidth < imgHeight) {
+        $('#image').css({
+          'width' : 'auto',
+          'height' : '100%'
+        });
+      }
+    }
+
+    if(imgRatio < frRatio) {
+      if(imgWidth >= imgHeight) {
+        $('#image').css({
+          'width' : '100%',
+          'height' : 'auto',
+          'text-align' : 'center'
+        });
+      } else if(imgWidth < imgHeight) {
+        $('#image').css({
+          'width' : 'auto',
+          'height' : '100%'
+        });
+      }
+    }
   }
 };
 </script>
@@ -241,8 +265,8 @@ export default {
   background-color: rgb(250, 250, 250);
 }
 
-.image {
-  border: 1px solid rgba(0, 0, 0, 0.2);
+#image {
+  /* border: 1px solid rgba(0, 0, 0, 0.2); */
   /* width: 100%;
   height: auto; */
   /* background-position: center;
@@ -305,7 +329,7 @@ export default {
 .post__contaniner {
   display: grid;
   grid-template-columns: 5fr 5fr;
-  grid-auto-rows: minmax(550px, 1fr);
+  grid-auto-rows: minmax(550px, 550px);
 }
 .title,
 .content {
@@ -319,10 +343,7 @@ export default {
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-.like__container {
-  padding-left: 10px;
-  margin-bottom: 5px;
-}
+
 .comment__container {
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
