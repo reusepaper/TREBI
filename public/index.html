@@ -5,12 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 
+    <!-- Viewport meta tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- dns prefetch off -->
+    <!-- <meta http-equiv="x-dns-prefetch-control" content="off" /> -->
+
     <!-- favicon -->
     <meta name="msapplication-TileColor" content="#b2d5bf" />
     <meta name="theme-color" content="#b2d5bf" />
 
+    <!-- cache option -->
+    <!-- <filesMatch ".(ico|jpg|jpeg|png|gif)$">
+      Header set Cache-Control "max-age=2592000, public"
+     </filesMatch> -->
+
     <!-- fontawesome -->
-    <script src="https://use.fontawesome.com/releases/v5.9.0/js/all.js"></script>
+    <script
+      async
+      src="https://use.fontawesome.com/releases/v5.9.0/js/all.js"
+    ></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script
       async
@@ -48,7 +62,7 @@
       href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
       rel="stylesheet"
     />
-    <title>webmobile-sub3</title>
+    <title>TREBI</title>
   </head>
   <body>
     <noscript>
@@ -81,6 +95,97 @@
         once: false, // whether animation should happen only once - while scrolling down
         mirror: false, // whether elements should animate out while scrolling past them
         anchorPlacement: "top-bottom" // defines which position of the element regarding to window should trigger the animation
+      });
+    </script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+          navigator.serviceWorker.register("/service-worker.js").then(
+            function(registration) {
+              // Registration was successful
+              console.log(
+                "ServiceWorker registration successful with scope: ",
+                registration.scope
+              );
+            },
+            function(err) {
+              // registration failed :(
+              console.log("ServiceWorker registration failed: ", err);
+            }
+          );
+        });
+      }
+    </script>
+    <script>
+      var CACHE_NAME = "TREBI-cache";
+      var urlsToCache = ["/", "/styles/main.css", "/script/main.js"];
+
+      self.addEventListener("install", function(event) {
+        // Perform install steps
+        event.waitUntil(
+          caches.open(CACHE_NAME).then(function(cache) {
+            console.log("Opened cache");
+            return cache.addAll(urlsToCache);
+          })
+        );
+      });
+    </script>
+    <script>
+      self.addEventListener("fetch", function(event) {
+        event.respondWith(
+          caches.match(event.request).then(function(response) {
+            // Cache hit - return response
+            if (response) {
+              return response;
+            }
+
+            // IMPORTANT: Clone the request. A request is a stream and
+            // can only be consumed once. Since we are consuming this
+            // once by cache and once by the browser for fetch, we need
+            // to clone the response.
+            var fetchRequest = event.request.clone();
+
+            return fetch(fetchRequest).then(function(response) {
+              // Check if we received a valid response
+              if (
+                !response ||
+                response.status !== 200 ||
+                response.type !== "basic"
+              ) {
+                return response;
+              }
+
+              // IMPORTANT: Clone the response. A response is a stream
+              // and because we want the browser to consume the response
+              // as well as the cache consuming the response, we need
+              // to clone it so we have two streams.
+              var responseToCache = response.clone();
+
+              caches.open(CACHE_NAME).then(function(cache) {
+                cache.put(event.request, responseToCache);
+              });
+
+              return response;
+            });
+          })
+        );
+      });
+    </script>
+    <script>
+      self.addEventListener("activate", function(event) {
+        var cacheWhitelist = ["pages-cache-v1", "blog-posts-cache-v1"];
+
+        event.waitUntil(
+          caches.keys().then(function(cacheNames) {
+            return Promise.all(
+              cacheNames.map(function(cacheName) {
+                if (cacheWhitelist.indexOf(cacheName) === -1) {
+                  return caches.delete(cacheName);
+                }
+              })
+            );
+          })
+        );
       });
     </script>
   </body>

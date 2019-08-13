@@ -30,7 +30,7 @@
           <div class="icon heart" v-else @click="deleteLikePost">
             <FullHeart></FullHeart>
           </div>
-          
+
           <div class="icon">
             <Bubble></Bubble>
           </div>
@@ -67,27 +67,12 @@ import Bubble from "../Icons/Bubble";
 import Share from "../Icons/Share";
 import FullHeart from "../Icons/FullHeart";
 export default {
-  data() {
-    return {
-      comments: [
-        // { writer: "1", content: "a" },
-        // { writer: "2", content: "b" },
-        // { writer: "3", content: "c" },
-        // { writer: "4", content: "d" },
-        // { writer: "1", content: "a" },
-        // { writer: "2", content: "b" },
-        // { writer: "3", content: "c" },
-        // { writer: "4", content: "d" },
-        // { writer: "1", content: "a" },
-        // { writer: "2", content: "b" },
-        // { writer: "3", content: "c" },
-        // { writer: "4", content: "d" }
-      ],
-      comment: "",
-      isLike: [],
-      likeUsers: [],
-      displayPost: ""
-    };
+  data: {
+    comment: "",
+    isLike: {
+      length: 0
+    },
+    displayPost: ""
   },
   components: {
     EmptyHeart,
@@ -124,12 +109,10 @@ export default {
         comment: this.comment,
         uid: this.$store.state.user.uid
       };
-      this.likeUsers.push(
-        {
-          comment: this.comment,
-          uid: this.$store.state.user.uid
-        }
-      )
+      this.likeUsers.push({
+        comment: this.comment,
+        uid: this.$store.state.user.uid
+      });
       FirebaseService.createLikePost(
         this.$store.state.nowDisplayPost.id,
         this.$store.state.user.uid
@@ -143,7 +126,7 @@ export default {
         this.$store.state.user.uid
       );
     },
-    async getIsLikePost(){
+    async getIsLikePost() {
       this.isLike = await FirebaseService.getIsLikePost(
         this.$store.state.nowDisplayPost.id,
         this.$store.state.user.uid
@@ -179,7 +162,7 @@ export default {
         this.getCommentPost();
       }
     );
-    
+
     const commentList = document.querySelector("#comment__list");
     commentList.addEventListener("mousewheel", function(event) {
       event.stopPropagation();
