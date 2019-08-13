@@ -2,34 +2,33 @@
   <div id="popup-article" class="popup" v-bind:class="{modalShow :this.$store.state.Child1}">
     <div class="popup__block">
       <div class="block-row">
-        <div @click="popUpClose" class="close-container">
+        <div @click="popUpClose" class="close__container">
           <div class="leftright"></div>
           <div class="rightleft"></div>
           <label class="close">close</label>
         </div>
         <!-- <div @click="popUpClose" class="popup__close">close</div> -->
         <div class="block-cell upload">
-          <div class="carousel-wrapper">
-            <span id="target-item-1"></span>
-            <span id="target-item-2"></span>
-            <span id="target-item-3"></span>
-            <div class="carousel-item item-1" style="background-color: khaki;">
-              <h2>{{content.content1}}</h2>
-              <p>Content goes here.</p>
-              <a class="arrow arrow-prev" href="#target-item-3"></a>
-              <a class="arrow arrow-next" href="#target-item-2"></a>
+          <div class="carousel__wrapper">
+            <ul>
+              <li @click="backSlide"><span><i class="fas fa-arrow-left"></i></span></li>
+              <li @click="nextSlide"><span><i class="fas fa-arrow-right"></i></span></li>
+            </ul>
+            <div class="showatio">{{current_slide}}/5</div>
+            <div class="carousel__item" v-bind:class="{showing: current_slide===1}">
+              <img src="..\..\..\assets\portfolio1\11.png"/>
             </div>
-            <div class="carousel-item item-2 light" style="background-color: royalblue;">
-              <h2>{{content.content2}}</h2>
-              <p>Content goes here.</p>
-              <a class="arrow arrow-prev" href="#target-item-1"></a>
-              <a class="arrow arrow-next" href="#target-item-3"></a>
+            <div class="carousel__item" v-bind:class="{showing: current_slide===2}">
+              <img src="..\..\..\assets\portfolio1\22.png"/>
             </div>
-            <div class="carousel-item item-3" style="background-color: aliceblue;">
-              <h2>{{content.content3}}</h2>
-              <p>Content goes here.</p>
-              <a class="arrow arrow-prev" href="#target-item-2"></a>
-              <a class="arrow arrow-next" href="#target-item-1"></a>
+            <div class="carousel__item" v-bind:class="{showing: current_slide===3}">
+              <img src="..\..\..\assets\portfolio1\33.png"/>
+            </div>
+            <div class="carousel__item" v-bind:class="{showing: current_slide===4}">
+              <img src="..\..\..\assets\portfolio1\44.png"/>
+            </div>
+            <div class="carousel__item" v-bind:class="{showing: current_slide===5}">
+              <img src="..\..\..\assets\portfolio1\55.png"/>
             </div>
           </div>
         </div>
@@ -40,9 +39,9 @@
             </div>-->
             <div class="comment__container">
               <ul id="comment--content">
-                <li v-for="comment in comments" v-bind:key="comment">
-                  {{comment.displayName}} | {{comment.comment}}
-                  <button
+                <li v-for="comment in comments" v-bind:key="comment.uid">
+                  {{comment.displayName}} | {{comment.comment}} 
+                  <button 
                     v-if="$store.state.user && $store.state.user.uid == comment.uid"
                     class="deleteButton"
                     @click="delete_event(content.id, comment.id)"
@@ -69,55 +68,71 @@
 </template>
 
 <script scoped>
-import FirebaseService from "@/services/FirebaseService";
+import FirebaseService from '@/services/FirebaseService';
+import { setInterval } from 'timers';
+
 export default {
   data: function() {
     return {
       content: [],
       comment: "",
       comments: [],
-      user: this.$store.state.user
-    };
+      user: this.$store.state.user,
+      firstSlide:'',
+      showing_class:"showing",
+      current_slide:1,
+    }
   },
   mounted: function() {
     this.getTeamPost();
-    this.$store.watch(
-      () => this.$store.getters.getChild1State,
-      Child1 => {
-        // console.log('watched:', ismodalShow);
-        // this.posY = $(window).scrollTop();
-        if (Child1) {
-          // console.log(this.posY);
-          var height = $(window).height();
-          height *= 1;
-          height += 1;
-          window.scrollTo({
-            top: height,
-            behavior: "smooth"
-          });
-          // $("html, body").addClass("not_scroll");
-          $("body").css("overflow", "hidden");
-          $(".comment__container").on("mousewheel", function(event) {
-            event.stopPropagation();
-          });
-        } else {
-          // $("html, body").removeClass("not_scroll");
-          // posY = $(window).scrollTop(posY);
-          var height = $(window).height();
-          height *= 1;
-          height += 1;
-          window.scrollTo({
-            top: height
-            // behavior: 'smooth'
-          });
-          $("body").css("overflow", "visible");
-          // $("html, body").removeClass("not_scroll");
-          // this.posY = $(window).scrollTop(this.posY);
-        }
-      }
-    );
+    this.$store.watch(() => this.$store.getters.getChild1State, Child1 => {
+      // console.log('watched:', ismodalShow);
+      // this.posY = $(window).scrollTop();
+      if(Child1) {
+        // console.log(this.posY);
+        var height = $(window).height();
+        height *= 1;
+        height += 1;
+        window.scrollTo({
+          top: height,
+          behavior: 'smooth'
+        });
+        // $("html, body").addClass("not_scroll");
+        $("body").css("overflow", "hidden");
+        $(".comment__container").on("mousewheel", function (event) {
+          event.stopPropagation();
+        });
+      } else{
+        // $("html, body").removeClass("not_scroll");
+        // posY = $(window).scrollTop(posY);
+        var height = $(window).height();
+        height *= 1;
+        height += 1;
+        window.scrollTo({
+          top: height
+          // behavior: 'smooth'
+        });
+        $("body").css("overflow", "visible");
+        // $("html, body").removeClass("not_scroll");
+        // this.posY = $(window).scrollTop(this.posY);
+      };
+    })
   },
   methods: {
+    backSlide(){
+      if(this.current_slide===1){
+        this.current_slide=5;
+      }else{
+        this.current_slide=this.current_slide-1;
+      }
+    },
+    nextSlide(){
+      if(this.current_slide===5){
+        this.current_slide=1;
+      }else{
+        this.current_slide++;
+      }
+    },
     popUpClose() {
       // this.$store.commit("closeChildShow");
       this.$store.commit("toggleNthChildShow", 1);
@@ -172,16 +187,6 @@ export default {
 </script>
 
 <style scoped>
-.close-container {
-  /* position: relative;
-    margin: auto; */
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-}
 
 .leftright {
   height: 4px;
@@ -211,27 +216,32 @@ label {
   font-size: 0.6em;
   text-transform: uppercase;
   letter-spacing: 2px;
-  transition: all 0.3s ease-in;
   opacity: 0;
 }
-
-.close {
-  margin: 72px 14px 0 0;
-  position: absolute;
+.close__container {
+  /* position: relative;
+    margin: auto; */
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
 }
-
-.close-container:hover .leftright {
+.close__container:hover .leftright {
   transform: rotate(-45deg);
-  background-color: #ffffff;
+  background-color: #FFFFFF;
 }
 
-.close-container:hover .rightleft {
+.close__container:hover .rightleft {
   transform: rotate(45deg);
-  background-color: #ffffff;
+  background-color: #FFFFFF;
 }
 
-.close-container:hover label {
+.close__container:hover label {
   opacity: 1;
+  position:relative;
+  top:40px;
 }
 
 .addBtn {
@@ -436,7 +446,7 @@ label {
 
 .popup__block {
   height: 80vh;
-  width: 60%;
+  width: 80%;
   /* box-sizing: border-box; */
   /* padding: 1% 1% !important; */
   /* position: relative; */
@@ -537,23 +547,70 @@ label {
 /* Here's where our carousel begins, with the main wrapper being
 relatively positioned, so that our absolutely positioned items are
 in the right place. */
-.carousel-wrapper {
+.carousel__wrapper
+ {
   position: relative;
   height: 100%;
+}
+.carousel__wrapper ul{
+  list-style-type: none;
+  display:flex;
+  height:100%;
+  width:100%;
+  margin: 0 auto;
+  position:absolute;
+}
+.carousel__wrapper ul li:nth-child(1){
+  z-index: 3;
+  width:50%;
+  height:100%;
+  overflow:hidden;
+  background: transparent;
+  font-size:40px;
+}
+.carousel__wrapper ul li:nth-child(2){
+  z-index: 3;
+  position:relative;
+  width:50%;
+  height:100%;
+  overflow:hidden;
+  background:transparent;
+  text-align: right;
+  font-size:40px;
+}
+.showatio{
+  position:absolute;
+  font-size: 20px;
+  background-color: rgba(0,0,0,.3);
+  color:white;
+  margin-top:10px;
+  z-index: 4;
+  left:50%;
 }
 /* Our absolutely positioned carousel items span the width and
 height of its parent. We're making them transparent by default so
 that they fade in when we cycle through them using the arrow links. */
-.carousel-item {
+.carousel__item {
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 25px 50px;
-  opacity: 0;
-  transition: all 0.5s ease-in-out;
-  /* border: 1px solid #aaa; */
+  top:0;
+  z-index: 0;
+  opacity:0;
+  transition: opacity .3s ease-in-out;
+}
+.carousel__item:nth-child(odd){
+  background-color: antiquewhite;
+}
+.carousel__item:nth-child(even){
+  background-color: steelblue;
+}
+.showing{
+  opacity:1;
+  z-index: 2;
 }
 /* Did you notice the 50px left, right padding up above? It's so
 we can position our arrow links! Each one will be 50px wide. Also,
@@ -613,36 +670,12 @@ any element whose id starts with 'target-item'. */
 [id^="target-item"] {
   display: none;
 }
-
-/* So, up above we made all our carousel items transparent, which means
-that on page-load, we'd have a big empty box where our carousel should be.
-Let's set our first item's opacity to 1 so that it displays instead. Also,
-we're setting its z-index to 2, so that it's positioned on top of the other carousel items. */
-.item-1 {
-  z-index: 2;
-  opacity: 1;
-}
-
-/* But we don't want the first item to ALAWYS be opacity: 1; otherwise
-it would peek through when cycling between items two and above. */
-*:target ~ .item-1 {
-  opacity: 0;
-}
-
-/* ...but if #target-item-1 is targeted, well we do want the first item
-to show up, so we're selecting it with the ~ sibling selector and
-setting its opacity to 1 again :-) */
-#target-item-1:target ~ .item-1 {
-  opacity: 1;
-}
-
-/* If any other target-item-# is targeted, let's select it using the sibling
-selector, make it fade in, and place it on top of the pile using z-index: 3.
-Here's where you'd add more target items if your carousel has more than three
-items. It might be worth adding like 10 items right off the bat. */
-#target-item-2:target ~ .item-2,
-#target-item-3:target ~ .item-3 {
-  z-index: 3;
-  opacity: 1;
+.carousel__item img{
+  overflow: hidden;
+  display: flex;
+  align-items: top;
+  justify-content: top;
+  width: 100%;
+  height: 100%;
 }
 </style>
