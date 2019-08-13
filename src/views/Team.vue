@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <TeamTitleContain></TeamTitleContain>
+  <div class="team">
+    <TeamTitleContain data-aos="fade-right" data-aos-delay="100"></TeamTitleContain>
     <TeamContentsContain></TeamContentsContain>
   </div>
 </template>
 <script>
 import TeamTitleContain from "../components/Team/TeamTitleContain";
 import TeamContentsContain from "../components/Team/TeamContentsContain";
+import $ from 'jquery';
+
 export default {
   components: {
     TeamTitleContain,
@@ -14,3 +16,10 @@ export default {
   }
 };
 </script>
+
+<style>
+  .team {
+    height: 100vh;
+    background: #EDEDEE;
+  }
+</style>

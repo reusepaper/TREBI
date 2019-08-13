@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <PostsTitleContain></PostsTitleContain>
-    <WriterListsContain></WriterListsContain>
-    <PostsViewContain></PostsViewContain>
+  <div class="posts">
+    <PostsTitleContain class="post-title"></PostsTitleContain>
+    <div class="contents">
+      <WriterListsContain class="posts-list-contain"></WriterListsContain>
+      <PostsViewContain class="posts-contents-contain"></PostsViewContain>
+    </div>
   </div>
 </template>
 <script>
@@ -18,3 +20,32 @@ export default {
   }
 };
 </script>
+<style scoped>
+.posts {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 150px 8fr;
+}
+.post-title {
+  float: left;
+  height: 100vh;
+}
+.contents {
+  float: left;
+  width: 80%;
+  height: 100vh;
+}
+.posts-list-contain {
+  height: 20%;
+  margin: 20px;
+  margin-top: 7%;
+}
+.posts-contents-contain {
+  background-color: white;
+  margin: 20px;
+  height: 46%;
+  border-radius: 1%;
+  margin-top: 8%;
+}
+</style>
