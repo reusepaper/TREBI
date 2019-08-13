@@ -29,11 +29,11 @@ messaging
   })
   .then(function(token) {
     // console.log(token)
-    localStorage.setItem('localMessagingToken', token);
+    localStorage.setItem("localMessagingToken", token);
   })
   .catch(function(err) {
     // console.log("Unable to get permission to notify.", err);
-    localStorage.setItem('localMessagingToken', null);
+    localStorage.setItem("localMessagingToken", null);
   });
 
 // forground Message
@@ -41,7 +41,7 @@ messaging.onMessage(function(payload) {
   const notificationTitle = payload.data.message;
   const notificationOptions = {
     body: payload.data.body
-    // icon: payload.data.icon
+    // icon: "../assets/trebiMain"
   };
 
   if (!("Notification" in window)) {
@@ -191,22 +191,22 @@ export default {
       .collection(POSTS)
       .doc(postId)
       .collection(POSTCOMMENT);
-    return CommentPostCollection
-    .orderBy("createdAt", "desc").get().then(docSnapshots => {
-      return docSnapshots.docs.map(doc => {
-        let data = doc.data();
-        data.id = doc.id;
-        return data;
+    return CommentPostCollection.orderBy("createdAt", "desc")
+      .get()
+      .then(docSnapshots => {
+        return docSnapshots.docs.map(doc => {
+          let data = doc.data();
+          data.id = doc.id;
+          return data;
+        });
       });
-    });
   },
   getIsLikePost(postId, userUid) {
     const LikePostCollection = firestore
       .collection(POSTS)
       .doc(postId)
       .collection(LIKEPOST);
-    return LikePostCollection
-      .where("uid", "==", userUid)
+    return LikePostCollection.where("uid", "==", userUid)
       .get()
       .then(docSnapshots => {
         // console.log(docSnapshots);
