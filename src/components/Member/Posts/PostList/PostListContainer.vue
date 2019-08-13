@@ -48,9 +48,9 @@ export default {
     postList: function() {}
   },
   methods: {
-    getPosts: async function() {
-      await FirebaseService.getPosts();
-    },
+    // getPosts: async function() {
+    //   await FirebaseService.getPosts();
+    // },
     getUId: async function(name) {
       const [result] = await FirebaseService.getUserByName(name);
       this.$store.commit("setNowDisplayMemberInfo", result);
