@@ -40,7 +40,15 @@ export default {
     return {
       window: {
         width: 0
-      }
+      },
+      x: null,
+      y: null,
+      nowX: null,
+      nowY: null,
+      subX: null,
+      subY: null,
+      bStartEvent: false,
+      bMoveEvent: false,
     };
   },
   created() {
@@ -100,6 +108,89 @@ export default {
             }
           );
       });
+      $(this).on("touchstart", function(event){
+        this.x = event.touches[0].clientX;
+        this.y = event.touches[0].clientY;
+        this.bStartEvent = true;
+      })
+      $(this).on("touchmove", function(event){
+        if(!this.bStartEvent){
+          this.x = null;
+          this.y = null;
+          return;
+        }
+        this.nowX = event.touches[0].clientX;
+        this.nowY = event.touches[0].clientY;
+        this.bMoveEvent = true;
+      })
+      
+      $(this).on("touchend", function(event){
+        if(this.bStartEvent && !this.bMoveEvent){
+
+        }
+        else{
+          this.subX = this.x - this.nowX;
+          this.subY = this.y - this.nowY;
+          // console.log("end:", this.subX, this.subY);
+          if(Math.abs(this.subY) > Math.abs(this.subX)){
+            event.preventDefault();
+
+            var delta = 0;
+            var moveTop = $(window).scrollTop();
+            var pageMax = $(".page").length - 1;
+            var winEvent = "";
+            if (!winEvent) {
+              winEvent = window.event;
+            }
+            if (winEvent.wheelDelta) {
+              delta = winEvent.wheelDelta / 120;
+              if (window.opera) {
+                delta = -delta;
+              }
+            } else if (winEvent.detail) {
+              delta = -winEvent.detail / 3;
+            }
+            if (this.subY > 0) {
+              if ($(this).index() <= pageMax) {
+                if ($(this).next() != undefined) {
+                  moveTop = $(this)
+                    .next()
+                    .offset().top;
+                }
+              }
+            } else {
+              if ($(this).index() > 0) {
+                if ($(this).prev() != undefined) {
+                  moveTop = $(this)
+                    .prev()
+                    .offset().top;
+                }
+              }
+            }
+
+            $("html, body")
+              .stop()
+              .animate(
+                {
+                  scrollTop: moveTop + "px"
+                },
+                {
+                  duration: 800,
+                  complete: function() {}
+                }
+              );
+          }
+        }
+        this.x = null;
+        this.y = null;
+        this.nowX = null;
+        this.nowY = null;
+        this.subX = null;
+        this.subY = null;
+        this.bStartEvent = false;
+        this.bMoveEvent = false;
+
+      })
     });
   },
   destroyed() {

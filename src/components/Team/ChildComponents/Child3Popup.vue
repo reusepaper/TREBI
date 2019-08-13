@@ -43,7 +43,7 @@
               <img src="..\..\..\assets\portfolio3\portfolio6.png"/>
             </div>
             <div class="carousel__item" v-bind:class="{showing: current_slide===10}">
-              <img src="..\..\..\assets\portfolio3\portfolio7.png"/>
+              <img src="..\..\..\assets\portfolio3\portfolio8.png"/>
             </div>
           </div>  
         </div>
@@ -259,6 +259,9 @@ export default {
 
   .close__container:hover label {
     opacity: 1;
+    position:relative;
+    top: 40px;
+    left: 6px;
   }
 
 
