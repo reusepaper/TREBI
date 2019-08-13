@@ -8,7 +8,6 @@ b<template>
         <thead>
           <tr>
             <th>No</th>
-            <th>Category</th>
             <th>Title</th>
             <th>Writer</th>
             <th>Delete</th>
@@ -20,8 +19,7 @@ b<template>
               <b>{{listArray.length - (pageNum*pageSize) - i}}</b>
             </td>
             <!-- <td><b>{{pageSize - i}}</b></td> -->
-            <td>{{p.category}}</td>
-            <td>{{p.title}}</td>
+            <td style="width: 50%;">{{p.title}}</td>
             <td>{{p.postWriter}}</td>
             <td>
               <img

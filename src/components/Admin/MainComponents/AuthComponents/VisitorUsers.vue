@@ -6,8 +6,8 @@
     <table>
       <thead>
         <tr>
-          <th>Created At</th>
           <th>User Id</th>
+          <th>Created At</th>
           <th>Level</th>
           <th>Name</th>
           <th>Post Cnt</th>
@@ -17,6 +17,7 @@
       <tbody>
         <tr v-for="oneUser in allUsers" style="border-bottom: solid 1px #ccc;">
           <!-- {{oneUser}} -->
+          <td>{{oneUser.eamil}}</td>
           <td
             v-for="field, key in oneUser"
             v-if="typeof(field) === 'object'"
@@ -34,7 +35,8 @@
           </td>
           <td v-else-if="key === 'uid'" style="display:none"></td>
           <td v-else-if="key === 'pushToken'" style="display:none"></td>
-          <td v-else>{{field}}</td>
+          <td>{{oneUser.displayName}}</td>
+          <td>{{oneUser.post}}</td>
           <td>
             <button
               @click="delete_event(oneUser)"
