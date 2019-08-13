@@ -52,9 +52,9 @@
               <div style="display: table; width:100%;">
                 <button v-on:click="viewPostList" class="menuDetailBtn">Post List</button>
               </div>
-              <div style="display: table; width:100%;">
+              <!-- <div style="display: table; width:100%;">
                 <button v-on:click="viewPortfolioList" class="menuDetailBtn">Portfolio List</button>
-              </div>
+              </div>-->
             </div>
           </li>
           <li class="AnalyticsBtnLi">
