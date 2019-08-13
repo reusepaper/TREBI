@@ -66,6 +66,7 @@ export default {
 .adminMainPageGrid {
   width: 100%;
   display: block;
+  height: 100vh;
 }
 
 .admin__title {
@@ -75,5 +76,9 @@ export default {
   color: #262f3d;
   margin-top: 10px;
   text-shadow: 3px 3px 4px #6a88a6;
+}
+
+.admin__content {
+  height: 85%;
 }
 </style>

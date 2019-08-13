@@ -24,8 +24,8 @@
         <div class="content">{{this.$store.state.nowDisplayPost.content}}</div>
         <!-- <div class="comment__container"></div> -->
         <div class="meta">
-          <div>{{isLike}}</div>
-          <div class="icon heart" v-if="isLike" @click="deleteLikePost">
+          <!-- <div>{{isLike}}</div> -->
+          <div class="icon heart" v-if="isLike.length == 1" @click="deleteLikePost">
             <FullHeart></FullHeart>
           </div>
           <div class="icon heart" v-else @click="createLikePost">

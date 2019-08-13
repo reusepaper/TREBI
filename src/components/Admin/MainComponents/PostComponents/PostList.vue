@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="postlist">
     <!-- <PostPagination :listArray="Allposts" :pageSize="postsNums"/> -->
     <PostPagination :listArray="Allposts"/>
   </div>
@@ -33,4 +33,7 @@ export default {
 </script>
 
 <style>
+.postlist {
+  height: 100%;
+}
 </style>
