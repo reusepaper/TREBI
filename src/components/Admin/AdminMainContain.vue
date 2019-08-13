@@ -112,7 +112,6 @@ export default {
   font-size: 60px;
   font-weight: 900;
   color: #262f3d;
-  margin-top: 10px;
   text-shadow: 3px 3px 4px #6a88a6;
 }
 

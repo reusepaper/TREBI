@@ -17,13 +17,6 @@
           <div class="box-cell box2">
             <ul>
               <li>
-                <div class="item">
-                  <span>1th July 2019</span>
-                  <h3>첫 만남</h3>
-                  <p>팀 이름 정하기, 역할 분담 및 목표 설정</p>
-                </div>
-              </li>
-              <li>
                 <div class="item" @click="togglePopUp(1)">
                   <span>1st July 2019 ~ 7st 7th 2019</span>
                   <h3>[1주 프로젝트] 반응형 웹 페이지 제작</h3>
@@ -42,6 +35,12 @@
                   <span>22st July 2019 ~ 16st Aug 2019</span>
                   <h3>[4주 프로젝트] SW 개발 비서 구현</h3>
                   <p>SW 개발 비서 구현</p>
+                </div>
+              </li>
+              <li>
+                <div class="item">
+                  <span>14st Aug 2019</span>
+                  <h3>개발 완료 및 베포</h3>
                 </div>
               </li>
             </ul>
@@ -441,7 +440,7 @@ export default {
     height: 65vh;
   }
   .box ul {
-    height: 64vh;
+    height: 67vh;
   }
 }
 @media screen and (min-width: 1200px) {

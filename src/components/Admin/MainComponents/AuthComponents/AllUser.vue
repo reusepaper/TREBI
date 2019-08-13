@@ -6,8 +6,8 @@
     <table>
       <thead>
         <tr>
-          <th>Created At</th>
           <th>User Id</th>
+          <th>Created At</th>
           <th>Level</th>
           <th>Name</th>
           <th>Post Cnt</th>
@@ -16,8 +16,8 @@
       </thead>
       <tbody>
         <tr v-for="oneUser in allUsers" style="border-bottom: solid 1px #ccc;">
-          <td>{{formatDate(oneUser.createdAt.toDate())}}</td>
           <td>{{oneUser.eamil}}</td>
+          <td>{{formatDate(oneUser.createdAt.toDate())}}</td>
           <td v-if="oneUser.level">
             <select v-bind:id="oneUser.uid" class="level_select">
               <option
