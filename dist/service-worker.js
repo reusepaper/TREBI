@@ -14,12 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-<<<<<<< HEAD
   "/precache-manifest.abf8c7f041bfac1928dd974a0bb3ad14.js"
-=======
-  "/precache-manifest.946294b83eace07ded777669c04dd46b.js"
-);
->>>>>>> [#34] S1P2213002-98 PWA - FCM
 
 workbox.core.setCacheNameDetails({prefix: "webmobile-sub3"});
 
