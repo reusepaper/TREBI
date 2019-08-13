@@ -173,7 +173,24 @@ export default {
     }
   },
   mounted() {
-    
+    var frWidth = $('.image__container').width();
+    var frHeight = $('.image__container').height();
+    var frRatio = frWidth/frHeight;
+    var imgWidth = $('.image').width();
+    var imgHeight = $('.image').height();
+    var imgRatio = imgWidth/imgHeight;
+    if(imgRatio >= frRatio){
+      $('.image').css({
+        'width' : 'auto',
+        'height' : '100%'
+      });
+    } else {
+      $('.image').css({
+        'width' : '100%',
+        'height' : 'auto',
+        'text-align' : 'center'
+      });
+    }
     // this.getLikePost();
     // console.log(this.$store.state.user);
     this.$store.watch(
@@ -226,8 +243,8 @@ export default {
 
 .image {
   border: 1px solid rgba(0, 0, 0, 0.2);
-  width: 100%;
-  height: auto;
+  /* width: 100%;
+  height: auto; */
   /* background-position: center;
   background-size: cover; */
   border: none;
