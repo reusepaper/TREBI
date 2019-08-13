@@ -1,39 +1,41 @@
 <template>
-  <div>
+  <div class="postpageing">
     <div style="margin-top: 20px; padding-right: 40px; text-align: right;">
       <span>total Post: {{listArray.length}}</span>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>Category</th>
-          <th>Title</th>
-          <th>Writer</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(p, i) in paginatedData">
-          <td><b>{{listArray.length - (pageNum*pageSize) - i}}</b></td>
-          <!-- <td><b>{{pageSize - i}}</b></td> -->
-          <td>{{p.category}}</td>
-          <td>{{p.title}}</td>
-          <td>{{p.postWriter}}</td>
-          <td>
-            <img style="height: 25px; cursor:pointer;" @click="delete_event(p)" src="../../../../assets/delete.png" />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="btn-cover">
-      <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
-        이전
-      </button>
-      <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
-      <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
-        다음
-      </button>
+    <div class="postboard">
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Writer</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(p, i) in paginatedData">
+            <td><b>{{listArray.length - (pageNum*pageSize) - i}}</b></td>
+            <!-- <td><b>{{pageSize - i}}</b></td> -->
+            <td>{{p.category}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.postWriter}}</td>
+            <td>
+              <img style="height: 25px; cursor:pointer;" @click="delete_event(p)" src="../../../../assets/delete.png" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="btn-cover">
+        <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+          이전
+        </button>
+        <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
+        <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
+          다음
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -101,6 +103,21 @@ export default {
 </script>
 
 <style>
+.postpageing {
+  height: 100%;
+}
+
+.postboard {
+  height: 80%;
+}
+
+.postboard table {
+  height: 90%;
+}
+.postboard .btn-cover {
+  height: 10%;
+}
+
 table {
   margin: 50px 0px;
   border-collapse: collapse;

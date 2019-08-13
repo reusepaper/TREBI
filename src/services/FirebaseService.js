@@ -145,7 +145,8 @@ export default {
       createdAt: new Date()
     });
   },
-  getLikePost(postId, userUid) {
+  // getLikePost(postId, userUid) {
+  getLikePost(postId) {
     const LikePostCollection = firestore
       .collection(POSTS)
       .doc(postId)
