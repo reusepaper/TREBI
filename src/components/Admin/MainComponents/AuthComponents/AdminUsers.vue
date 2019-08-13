@@ -28,7 +28,7 @@
             </select>
             <button id="select_button" @click="changeLevel(oneUser)">변경</button>
           </td>
-          <td>{{oneUser.nickname}}</td>
+          <td>{{oneUser.displayName}}</td>
           <td>{{oneUser.post}}</td>
           <td>
             <button

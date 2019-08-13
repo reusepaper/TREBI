@@ -91,10 +91,10 @@ export default {
   },
   mounted: function() {
     this.getTeamPost();
-    this.$store.watch(() => this.$store.getters.getChild1State, Child2 => {
+    this.$store.watch(() => this.$store.getters.getChild2State, Child2 => {
       // console.log('watched:', ismodalShow);
       // this.posY = $(window).scrollTop();
-      if(Child1) {
+      if(this.$store.state.child2) {
         // console.log(this.posY);
         var height = $(window).height();
         height *= 1;
