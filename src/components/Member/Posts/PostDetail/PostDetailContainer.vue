@@ -194,43 +194,53 @@ export default {
     
     var frWidth = $('.image__container').width();
     var frHeight = 500;
-    var frRatio = frWidth/frHeight;
     var imgWidth = $('#image').width();
     var imgHeight = $('#image').height();
-    var imgRatio = imgWidth/imgHeight;
 
-    console.log(imgWidth);
-    console.log(imgHeight);
+    if(imgWidth <= frWidth && imgHeight <= frHeight) {
+      if(imgWidth >= imgHeight) {
+        $('#image').css({
+          'width' : '100%',
+          'height' : 'auto',
+          'text-align' : 'center'
+        });
+      } else {
+        $('#image').css({
+          'width' : 'auto',
+          'height' : '100%'
+        });
+      }
+    } 
     
-    if(imgRatio >= frRatio){
-      if(imgWidth >= imgHeight) {
-        $('#image').css({
-          'width' : '100%',
-          'height' : 'auto',
-          'text-align' : 'center'
-        });
-      } else if(imgWidth < imgHeight) {
-        $('#image').css({
-          'width' : 'auto',
-          'height' : '100%'
-        });
-      }
-    }
+    if(imgWidth <= frWidth && imgHeight > frHeight) {
+      $('#image').css({
+        'width' : 'auto',
+        'height' : '100%'
+      });
+    } 
 
-    if(imgRatio < frRatio) {
+    if(imgWidth > frWidth && imgHeight <= frHeight) {
+      $('#image').css({
+        'width' : '100%',
+        'height' : 'auto',
+        'text-align' : 'center'
+      });
+    } 
+
+    if(imgWidth > frWidth && imgHeight > frHeight) {
       if(imgWidth >= imgHeight) {
         $('#image').css({
           'width' : '100%',
           'height' : 'auto',
           'text-align' : 'center'
         });
-      } else if(imgWidth < imgHeight) {
+      } else {
         $('#image').css({
           'width' : 'auto',
           'height' : '100%'
         });
       }
-    }
+    } 
   }
 };
 </script>
