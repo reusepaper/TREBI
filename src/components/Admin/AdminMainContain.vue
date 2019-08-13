@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="admin__main">
     <AdminMain v-show="this.$store.state.adminPage==='Main'"></AdminMain>
     <div class="adminMainPageGrid" v-show="this.$store.state.adminPage!=='Main'">
       <div
@@ -93,6 +93,18 @@ export default {
   width: 100%;
   display: block;
   height: 100vh;
+}
+
+@media screen and (max-width: 700px) {
+  .admin__main {
+    overflow-y: scroll;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .admin__main {
+    overflow: hidden;
+  }
 }
 
 .admin__title {
