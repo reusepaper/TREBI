@@ -261,7 +261,8 @@ export default {
         createdAt,
         photoURL,
         post: 0,
-        pushToken: null
+        pushToken: null,
+        localMessagingToken: null
       });
   },
   getisSignup(loginUid) {
