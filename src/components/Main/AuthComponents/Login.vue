@@ -112,7 +112,7 @@ export default {
       await this.$store.commit("setUser", this.loginUser);
       await this.$store.commit("setUserLevel", this.userLevel);
       // await console.log(this.$store.state.userLevel);
-      await window.location.reload();
+      // await window.location.reload();
     },
     checkIsSignup: function(currentUser) {
       // console.log(this.allUsers);
