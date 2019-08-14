@@ -81,7 +81,10 @@ export default {
           this.loginUser.email.toString(),
           "visitor",
           new Date(),
-          this.loginUser.photoURL
+          this.loginUser.photoURL,
+          0,
+          null,
+          null
         );
         this.userLevel = "visitor";
       } else {
@@ -112,7 +115,7 @@ export default {
       await this.$store.commit("setUser", this.loginUser);
       await this.$store.commit("setUserLevel", this.userLevel);
       // await console.log(this.$store.state.userLevel);
-      await window.location.reload();
+      // await window.location.reload();
     },
     checkIsSignup: function(currentUser) {
       // console.log(this.allUsers);

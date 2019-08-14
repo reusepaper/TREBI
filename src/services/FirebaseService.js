@@ -249,7 +249,7 @@ export default {
       .doc(userUid);
     LikePostCollection.delete();
   },
-  createUser(uid, displayName, eamil, level, createdAt, photoURL) {
+  createUser(uid, displayName, eamil, level, createdAt, photoURL, post, pushToken, localMessagingToken) {
     return firestore
       .collection(USERS)
       .doc(uid)
@@ -260,9 +260,9 @@ export default {
         level,
         createdAt,
         photoURL,
-        post: 0,
-        pushToken: null,
-        localMessagingToken: null
+        post,
+        pushToken,
+        localMessagingToken
       });
   },
   getisSignup(loginUid) {
