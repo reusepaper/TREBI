@@ -151,7 +151,7 @@ export default {
       // console.log(this.content);
     },
     async createTeamPostComment() {
-      if (this.user === null) {
+      if (this.$store.state.user === null) {
         alert("로그인을 해야 댓글을 작성할 수 있습니다.");
         return;
       } else {
@@ -163,7 +163,7 @@ export default {
 
       await FirebaseService.createTeamPostComment(
         this.content.id,
-        this.user,
+        this.$store.state.user,
         this.comment
       );
       await this.getTeamPostComment();
