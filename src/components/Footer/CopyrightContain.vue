@@ -1,8 +1,8 @@
 <template>
   <div class="CopyrightContain">
-    <span>©2019 07 30 TREBI</span>
+    <span>Copyright ⓒ 2019.07 All Rights Reserved.</span>
     <WeatherContain></WeatherContain>
-    <span>도용노노</span>
+    <span>TREBI</span>
   </div>
 </template>
 
