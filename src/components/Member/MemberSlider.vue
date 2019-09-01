@@ -14,10 +14,12 @@
 
         <div class="infoHeader">
           <!-- 좌상단 프로필사진 -->
-          <div
-            class="profileImgContanier"
-            v-bind:style="{ 'background-image': 'url(https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814049_960_720.png )' }"
-          ></div>
+          <div class="profileImgContanier">
+            <div
+              class="profileImg"
+              v-bind:style="{ 'background-image': `url(${member.image_src})` }"
+            ></div>
+          </div>
           <!-- 우상단 설명부분 -->
           <div class="introContainer">
             <span class="name">{{member.name}}</span>
@@ -36,9 +38,7 @@
             @click="togglePopUp"
             v-bind:class="{modalShow : ismodalShow}"
             style="cursor:pointer"
-          >
-            More
-          </div>
+          >More</div>
           <!-- 스킬바 -->
           <SkillSlider v-bind:skills="member.skills"></SkillSlider>
         </div>
@@ -56,8 +56,8 @@
 <script>
 import SkillSlider from "./SkillSlider";
 import PostPopup from "./Posts/PostPopup";
-import $ from 'jquery';
-import { setInterval } from 'timers';
+import $ from "jquery";
+import { setInterval } from "timers";
 
 export default {
   components: {
@@ -164,6 +164,17 @@ export default {
   font-weight: 100;
 }
 .profileImgContanier {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.profileImg {
+  border-radius: 50%;
+  align-self: center;
+  justify-self: center;
+  width: 80%;
+  height: 50%;
   background-position: center;
   background-size: cover;
 }
