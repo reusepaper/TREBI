@@ -19,7 +19,7 @@ export default {
           name: "꼬부기2"
         },
         {
-          image_src: require("../assets/goubook1.png"),
+          image_src: require("../assets/orangetiger.jpg"),
           name: "이주호",
           intro: "기호 1번 잘부탁드립니당. 출퇴근 4시간 가능합니다. 연락주세용",
           socials: [
@@ -53,7 +53,7 @@ export default {
           ]
         },
         {
-          image_src: require("../assets/hesee.jpg"),
+          image_src: require("../assets/bronzepipe.jpg"),
           name: "유동관",
           intro:
             "기호 2번 잘부탁드립니당. 유하~ 방황하는 반장역할을 맡고 있습니당 유바~",
@@ -130,7 +130,7 @@ export default {
           ]
         },
         {
-          image_src: require("../assets/togepi.jpg"),
+          image_src: require("../assets/sweetrain.jpg"),
           name: "한단비",
           intro: "기호 4번 잘부탁드립니당.",
           socials: [
@@ -183,7 +183,7 @@ export default {
           ]
         },
         {
-          image_src: require("../assets/jammanbo.jpg"),
+          image_src: require("../assets/verydissapoint.jpg"),
           name: "한만섭",
           intro: "기호 5번 잘부탁드립니당.",
           socials: [
