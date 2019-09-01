@@ -173,8 +173,8 @@ export default {
   border-radius: 50%;
   align-self: center;
   justify-self: center;
-  width: 80%;
-  height: 50%;
+  width: 50%;
+  height: 85%;
   background-position: center;
   background-size: cover;
 }
@@ -255,6 +255,15 @@ svg {
   .memberInfo {
     grid-template-rows: 6fr 4fr;
   }
+  .profileImg {
+    border-radius: 50%;
+    align-self: center;
+    justify-self: center;
+    width: 80%;
+    height: 50%;
+    background-position: center;
+    background-size: cover;
+  }
 }
 
 @media (max-width: 768px) {
@@ -289,6 +298,15 @@ svg {
   .socialList {
     font-size: 14px;
     margin-top: 5px;
+  }
+  .profileImg {
+    border-radius: 50%;
+    align-self: center;
+    justify-self: center;
+    width: 50%;
+    height: 85%;
+    background-position: center;
+    background-size: cover;
   }
 }
 </style>
