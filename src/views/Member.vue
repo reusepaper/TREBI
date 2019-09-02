@@ -92,7 +92,7 @@ export default {
           ]
         },
         {
-          image_src: require("../assets/pikachu.jpg"),
+          image_src: require("../assets/reusepaper.jpg"),
           name: "임연지",
           intro:
             "기호 3번 잘부탁드립니당. 못받은 계약금 받아드립니다 연락주세용",
