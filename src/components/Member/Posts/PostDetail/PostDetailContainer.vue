@@ -24,7 +24,13 @@
             <div class>{{this.$store.state.nowDisplayPost.title}}</div>
           </div>
         </div>
-        <div class="content">{{this.$store.state.nowDisplayPost.content}}</div>
+        <!-- <div class="content">{{this.$store.state.nowDisplayPost.content}}</div> -->
+        <markdown-it-vue
+          class="md-body"
+          :content="this.$store.state.nowDisplayPost.content"
+          :options="options"
+        ></markdown-it-vue>
+
         <!-- <div class="comment__container"></div> -->
         <div class="meta">
           <div class="icon heart" v-if="isLike.length == 0" @click="createLikePost">
@@ -70,6 +76,8 @@ import EmptyHeart from "../Icons/EmptyHeart";
 import Bubble from "../Icons/Bubble";
 import Share from "../Icons/Share";
 import FullHeart from "../Icons/FullHeart";
+import MarkdownItVue from "markdown-it-vue";
+import "markdown-it-vue/dist/markdown-it-vue.css";
 export default {
   data() {
     return {
@@ -78,14 +86,25 @@ export default {
       isLike: [],
       likeUsers: [],
       displayPost: "",
-      comments: []
+      comments: [],
+      // content: this.$store.state.nowDisplayPost.content,
+      options: {
+        markdownIt: {
+          linkify: true
+        },
+        linkAttributes: {
+          target: "_blank",
+          rel: "noopener"
+        }
+      }
     };
   },
   components: {
     EmptyHeart,
     FullHeart,
     Share,
-    Bubble
+    Bubble,
+    MarkdownItVue
   },
   methods: {
     goPostList: function() {
@@ -191,7 +210,6 @@ export default {
     });
   },
   beforeUpdate() {
-    
     var frWidth = 718;
     var frHeight = 500;
     var imgWidth = $("#image").width();
@@ -276,6 +294,7 @@ export default {
 }
 
 #image {
+  background-size: cover;
   /* border: 1px solid rgba(0, 0, 0, 0.2); */
   /* width: 100%;
   height: auto; */
@@ -337,6 +356,7 @@ export default {
   font-size: 15px;
 }
 .post__contaniner {
+  overflow: hidden;
   display: grid;
   grid-template-columns: 5fr 5fr;
   grid-auto-rows: minmax(550px, 550px);
@@ -352,6 +372,7 @@ export default {
   font-weight: lighter;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  overflow: auto;
 }
 
 .comment__container {
@@ -407,6 +428,7 @@ export default {
   /* background-color: white; */
   padding: 10px;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 .input {
   width: 85%;
@@ -434,16 +456,24 @@ export default {
   outline: none;
 }
 
+.md-body {
+  /* width: 50%; */
+  /* margin-left: 20px; */
+  overflow: auto;
+  max-height: 500px;
+}
+
 @media (max-width: 768px) {
   .Wrapper {
     margin: 0;
   }
   .post__contaniner {
     grid-template-columns: none;
-    grid-template-rows: 4fr 6fr;
+    grid-template-rows: 170px 8fr;
   }
   .post__content {
-    grid-template-rows: 0.5fr 0.5fr 3fr 0.5fr 0.5fr;
+    /* grid-template-rows: 0.5fr 0.5fr 3fr 0.5fr 0.5fr; */
+    grid-template-rows: 70px 150px 30px 30px 30px 50px;
   }
   .content__header {
     padding: 5px;
