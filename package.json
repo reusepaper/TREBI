@@ -12,7 +12,7 @@
   "main": "babel.config.js",
   "dependencies": {
     "@slack/web-api": "^5.1.0",
-    "apexcharts": "^3.8.3",
+    "apexcharts": "^3.24.0",
     "core-js": "^2.6.5",
     "emojis": "^1.0.10",
     "firebase": "^6.3.1",
